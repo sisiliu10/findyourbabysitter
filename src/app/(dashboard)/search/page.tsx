@@ -324,24 +324,7 @@ export default function SearchPage() {
 
       {/* Action buttons */}
       {!loading && !isFinished && currentCard && (
-        <div className="mt-6 flex items-center justify-center gap-4">
-          {/* Undo */}
-          <button
-            onClick={handleUndo}
-            disabled={currentIndex === 0}
-            className={cn(
-              "flex h-11 w-11 items-center justify-center border transition-colors",
-              currentIndex === 0
-                ? "border-border-subtle text-text-muted cursor-not-allowed"
-                : "border-border-default text-text-secondary hover:border-text-primary hover:text-text-primary"
-            )}
-            title="Undo"
-          >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-            </svg>
-          </button>
-
+        <div className="mt-6 flex items-center justify-center gap-5">
           {/* Pass */}
           <button
             onClick={handleSwipeLeft}
@@ -352,18 +335,6 @@ export default function SearchPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-
-          {/* View profile */}
-          <Link
-            href={currentCard.linkHref}
-            className="flex h-11 w-11 items-center justify-center border border-border-default text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary"
-            title="View profile"
-          >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </Link>
 
           {/* Like */}
           <button
@@ -410,6 +381,17 @@ function ProfileCard({
         )}
         {/* Gradient overlay on photo */}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
+        {/* View profile link */}
+        <Link
+          href={profile.linkHref}
+          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center bg-black/30 text-white/80 backdrop-blur-sm transition hover:bg-black/50 hover:text-white"
+          title="View profile"
+        >
+          <svg className="h-4.5 w-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </Link>
         {/* Name overlay on photo */}
         <div className="absolute bottom-0 left-0 p-5">
           <h2 className="text-2xl font-semibold text-white">
