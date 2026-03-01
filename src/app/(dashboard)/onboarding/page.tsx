@@ -35,11 +35,17 @@ export default function OnboardingPage() {
   // Parent fields
   const [children, setChildren] = useState([{ name: "", age: "" }]);
 
-  // Fetch role on mount
+  // Fetch role on mount, redirect if already onboarded
   useState(() => {
     fetch("/api/auth/me")
       .then((r) => r.json())
-      .then((u) => setRole(u?.data?.role || "PARENT"))
+      .then((u) => {
+        if (u?.data?.onboarded) {
+          router.replace("/dashboard");
+          return;
+        }
+        setRole(u?.data?.role || "PARENT");
+      })
       .catch(() => setRole("PARENT"));
   });
 
