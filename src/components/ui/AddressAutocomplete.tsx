@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils";
 
 declare global {
   interface Window {
-    google: typeof google;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    google: any;
     initGoogleMaps?: () => void;
   }
 }
@@ -59,7 +60,8 @@ export function AddressAutocomplete({
   className,
 }: AddressAutocompleteProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const autocompleteRef = useRef<any>(null);
 
   const handlePlaceSelect = useCallback(() => {
     const autocomplete = autocompleteRef.current;
