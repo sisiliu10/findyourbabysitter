@@ -151,52 +151,49 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Recent bookings */}
-      <div>
-        <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-          Upcoming Bookings
-        </p>
-        {recentBookings.length === 0 ? (
-          <div className="border border-border-default bg-surface-secondary p-8">
-            <p className="text-sm text-text-secondary">No upcoming bookings yet</p>
-            {user.role === "PARENT" && (
-              <Link href="/search" className="mt-3 inline-block text-sm font-medium text-accent hover:underline">
-                Find a babysitter
-              </Link>
-            )}
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {recentBookings.map((booking) => {
-              const otherPerson = session.role === "PARENT" ? booking.sitter : booking.parent;
-              return (
-                <Link
-                  key={booking.id}
-                  href={`/bookings/${booking.id}`}
-                  className="flex items-center justify-between border border-border-default bg-surface-secondary p-4 transition hover:border-border-hover"
-                >
-                  <div>
-                    <p className="font-medium text-text-primary">
-                      {otherPerson.firstName} {otherPerson.lastName}
-                    </p>
-                    <p className="text-sm text-text-secondary">
-                      {formatDate(booking.dateBooked)} &middot; {formatTime(booking.startTime)} - {formatTime(booking.endTime)}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-text-primary">
-                      {formatCurrency(booking.totalEstimated)}
-                    </span>
-                    <span className={`px-2.5 py-0.5 text-xs font-medium uppercase tracking-wide ${statusColors[booking.status] || "bg-surface-tertiary text-text-tertiary border border-border-default"}`}>
-                      {booking.status}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        )}
-      </div>
+      {/* Recent bookings (sitters only — parents have a dedicated Bookings tab) */}
+      {user.role === "BABYSITTER" && (
+        <div>
+          <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
+            Upcoming Bookings
+          </p>
+          {recentBookings.length === 0 ? (
+            <div className="border border-border-default bg-surface-secondary p-8">
+              <p className="text-sm text-text-secondary">No upcoming bookings yet</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {recentBookings.map((booking) => {
+                const otherPerson = booking.parent;
+                return (
+                  <Link
+                    key={booking.id}
+                    href={`/bookings/${booking.id}`}
+                    className="flex items-center justify-between border border-border-default bg-surface-secondary p-4 transition hover:border-border-hover"
+                  >
+                    <div>
+                      <p className="font-medium text-text-primary">
+                        {otherPerson.firstName} {otherPerson.lastName}
+                      </p>
+                      <p className="text-sm text-text-secondary">
+                        {formatDate(booking.dateBooked)} &middot; {formatTime(booking.startTime)} - {formatTime(booking.endTime)}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm font-medium text-text-primary">
+                        {formatCurrency(booking.totalEstimated)}
+                      </span>
+                      <span className={`px-2.5 py-0.5 text-xs font-medium uppercase tracking-wide ${statusColors[booking.status] || "bg-surface-tertiary text-text-tertiary border border-border-default"}`}>
+                        {booking.status}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
