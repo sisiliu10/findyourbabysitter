@@ -99,13 +99,13 @@ export default function SearchPage() {
             label="City"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            placeholder="e.g. San Francisco"
+            placeholder="e.g. Berlin"
           />
           <Input
-            label="State"
+            label="Address"
             value={state}
             onChange={(e) => setState(e.target.value)}
-            placeholder="e.g. CA"
+            placeholder="e.g. Friedrichstraße 123"
           />
           <Input
             label="Max Hourly Rate"

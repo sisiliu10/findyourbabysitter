@@ -36,7 +36,7 @@ export default function OnboardingPage() {
   useState(() => {
     fetch("/api/auth/me")
       .then((r) => r.json())
-      .then((u) => setRole(u?.role || "PARENT"))
+      .then((u) => setRole(u?.data?.role || "PARENT"))
       .catch(() => setRole("PARENT"));
   });
 
@@ -143,12 +143,12 @@ export default function OnboardingPage() {
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">Your location</h2>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">City</label>
-            <input value={city} onChange={(e) => setCity(e.target.value)} className={inputClass} placeholder="San Francisco" />
+            <input value={city} onChange={(e) => setCity(e.target.value)} className={inputClass} placeholder="Berlin" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">State</label>
-              <input value={state} onChange={(e) => setState(e.target.value)} className={inputClass} placeholder="CA" />
+              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Address</label>
+              <input value={state} onChange={(e) => setState(e.target.value)} className={inputClass} placeholder="Friedrichstraße 123" />
             </div>
             <div>
               <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Zip code</label>
