@@ -35,6 +35,7 @@ export async function PUT(request: NextRequest) {
   if (body.firstName) userUpdates.firstName = body.firstName;
   if (body.lastName) userUpdates.lastName = body.lastName;
   if (body.phone !== undefined) userUpdates.phone = body.phone;
+  if (body.birthday) userUpdates.birthday = new Date(body.birthday);
 
   // Mark as onboarded
   userUpdates.onboarded = true;

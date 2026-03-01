@@ -25,6 +25,7 @@ interface SitterResult {
     firstName: string;
     lastName: string;
     avatarUrl: string | null;
+    birthday: string | null;
   };
 }
 
@@ -33,6 +34,7 @@ interface ParentResult {
   firstName: string;
   lastName: string;
   avatarUrl: string | null;
+  birthday: string | null;
   createdAt: string;
   childcareRequests: {
     id: string;
@@ -53,9 +55,22 @@ interface CardProfile {
   location: string;
   bio: string;
   tags: { label: string; variant: "success" | "info" | "neutral" }[];
+  age: number | null;
   detail: string;
   linkHref: string;
   meta: string;
+}
+
+function calculateAge(birthday: string | null): number | null {
+  if (!birthday) return null;
+  const birth = new Date(birthday);
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+  return age;
 }
 
 function sitterToCard(s: SitterResult): CardProfile {
@@ -72,6 +87,7 @@ function sitterToCard(s: SitterResult): CardProfile {
     location: [s.city, s.state].filter(Boolean).join(", "),
     bio: s.bio,
     tags,
+    age: calculateAge(s.user.birthday),
     detail: `${formatCurrency(s.hourlyRate)}/hr`,
     linkHref: `/sitter/${s.user.id}`,
     meta: [
@@ -106,6 +122,7 @@ function parentToCard(p: ParentResult): CardProfile {
     firstName: p.firstName,
     lastName: p.lastName,
     avatarUrl: p.avatarUrl,
+    age: calculateAge(p.birthday),
     location: locations[0] || "",
     bio: reqs.length > 0
       ? reqs.map((r) => r.title).join(" · ")
@@ -396,7 +413,7 @@ function ProfileCard({
         {/* Name overlay on photo */}
         <div className="absolute bottom-0 left-0 p-5">
           <h2 className="text-2xl font-semibold text-white">
-            {profile.firstName} {profile.lastName}
+            {profile.firstName} {profile.lastName}{profile.age !== null && <span className="font-normal text-white/80">, {profile.age}</span>}
           </h2>
           {profile.location && (
             <p className="mt-0.5 flex items-center gap-1.5 text-sm text-white/80">

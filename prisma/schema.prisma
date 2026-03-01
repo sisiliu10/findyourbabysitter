@@ -17,6 +17,7 @@ model User {
   lastName     String
   phone        String?
   avatarUrl    String?
+  birthday     DateTime?
   isDisabled   Boolean  @default(false)
   onboarded    Boolean  @default(false)
   createdAt    DateTime @default(now())

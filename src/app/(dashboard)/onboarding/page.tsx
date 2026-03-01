@@ -25,6 +25,7 @@ export default function OnboardingPage() {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
 
   // Shared fields
+  const [birthday, setBirthday] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
@@ -80,6 +81,7 @@ export default function OnboardingPage() {
     setLoading(true);
 
     const body: Record<string, unknown> = { city, state, zipCode, phone, latitude, longitude };
+    if (birthday) body.birthday = birthday;
 
     // Upload avatar if selected
     if (avatarFile) {
@@ -152,7 +154,12 @@ export default function OnboardingPage() {
       {/* Step 1: Location (both roles) */}
       {step === 1 && (
         <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
-          <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">Your location</h2>
+          <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">About you</h2>
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Birthday</label>
+            <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} className={inputClass} max={new Date().toISOString().split("T")[0]} />
+          </div>
+          <h2 className="mt-2 text-xs font-medium uppercase tracking-wide text-text-secondary">Your location</h2>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">City</label>
             <input value={city} onChange={(e) => setCity(e.target.value)} className={inputClass} placeholder="Berlin" />
@@ -211,7 +218,7 @@ export default function OnboardingPage() {
 
           <button
             onClick={() => setStep(2)}
-            disabled={!city || !state || !zipCode}
+            disabled={!city || !state || !zipCode || !birthday}
             className="mt-4 w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
           >
             Continue
