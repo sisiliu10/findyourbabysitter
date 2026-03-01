@@ -152,12 +152,12 @@ export default function OnboardingPage() {
             </div>
             <div>
               <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Zip code</label>
-              <input value={zipCode} onChange={(e) => setZipCode(e.target.value)} className={inputClass} placeholder="94102" />
+              <input value={zipCode} onChange={(e) => setZipCode(e.target.value)} className={inputClass} placeholder="10117" />
             </div>
           </div>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Phone (optional)</label>
-            <input value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="(555) 123-4567" />
+            <input value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="+49 30 123 4567" />
           </div>
 
           {role === "PARENT" && (
