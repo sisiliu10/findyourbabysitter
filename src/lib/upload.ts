@@ -1,8 +1,3 @@
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
-import { randomUUID } from "crypto";
-
-const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads", "avatars");
 const MAX_SIZE = 5 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
@@ -14,14 +9,8 @@ export async function saveAvatar(file: File): Promise<string> {
     throw new Error("File too large. Maximum 5MB.");
   }
 
-  await mkdir(UPLOAD_DIR, { recursive: true });
-
-  const ext = file.name.split(".").pop() || "jpg";
-  const filename = `${randomUUID()}.${ext}`;
-  const filepath = path.join(UPLOAD_DIR, filename);
-
   const buffer = Buffer.from(await file.arrayBuffer());
-  await writeFile(filepath, buffer);
+  const base64 = buffer.toString("base64");
 
-  return `/uploads/avatars/${filename}`;
+  return `data:${file.type};base64,${base64}`;
 }
