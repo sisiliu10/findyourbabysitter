@@ -127,25 +127,16 @@ export default async function BookingsListPage() {
                       {otherPerson.firstName} {otherPerson.lastName}
                     </p>
                     <p className="text-sm text-text-secondary">
-                      {formatDate(booking.dateBooked)} &middot;{" "}
-                      {formatTime(booking.startTime)} -{" "}
-                      {formatTime(booking.endTime)}
+                      {formatDate(booking.dateBooked)}
                     </p>
-                    {booking.request?.title && (
-                      <p className="mt-0.5 text-xs text-text-tertiary">
-                        {booking.request.title}
-                      </p>
-                    )}
+                    <p className="text-xs text-text-tertiary">
+                      {formatTime(booking.startTime)} - {formatTime(booking.endTime)}
+                    </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-medium text-text-primary">
-                    {formatCurrency(booking.agreedRate)}/hr
-                  </span>
-                  <Badge variant={statusVariants[booking.status] || "neutral"}>
-                    {booking.status}
-                  </Badge>
-                </div>
+                <Badge variant={statusVariants[booking.status] || "neutral"}>
+                  {booking.status}
+                </Badge>
               </Link>
             );
           })}
