@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { DAYS_OF_WEEK, TIME_SLOTS } from "@/lib/constants";
+import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -28,6 +29,8 @@ export default function OnboardingPage() {
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [phone, setPhone] = useState("");
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longitude, setLongitude] = useState<number | null>(null);
 
   // Parent fields
   const [children, setChildren] = useState([{ name: "", age: "" }]);
@@ -70,7 +73,7 @@ export default function OnboardingPage() {
     setError("");
     setLoading(true);
 
-    const body: Record<string, unknown> = { city, state, zipCode, phone };
+    const body: Record<string, unknown> = { city, state, zipCode, phone, latitude, longitude };
 
     if (role === "BABYSITTER") {
       Object.assign(body, {
@@ -148,7 +151,18 @@ export default function OnboardingPage() {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Address</label>
-              <input value={state} onChange={(e) => setState(e.target.value)} className={inputClass} placeholder="Friedrichstraße 123" />
+              <AddressAutocomplete
+                value={state}
+                onChange={setState}
+                onSelect={(result) => {
+                  setState(result.address);
+                  setCity(result.city);
+                  setZipCode(result.zipCode);
+                  setLatitude(result.latitude);
+                  setLongitude(result.longitude);
+                }}
+                placeholder="Friedrichstraße 123"
+              />
             </div>
             <div>
               <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Zip code</label>
