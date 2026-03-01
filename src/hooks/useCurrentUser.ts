@@ -19,7 +19,7 @@ export function useCurrentUser() {
   useEffect(() => {
     fetch("/api/auth/me")
       .then((res) => (res.ok ? res.json() : null))
-      .then((data) => setUser(data))
+      .then((json) => setUser(json?.data ?? null))
       .catch(() => setUser(null))
       .finally(() => setLoading(false));
   }, []);
