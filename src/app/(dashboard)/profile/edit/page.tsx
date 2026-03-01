@@ -17,6 +17,7 @@ interface UserProfile {
   lastName: string;
   phone: string | null;
   avatarUrl: string | null;
+  birthday: string | null;
   babysitterProfile: {
     bio: string;
     hourlyRate: number;
@@ -49,6 +50,7 @@ export default function ProfileEditPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [role, setRole] = useState("");
 
@@ -78,6 +80,7 @@ export default function ProfileEditPage() {
         setFirstName(user.firstName);
         setLastName(user.lastName);
         setPhone(user.phone || "");
+        setBirthday(user.birthday ? user.birthday.slice(0, 10) : "");
         setAvatarUrl(user.avatarUrl);
         setRole(user.role);
 
@@ -158,6 +161,7 @@ export default function ProfileEditPage() {
       firstName,
       lastName,
       phone: phone || undefined,
+      birthday: birthday || undefined,
     };
 
     if (role === "BABYSITTER") {
@@ -295,6 +299,12 @@ export default function ProfileEditPage() {
                 required
               />
             </div>
+            <Input
+              label="Birthday"
+              type="date"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+            />
             <Input
               label="Phone (optional)"
               value={phone}
