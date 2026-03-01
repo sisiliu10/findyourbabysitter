@@ -36,6 +36,7 @@ export async function PUT(request: NextRequest) {
   if (body.lastName) userUpdates.lastName = body.lastName;
   if (body.phone !== undefined) userUpdates.phone = body.phone;
   if (body.birthday) userUpdates.birthday = new Date(body.birthday);
+  if (body.instagram !== undefined) userUpdates.instagram = body.instagram || null;
 
   // Mark as onboarded
   userUpdates.onboarded = true;

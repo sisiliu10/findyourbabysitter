@@ -18,6 +18,7 @@ model User {
   phone        String?
   avatarUrl    String?
   birthday     DateTime?
+  instagram    String?
   isDisabled   Boolean  @default(false)
   onboarded    Boolean  @default(false)
   createdAt    DateTime @default(now())
