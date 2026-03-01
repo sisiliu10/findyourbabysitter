@@ -101,20 +101,38 @@ export default async function DashboardPage() {
             </>
           )}
 
-          {user.role === "BABYSITTER" && pendingCount > 0 && (
-            <Link
-              href="/bookings"
-              className="flex items-center gap-4 border border-warning/20 bg-warning-muted p-5 transition hover:border-border-hover"
-            >
-              <div className="flex h-10 w-10 items-center justify-center bg-warning-muted text-warning">
-                <span className="text-lg font-medium">{pendingCount}</span>
-              </div>
-              <div>
-                <p className="font-medium text-text-primary">Pending requests</p>
-                <p className="text-xs text-text-tertiary">Respond to booking requests</p>
-              </div>
-            </Link>
-          )}
+          {user.role === "BABYSITTER" && (
+            <>
+              {pendingCount > 0 && (
+                <Link
+                  href="/bookings"
+                  className="flex items-center gap-4 border border-warning/20 bg-warning-muted p-5 transition hover:border-border-hover"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center bg-warning-muted text-warning">
+                    <span className="text-lg font-medium">{pendingCount}</span>
+                  </div>
+                  <div>
+                    <p className="font-medium text-text-primary">Pending requests</p>
+                    <p className="text-xs text-text-tertiary">Respond to booking requests</p>
+                  </div>
+                </Link>
+              )}
+              <Link
+                href="/requests"
+                className="flex items-center gap-4 border border-border-default bg-surface-secondary p-5 transition hover:border-border-hover"
+              >
+                <div className="flex h-10 w-10 items-center justify-center bg-accent-muted text-accent">
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-medium text-text-primary">Find parents</p>
+                  <p className="text-xs text-text-tertiary">Browse open childcare requests</p>
+                </div>
+              </Link>
+            </>
+          )}}
 
           <Link
             href="/profile"
