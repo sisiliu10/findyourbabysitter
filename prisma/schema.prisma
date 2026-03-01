@@ -1,0 +1,186 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("PARENT") // PARENT | BABYSITTER | ADMIN
+  firstName    String
+  lastName     String
+  phone        String?
+  avatarUrl    String?
+  isDisabled   Boolean  @default(false)
+  onboarded    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  babysitterProfile BabysitterProfile?
+  childcareRequests ChildcareRequest[]
+  bookingsAsParent  Booking[]  @relation("ParentBookings")
+  bookingsAsSitter  Booking[]  @relation("SitterBookings")
+  sentMessages      Message[]  @relation("SentMessages")
+  reviewsGiven      Review[]   @relation("ReviewAuthor")
+  reviewsReceived   Review[]   @relation("ReviewSubject")
+
+  @@index([role])
+  @@index([isDisabled])
+}
+
+model BabysitterProfile {
+  id               String  @id @default(cuid())
+  userId           String  @unique
+  user             User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  bio              String  @default("")
+  hourlyRate       Float   @default(20)
+  currency         String  @default("USD")
+
+  city             String  @default("")
+  state            String  @default("")
+  zipCode          String  @default("")
+  latitude         Float?
+  longitude        Float?
+  radiusMiles      Int     @default(10)
+
+  availabilityJson String  @default("{}")
+  yearsExperience  Int     @default(0)
+  languages        String  @default("English")
+  certifications   String  @default("")
+  ageRangeMin      Int     @default(0)
+  ageRangeMax      Int     @default(17)
+  hasTransportation Boolean @default(false)
+  hasFirstAid      Boolean @default(false)
+  hasCPR           Boolean @default(false)
+  referencesJson   String  @default("[]")
+  isActive         Boolean @default(true)
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([city, state])
+  @@index([hourlyRate])
+  @@index([isActive])
+}
+
+model ChildcareRequest {
+  id              String   @id @default(cuid())
+  parentId        String
+  parent          User     @relation(fields: [parentId], references: [id], onDelete: Cascade)
+
+  title           String
+  description     String   @default("")
+  dateNeeded      DateTime
+  startTime       String
+  endTime         String
+  durationHours   Float
+
+  childrenJson    String   @default("[]")
+  numberOfChildren Int     @default(1)
+
+  city            String   @default("")
+  state           String   @default("")
+  zipCode         String   @default("")
+  latitude        Float?
+  longitude       Float?
+  address         String   @default("")
+
+  maxHourlyRate   Float?
+  specialNotes    String   @default("")
+  status          String   @default("OPEN") // OPEN | MATCHED | CLOSED
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  bookings        Booking[]
+
+  @@index([parentId])
+  @@index([status])
+  @@index([dateNeeded])
+  @@index([city, state])
+}
+
+model Booking {
+  id             String   @id @default(cuid())
+  requestId      String
+  request        ChildcareRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  parentId       String
+  parent         User     @relation("ParentBookings", fields: [parentId], references: [id])
+  sitterId       String
+  sitter         User     @relation("SitterBookings", fields: [sitterId], references: [id])
+
+  dateBooked     DateTime
+  startTime      String
+  endTime        String
+  agreedRate     Float
+  totalEstimated Float
+
+  status         String   @default("PENDING")
+  // PENDING | ACCEPTED | DECLINED | CONFIRMED | COMPLETED | CANCELLED | REVIEWED
+
+  parentNotes    String   @default("")
+  sitterNotes    String   @default("")
+  declinedReason String?
+  cancelledBy    String?
+  cancelledReason String?
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  messages       Message[]
+  review         Review?
+
+  @@index([parentId])
+  @@index([sitterId])
+  @@index([requestId])
+  @@index([status])
+  @@index([dateBooked])
+  @@unique([requestId, sitterId])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  bookingId String
+  booking   Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  senderId  String
+  sender    User     @relation("SentMessages", fields: [senderId], references: [id])
+
+  content   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([bookingId, createdAt])
+  @@index([senderId])
+  @@index([bookingId, isRead])
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  bookingId String   @unique
+  booking   Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  authorId  String
+  author    User     @relation("ReviewAuthor", fields: [authorId], references: [id])
+  subjectId String
+  subject   User     @relation("ReviewSubject", fields: [subjectId], references: [id])
+
+  rating    Int
+  title     String   @default("")
+  comment   String   @default("")
+  isVisible Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([subjectId, rating])
+  @@index([authorId])
+}

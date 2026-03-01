@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+
+  --color-surface-primary: #FAF6F1;
+  --color-surface-secondary: #FFFFFF;
+  --color-surface-tertiary: #F3EDE6;
+  --color-surface-elevated: #FFFFFF;
+
+  --color-border-default: #E5DDD4;
+  --color-border-subtle: #EDE7E0;
+  --color-border-hover: #C9BFB4;
+  --color-border-active: #A69686;
+
+  --color-text-primary: #2C2420;
+  --color-text-secondary: #7A6B5D;
+  --color-text-tertiary: #A69686;
+  --color-text-muted: #C4B8AB;
+
+  --color-accent: #D4845C;
+  --color-accent-hover: #C07548;
+  --color-accent-muted: rgba(212, 132, 92, 0.10);
+
+  --color-success: #5A8A62;
+  --color-success-muted: rgba(90, 138, 98, 0.10);
+  --color-warning: #C49632;
+  --color-warning-muted: rgba(196, 150, 50, 0.10);
+  --color-danger: #C45A4A;
+  --color-danger-muted: rgba(196, 90, 74, 0.08);
+  --color-info: #6B8EB5;
+  --color-info-muted: rgba(107, 142, 181, 0.08);
+}
+
+::selection {
+  background: rgba(212, 132, 92, 0.20);
+  color: #2C2420;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5DDD4;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C9BFB4;
+}
+
+input[type="checkbox"] {
+  accent-color: #D4845C;
+}
+
+select option {
+  background-color: #FFFFFF;
+  color: #2C2420;
+}
+
+/* Override all border-radius globally */
+*, *::before, *::after {
+  border-radius: 0 !important;
+}
+
