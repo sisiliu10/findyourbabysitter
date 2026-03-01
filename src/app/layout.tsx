@@ -6,7 +6,7 @@ const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
 const instrumentSerif = Instrument_Serif({ weight: "400", subsets: ["latin"], variable: "--font-serif" });
 
 export const metadata: Metadata = {
-  title: "FindYourBabysitter - Trusted Childcare",
+  title: "Berlin Babysitter - Trusted Childcare",
   description: "Find trusted, vetted babysitters in your area. Quick booking, verified profiles, real reviews.",
 };
 

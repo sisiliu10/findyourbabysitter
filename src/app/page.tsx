@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function HomePage() {
   return (
@@ -8,7 +7,7 @@ export default function HomePage() {
       <header className="border-b border-border-default">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
           <Link href="/" className="text-xs font-medium uppercase tracking-[0.2em] text-text-primary">
-            FindYourBabysitter
+            Berlin Babysitter
           </Link>
           <div className="flex items-center gap-8">
             <Link
@@ -31,32 +30,31 @@ export default function HomePage() {
         {/* Hero — left aligned, asymmetric, editorial */}
         <section className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-border-default">
-            <div className="lg:col-span-7 py-24 sm:py-32 lg:py-40 lg:pr-16">
-              <h1 className="font-serif text-5xl leading-[1.05] tracking-tight text-text-primary sm:text-6xl lg:text-7xl">
-                Childcare that<br />
-                feels right.
+            <div className="lg:col-span-7 py-16 sm:py-20 lg:py-24 lg:pr-16">
+              <h1 className="font-serif text-4xl leading-[1.1] tracking-tight text-text-primary sm:text-5xl lg:text-6xl">
+                Childcare that feels right.
               </h1>
-              <p className="mt-8 max-w-md text-base leading-relaxed text-text-secondary">
-                Verified babysitters in your neighborhood. Real reviews from real
-                parents. No algorithms, no noise — just people you can trust
-                with your kids.
+              <p className="mt-6 max-w-lg text-base leading-relaxed text-text-secondary">
+                Stop scrolling through random profiles.<br />
+                Start with babysitters your friends actually use.<br />
+                Verified, reviewed, and easy to book in one place.
               </p>
-              <div className="mt-12 flex items-center gap-6">
+              <div className="mt-10 flex items-center gap-6">
                 <Link
                   href="/register"
-                  className="border border-text-primary bg-text-primary px-8 py-3.5 text-xs font-medium uppercase tracking-widest text-surface-primary transition-colors hover:bg-accent hover:border-accent"
+                  className="border border-text-primary bg-text-primary px-8 py-3.5 text-sm font-medium text-surface-primary transition-colors hover:bg-accent hover:border-accent"
                 >
                   Get started
                 </Link>
                 <Link
                   href="/login"
-                  className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
+                  className="text-sm text-text-tertiary transition-colors hover:text-text-primary"
                 >
-                  Already a member
+                  Sign in
                 </Link>
               </div>
             </div>
-            <div className="flex flex-col justify-between py-12 lg:col-span-5 lg:border-l lg:border-border-default lg:pl-12 lg:py-16">
+            <div className="flex flex-col justify-center py-10 lg:col-span-5 lg:border-l lg:border-border-default lg:pl-12 lg:py-24">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/hero-drawing.jpg"
@@ -64,36 +62,31 @@ export default function HomePage() {
                 className="w-full h-auto"
                 style={{ mixBlendMode: "multiply" }}
               />
-
-              <div className="space-y-6 text-sm text-text-tertiary mt-8">
-                <p className="text-xs uppercase tracking-wide text-text-muted">Since 2024</p>
-                <div className="space-y-1">
-                  <p>1,200+ verified sitters</p>
-                  <p>4.8 avg parent rating</p>
-                  <p>Background checked</p>
-                </div>
-              </div>
             </div>
           </div>
         </section>
 
-        {/* Two paths — asymmetric grid, not centered cards */}
+        {/* Two paths */}
         <section className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 py-6">
             <Link
               href="/register?role=PARENT"
-              className="group border-b border-border-default py-16 lg:border-r lg:border-b-0 lg:pr-16"
+              className="group relative overflow-hidden p-8 sm:p-10 transition-transform hover:-translate-y-0.5"
+              style={{
+                background: "linear-gradient(135deg, #E8C9A0, #F2D9B6, #E0B88A, #E8C9A0)",
+                backgroundSize: "300% 300%",
+                animation: "gradientShift 8s ease infinite",
+              }}
             >
-              <p className="text-xs uppercase tracking-wide text-text-muted mb-4">01</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-primary/40 mb-3">For parents</p>
               <h2 className="font-serif text-3xl text-text-primary sm:text-4xl">
                 I need a sitter
               </h2>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-secondary">
-                Browse verified profiles, read honest reviews, and book
-                the right person for your family. Direct and simple.
+              <p className="mt-3 max-w-xs text-sm leading-relaxed text-text-primary/60">
+                Browse profiles, read reviews, book the right person.
               </p>
-              <span className="mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-wide text-text-tertiary transition-colors group-hover:text-accent">
-                Start here
+              <span className="mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-text-primary/40 transition-colors group-hover:text-text-primary">
+                Get started
                 <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
@@ -102,18 +95,22 @@ export default function HomePage() {
 
             <Link
               href="/register?role=BABYSITTER"
-              className="group border-b border-border-default py-16 lg:pl-16"
+              className="group relative overflow-hidden p-8 sm:p-10 transition-transform hover:-translate-y-0.5"
+              style={{
+                background: "linear-gradient(135deg, #C4D8E2, #D6E6EE, #B8CFD9, #C4D8E2)",
+                backgroundSize: "300% 300%",
+                animation: "gradientShift 8s ease infinite 2s",
+              }}
             >
-              <p className="text-xs uppercase tracking-wide text-text-muted mb-4">02</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-primary/40 mb-3">For sitters</p>
               <h2 className="font-serif text-3xl text-text-primary sm:text-4xl">
                 I am a sitter
               </h2>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-secondary">
-                Create your profile, set your own rates and schedule,
-                and connect with families who need you.
+              <p className="mt-3 max-w-xs text-sm leading-relaxed text-text-primary/60">
+                Create your profile, set your rates, connect with families.
               </p>
-              <span className="mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-wide text-text-tertiary transition-colors group-hover:text-accent">
-                Start here
+              <span className="mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-text-primary/40 transition-colors group-hover:text-text-primary">
+                Get started
                 <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
@@ -123,8 +120,8 @@ export default function HomePage() {
         </section>
 
         {/* Trust — horizontal, not 3-column feature grid */}
-        <section className="mx-auto max-w-7xl px-6 py-24 sm:py-32">
-          <p className="text-xs uppercase tracking-wide text-text-muted mb-12">How it works</p>
+        <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+          <p className="text-xs uppercase tracking-wide text-text-muted mb-8">How it works</p>
           <div className="grid grid-cols-1 gap-0 sm:grid-cols-3">
             {[
               {
@@ -162,7 +159,7 @@ export default function HomePage() {
       <footer className="border-t border-border-default">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
           <span className="text-xs uppercase tracking-wide text-text-muted">
-            FindYourBabysitter
+            Berlin Babysitter
           </span>
           <span className="text-xs text-text-muted">
             {new Date().getFullYear()}

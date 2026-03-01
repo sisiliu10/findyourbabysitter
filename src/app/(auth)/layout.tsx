@@ -6,7 +6,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <header className="border-b border-border-default">
         <div className="flex h-14 items-center px-6">
           <Link href="/" className="text-xs font-medium uppercase tracking-[0.2em] text-text-primary">
-            FindYourBabysitter
+            Berlin Babysitter
           </Link>
         </div>
       </header>
