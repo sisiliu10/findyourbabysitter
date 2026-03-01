@@ -62,6 +62,45 @@ export default async function DashboardPage() {
         </p>
       </div>
 
+      {/* Discover — parent cards */}
+      {user.role === "PARENT" && (
+        <div className="mb-10">
+          <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
+            Discover
+          </p>
+          <div className="grid grid-cols-2 gap-4">
+            <Link
+              href="/search?mode=sitters"
+              className="group relative flex aspect-square flex-col items-center justify-center gap-3 border border-accent/20 bg-accent-muted p-6 transition hover:border-accent/40"
+            >
+              <div className="flex h-14 w-14 items-center justify-center bg-accent/10 transition group-hover:scale-105">
+                <svg className="h-7 w-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
+              </div>
+              <div className="text-center">
+                <p className="font-serif text-lg text-text-primary">Find Sitters</p>
+                <p className="mt-0.5 text-xs text-text-secondary">Browse babysitters</p>
+              </div>
+            </Link>
+            <Link
+              href="/search?mode=moms"
+              className="group relative flex aspect-square flex-col items-center justify-center gap-3 border border-[#b8860b]/20 bg-[#b8860b]/5 p-6 transition hover:border-[#b8860b]/40"
+            >
+              <div className="flex h-14 w-14 items-center justify-center bg-[#b8860b]/10 transition group-hover:scale-105">
+                <svg className="h-7 w-7 text-[#b8860b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                </svg>
+              </div>
+              <div className="text-center">
+                <p className="font-serif text-lg text-text-primary">Find Moms</p>
+                <p className="mt-0.5 text-xs text-text-secondary">Connect with parents</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      )}
+
       {/* Quick actions */}
       <div className="mb-10">
         <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
@@ -69,36 +108,20 @@ export default async function DashboardPage() {
         </p>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {user.role === "PARENT" && (
-            <>
-              <Link
-                href="/requests/new"
-                className="flex items-center gap-4 border border-border-default bg-surface-secondary p-5 transition hover:border-border-hover"
-              >
-                <div className="flex h-10 w-10 items-center justify-center bg-accent-muted text-accent">
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="font-medium text-text-primary">Create request</p>
-                  <p className="text-xs text-text-tertiary">Post a childcare need</p>
-                </div>
-              </Link>
-              <Link
-                href="/search"
-                className="flex items-center gap-4 border border-border-default bg-surface-secondary p-5 transition hover:border-border-hover"
-              >
-                <div className="flex h-10 w-10 items-center justify-center bg-accent-muted text-accent">
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="font-medium text-text-primary">Find sitters</p>
-                  <p className="text-xs text-text-tertiary">Browse available babysitters</p>
-                </div>
-              </Link>
-            </>
+            <Link
+              href="/requests/new"
+              className="flex items-center gap-4 border border-border-default bg-surface-secondary p-5 transition hover:border-border-hover"
+            >
+              <div className="flex h-10 w-10 items-center justify-center bg-accent-muted text-accent">
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-medium text-text-primary">Create request</p>
+                <p className="text-xs text-text-tertiary">Post a childcare need</p>
+              </div>
+            </Link>
           )}
 
           {user.role === "BABYSITTER" && (
