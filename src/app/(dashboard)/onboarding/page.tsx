@@ -15,14 +15,14 @@ export default function OnboardingPage() {
   // Sitter fields
   const [bio, setBio] = useState("");
   const [hourlyRate, setHourlyRate] = useState("20");
-  const [yearsExperience, setYearsExperience] = useState("0");
   const [languages, setLanguages] = useState("English");
-  const [hasFirstAid, setHasFirstAid] = useState(false);
-  const [hasCPR, setHasCPR] = useState(false);
-  const [hasTransportation, setHasTransportation] = useState(false);
   const [ageRangeMin, setAgeRangeMin] = useState("0");
   const [ageRangeMax, setAgeRangeMax] = useState("17");
   const [availability, setAvailability] = useState<Record<string, string[]>>({});
+
+  // Profile picture
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
 
   // Shared fields
   const [city, setCity] = useState("");
@@ -75,15 +75,18 @@ export default function OnboardingPage() {
 
     const body: Record<string, unknown> = { city, state, zipCode, phone, latitude, longitude };
 
+    // Upload avatar if selected
+    if (avatarFile) {
+      const avatarData = new FormData();
+      avatarData.append("avatar", avatarFile);
+      await fetch("/api/profile/avatar", { method: "POST", body: avatarData });
+    }
+
     if (role === "BABYSITTER") {
       Object.assign(body, {
         bio,
         hourlyRate: parseFloat(hourlyRate),
-        yearsExperience: parseInt(yearsExperience, 10),
         languages,
-        hasFirstAid,
-        hasCPR,
-        hasTransportation,
         ageRangeMin: parseInt(ageRangeMin, 10),
         ageRangeMax: parseInt(ageRangeMax, 10),
         availabilityJson: JSON.stringify(availability),
@@ -214,23 +217,48 @@ export default function OnboardingPage() {
       {step === 2 && role === "BABYSITTER" && (
         <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">About you</h2>
+
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Profile picture</label>
+            <div className="mt-1 flex items-center gap-4">
+              {avatarPreview ? (
+                <img src={avatarPreview} alt="Preview" className="h-16 w-16 object-cover" />
+              ) : (
+                <div className="flex h-16 w-16 items-center justify-center bg-surface-tertiary text-text-muted">
+                  <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
+                  </svg>
+                </div>
+              )}
+              <label className="cursor-pointer border border-border-default px-3 py-2 text-sm text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+                Choose photo
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setAvatarFile(file);
+                      setAvatarPreview(URL.createObjectURL(file));
+                    }
+                  }}
+                />
+              </label>
+            </div>
+          </div>
+
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Bio</label>
             <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={4} className={inputClass} placeholder="Tell parents about yourself, your experience, and what makes you a great babysitter..." />
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Hourly rate ($)</label>
-              <input type="number" min="1" value={hourlyRate} onChange={(e) => setHourlyRate(e.target.value)} className={inputClass} />
-            </div>
-            <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Years of experience</label>
-              <input type="number" min="0" value={yearsExperience} onChange={(e) => setYearsExperience(e.target.value)} className={inputClass} />
-            </div>
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Hourly rate (&euro;)</label>
+            <input type="number" min="1" value={hourlyRate} onChange={(e) => setHourlyRate(e.target.value)} className={inputClass} />
           </div>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Languages (comma separated)</label>
-            <input value={languages} onChange={(e) => setLanguages(e.target.value)} className={inputClass} placeholder="English, Spanish" />
+            <input value={languages} onChange={(e) => setLanguages(e.target.value)} className={inputClass} placeholder="English, German" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -241,20 +269,6 @@ export default function OnboardingPage() {
               <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Oldest age comfortable</label>
               <input type="number" min="0" max="17" value={ageRangeMax} onChange={(e) => setAgeRangeMax(e.target.value)} className={inputClass} />
             </div>
-          </div>
-
-          <h3 className="mt-4 text-xs font-medium uppercase tracking-wide text-text-secondary">Certifications</h3>
-          <div className="flex flex-wrap gap-4">
-            {[
-              { label: "First Aid", checked: hasFirstAid, set: setHasFirstAid },
-              { label: "CPR", checked: hasCPR, set: setHasCPR },
-              { label: "Has transportation", checked: hasTransportation, set: setHasTransportation },
-            ].map((cert) => (
-              <label key={cert.label} className="flex items-center gap-2 text-sm text-text-secondary">
-                <input type="checkbox" checked={cert.checked} onChange={(e) => cert.set(e.target.checked)} className="h-4 w-4 border-border-default text-text-primary focus:ring-text-primary" />
-                {cert.label}
-              </label>
-            ))}
           </div>
 
           <div className="mt-4 flex gap-3">
