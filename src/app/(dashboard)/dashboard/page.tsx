@@ -132,7 +132,7 @@ export default async function DashboardPage() {
                 </div>
               </Link>
             </>
-          )}}
+          )}
 
           <Link
             href="/profile"
