@@ -29,7 +29,7 @@ export default function HomePage() {
       <main className="flex-1">
         {/* Hero — left aligned, asymmetric, editorial */}
         <section className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-border-default">
+          <div className="grid grid-cols-1 lg:grid-cols-12 lg:items-center border-b border-border-default">
             <div className="lg:col-span-7 py-16 sm:py-20 lg:py-24 lg:pr-16">
               <h1 className="font-serif text-4xl leading-[1.1] tracking-tight text-text-primary sm:text-5xl lg:text-6xl">
                 Childcare that feels right.
@@ -54,7 +54,7 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="flex flex-col justify-center py-10 lg:col-span-5 lg:border-l lg:border-border-default lg:pl-12 lg:py-24">
+            <div className="lg:col-span-5 lg:pl-12">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/hero-drawing.jpg"
