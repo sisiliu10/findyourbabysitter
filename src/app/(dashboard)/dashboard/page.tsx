@@ -134,20 +134,6 @@ export default async function DashboardPage() {
             </>
           )}
 
-          <Link
-            href="/profile"
-            className="flex items-center gap-4 border border-border-default bg-surface-secondary p-5 transition hover:border-border-hover"
-          >
-            <div className="flex h-10 w-10 items-center justify-center bg-accent-muted text-accent">
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </div>
-            <div>
-              <p className="font-medium text-text-primary">Your profile</p>
-              <p className="text-xs text-text-tertiary">View and edit your info</p>
-            </div>
-          </Link>
         </div>
       </div>
 
