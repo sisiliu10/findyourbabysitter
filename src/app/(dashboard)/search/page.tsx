@@ -84,7 +84,7 @@ function sitterToCard(s: SitterResult): CardProfile {
     firstName: s.user.firstName,
     lastName: s.user.lastName,
     avatarUrl: s.user.avatarUrl,
-    location: [s.city, s.state].filter(Boolean).join(", "),
+    location: s.city || "",
     bio: s.bio,
     tags,
     age: calculateAge(s.user.birthday),
@@ -112,7 +112,7 @@ function parentToCard(p: ParentResult): CardProfile {
     }
   }, 0);
 
-  const locations = [...new Set(reqs.map((r) => [r.city, r.state].filter(Boolean).join(", ")).filter(Boolean))];
+  const locations = [...new Set(reqs.map((r) => r.city).filter(Boolean))];
   const tags: CardProfile["tags"] = [];
   if (totalKids > 0) tags.push({ label: `${totalKids} ${totalKids === 1 ? "child" : "children"}`, variant: "info" });
   if (reqs.length > 0) tags.push({ label: `${reqs.length} ${reqs.length === 1 ? "request" : "requests"}`, variant: "neutral" });
