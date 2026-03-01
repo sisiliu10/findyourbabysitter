@@ -1,18 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { cn } from "@/lib/utils";
 
-interface PhotonFeature {
-  geometry: { coordinates: [number, number] };
-  properties: {
-    name?: string;
-    street?: string;
-    housenumber?: string;
-    postcode?: string;
-    city?: string;
-    country?: string;
-  };
+declare global {
+  interface Window {
+    google: typeof google;
+    initGoogleMaps?: () => void;
+  }
 }
 
 interface AddressAutocompleteProps {
@@ -29,6 +24,33 @@ interface AddressAutocompleteProps {
   className?: string;
 }
 
+let googleMapsLoaded = false;
+let googleMapsLoading = false;
+const loadCallbacks: (() => void)[] = [];
+
+function loadGoogleMaps(apiKey: string): Promise<void> {
+  if (googleMapsLoaded) return Promise.resolve();
+
+  return new Promise((resolve) => {
+    loadCallbacks.push(resolve);
+
+    if (googleMapsLoading) return;
+    googleMapsLoading = true;
+
+    window.initGoogleMaps = () => {
+      googleMapsLoaded = true;
+      loadCallbacks.forEach((cb) => cb());
+      loadCallbacks.length = 0;
+    };
+
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleMaps`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  });
+}
+
 export function AddressAutocomplete({
   value,
   onChange,
@@ -36,148 +58,68 @@ export function AddressAutocomplete({
   placeholder,
   className,
 }: AddressAutocompleteProps) {
-  const [suggestions, setSuggestions] = useState<PhotonFeature[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
 
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const handlePlaceSelect = useCallback(() => {
+    const autocomplete = autocompleteRef.current;
+    if (!autocomplete) return;
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const query = e.target.value;
-    onChange(query);
-    setActiveIndex(-1);
+    const place = autocomplete.getPlace();
+    if (!place.geometry?.location) return;
 
-    if (debounceRef.current) clearTimeout(debounceRef.current);
+    const components = place.address_components || [];
+    let street = "";
+    let streetNumber = "";
+    let city = "";
+    let zipCode = "";
 
-    if (query.length < 3) {
-      setSuggestions([]);
-      setIsOpen(false);
-      return;
+    for (const comp of components) {
+      const types = comp.types;
+      if (types.includes("route")) street = comp.long_name;
+      if (types.includes("street_number")) streetNumber = comp.long_name;
+      if (types.includes("locality")) city = comp.long_name;
+      if (types.includes("postal_code")) zipCode = comp.long_name;
     }
 
-    debounceRef.current = setTimeout(async () => {
-      try {
-        const res = await fetch(
-          `https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&lat=52.52&lon=13.405&limit=5`
-        );
-        const data = await res.json();
-        const features = (data.features || []) as PhotonFeature[];
-        setSuggestions(features);
-        setIsOpen(features.length > 0);
-      } catch {
-        setSuggestions([]);
-        setIsOpen(false);
-      }
-    }, 300);
-  }
-
-  function handleSelect(feature: PhotonFeature) {
-    const props = feature.properties;
-    const [lng, lat] = feature.geometry.coordinates;
-
-    const street = props.street || props.name || "";
-    const housenumber = props.housenumber || "";
-    const address = housenumber ? `${street} ${housenumber}` : street;
+    const address = streetNumber ? `${street} ${streetNumber}` : street;
+    const lat = place.geometry.location.lat();
+    const lng = place.geometry.location.lng();
 
     onChange(address);
-    onSelect({
-      address,
-      city: props.city || "",
-      zipCode: props.postcode || "",
-      latitude: lat,
-      longitude: lng,
+    onSelect({ address, city, zipCode, latitude: lat, longitude: lng });
+  }, [onChange, onSelect]);
+
+  useEffect(() => {
+    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+    if (!apiKey || !inputRef.current) return;
+
+    loadGoogleMaps(apiKey).then(() => {
+      if (!inputRef.current || autocompleteRef.current) return;
+
+      const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
+        types: ["address"],
+        componentRestrictions: { country: "de" },
+        fields: ["address_components", "geometry"],
+      });
+
+      autocomplete.addListener("place_changed", handlePlaceSelect);
+      autocompleteRef.current = autocomplete;
     });
-
-    setSuggestions([]);
-    setIsOpen(false);
-  }
-
-  function handleKeyDown(e: React.KeyboardEvent) {
-    if (!isOpen || suggestions.length === 0) return;
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setActiveIndex((i) => Math.min(i + 1, suggestions.length - 1));
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setActiveIndex((i) => Math.max(i - 1, 0));
-    } else if (e.key === "Enter" && activeIndex >= 0) {
-      e.preventDefault();
-      handleSelect(suggestions[activeIndex]);
-    } else if (e.key === "Escape") {
-      setIsOpen(false);
-    }
-  }
-
-  function formatSuggestion(feature: PhotonFeature) {
-    const p = feature.properties;
-    const street = p.street || p.name || "";
-    const housenumber = p.housenumber || "";
-    const primary = housenumber ? `${street} ${housenumber}` : street;
-    const secondary = [p.postcode, p.city].filter(Boolean).join(", ");
-    return { primary, secondary };
-  }
+  }, [handlePlaceSelect]);
 
   return (
-    <div ref={containerRef} className="relative w-full">
-      <input
-        value={value}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        onFocus={() => suggestions.length > 0 && setIsOpen(true)}
-        placeholder={placeholder}
-        className={cn(
-          "block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary",
-          "placeholder:text-text-muted transition focus:border-text-primary focus:outline-none",
-          className,
-        )}
-        role="combobox"
-        aria-expanded={isOpen}
-        aria-autocomplete="list"
-        aria-controls="address-suggestions"
-        autoComplete="off"
-      />
-      {isOpen && (
-        <ul
-          id="address-suggestions"
-          role="listbox"
-          className="absolute z-50 w-full border border-t-0 border-border-default bg-surface-secondary shadow-sm"
-        >
-          {suggestions.map((feature, i) => {
-            const { primary, secondary } = formatSuggestion(feature);
-            return (
-              <li
-                key={i}
-                role="option"
-                aria-selected={i === activeIndex}
-                onMouseDown={() => handleSelect(feature)}
-                onMouseEnter={() => setActiveIndex(i)}
-                className={cn(
-                  "cursor-pointer px-3 py-2.5 text-sm transition",
-                  i === activeIndex
-                    ? "bg-surface-tertiary text-text-primary"
-                    : "text-text-secondary hover:bg-surface-tertiary",
-                )}
-              >
-                <span className="block text-text-primary">{primary}</span>
-                {secondary && (
-                  <span className="block text-xs text-text-muted">{secondary}</span>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+    <input
+      ref={inputRef}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder}
+      className={cn(
+        "block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary",
+        "placeholder:text-text-muted transition focus:border-text-primary focus:outline-none",
+        className,
       )}
-    </div>
+      autoComplete="off"
+    />
   );
 }
