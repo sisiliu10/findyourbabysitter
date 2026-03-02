@@ -123,6 +123,34 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
                 <div className="lg:col-span-5">
                   <div className="mb-6">
                     <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-2">
+                      Google rating
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <div className="flex">
+                        {[1, 2, 3, 4, 5].map((star) => {
+                          const fill = Math.min(1, Math.max(0, pg.googleRating - (star - 1)));
+                          return (
+                            <svg key={star} className="h-4 w-4" viewBox="0 0 20 20" fill="none">
+                              <defs>
+                                <linearGradient id={`star-${index}-${star}`}>
+                                  <stop offset={`${fill * 100}%`} stopColor="#FBBC04" />
+                                  <stop offset={`${fill * 100}%`} stopColor="#D1D5DB" />
+                                </linearGradient>
+                              </defs>
+                              <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                fill={`url(#star-${index}-${star})`}
+                              />
+                            </svg>
+                          );
+                        })}
+                      </div>
+                      <span className="text-sm font-medium text-text-primary">{pg.googleRating}</span>
+                      <span className="text-xs text-text-muted">({pg.googleReviewCount.toLocaleString()} reviews)</span>
+                    </div>
+                  </div>
+                  <div className="mb-6">
+                    <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-2">
                       Recommended ages
                     </p>
                     <p className="text-sm text-text-secondary">{pg.ageRange}</p>

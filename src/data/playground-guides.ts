@@ -4,6 +4,8 @@ export interface Playground {
   description: string;
   highlights: string[];
   ageRange: string;
+  googleRating: number;
+  googleReviewCount: number;
 }
 
 export interface PlaygroundGuide {
@@ -39,6 +41,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Generous shade from mature trees, great for hot summer days",
         ],
         ageRange: "1-10 years",
+        googleRating: 4.2,
+        googleReviewCount: 30,
       },
       {
         name: "Spielplatz Helmholtzplatz",
@@ -51,6 +55,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Quieter and less crowded than Kollwitzplatz, especially on weekdays",
         ],
         ageRange: "2-12 years",
+        googleRating: 4.1,
+        googleReviewCount: 68,
       },
       {
         name: "Mauerpark Playground",
@@ -63,6 +69,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Grassy hillside perfect for picnics after playtime",
         ],
         ageRange: "2-12 years",
+        googleRating: 4.7,
+        googleReviewCount: 69,
       },
       {
         name: "Abenteuerlicher Bauspielplatz Kolle 37",
@@ -75,6 +83,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "A rare chance for kids to experience genuinely unstructured, creative play",
         ],
         ageRange: "6-14 years",
+        googleRating: 4.4,
+        googleReviewCount: 107,
       },
     ],
     closingNote:
@@ -101,6 +111,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Plenty of open green space around the playground for running and games",
         ],
         ageRange: "3-12 years",
+        googleRating: 4.5,
+        googleReviewCount: 43,
       },
       {
         name: "Waldeck Spielplatz",
@@ -113,6 +125,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Small and enclosed, easy to keep an eye on kids",
         ],
         ageRange: "3-10 years",
+        googleRating: 3.9,
+        googleReviewCount: 449,
       },
       {
         name: "Spielplatz Mariannenplatz",
@@ -125,6 +139,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Near Bethanien arts center, combining culture with outdoor play",
         ],
         ageRange: "1-10 years",
+        googleRating: 4.5,
+        googleReviewCount: 245,
       },
       {
         name: "Spielplatz am Boecklerpark",
@@ -137,6 +153,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Sand areas and climbing structures suit a wide age range",
         ],
         ageRange: "2-10 years",
+        googleRating: 4.4,
+        googleReviewCount: 267,
       },
     ],
     closingNote:
@@ -163,6 +181,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Water pump for splashing and sand play in warmer months",
         ],
         ageRange: "2-10 years",
+        googleRating: 4.6,
+        googleReviewCount: 551,
       },
       {
         name: "Indianerdorf, Volkspark Friedrichshain",
@@ -175,6 +195,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Spacious park setting with ponds, paths, and picnic spots",
         ],
         ageRange: "3-12 years",
+        googleRating: 4.7,
+        googleReviewCount: 32,
       },
       {
         name: "Spielplatz Boxhagener Platz",
@@ -187,6 +209,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Fenced area with equipment for both toddlers and older kids",
         ],
         ageRange: "1-10 years",
+        googleRating: 4.6,
+        googleReviewCount: 26,
       },
       {
         name: "Abenteuerspielplatz Forcki",
@@ -199,6 +223,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Open weekday afternoons during school terms",
         ],
         ageRange: "6-14 years",
+        googleRating: 4.7,
+        googleReviewCount: 44,
       },
     ],
     closingNote:
@@ -225,6 +251,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Open, airy setting with great sightlines for parents",
         ],
         ageRange: "3-12 years",
+        googleRating: 4.5,
+        googleReviewCount: 151,
       },
       {
         name: "1001 Nacht Spielplatz",
@@ -237,6 +265,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Kiosk nearby for drinks and snacks",
         ],
         ageRange: "2-10 years",
+        googleRating: 4.9,
+        googleReviewCount: 8,
       },
       {
         name: "Spielplatz Kornerpark",
@@ -249,6 +279,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Quieter and less crowded than most Neukolln playgrounds",
         ],
         ageRange: "2-8 years",
+        googleRating: 4.3,
+        googleReviewCount: 112,
       },
       {
         name: "Kinderspielplatz Tempelhofer Feld",
@@ -261,6 +293,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Flat terrain is perfect for bikes, scooters, and little legs learning to walk",
         ],
         ageRange: "0-14 years",
+        googleRating: 4.5,
+        googleReviewCount: 151,
       },
     ],
     closingNote:
@@ -287,6 +321,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Set in a green park just off busy Weinbergsweg",
         ],
         ageRange: "2-10 years",
+        googleRating: 4.2,
+        googleReviewCount: 81,
       },
       {
         name: "Spielplatz Monbijoupark",
@@ -299,6 +335,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Central location, easy to reach from anywhere in Mitte",
         ],
         ageRange: "2-10 years",
+        googleRating: 4.7,
+        googleReviewCount: 51,
       },
       {
         name: "Spielplatz am Zionskirchplatz",
@@ -311,6 +349,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Generous shade from mature trees",
         ],
         ageRange: "1-8 years",
+        googleRating: 4.4,
+        googleReviewCount: 118,
       },
       {
         name: "Spielplatz Hackescher Markt",
@@ -323,6 +363,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Perfect for a quick play break during a city outing",
         ],
         ageRange: "1-6 years",
+        googleRating: 4.3,
+        googleReviewCount: 15,
       },
     ],
     closingNote:
@@ -349,6 +391,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Spacious and rarely overcrowded despite the tourist-adjacent location",
         ],
         ageRange: "2-10 years",
+        googleRating: 4.5,
+        googleReviewCount: 86,
       },
       {
         name: "Spielplatz Lietzenseepark",
@@ -361,6 +405,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Well-shaded promenade perfect for stroller walks",
         ],
         ageRange: "2-10 years",
+        googleRating: 4.4,
+        googleReviewCount: 150,
       },
       {
         name: "Spielplatz Klausenerplatz",
@@ -373,6 +419,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Weekly market on the square creates a community atmosphere",
         ],
         ageRange: "1-12 years",
+        googleRating: 4.3,
+        googleReviewCount: 236,
       },
       {
         name: "Piratenschiff Spielplatz",
@@ -385,6 +433,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Large enough that multiple groups can play without crowding",
         ],
         ageRange: "4-12 years",
+        googleRating: 4.1,
+        googleReviewCount: 129,
       },
     ],
     closingNote:
@@ -411,6 +461,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Compact enough for parents to supervise easily",
         ],
         ageRange: "3-10 years",
+        googleRating: 4.6,
+        googleReviewCount: 303,
       },
       {
         name: "Cowboy Spielplatz",
@@ -423,6 +475,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Good mix of climbing and imaginative play",
         ],
         ageRange: "3-12 years",
+        googleRating: 4.8,
+        googleReviewCount: 1206,
       },
       {
         name: "Spielplatz Rudolph-Wilde-Park",
@@ -435,6 +489,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Wide lawns for picnics and running alongside the play equipment",
         ],
         ageRange: "1-10 years",
+        googleRating: 4.5,
+        googleReviewCount: 2441,
       },
       {
         name: "Spielplatz Cheruskerpark",
@@ -447,6 +503,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Large meadow for free play alongside the structured equipment",
         ],
         ageRange: "2-10 years",
+        googleRating: 4.3,
+        googleReviewCount: 37,
       },
     ],
     closingNote:
@@ -473,6 +531,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Schillerpark itself has open lawns and walking paths for a full outing",
         ],
         ageRange: "1-10 years",
+        googleRating: 4.1,
+        googleReviewCount: 478,
       },
       {
         name: "Abenteuerspielplatz Humboldthain",
@@ -485,6 +545,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Genuinely engaging hands-on activities, not just equipment",
         ],
         ageRange: "6-14 years",
+        googleRating: 4.3,
+        googleReviewCount: 57,
       },
       {
         name: "Spielplatz am Plotzensee",
@@ -497,6 +559,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "One of the few playgrounds in Berlin with a swimmable lake nearby",
         ],
         ageRange: "2-12 years",
+        googleRating: 4.7,
+        googleReviewCount: 7,
       },
       {
         name: "Spielplatz Leopoldplatz",
@@ -509,6 +573,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Modern, well-maintained equipment in a central location",
         ],
         ageRange: "1-8 years",
+        googleRating: 4.5,
+        googleReviewCount: 475,
       },
     ],
     closingNote:
@@ -535,6 +601,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Active, social atmosphere — great for kids to make friends",
         ],
         ageRange: "5-14 years",
+        googleRating: 4.6,
+        googleReviewCount: 173,
       },
       {
         name: "Spielplatz Fritz-Schloss-Park",
@@ -547,6 +615,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Spacious layout means it never feels cramped",
         ],
         ageRange: "2-12 years",
+        googleRating: 4.4,
+        googleReviewCount: 940,
       },
       {
         name: "Spielplatz Kleiner Tiergarten",
@@ -559,6 +629,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Sheltered by park trees despite being steps from the main road",
         ],
         ageRange: "1-10 years",
+        googleRating: 4.4,
+        googleReviewCount: 20,
       },
       {
         name: "Uferpromenade Spielplatz",
@@ -571,6 +643,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Combines well with a walk along the river promenade",
         ],
         ageRange: "2-8 years",
+        googleRating: 4.4,
+        googleReviewCount: 12,
       },
     ],
     closingNote:
@@ -597,6 +671,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Generous shade from mature trees — comfortable even in peak summer",
         ],
         ageRange: "3-14 years",
+        googleRating: 4.6,
+        googleReviewCount: 121,
       },
       {
         name: "Spielplatz Stadtpark Steglitz (Edge)",
@@ -609,6 +685,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Less crowded than the main playground, quieter atmosphere",
         ],
         ageRange: "4-12 years",
+        googleRating: 4.6,
+        googleReviewCount: 121,
       },
       {
         name: "Spielplatz Botanischer Garten",
@@ -621,6 +699,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Greenhouses make it a year-round destination, not just a summer one",
         ],
         ageRange: "2-10 years",
+        googleRating: 4.5,
+        googleReviewCount: 34,
       },
       {
         name: "Spielplatz Birkbuschgarten",
@@ -633,6 +713,8 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
           "Small meadow for free play alongside the structured equipment",
         ],
         ageRange: "1-8 years",
+        googleRating: 4.3,
+        googleReviewCount: 18,
       },
     ],
     closingNote:
