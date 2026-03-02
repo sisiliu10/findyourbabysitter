@@ -158,6 +158,17 @@ export default async function LandingPage({ params }: PageProps) {
                 <p className="text-sm leading-relaxed text-text-secondary">
                   {page.longDescription}
                 </p>
+                {isDistrict && (
+                  <Link
+                    href={`/babysitter/${slug}/playgrounds`}
+                    className="mt-6 inline-flex items-center gap-2 text-sm text-accent transition-colors hover:text-text-primary"
+                  >
+                    Playground guide for {page.name}
+                    <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                    </svg>
+                  </Link>
+                )}
               </div>
               <div className="lg:col-span-5">
                 <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-4">
