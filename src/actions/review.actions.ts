@@ -3,6 +3,7 @@
 import { requireAuth } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { reviewSchema } from "@/lib/validators";
+import { notifyReviewSubmitted } from "@/lib/email";
 import type { ActionResult } from "@/types";
 
 export async function submitReview(formData: FormData): Promise<ActionResult> {
@@ -63,6 +64,15 @@ export async function submitReview(formData: FormData): Promise<ActionResult> {
         data: { status: "REVIEWED" },
       }),
     ]);
+
+    // Send email notification to sitter (fire-and-forget)
+    const [sitter, parent] = await Promise.all([
+      prisma.user.findUnique({ where: { id: booking.sitterId }, select: { email: true } }),
+      prisma.user.findUnique({ where: { id: session.userId }, select: { firstName: true, lastName: true } }),
+    ]);
+    if (sitter && parent) {
+      notifyReviewSubmitted(sitter.email, `${parent.firstName} ${parent.lastName}`, rating, bookingId).catch(console.error);
+    }
 
     return { success: true };
   } catch (error) {

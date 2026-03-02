@@ -4,6 +4,15 @@ import { requireAuth } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { createBookingSchema } from "@/lib/validators";
 import { STATUS_TRANSITIONS } from "@/lib/constants";
+import {
+  notifyBookingCreated,
+  notifyBookingAccepted,
+  notifyBookingDeclined,
+  notifyBookingConfirmed,
+  notifyBookingCompleted,
+  notifyBookingCancelled,
+  type BookingEmailData,
+} from "@/lib/email";
 import type { ActionResult } from "@/types";
 
 export async function createBooking(formData: FormData): Promise<ActionResult> {
@@ -62,6 +71,25 @@ export async function createBooking(formData: FormData): Promise<ActionResult> {
         parentNotes: parentNotes || "",
       },
     });
+
+    // Send email notification to sitter (fire-and-forget)
+    const [sitter, parent] = await Promise.all([
+      prisma.user.findUnique({ where: { id: sitterId }, select: { email: true, firstName: true, lastName: true } }),
+      prisma.user.findUnique({ where: { id: session.userId }, select: { email: true, firstName: true, lastName: true } }),
+    ]);
+    if (sitter && parent) {
+      notifyBookingCreated({
+        bookingId: booking.id,
+        dateBooked: booking.dateBooked,
+        startTime: booking.startTime,
+        endTime: booking.endTime,
+        agreedRate: booking.agreedRate,
+        parentName: `${parent.firstName} ${parent.lastName}`,
+        parentEmail: parent.email,
+        sitterName: `${sitter.firstName} ${sitter.lastName}`,
+        sitterEmail: sitter.email,
+      }).catch(console.error);
+    }
 
     return { success: true, data: { bookingId: booking.id } };
   } catch (error) {
@@ -123,6 +151,49 @@ export async function updateBookingStatus(
       where: { id: bookingId },
       data: updateData,
     });
+
+    // Send email notification (fire-and-forget)
+    const [parent, sitter] = await Promise.all([
+      prisma.user.findUnique({ where: { id: booking.parentId }, select: { email: true, firstName: true, lastName: true } }),
+      prisma.user.findUnique({ where: { id: booking.sitterId }, select: { email: true, firstName: true, lastName: true } }),
+    ]);
+    if (parent && sitter) {
+      const emailData: BookingEmailData = {
+        bookingId: booking.id,
+        dateBooked: booking.dateBooked,
+        startTime: booking.startTime,
+        endTime: booking.endTime,
+        agreedRate: booking.agreedRate,
+        parentName: `${parent.firstName} ${parent.lastName}`,
+        parentEmail: parent.email,
+        sitterName: `${sitter.firstName} ${sitter.lastName}`,
+        sitterEmail: sitter.email,
+      };
+      switch (newStatus) {
+        case "ACCEPTED":
+          notifyBookingAccepted(emailData).catch(console.error);
+          break;
+        case "DECLINED":
+          notifyBookingDeclined(emailData, reason).catch(console.error);
+          break;
+        case "CONFIRMED":
+          notifyBookingConfirmed(emailData).catch(console.error);
+          break;
+        case "COMPLETED":
+          notifyBookingCompleted(emailData).catch(console.error);
+          break;
+        case "CANCELLED": {
+          const cancelledByName =
+            session.userId === booking.parentId
+              ? `${parent.firstName} ${parent.lastName}`
+              : `${sitter.firstName} ${sitter.lastName}`;
+          const recipientEmail =
+            session.userId === booking.parentId ? sitter.email : parent.email;
+          notifyBookingCancelled(emailData, cancelledByName, recipientEmail, reason).catch(console.error);
+          break;
+        }
+      }
+    }
 
     return { success: true };
   } catch (error) {

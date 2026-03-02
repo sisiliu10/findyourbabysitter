@@ -2,6 +2,14 @@ import { NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { STATUS_TRANSITIONS } from "@/lib/constants";
+import {
+  notifyBookingAccepted,
+  notifyBookingDeclined,
+  notifyBookingConfirmed,
+  notifyBookingCompleted,
+  notifyBookingCancelled,
+  type BookingEmailData,
+} from "@/lib/email";
 
 export async function PATCH(
   request: Request,
@@ -76,6 +84,49 @@ export async function PATCH(
       where: { id },
       data: updateData,
     });
+
+    // Send email notification (fire-and-forget)
+    const [parent, sitter] = await Promise.all([
+      prisma.user.findUnique({ where: { id: booking.parentId }, select: { email: true, firstName: true, lastName: true } }),
+      prisma.user.findUnique({ where: { id: booking.sitterId }, select: { email: true, firstName: true, lastName: true } }),
+    ]);
+    if (parent && sitter) {
+      const emailData: BookingEmailData = {
+        bookingId: booking.id,
+        dateBooked: booking.dateBooked,
+        startTime: booking.startTime,
+        endTime: booking.endTime,
+        agreedRate: booking.agreedRate,
+        parentName: `${parent.firstName} ${parent.lastName}`,
+        parentEmail: parent.email,
+        sitterName: `${sitter.firstName} ${sitter.lastName}`,
+        sitterEmail: sitter.email,
+      };
+      switch (newStatus) {
+        case "ACCEPTED":
+          notifyBookingAccepted(emailData).catch(console.error);
+          break;
+        case "DECLINED":
+          notifyBookingDeclined(emailData, reason).catch(console.error);
+          break;
+        case "CONFIRMED":
+          notifyBookingConfirmed(emailData).catch(console.error);
+          break;
+        case "COMPLETED":
+          notifyBookingCompleted(emailData).catch(console.error);
+          break;
+        case "CANCELLED": {
+          const cancelledByName =
+            session.userId === booking.parentId
+              ? `${parent.firstName} ${parent.lastName}`
+              : `${sitter.firstName} ${sitter.lastName}`;
+          const recipientEmail =
+            session.userId === booking.parentId ? sitter.email : parent.email;
+          notifyBookingCancelled(emailData, cancelledByName, recipientEmail, reason).catch(console.error);
+          break;
+        }
+      }
+    }
 
     return NextResponse.json({ success: true, data: updated });
   } catch (error) {

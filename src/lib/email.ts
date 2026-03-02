@@ -1,0 +1,246 @@
+import { Resend } from "resend";
+
+// -------------------------------------------------------------------
+// Setup
+// -------------------------------------------------------------------
+
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
+
+const FROM_EMAIL = "FindYourBabysitter <onboarding@resend.dev>";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
+// -------------------------------------------------------------------
+// Generic send
+// -------------------------------------------------------------------
+
+interface SendEmailParams {
+  to: string;
+  subject: string;
+  html: string;
+}
+
+async function sendEmail({ to, subject, html }: SendEmailParams): Promise<void> {
+  if (!resend) {
+    console.warn("[email] RESEND_API_KEY not set — skipping:", subject);
+    return;
+  }
+
+  try {
+    await resend.emails.send({ from: FROM_EMAIL, to, subject, html });
+  } catch (error) {
+    console.error("[email] Failed to send:", subject, error);
+  }
+}
+
+// -------------------------------------------------------------------
+// Shared types
+// -------------------------------------------------------------------
+
+export interface BookingEmailData {
+  bookingId: string;
+  dateBooked: Date;
+  startTime: string;
+  endTime: string;
+  agreedRate: number;
+  parentName: string;
+  parentEmail: string;
+  sitterName: string;
+  sitterEmail: string;
+}
+
+// -------------------------------------------------------------------
+// Helpers
+// -------------------------------------------------------------------
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+function formatTime(time: string): string {
+  const [h, m] = time.split(":");
+  const hour = parseInt(h, 10);
+  const ampm = hour >= 12 ? "PM" : "AM";
+  const displayHour = hour % 12 || 12;
+  return `${displayHour}:${m} ${ampm}`;
+}
+
+function bookingLink(bookingId: string): string {
+  return `${APP_URL}/bookings/${bookingId}`;
+}
+
+// -------------------------------------------------------------------
+// 1. Booking Created  (Parent books → Sitter gets email)
+// -------------------------------------------------------------------
+
+export async function notifyBookingCreated(data: BookingEmailData): Promise<void> {
+  return sendEmail({
+    to: data.sitterEmail,
+    subject: `New booking request from ${data.parentName}`,
+    html: `
+      <h2>You have a new booking request!</h2>
+      <p><strong>${data.parentName}</strong> would like to book you for babysitting.</p>
+      <p><strong>Date:</strong> ${formatDate(data.dateBooked)}</p>
+      <p><strong>Time:</strong> ${formatTime(data.startTime)} – ${formatTime(data.endTime)}</p>
+      <p><strong>Rate:</strong> €${data.agreedRate}/hr</p>
+      <p><a href="${bookingLink(data.bookingId)}">View and respond to this booking</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 2. Booking Accepted  (Sitter accepts → Parent gets email)
+// -------------------------------------------------------------------
+
+export async function notifyBookingAccepted(data: BookingEmailData): Promise<void> {
+  return sendEmail({
+    to: data.parentEmail,
+    subject: `${data.sitterName} accepted your booking!`,
+    html: `
+      <h2>Great news!</h2>
+      <p><strong>${data.sitterName}</strong> has accepted your booking request.</p>
+      <p><strong>Date:</strong> ${formatDate(data.dateBooked)}</p>
+      <p><strong>Time:</strong> ${formatTime(data.startTime)} – ${formatTime(data.endTime)}</p>
+      <p>Please confirm the booking to finalize.</p>
+      <p><a href="${bookingLink(data.bookingId)}">Confirm your booking</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 3. Booking Declined  (Sitter declines → Parent gets email)
+// -------------------------------------------------------------------
+
+export async function notifyBookingDeclined(
+  data: BookingEmailData,
+  reason?: string,
+): Promise<void> {
+  return sendEmail({
+    to: data.parentEmail,
+    subject: `${data.sitterName} declined your booking request`,
+    html: `
+      <h2>Booking update</h2>
+      <p><strong>${data.sitterName}</strong> is unable to accept your booking for ${formatDate(data.dateBooked)}.</p>
+      ${reason ? `<p><strong>Reason:</strong> ${reason}</p>` : ""}
+      <p>You can browse other available sitters and create a new booking.</p>
+      <p><a href="${APP_URL}/dashboard">Go to your dashboard</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 4. Booking Confirmed  (Parent confirms → Sitter gets email)
+// -------------------------------------------------------------------
+
+export async function notifyBookingConfirmed(data: BookingEmailData): Promise<void> {
+  return sendEmail({
+    to: data.sitterEmail,
+    subject: `Booking confirmed with ${data.parentName}`,
+    html: `
+      <h2>Your booking is confirmed!</h2>
+      <p><strong>${data.parentName}</strong> has confirmed the booking.</p>
+      <p><strong>Date:</strong> ${formatDate(data.dateBooked)}</p>
+      <p><strong>Time:</strong> ${formatTime(data.startTime)} – ${formatTime(data.endTime)}</p>
+      <p><strong>Rate:</strong> €${data.agreedRate}/hr</p>
+      <p><a href="${bookingLink(data.bookingId)}">View booking details</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 5. Booking Completed  (Parent marks done → Sitter gets email)
+// -------------------------------------------------------------------
+
+export async function notifyBookingCompleted(data: BookingEmailData): Promise<void> {
+  return sendEmail({
+    to: data.sitterEmail,
+    subject: `Booking with ${data.parentName} marked as completed`,
+    html: `
+      <h2>Booking completed!</h2>
+      <p><strong>${data.parentName}</strong> has marked your booking on ${formatDate(data.dateBooked)} as completed.</p>
+      <p>Thank you for your great work!</p>
+      <p><a href="${bookingLink(data.bookingId)}">View booking details</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 6. Booking Cancelled  (Either party → Other party gets email)
+// -------------------------------------------------------------------
+
+export async function notifyBookingCancelled(
+  data: BookingEmailData,
+  cancelledByName: string,
+  recipientEmail: string,
+  reason?: string,
+): Promise<void> {
+  return sendEmail({
+    to: recipientEmail,
+    subject: `Booking on ${formatDate(data.dateBooked)} has been cancelled`,
+    html: `
+      <h2>Booking cancelled</h2>
+      <p><strong>${cancelledByName}</strong> has cancelled the booking for ${formatDate(data.dateBooked)}.</p>
+      ${reason ? `<p><strong>Reason:</strong> ${reason}</p>` : ""}
+      <p><a href="${APP_URL}/dashboard">Go to your dashboard</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 7. New Message  (Sender → Recipient gets email)
+// -------------------------------------------------------------------
+
+export async function notifyNewMessage(
+  recipientEmail: string,
+  senderName: string,
+  messagePreview: string,
+  bookingId: string,
+): Promise<void> {
+  const preview =
+    messagePreview.length > 150
+      ? messagePreview.slice(0, 150) + "..."
+      : messagePreview;
+
+  return sendEmail({
+    to: recipientEmail,
+    subject: `New message from ${senderName}`,
+    html: `
+      <h2>You have a new message</h2>
+      <p><strong>${senderName}</strong> sent you a message:</p>
+      <blockquote style="border-left: 3px solid #ccc; padding-left: 12px; color: #555;">
+        ${preview}
+      </blockquote>
+      <p><a href="${APP_URL}/messages/${bookingId}">Reply to this message</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 8. Review Submitted  (Parent reviews → Sitter gets email)
+// -------------------------------------------------------------------
+
+export async function notifyReviewSubmitted(
+  sitterEmail: string,
+  parentName: string,
+  rating: number,
+  bookingId: string,
+): Promise<void> {
+  const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+  return sendEmail({
+    to: sitterEmail,
+    subject: `${parentName} left you a review`,
+    html: `
+      <h2>You received a new review!</h2>
+      <p><strong>${parentName}</strong> left you a ${rating}-star review.</p>
+      <p style="font-size: 24px;">${stars}</p>
+      <p><a href="${bookingLink(bookingId)}">View the full review</a></p>
+    `,
+  });
+}

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { messageSchema } from "@/lib/validators";
+import { notifyNewMessage } from "@/lib/email";
 
 export async function GET(
   request: Request,
@@ -135,6 +136,18 @@ export async function POST(
         },
       },
     });
+
+    // Send email notification to the other party (fire-and-forget)
+    const recipientId =
+      booking.parentId === session.userId ? booking.sitterId : booking.parentId;
+    const recipient = await prisma.user.findUnique({
+      where: { id: recipientId },
+      select: { email: true },
+    });
+    if (recipient) {
+      const senderName = `${message.sender.firstName} ${message.sender.lastName}`;
+      notifyNewMessage(recipient.email, senderName, parsed.data.content, bookingId).catch(console.error);
+    }
 
     return NextResponse.json(
       { success: true, data: message },
