@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DISTRICTS, LANGUAGES } from "@/data/landing-pages";
 
 export default function HomePage() {
   return (
@@ -121,23 +122,24 @@ export default function HomePage() {
 
         {/* Trust — horizontal, not 3-column feature grid */}
         <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
-          <p className="text-xs uppercase tracking-wide text-text-muted mb-8">How it works</p>
+          <p className="text-xs uppercase tracking-wide text-text-muted mb-3">How it works</p>
+          <h2 className="font-serif text-3xl text-text-primary sm:text-4xl mb-8">Everything parents in Berlin need — in one place.</h2>
           <div className="grid grid-cols-1 gap-0 sm:grid-cols-3">
             {[
               {
                 num: "01",
-                title: "Verified profiles",
-                desc: "Every sitter is reviewed and ID-verified before they appear on the platform.",
+                title: "Find a Kita place",
+                desc: "Search for childcare options in your neighborhood and reach out easily.",
               },
               {
                 num: "02",
-                title: "Background checks",
-                desc: "Trust badges for sitters who complete our third-party verification process.",
+                title: "Find a babysitter you trust",
+                desc: "See sitters recommended by other parents in Berlin. No random profiles.",
               },
               {
                 num: "03",
-                title: "Honest reviews",
-                desc: "Real feedback from parents who booked. No curated testimonials.",
+                title: "Meet other moms nearby",
+                desc: "Build your village. Connect for playdates, co-sitting, or just support.",
               },
             ].map((item, i) => (
               <div
@@ -151,6 +153,43 @@ export default function HomePage() {
                 </p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Browse by neighborhood */}
+        <section className="border-t border-border-default">
+          <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+            <p className="text-xs uppercase tracking-wide text-text-muted mb-8">Browse by neighborhood</p>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+              {DISTRICTS.map((d) => (
+                <Link
+                  key={d.slug}
+                  href={`/babysitter/${d.slug}`}
+                  className="group border border-border-default p-5 transition-colors hover:border-text-primary"
+                >
+                  <p className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">{d.name}</p>
+                  <p className="mt-1 text-xs text-text-tertiary">Babysitters</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Browse by language */}
+        <section className="border-t border-border-default">
+          <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+            <p className="text-xs uppercase tracking-wide text-text-muted mb-8">Browse by language</p>
+            <div className="flex flex-wrap gap-3">
+              {LANGUAGES.map((l) => (
+                <Link
+                  key={l.slug}
+                  href={`/babysitter/${l.slug}`}
+                  className="border border-border-default px-5 py-3 text-sm text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary"
+                >
+                  {l.name}{l.nativeName ? ` — ${l.nativeName}` : ""}
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
       </main>

@@ -6,8 +6,17 @@ const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
 const instrumentSerif = Instrument_Serif({ weight: "400", subsets: ["latin"], variable: "--font-serif" });
 
 export const metadata: Metadata = {
-  title: "Berlin Babysitter - Trusted Childcare",
-  description: "Find trusted, vetted babysitters in your area. Quick booking, verified profiles, real reviews.",
+  metadataBase: new URL("https://berlinbabysitter.com"),
+  title: {
+    default: "Berlin Babysitter - Trusted Childcare",
+    template: "%s | Berlin Babysitter",
+  },
+  description: "Find trusted, vetted babysitters in Berlin. Quick booking, verified profiles, real reviews.",
+  openGraph: {
+    siteName: "Berlin Babysitter",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
