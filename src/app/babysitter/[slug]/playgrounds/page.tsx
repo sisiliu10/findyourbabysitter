@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLandingPage } from "@/data/landing-pages";
 import { getPlaygroundGuide } from "@/data/playground-guides";
+import { getPlaygroundsWithRatings } from "@/lib/playground-ratings";
 import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
 import { CrossLinks } from "@/components/landing/CrossLinks";
@@ -44,6 +45,8 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
 
   const district = getLandingPage(slug);
   if (!district) notFound();
+
+  const playgrounds = await getPlaygroundsWithRatings(slug, guide.playgrounds);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -104,7 +107,10 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
         </section>
 
         {/* Playground entries */}
-        {guide.playgrounds.map((pg, index) => (
+        {playgrounds.map((pg, index) => {
+          const rating = pg.liveRating ?? pg.googleRating;
+          const reviewCount = pg.liveReviewCount ?? pg.googleReviewCount;
+          return (
           <section key={pg.name} className="border-t border-border-default">
             <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
               <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
@@ -128,7 +134,7 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
                     <div className="flex items-center gap-2">
                       <div className="flex">
                         {[1, 2, 3, 4, 5].map((star) => {
-                          const fill = Math.min(1, Math.max(0, pg.googleRating - (star - 1)));
+                          const fill = Math.min(1, Math.max(0, rating - (star - 1)));
                           return (
                             <svg key={star} className="h-4 w-4" viewBox="0 0 20 20" fill="none">
                               <defs>
@@ -145,8 +151,8 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
                           );
                         })}
                       </div>
-                      <span className="text-sm font-medium text-text-primary">{pg.googleRating}</span>
-                      <span className="text-xs text-text-muted">({pg.googleReviewCount.toLocaleString()} reviews)</span>
+                      <span className="text-sm font-medium text-text-primary">{rating}</span>
+                      <span className="text-xs text-text-muted">({reviewCount.toLocaleString()} reviews)</span>
                     </div>
                   </div>
                   <div className="mb-6">
@@ -173,7 +179,8 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
               </div>
             </div>
           </section>
-        ))}
+          );
+        })}
 
         {/* Closing note */}
         <section className="border-t border-border-default">
