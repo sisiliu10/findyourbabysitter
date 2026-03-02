@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx vercel pull --yes)",
+      "Bash(npx vercel inspect https://findyourbabysitter-997fwsman-sisiliu10s-projects.vercel.app)",
+      "Bash(npx vercel inspect https://findyourbabysitter-eaja79ol7-sisiliu10s-projects.vercel.app)",
+      "Bash(npx vercel env ls)",
+      "Bash(git diff b8f477b..d955d98 -- src/app/babysitter/\\\\[slug\\\\]/playgrounds/page.tsx)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''node:'', d.get\\(''engines'',{}\\).get\\(''node'',''not set''\\)\\); print\\(''next ver:'', d.get\\(''dependencies'',{}\\).get\\(''next'',''not set''\\)\\)\")",
+      "Bash(DEPLOY_ID=\"dpl_5AszhSdUGWaUvv28AarjUhEAXkKZ\")",
+      "Bash(npx vercel inspect --logs \"$DEPLOY_ID\")",
+      "Bash(npx vercel inspect --logs https://findyourbabysitter-20ac5yam3-sisiliu10s-projects.vercel.app)",
+      "Bash(# Check function sizes du -sh /Users/sisi.liu/findyourbabysitter/.vercel/output/functions/*)"
+    ]
+  }
+}
