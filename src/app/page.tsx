@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { LANGUAGES } from "@/data/landing-pages";
-import { BerlinMap } from "@/components/landing/BerlinMap";
+import { DISTRICTS, LANGUAGES } from "@/data/landing-pages";
 
 export default function HomePage() {
   return (
@@ -160,7 +159,18 @@ export default function HomePage() {
         <section className="border-t border-border-default">
           <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
             <p className="text-xs uppercase tracking-wide text-text-muted mb-8">Browse by neighborhood</p>
-            <BerlinMap />
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+              {DISTRICTS.map((d) => (
+                <Link
+                  key={d.slug}
+                  href={`/babysitter/${d.slug}`}
+                  className="group border border-border-default p-5 transition-colors hover:border-text-primary"
+                >
+                  <p className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">{d.name}</p>
+                  <p className="mt-1 text-xs text-text-tertiary">Babysitters</p>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
