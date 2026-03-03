@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { hashPassword } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { authLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 const resetSchema = z.object({
   token: z.string().min(1, "Reset token is required"),
@@ -10,6 +11,9 @@ const resetSchema = z.object({
 
 export async function POST(request: Request) {
   try {
+    const rateLimited = await checkRateLimit(authLimiter, request);
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
 
     const parsed = resetSchema.safeParse(body);

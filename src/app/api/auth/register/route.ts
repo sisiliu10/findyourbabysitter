@@ -4,9 +4,13 @@ import { hashPassword } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validators";
 import { sendVerificationEmail } from "@/lib/email";
+import { emailLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 export async function POST(request: Request) {
   try {
+    const rateLimited = await checkRateLimit(emailLimiter, request);
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
 
     const parsed = registerSchema.safeParse(body);

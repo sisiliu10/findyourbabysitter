@@ -2,11 +2,15 @@ import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { prisma } from "@/lib/prisma";
 import { sendPasswordResetEmail } from "@/lib/email";
+import { emailLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 const SUCCESS_MESSAGE = "If an account exists with that email, a password reset link has been sent.";
 
 export async function POST(request: Request) {
   try {
+    const rateLimited = await checkRateLimit(emailLimiter, request);
+    if (rateLimited) return rateLimited;
+
     const { email } = await request.json();
 
     if (!email || typeof email !== "string") {

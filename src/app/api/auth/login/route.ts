@@ -3,9 +3,13 @@ import { verifyPassword, signJwt } from "@/lib/auth";
 import { setSessionCookie } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { loginSchema } from "@/lib/validators";
+import { authLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 export async function POST(request: Request) {
   try {
+    const rateLimited = await checkRateLimit(authLimiter, request);
+    if (rateLimited) return rateLimited;
+
     const body = await request.json();
 
     const parsed = loginSchema.safeParse(body);

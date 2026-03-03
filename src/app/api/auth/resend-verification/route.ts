@@ -2,9 +2,13 @@ import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { prisma } from "@/lib/prisma";
 import { sendVerificationEmail } from "@/lib/email";
+import { emailLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 export async function POST(request: Request) {
   try {
+    const rateLimited = await checkRateLimit(emailLimiter, request);
+    if (rateLimited) return rateLimited;
+
     const { email } = await request.json();
 
     if (!email || typeof email !== "string") {
