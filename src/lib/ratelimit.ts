@@ -38,11 +38,6 @@ export function getClientIp(request: Request): string {
   return forwarded?.split(",")[0].trim() || "unknown";
 }
 
-const RATE_LIMIT_RESPONSE = NextResponse.json(
-  { success: false, error: "Too many attempts. Please try again later." },
-  { status: 429 },
-);
-
 /**
  * Check rate limit for a request. Returns a 429 response if the limit is
  * exceeded, or null if the request should proceed.
@@ -65,7 +60,10 @@ export async function checkRateLimit(
   const { success } = await limiter.limit(ip);
 
   if (!success) {
-    return RATE_LIMIT_RESPONSE;
+    return NextResponse.json(
+      { success: false, error: "Too many attempts. Please try again later." },
+      { status: 429 },
+    );
   }
 
   return null;
