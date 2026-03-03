@@ -81,7 +81,7 @@ export default function HomePage() {
             >
               <p className="text-xs font-medium uppercase tracking-wide text-text-primary/40 mb-3">For parents</p>
               <h2 className="font-serif text-3xl text-text-primary sm:text-4xl">
-                I need a sitter
+                I am a parent
               </h2>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-text-primary/60">
                 Browse profiles, read reviews, book the right person.
