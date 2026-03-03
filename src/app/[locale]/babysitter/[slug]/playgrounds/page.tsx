@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getLandingPage } from "@/data/landing-pages";
 import { getPlaygroundGuide } from "@/data/playground-guides";
@@ -13,7 +14,7 @@ import { JsonLd } from "@/components/landing/JsonLd";
 export const dynamic = "force-dynamic";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -39,13 +40,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function PlaygroundGuidePage({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const guide = getPlaygroundGuide(slug);
   if (!guide) notFound();
 
   const district = getLandingPage(slug);
   if (!district) notFound();
 
+  const t = await getTranslations({ locale, namespace: "babysitter" });
   const playgrounds = await getPlaygroundsWithRatings(slug, guide.playgrounds);
 
   const articleJsonLd = {
@@ -65,9 +67,9 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://berlinbabysitter.com" },
-      { "@type": "ListItem", position: 2, name: `Babysitters in ${guide.districtName}`, item: `https://berlinbabysitter.com/babysitter/${slug}` },
-      { "@type": "ListItem", position: 3, name: "Playgrounds", item: `https://berlinbabysitter.com/babysitter/${slug}/playgrounds` },
+      { "@type": "ListItem", position: 1, name: t("home"), item: "https://berlinbabysitter.com" },
+      { "@type": "ListItem", position: 2, name: t("babysittersIn", { district: guide.districtName }), item: `https://berlinbabysitter.com/babysitter/${slug}` },
+      { "@type": "ListItem", position: 3, name: t("playgrounds"), item: `https://berlinbabysitter.com/babysitter/${slug}/playgrounds` },
     ],
   };
 
@@ -81,13 +83,13 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
         {/* Breadcrumb */}
         <div className="mx-auto max-w-7xl px-6 pt-6">
           <nav className="text-xs text-text-muted">
-            <Link href="/" className="transition-colors hover:text-text-primary">Home</Link>
+            <Link href="/" className="transition-colors hover:text-text-primary">{t("home")}</Link>
             <span className="mx-2">/</span>
             <Link href={`/babysitter/${slug}`} className="transition-colors hover:text-text-primary">
-              Babysitters in {guide.districtName}
+              {t("babysittersIn", { district: guide.districtName })}
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-text-secondary">Playgrounds</span>
+            <span className="text-text-secondary">{t("playgrounds")}</span>
           </nav>
         </div>
 
@@ -95,7 +97,7 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
         <section className="mx-auto max-w-7xl px-6 py-12 sm:py-16 lg:py-20">
           <div className="max-w-2xl">
             <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-4">
-              Playground guide
+              {t("playgroundGuideLabel")}
             </p>
             <h1 className="font-serif text-3xl leading-tight text-text-primary sm:text-4xl lg:text-5xl">
               {guide.h1}
@@ -129,7 +131,7 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
                 <div className="lg:col-span-5">
                   <div className="mb-6">
                     <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-2">
-                      Google rating
+                      {t("googleRating")}
                     </p>
                     <div className="flex items-center gap-2">
                       <div className="flex">
@@ -152,17 +154,17 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
                         })}
                       </div>
                       <span className="text-sm font-medium text-text-primary">{rating}</span>
-                      <span className="text-xs text-text-muted">({reviewCount.toLocaleString()} reviews)</span>
+                      <span className="text-xs text-text-muted">{t("reviews", { count: reviewCount.toLocaleString(locale) })}</span>
                     </div>
                   </div>
                   <div className="mb-6">
                     <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-2">
-                      Recommended ages
+                      {t("recommendedAges")}
                     </p>
                     <p className="text-sm text-text-secondary">{pg.ageRange}</p>
                   </div>
                   <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-4">
-                    What makes it special
+                    {t("whatMakesItSpecial")}
                   </p>
                   <div className="space-y-0">
                     {pg.highlights.map((h, i) => (
@@ -196,7 +198,7 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
         {/* Cross-links */}
         <section className="border-t border-border-default">
           <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
-            <CrossLinks current={district} />
+            <CrossLinks current={district} locale={locale} />
           </div>
         </section>
 
@@ -207,16 +209,16 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
         >
           <div className="mx-auto max-w-7xl px-6 py-14 sm:py-20 text-center">
             <h2 className="font-serif text-2xl text-text-primary sm:text-3xl">
-              Need a sitter while you explore?
+              {t("needSitter")}
             </h2>
             <p className="mt-3 text-sm text-text-primary/60">
-              Find a babysitter in {guide.districtName} who knows the local playgrounds.
+              {t("findSitterKnowsPlaygrounds", { district: guide.districtName })}
             </p>
             <Link
               href="/register"
               className="mt-8 inline-block border border-text-primary bg-text-primary px-8 py-3.5 text-sm font-medium text-surface-primary transition-colors hover:bg-accent hover:border-accent"
             >
-              Get started for free
+              {t("getStartedFree")}
             </Link>
           </div>
         </section>

@@ -1,7 +1,9 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { DISTRICTS, LANGUAGES, type LandingPage } from "@/data/landing-pages";
 
-export function CrossLinks({ current }: { current: LandingPage }) {
+export async function CrossLinks({ current, locale }: { current: LandingPage; locale: string }) {
+  const t = await getTranslations({ locale, namespace: "babysitter" });
   const isDistrict = current.type === "district";
   const siblings = isDistrict ? DISTRICTS : LANGUAGES;
   const otherType = isDistrict ? LANGUAGES : DISTRICTS;
@@ -10,7 +12,7 @@ export function CrossLinks({ current }: { current: LandingPage }) {
     <div className="space-y-12">
       <div>
         <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-4">
-          {isDistrict ? "Other neighborhoods" : "Other languages"}
+          {isDistrict ? t("otherNeighborhoods") : t("otherLanguages")}
         </p>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
           {siblings
@@ -29,7 +31,7 @@ export function CrossLinks({ current }: { current: LandingPage }) {
 
       <div>
         <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-4">
-          {isDistrict ? "Browse by language" : "Browse by neighborhood"}
+          {isDistrict ? t("browseByLanguage") : t("browseByNeighborhood")}
         </p>
         <div className="flex flex-wrap gap-2">
           {otherType.map((page) => (
