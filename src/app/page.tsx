@@ -194,15 +194,28 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* Footer — minimal, left-weighted */}
+      {/* Footer */}
       <footer className="border-t border-border-default">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-          <span className="text-xs uppercase tracking-wide text-text-muted">
-            Berlin Babysitter
-          </span>
-          <span className="text-xs text-text-muted">
-            {new Date().getFullYear()}
-          </span>
+        <div className="mx-auto max-w-7xl px-6 py-6">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <span className="text-xs uppercase tracking-wide text-text-muted">
+              Berlin Babysitter
+            </span>
+            <nav className="flex items-center gap-6">
+              <Link href="/privacy-policy" className="text-xs text-text-muted transition-colors hover:text-text-primary">
+                Privacy Policy
+              </Link>
+              <Link href="/terms-of-service" className="text-xs text-text-muted transition-colors hover:text-text-primary">
+                Terms of Service
+              </Link>
+              <Link href="/impressum" className="text-xs text-text-muted transition-colors hover:text-text-primary">
+                Impressum
+              </Link>
+            </nav>
+            <span className="text-xs text-text-muted">
+              {new Date().getFullYear()}
+            </span>
+          </div>
         </div>
       </footer>
     </div>

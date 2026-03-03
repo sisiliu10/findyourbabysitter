@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border-default">
       <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-4">
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-text-primary mb-4">
               Berlin Babysitter
@@ -44,6 +44,22 @@ export function Footer() {
                   {l.name}
                 </Link>
               ))}
+            </div>
+          </div>
+          <div>
+            <p className="text-xs font-medium uppercase tracking-wide text-text-secondary mb-3">
+              Legal
+            </p>
+            <div className="flex flex-col gap-1.5">
+              <Link href="/privacy-policy" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
+                Privacy Policy
+              </Link>
+              <Link href="/terms-of-service" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
+                Terms of Service
+              </Link>
+              <Link href="/impressum" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
+                Impressum
+              </Link>
             </div>
           </div>
         </div>
