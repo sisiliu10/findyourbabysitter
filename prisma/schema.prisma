@@ -19,10 +19,13 @@ model User {
   avatarUrl    String?
   birthday     DateTime?
   instagram    String?
-  isDisabled   Boolean  @default(false)
-  onboarded    Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  isDisabled               Boolean   @default(false)
+  onboarded                Boolean   @default(false)
+  emailVerified            Boolean   @default(false)
+  emailVerificationToken   String?
+  emailVerificationExpiry  DateTime?
+  createdAt                DateTime  @default(now())
+  updatedAt                DateTime  @updatedAt
 
   babysitterProfile BabysitterProfile?
   childcareRequests ChildcareRequest[]

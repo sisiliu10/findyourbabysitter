@@ -76,6 +76,31 @@ function bookingLink(bookingId: string): string {
 }
 
 // -------------------------------------------------------------------
+// 0. Email Verification  (User registers → gets verification link)
+// -------------------------------------------------------------------
+
+export async function sendVerificationEmail(
+  email: string,
+  firstName: string,
+  token: string,
+): Promise<void> {
+  const verifyLink = `${APP_URL}/verify-email?token=${token}`;
+
+  return sendEmail({
+    to: email,
+    subject: "Verify your email address",
+    html: `
+      <h2>Welcome to FindYourBabysitter!</h2>
+      <p>Hi ${firstName}, thanks for signing up. Please verify your email address to get started.</p>
+      <p><a href="${verifyLink}" style="display:inline-block;padding:12px 24px;background:#111;color:#fff;text-decoration:none;font-size:14px;letter-spacing:0.05em;">Verify my email</a></p>
+      <p style="margin-top:24px;font-size:13px;color:#666;">Or copy and paste this link into your browser:</p>
+      <p style="font-size:13px;color:#666;word-break:break-all;">${verifyLink}</p>
+      <p style="margin-top:24px;font-size:12px;color:#999;">This link expires in 24 hours. If you didn't create an account, you can ignore this email.</p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
 // 1. Booking Created  (Parent books → Sitter gets email)
 // -------------------------------------------------------------------
 

@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Suspense } from "react";
 
 function RegisterForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const preselectedRole = searchParams.get("role") || "";
 
@@ -14,6 +13,9 @@ function RegisterForm() {
   const [role, setRole] = useState(preselectedRole);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [registeredEmail, setRegisteredEmail] = useState("");
+  const [resending, setResending] = useState(false);
+  const [resendMessage, setResendMessage] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -40,13 +42,76 @@ function RegisterForm() {
         return;
       }
 
-      router.push("/onboarding");
-      router.refresh();
+      setRegisteredEmail(data.email);
     } catch {
       setError("Something went wrong");
     } finally {
       setLoading(false);
     }
+  }
+
+  async function handleResend() {
+    setResending(true);
+    setResendMessage("");
+    try {
+      const res = await fetch("/api/auth/resend-verification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: registeredEmail }),
+      });
+      const data = await res.json();
+      setResendMessage(data.message || "Verification email sent.");
+    } catch {
+      setResendMessage("Failed to resend. Please try again.");
+    } finally {
+      setResending(false);
+    }
+  }
+
+  // Show "check your email" screen after successful registration
+  if (registeredEmail) {
+    return (
+      <div>
+        <div className="mb-6 flex h-12 w-12 items-center justify-center border border-border-default">
+          <svg className="h-6 w-6 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </div>
+
+        <h1 className="font-serif text-4xl text-text-primary">Check your email</h1>
+        <p className="mt-3 text-sm text-text-secondary">
+          We sent a verification link to{" "}
+          <span className="text-text-primary font-medium">{registeredEmail}</span>
+        </p>
+        <p className="mt-2 text-sm text-text-tertiary">
+          Click the link in the email to verify your account. The link expires in 24 hours.
+        </p>
+
+        <div className="mt-8 space-y-4">
+          <button
+            onClick={handleResend}
+            disabled={resending}
+            className="w-full border border-border-default px-4 py-3 text-xs font-medium uppercase tracking-widest text-text-primary transition-colors hover:border-text-primary disabled:opacity-40"
+          >
+            {resending ? "Sending..." : "Resend verification email"}
+          </button>
+
+          {resendMessage && (
+            <p className="text-sm text-text-secondary">{resendMessage}</p>
+          )}
+        </div>
+
+        <p className="mt-8 text-sm text-text-tertiary">
+          Wrong email?{" "}
+          <button
+            onClick={() => { setRegisteredEmail(""); setError(""); }}
+            className="text-text-primary underline underline-offset-4 hover:text-accent"
+          >
+            Register again
+          </button>
+        </p>
+      </div>
+    );
   }
 
   if (step === 1) {

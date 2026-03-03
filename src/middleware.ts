@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const publicPaths = ["/", "/login", "/register", "/api/auth/register", "/api/auth/login", "/api/auth/logout", "/babysitter"];
+const publicPaths = ["/", "/login", "/register", "/verify-email", "/api/auth/register", "/api/auth/login", "/api/auth/logout", "/api/auth/verify-email", "/api/auth/resend-verification", "/babysitter"];
 const adminPaths = ["/admin", "/api/admin"];
 
 export function middleware(request: NextRequest) {

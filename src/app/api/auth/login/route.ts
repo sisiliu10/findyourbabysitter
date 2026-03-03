@@ -41,6 +41,13 @@ export async function POST(request: Request) {
       );
     }
 
+    if (!user.emailVerified) {
+      return NextResponse.json(
+        { success: false, error: "Please verify your email address before logging in.", needsVerification: true, email: user.email },
+        { status: 403 }
+      );
+    }
+
     const token = signJwt({ userId: user.id, email: user.email, role: user.role });
     await setSessionCookie(token);
 

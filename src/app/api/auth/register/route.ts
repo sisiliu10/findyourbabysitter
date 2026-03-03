@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { hashPassword, signJwt } from "@/lib/auth";
-import { setSessionCookie } from "@/lib/session";
+import { randomUUID } from "crypto";
+import { hashPassword } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validators";
+import { sendVerificationEmail } from "@/lib/email";
 
 export async function POST(request: Request) {
   try {
@@ -27,6 +28,8 @@ export async function POST(request: Request) {
     }
 
     const passwordHash = await hashPassword(password);
+    const verificationToken = randomUUID();
+    const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
     const user = await prisma.user.create({
       data: {
@@ -35,6 +38,8 @@ export async function POST(request: Request) {
         firstName,
         lastName,
         role,
+        emailVerificationToken: verificationToken,
+        emailVerificationExpiry: verificationExpiry,
       },
     });
 
@@ -44,19 +49,13 @@ export async function POST(request: Request) {
       });
     }
 
-    const token = signJwt({ userId: user.id, email: user.email, role: user.role });
-    await setSessionCookie(token);
+    sendVerificationEmail(email, firstName, verificationToken).catch(console.error);
 
     return NextResponse.json(
       {
         success: true,
-        data: {
-          userId: user.id,
-          email: user.email,
-          role: user.role,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        },
+        needsVerification: true,
+        email: user.email,
       },
       { status: 201 }
     );

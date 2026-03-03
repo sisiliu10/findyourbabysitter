@@ -1,10 +1,12 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { randomUUID } from "crypto";
 import { hashPassword, verifyPassword, signJwt } from "@/lib/auth";
 import { setSessionCookie, clearSessionCookie } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { registerSchema, loginSchema } from "@/lib/validators";
+import { sendVerificationEmail } from "@/lib/email";
 import type { ActionResult } from "@/types";
 
 export async function registerUser(formData: FormData): Promise<ActionResult> {
@@ -30,6 +32,8 @@ export async function registerUser(formData: FormData): Promise<ActionResult> {
     }
 
     const passwordHash = await hashPassword(password);
+    const verificationToken = randomUUID();
+    const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
     const user = await prisma.user.create({
       data: {
@@ -38,6 +42,8 @@ export async function registerUser(formData: FormData): Promise<ActionResult> {
         firstName,
         lastName,
         role,
+        emailVerificationToken: verificationToken,
+        emailVerificationExpiry: verificationExpiry,
       },
     });
 
@@ -47,16 +53,15 @@ export async function registerUser(formData: FormData): Promise<ActionResult> {
       });
     }
 
-    const token = signJwt({ userId: user.id, email: user.email, role: user.role });
-    await setSessionCookie(token);
+    sendVerificationEmail(email, firstName, verificationToken).catch(console.error);
+
+    return { success: true };
   } catch (error) {
     return {
       success: false,
       error: error instanceof Error ? error.message : "Registration failed",
     };
   }
-
-  redirect("/onboarding");
 }
 
 export async function loginUser(formData: FormData): Promise<ActionResult> {
@@ -85,6 +90,10 @@ export async function loginUser(formData: FormData): Promise<ActionResult> {
 
     if (user.isDisabled) {
       return { success: false, error: "Your account has been disabled. Please contact support." };
+    }
+
+    if (!user.emailVerified) {
+      return { success: false, error: "Please verify your email address before logging in." };
     }
 
     const token = signJwt({ userId: user.id, email: user.email, role: user.role });
