@@ -42,19 +42,22 @@ export default function middleware(request: NextRequest) {
   // With localePrefix: 'as-needed', only non-default locales are prefixed.
   const normalised = pathname.replace(/^\/de(?=\/|$)/, "") || "/";
 
-  // Public paths — run i18n routing only, no auth needed
+  // API routes bypass next-intl entirely — just do auth check
+  if (normalised.startsWith("/api/")) {
+    if (isPublicPath(normalised)) return NextResponse.next();
+    const token = request.cookies.get("fyb_session")?.value;
+    if (!token) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.next();
+  }
+
+  // Public page paths — run i18n routing, no auth needed
   if (isPublicPath(normalised)) {
     return handleI18nRouting(request);
   }
 
-  // Auth check — cookie existence; route handlers verify the JWT
+  // Protected pages — check session cookie
   const token = request.cookies.get("fyb_session")?.value;
-
   if (!token) {
-    if (normalised.startsWith("/api/")) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    // Redirect to login, preserving the user's locale
     const locale = pathname.startsWith("/de") ? "de" : "en";
     const loginPath = locale === "de" ? "/de/login" : "/login";
     return NextResponse.redirect(new URL(loginPath, request.url));
