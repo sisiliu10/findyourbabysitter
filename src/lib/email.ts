@@ -101,6 +101,31 @@ export async function sendVerificationEmail(
 }
 
 // -------------------------------------------------------------------
+// 0b. Password Reset  (User requests reset → gets reset link)
+// -------------------------------------------------------------------
+
+export async function sendPasswordResetEmail(
+  email: string,
+  firstName: string,
+  token: string,
+): Promise<void> {
+  const resetLink = `${APP_URL}/reset-password?token=${token}`;
+
+  return sendEmail({
+    to: email,
+    subject: "Reset your password",
+    html: `
+      <h2>Password reset request</h2>
+      <p>Hi ${firstName}, we received a request to reset your password.</p>
+      <p><a href="${resetLink}" style="display:inline-block;padding:12px 24px;background:#111;color:#fff;text-decoration:none;font-size:14px;letter-spacing:0.05em;">Reset my password</a></p>
+      <p style="margin-top:24px;font-size:13px;color:#666;">Or copy and paste this link into your browser:</p>
+      <p style="font-size:13px;color:#666;word-break:break-all;">${resetLink}</p>
+      <p style="margin-top:24px;font-size:12px;color:#999;">This link expires in 1 hour. If you didn't request a password reset, you can ignore this email.</p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
 // 1. Booking Created  (Parent books → Sitter gets email)
 // -------------------------------------------------------------------
 
