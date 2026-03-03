@@ -1,30 +1,66 @@
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
 
-const publicPaths = ["/", "/login", "/register", "/verify-email", "/forgot-password", "/reset-password", "/api/auth/register", "/api/auth/login", "/api/auth/logout", "/api/auth/verify-email", "/api/auth/resend-verification", "/api/auth/forgot-password", "/api/auth/reset-password", "/babysitter", "/privacy-policy", "/terms-of-service", "/impressum"];
-const adminPaths = ["/admin", "/api/admin"];
+const handleI18nRouting = createMiddleware(routing);
 
-export function middleware(request: NextRequest) {
+// Paths that don't require authentication (without locale prefix)
+const publicBasePaths = [
+  "/",
+  "/login",
+  "/register",
+  "/verify-email",
+  "/forgot-password",
+  "/reset-password",
+  "/babysitter",
+  "/privacy-policy",
+  "/terms-of-service",
+  "/impressum",
+  "/api/auth/",
+];
+
+function isPublicPath(normalised: string): boolean {
+  return publicBasePaths.some(
+    (p) => normalised === p || normalised.startsWith(p + "/")
+  );
+}
+
+export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (publicPaths.some((p) => pathname === p || pathname.startsWith(p + "/"))) {
+  // Skip Next.js internals and static files
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/uploads") ||
+    pathname === "/favicon.ico" ||
+    /\.(jpg|jpeg|png|svg|gif|webp|ico)$/.test(pathname)
+  ) {
     return NextResponse.next();
   }
 
-  if (pathname.startsWith("/_next") || pathname.startsWith("/uploads") || pathname === "/favicon.ico" || pathname.match(/\.(jpg|jpeg|png|svg|gif|webp|ico)$/)) {
-    return NextResponse.next();
+  // Strip locale prefix to normalise path for auth/public-path checks.
+  // With localePrefix: 'as-needed', only non-default locales are prefixed.
+  const normalised = pathname.replace(/^\/de(?=\/|$)/, "") || "/";
+
+  // Public paths — run i18n routing only, no auth needed
+  if (isPublicPath(normalised)) {
+    return handleI18nRouting(request);
   }
 
+  // Auth check — cookie existence; route handlers verify the JWT
   const token = request.cookies.get("fyb_session")?.value;
 
-  // Just check cookie existence; route handlers verify the JWT
   if (!token) {
-    if (pathname.startsWith("/api/")) {
+    if (normalised.startsWith("/api/")) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    return NextResponse.redirect(new URL("/login", request.url));
+    // Redirect to login, preserving the user's locale
+    const locale = pathname.startsWith("/de") ? "de" : "en";
+    const loginPath = locale === "de" ? "/de/login" : "/login";
+    return NextResponse.redirect(new URL(loginPath, request.url));
   }
 
-  return NextResponse.next();
+  return handleI18nRouting(request);
 }
 
 export const config = {

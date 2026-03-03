@@ -1,11 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link } from "@/i18n/navigation";
+import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { LanguageToggle } from "@/components/LanguageToggle";
 
 export function Topbar() {
   const { user } = useCurrentUser();
+  const t = useTranslations("nav");
   const router = useRouter();
 
   async function handleLogout() {
@@ -25,6 +28,7 @@ export function Topbar() {
         </Link>
 
         <div className="flex items-center gap-6">
+          <LanguageToggle />
           {user && (
             <>
               <span className="hidden text-xs uppercase tracking-wide text-text-tertiary sm:block">
@@ -34,7 +38,7 @@ export function Topbar() {
                 onClick={handleLogout}
                 className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-accent"
               >
-                Log out
+                {t("logout")}
               </button>
             </>
           )}

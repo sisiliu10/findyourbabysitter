@@ -1,7 +1,12 @@
-import Link from "next/link";
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { DISTRICTS, LANGUAGES } from "@/data/landing-pages";
 
 export function Footer() {
+  const t = useTranslations("footer");
+
   return (
     <footer className="border-t border-border-default">
       <div className="mx-auto max-w-7xl px-6 py-12">
@@ -11,12 +16,12 @@ export function Footer() {
               Berlin Babysitter
             </p>
             <p className="text-xs leading-relaxed text-text-tertiary">
-              Trusted childcare for Berlin families.
+              {t("tagline")}
             </p>
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-wide text-text-secondary mb-3">
-              Neighborhoods
+              {t("neighborhoods")}
             </p>
             <div className="flex flex-col gap-1.5">
               {DISTRICTS.map((d) => (
@@ -32,7 +37,7 @@ export function Footer() {
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-wide text-text-secondary mb-3">
-              Languages
+              {t("languages")}
             </p>
             <div className="flex flex-col gap-1.5">
               {LANGUAGES.map((l) => (
@@ -48,17 +53,17 @@ export function Footer() {
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-wide text-text-secondary mb-3">
-              Legal
+              {t("legal")}
             </p>
             <div className="flex flex-col gap-1.5">
               <Link href="/privacy-policy" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
-                Privacy Policy
+                {t("privacyPolicy")}
               </Link>
               <Link href="/terms-of-service" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
-                Terms of Service
+                {t("termsOfService")}
               </Link>
               <Link href="/impressum" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
-                Impressum
+                {t("impressum")}
               </Link>
             </div>
           </div>

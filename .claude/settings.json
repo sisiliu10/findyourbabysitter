@@ -10,7 +10,11 @@
       "Bash(DEPLOY_ID=\"dpl_5AszhSdUGWaUvv28AarjUhEAXkKZ\")",
       "Bash(npx vercel inspect --logs \"$DEPLOY_ID\")",
       "Bash(npx vercel inspect --logs https://findyourbabysitter-20ac5yam3-sisiliu10s-projects.vercel.app)",
-      "Bash(# Check function sizes du -sh /Users/sisi.liu/findyourbabysitter/.vercel/output/functions/*)"
+      "Bash(# Check function sizes du -sh /Users/sisi.liu/findyourbabysitter/.vercel/output/functions/*)",
+      "Bash(npx vercel inspect --logs https://findyourbabysitter-e82otowlc-sisiliu10s-projects.vercel.app)",
+      "WebFetch(domain:wanderlog.com)",
+      "Bash(echo $GOOGLE_MAPS_API_KEY)",
+      "Bash(ls \"/Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\(auth\\)/\")"
     ]
   }
 }
