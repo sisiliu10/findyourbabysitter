@@ -4,6 +4,7 @@ import { formatDate, formatTime } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Badge, type BadgeVariant } from "@/components/ui/Badge";
+import { getTranslations } from "next-intl/server";
 
 const statusVariants: Record<string, BadgeVariant> = {
   OPEN: "success",
@@ -13,6 +14,8 @@ const statusVariants: Record<string, BadgeVariant> = {
 
 export default async function RequestsListPage() {
   const session = await requireAuth();
+  const t = await getTranslations("requestsList");
+  const tc = await getTranslations("common");
 
   if (session.role !== "PARENT") {
     redirect("/dashboard");
@@ -27,9 +30,9 @@ export default async function RequestsListPage() {
     <div>
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="font-serif text-2xl text-text-primary">Your Requests</h1>
+          <h1 className="font-serif text-2xl text-text-primary">{t("yourRequests")}</h1>
           <p className="mt-1 text-sm text-text-secondary">
-            Manage your childcare requests.
+            {t("subtitle")}
           </p>
         </div>
         <Link
@@ -49,7 +52,7 @@ export default async function RequestsListPage() {
               d="M12 4.5v15m7.5-7.5h-15"
             />
           </svg>
-          New Request
+          {t("newRequest")}
         </Link>
       </div>
 
@@ -70,12 +73,12 @@ export default async function RequestsListPage() {
               />
             </svg>
           </div>
-          <p className="text-sm text-text-secondary">No requests yet.</p>
+          <p className="text-sm text-text-secondary">{t("noRequests")}</p>
           <Link
             href="/requests/new"
             className="mt-3 inline-block text-sm font-medium text-accent hover:underline"
           >
-            Create your first request
+            {t("createFirst")}
           </Link>
         </div>
       ) : (
@@ -105,13 +108,13 @@ export default async function RequestsListPage() {
                     {formatTime(request.endTime)}
                   </p>
                   <p className="mt-0.5 text-xs text-text-tertiary">
-                    {childCount} {childCount === 1 ? "child" : "children"}{" "}
+                    {t("childCount", { count: childCount })}{" "}
                     &middot;{" "}
                     {[request.city, request.state].filter(Boolean).join(", ")}
                   </p>
                 </div>
                 <Badge variant={statusVariants[request.status] || "neutral"}>
-                  {request.status}
+                  {tc(`status.${request.status}` as any)}
                 </Badge>
               </Link>
             );

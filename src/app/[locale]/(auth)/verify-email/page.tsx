@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter, Link } from "@/i18n/navigation";
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 
 function VerifyEmailContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
+  const t = useTranslations("verifyEmail");
+  const ta = useTranslations("auth");
 
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
   const [message, setMessage] = useState("");
@@ -19,7 +22,7 @@ function VerifyEmailContent() {
   useEffect(() => {
     if (!token) {
       setStatus("error");
-      setMessage("No verification token provided.");
+      setMessage(t("noToken"));
       return;
     }
 
@@ -44,12 +47,12 @@ function VerifyEmailContent() {
         }
       } catch {
         setStatus("error");
-        setMessage("Something went wrong. Please try again.");
+        setMessage(t("somethingWentWrong"));
       }
     }
 
     verify();
-  }, [token, router]);
+  }, [token, router, t]);
 
   async function handleResend() {
     if (!expiredEmail) return;
@@ -62,9 +65,9 @@ function VerifyEmailContent() {
         body: JSON.stringify({ email: expiredEmail }),
       });
       const data = await res.json();
-      setResendMessage(data.message || "Verification email sent.");
+      setResendMessage(data.message || ta("verificationSent"));
     } catch {
-      setResendMessage("Failed to resend. Please try again.");
+      setResendMessage(ta("failedResend"));
     } finally {
       setResending(false);
     }
@@ -73,8 +76,8 @@ function VerifyEmailContent() {
   if (status === "loading") {
     return (
       <div>
-        <h1 className="font-serif text-4xl text-text-primary">Verifying your email</h1>
-        <p className="mt-3 text-sm text-text-secondary">Please wait...</p>
+        <h1 className="font-serif text-4xl text-text-primary">{t("verifying")}</h1>
+        <p className="mt-3 text-sm text-text-secondary">{t("pleaseWait")}</p>
         <div className="mt-8 h-1 w-full overflow-hidden border border-border-default">
           <div className="h-full w-1/3 animate-pulse bg-text-primary" />
         </div>
@@ -91,15 +94,15 @@ function VerifyEmailContent() {
           </svg>
         </div>
 
-        <h1 className="font-serif text-4xl text-text-primary">Email verified</h1>
+        <h1 className="font-serif text-4xl text-text-primary">{t("emailVerified")}</h1>
         <p className="mt-3 text-sm text-text-secondary">{message}</p>
-        <p className="mt-2 text-sm text-text-tertiary">Redirecting to login...</p>
+        <p className="mt-2 text-sm text-text-tertiary">{t("redirecting")}</p>
 
         <Link
           href="/login"
           className="mt-8 inline-block w-full border border-text-primary bg-text-primary px-4 py-3 text-center text-xs font-medium uppercase tracking-widest text-surface-primary transition-colors hover:bg-accent hover:border-accent"
         >
-          Log in now
+          {t("logInNow")}
         </Link>
       </div>
     );
@@ -113,7 +116,7 @@ function VerifyEmailContent() {
         </svg>
       </div>
 
-      <h1 className="font-serif text-4xl text-text-primary">Verification failed</h1>
+      <h1 className="font-serif text-4xl text-text-primary">{t("verificationFailed")}</h1>
       <p className="mt-3 text-sm text-text-secondary">{message}</p>
 
       {expiredEmail && (
@@ -123,7 +126,7 @@ function VerifyEmailContent() {
             disabled={resending}
             className="w-full border border-border-default px-4 py-3 text-xs font-medium uppercase tracking-widest text-text-primary transition-colors hover:border-text-primary disabled:opacity-40"
           >
-            {resending ? "Sending..." : "Resend verification email"}
+            {resending ? ta("sending") : t("resendVerification")}
           </button>
 
           {resendMessage && (
@@ -134,7 +137,7 @@ function VerifyEmailContent() {
 
       <p className="mt-8 text-sm text-text-tertiary">
         <Link href="/register" className="text-text-primary underline underline-offset-4 hover:text-accent">
-          Back to registration
+          {t("backToRegistration")}
         </Link>
       </p>
     </div>

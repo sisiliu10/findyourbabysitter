@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { formatCurrency, getInitials } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -33,6 +34,7 @@ interface MatchedSitter {
 
 export function MatchedSitters({ requestId }: { requestId: string }) {
   const router = useRouter();
+  const t = useTranslations("matchedSitters");
   const [matches, setMatches] = useState<MatchedSitter[]>([]);
   const [loading, setLoading] = useState(true);
   const [bookingLoading, setBookingLoading] = useState<string | null>(null);
@@ -46,7 +48,7 @@ export function MatchedSitters({ requestId }: { requestId: string }) {
           setMatches(json.data.matches);
         }
       })
-      .catch(() => setError("Failed to load matches"))
+      .catch(() => setError(t("failedToLoad")))
       .finally(() => setLoading(false));
   }, [requestId]);
 
@@ -65,10 +67,10 @@ export function MatchedSitters({ requestId }: { requestId: string }) {
         const bookingId = (result.data as { bookingId: string }).bookingId;
         router.push(`/bookings/${bookingId}`);
       } else {
-        setError(result.error || "Failed to create booking");
+        setError(result.error || t("failedToBook"));
       }
     } catch {
-      setError("Failed to create booking");
+      setError(t("failedToBook"));
     } finally {
       setBookingLoading(null);
     }
@@ -80,7 +82,7 @@ export function MatchedSitters({ requestId }: { requestId: string }) {
         <div className="flex items-center justify-center gap-3">
           <Spinner size="md" className="text-accent" />
           <span className="text-sm text-text-secondary">
-            Finding matching sitters...
+            {t("finding")}
           </span>
         </div>
       </div>
@@ -90,7 +92,7 @@ export function MatchedSitters({ requestId }: { requestId: string }) {
   return (
     <div className="border border-border-default bg-surface-secondary p-6">
       <h2 className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-        Matched Babysitters
+        {t("title")}
         {matches.length > 0 && (
           <span className="ml-2 text-xs font-normal normal-case tracking-normal text-text-tertiary">
             ({matches.length})
@@ -106,8 +108,7 @@ export function MatchedSitters({ requestId }: { requestId: string }) {
 
       {matches.length === 0 ? (
         <p className="text-sm text-text-secondary">
-          No matching sitters found for this request yet. Try broadening your
-          criteria.
+          {t("noMatches")}
         </p>
       ) : (
         <div className="space-y-4">
@@ -138,7 +139,7 @@ export function MatchedSitters({ requestId }: { requestId: string }) {
                       <h3 className="text-text-primary font-medium">
                         {user.firstName} {user.lastName}
                       </h3>
-                      <Badge variant="info">{match.score}% match</Badge>
+                      <Badge variant="info">{t("match", { score: match.score })}</Badge>
                     </div>
                     <p className="text-sm text-text-secondary">
                       {[profile.city, profile.state].filter(Boolean).join(", ")}{" "}
@@ -160,7 +161,7 @@ export function MatchedSitters({ requestId }: { requestId: string }) {
                     loading={bookingLoading === match.sitterId}
                     onClick={() => handleRequestBooking(match)}
                   >
-                    Request Booking
+                    {t("requestBooking")}
                   </Button>
                 </div>
               </div>

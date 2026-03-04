@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { DAYS_OF_WEEK, TIME_SLOTS } from "@/lib/constants";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
@@ -39,6 +40,8 @@ interface UserProfile {
 
 export default function ProfileEditPage() {
   const router = useRouter();
+  const t = useTranslations("profileEdit");
+  const tc = useTranslations("common");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [loading, setLoading] = useState(true);
@@ -109,7 +112,7 @@ export default function ProfileEditPage() {
           }
         }
       })
-      .catch(() => setError("Failed to load profile"))
+      .catch(() => setError(t("failedToLoad")))
       .finally(() => setLoading(false));
   }, []);
 
@@ -145,10 +148,10 @@ export default function ProfileEditPage() {
       if (res.ok) {
         setAvatarUrl(json.data?.avatarUrl || json.avatarUrl);
       } else {
-        setError(json.error || "Failed to upload avatar");
+        setError(json.error || t("failedToUpload"));
       }
     } catch {
-      setError("Failed to upload avatar");
+      setError(t("failedToUpload"));
     } finally {
       setUploadingAvatar(false);
     }
@@ -196,14 +199,14 @@ export default function ProfileEditPage() {
 
       if (!res.ok) {
         const data = await res.json();
-        setError(data.error || "Failed to save profile");
+        setError(data.error || t("failedToSave"));
         return;
       }
 
-      setSuccess("Profile updated successfully");
+      setSuccess(t("profileUpdated"));
       setTimeout(() => router.push("/profile"), 1200);
     } catch {
-      setError("Something went wrong");
+      setError(tc("somethingWentWrong"));
     } finally {
       setSaving(false);
     }
@@ -223,9 +226,9 @@ export default function ProfileEditPage() {
   return (
     <div className="mx-auto max-w-2xl">
       <div className="mb-8">
-        <h1 className="font-serif text-2xl text-text-primary">Edit Profile</h1>
+        <h1 className="font-serif text-2xl text-text-primary">{t("title")}</h1>
         <p className="mt-1 text-sm text-text-secondary">
-          Update your personal information and preferences.
+          {t("subtitle")}
         </p>
       </div>
 
@@ -245,7 +248,7 @@ export default function ProfileEditPage() {
         {/* Avatar Section */}
         <section className="border border-border-default bg-surface-secondary p-6">
           <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            Profile Photo
+            {t("profilePhoto")}
           </p>
           <div className="flex items-center gap-5">
             {avatarUrl ? (
@@ -274,10 +277,10 @@ export default function ProfileEditPage() {
                 loading={uploadingAvatar}
                 onClick={() => fileInputRef.current?.click()}
               >
-                {uploadingAvatar ? "Uploading..." : "Change Photo"}
+                {uploadingAvatar ? t("uploading") : t("changePhoto")}
               </Button>
               <p className="mt-1.5 text-xs text-text-tertiary">
-                JPG, PNG or GIF. Max 5MB.
+                {t("photoHint")}
               </p>
             </div>
           </div>
@@ -286,37 +289,37 @@ export default function ProfileEditPage() {
         {/* Basic Info */}
         <section className="border border-border-default bg-surface-secondary p-6">
           <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            Basic Information
+            {t("basicInfo")}
           </p>
           <div className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-2">
               <Input
-                label="First Name"
+                label={t("firstName")}
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
               />
               <Input
-                label="Last Name"
+                label={t("lastName")}
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
             </div>
             <Input
-              label="Birthday"
+              label={t("birthday")}
               type="date"
               value={birthday}
               onChange={(e) => setBirthday(e.target.value)}
             />
             <Input
-              label="Phone (optional)"
+              label={t("phoneOptional")}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="(555) 123-4567"
             />
             <Input
-              label="Instagram (optional)"
+              label={t("instagramOptional")}
               value={instagram}
               onChange={(e) => setInstagram(e.target.value)}
               placeholder="@yourusername"
@@ -330,19 +333,19 @@ export default function ProfileEditPage() {
             {/* About */}
             <section className="border border-border-default bg-surface-secondary p-6">
               <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-                About You
+                {t("aboutYou")}
               </p>
               <div className="space-y-4">
                 <Textarea
-                  label="Bio"
+                  label={t("bio")}
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
-                  placeholder="Tell parents about yourself, your experience, and what makes you a great babysitter..."
+                  placeholder={t("bioPlaceholder")}
                   rows={5}
                 />
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Input
-                    label="Hourly Rate ($)"
+                    label={t("hourlyRate")}
                     type="number"
                     min="1"
                     step="0.50"
@@ -350,7 +353,7 @@ export default function ProfileEditPage() {
                     onChange={(e) => setHourlyRate(e.target.value)}
                   />
                   <Input
-                    label="Years of Experience"
+                    label={t("yearsExperience")}
                     type="number"
                     min="0"
                     value={yearsExperience}
@@ -358,14 +361,14 @@ export default function ProfileEditPage() {
                   />
                 </div>
                 <Input
-                  label="Languages (comma separated)"
+                  label={t("languagesLabel")}
                   value={languages}
                   onChange={(e) => setLanguages(e.target.value)}
                   placeholder="English, Spanish"
                 />
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Input
-                    label="Youngest Age Comfortable"
+                    label={t("youngestAge")}
                     type="number"
                     min="0"
                     max="17"
@@ -373,7 +376,7 @@ export default function ProfileEditPage() {
                     onChange={(e) => setAgeRangeMin(e.target.value)}
                   />
                   <Input
-                    label="Oldest Age Comfortable"
+                    label={t("oldestAge")}
                     type="number"
                     min="0"
                     max="17"
@@ -387,31 +390,31 @@ export default function ProfileEditPage() {
             {/* Location */}
             <section className="border border-border-default bg-surface-secondary p-6">
               <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-                Location
+                {t("location")}
               </p>
               <div className="space-y-4">
                 <Input
-                  label="City"
+                  label={t("city")}
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   placeholder="San Francisco"
                 />
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Input
-                    label="State"
+                    label={t("state")}
                     value={state}
                     onChange={(e) => setState(e.target.value)}
                     placeholder="CA"
                   />
                   <Input
-                    label="Zip Code"
+                    label={t("zipCode")}
                     value={zipCode}
                     onChange={(e) => setZipCode(e.target.value)}
                     placeholder="94102"
                   />
                 </div>
                 <Input
-                  label="Travel Radius (miles)"
+                  label={t("travelRadius")}
                   type="number"
                   min="1"
                   max="100"
@@ -424,18 +427,18 @@ export default function ProfileEditPage() {
             {/* Certifications */}
             <section className="border border-border-default bg-surface-secondary p-6">
               <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-                Certifications
+                {t("certifications")}
               </p>
               <div className="flex flex-wrap gap-6">
                 {[
                   {
-                    label: "First Aid",
+                    label: t("firstAid"),
                     checked: hasFirstAid,
                     set: setHasFirstAid,
                   },
-                  { label: "CPR", checked: hasCPR, set: setHasCPR },
+                  { label: t("cpr"), checked: hasCPR, set: setHasCPR },
                   {
-                    label: "Has Transportation",
+                    label: t("hasTransportation"),
                     checked: hasTransportation,
                     set: setHasTransportation,
                   },
@@ -459,10 +462,10 @@ export default function ProfileEditPage() {
             {/* Availability */}
             <section className="border border-border-default bg-surface-secondary p-6">
               <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
-                Availability
+                {t("availability")}
               </p>
               <p className="mb-4 text-sm text-text-secondary">
-                Select when you are typically available.
+                {t("selectAvailability")}
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
@@ -474,7 +477,7 @@ export default function ProfileEditPage() {
                           key={slot}
                           className="pb-2 text-center text-xs font-medium uppercase tracking-wide text-text-secondary"
                         >
-                          {slot}
+                          {tc(`timeSlots.${slot}`)}
                         </th>
                       ))}
                     </tr>
@@ -482,8 +485,8 @@ export default function ProfileEditPage() {
                   <tbody>
                     {DAYS_OF_WEEK.map((day) => (
                       <tr key={day}>
-                        <td className="py-1.5 pr-3 text-sm capitalize text-text-secondary">
-                          {day}
+                        <td className="py-1.5 pr-3 text-sm text-text-secondary">
+                          {tc(`days.${day}`)}
                         </td>
                         {TIME_SLOTS.map((slot) => (
                           <td key={slot} className="py-1.5 text-center">
@@ -518,10 +521,10 @@ export default function ProfileEditPage() {
             variant="secondary"
             onClick={() => router.push("/profile")}
           >
-            Cancel
+            {tc("cancel")}
           </Button>
           <Button type="submit" loading={saving}>
-            {saving ? "Saving..." : "Save Changes"}
+            {saving ? tc("saving") : t("saveChanges")}
           </Button>
         </div>
       </form>

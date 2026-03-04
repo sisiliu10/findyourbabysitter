@@ -4,11 +4,13 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter, Link } from "@/i18n/navigation";
 import { Suspense } from "react";
+import { useTranslations } from "next-intl";
 
 function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
+  const t = useTranslations("resetPassword");
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,13 +24,13 @@ function ResetPasswordForm() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </div>
-        <h1 className="font-serif text-4xl text-text-primary">Invalid link</h1>
-        <p className="mt-3 text-sm text-text-secondary">This password reset link is invalid or incomplete.</p>
+        <h1 className="font-serif text-4xl text-text-primary">{t("invalidLink")}</h1>
+        <p className="mt-3 text-sm text-text-secondary">{t("invalidLinkDesc")}</p>
         <Link
           href="/forgot-password"
           className="mt-8 inline-block w-full border border-text-primary bg-text-primary px-4 py-3 text-center text-xs font-medium uppercase tracking-widest text-surface-primary transition-colors hover:bg-accent hover:border-accent"
         >
-          Request a new link
+          {t("requestNewLink")}
         </Link>
       </div>
     );
@@ -43,12 +45,12 @@ function ResetPasswordForm() {
     const confirmPassword = formData.get("confirmPassword") as string;
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+      setError(t("passwordsNoMatch"));
       return;
     }
 
     if (password.length < 8) {
-      setError("Password must be at least 8 characters.");
+      setError(t("passwordTooShort"));
       return;
     }
 
@@ -63,14 +65,14 @@ function ResetPasswordForm() {
 
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Reset failed");
+        setError(data.error || t("resetFailed"));
         return;
       }
 
       setSuccess(true);
       setTimeout(() => router.push("/login"), 3000);
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError(t("somethingWentWrong"));
     } finally {
       setLoading(false);
     }
@@ -85,14 +87,14 @@ function ResetPasswordForm() {
           </svg>
         </div>
 
-        <h1 className="font-serif text-4xl text-text-primary">Password reset</h1>
-        <p className="mt-3 text-sm text-text-secondary">Your password has been updated. Redirecting to login...</p>
+        <h1 className="font-serif text-4xl text-text-primary">{t("passwordReset")}</h1>
+        <p className="mt-3 text-sm text-text-secondary">{t("passwordUpdated")}</p>
 
         <Link
           href="/login"
           className="mt-8 inline-block w-full border border-text-primary bg-text-primary px-4 py-3 text-center text-xs font-medium uppercase tracking-widest text-surface-primary transition-colors hover:bg-accent hover:border-accent"
         >
-          Log in now
+          {t("logInNow")}
         </Link>
       </div>
     );
@@ -100,8 +102,8 @@ function ResetPasswordForm() {
 
   return (
     <div>
-      <h1 className="font-serif text-4xl text-text-primary">Set new password</h1>
-      <p className="mt-3 text-sm text-text-secondary">Enter your new password below.</p>
+      <h1 className="font-serif text-4xl text-text-primary">{t("setNewPassword")}</h1>
+      <p className="mt-3 text-sm text-text-secondary">{t("subtitle")}</p>
 
       {error && (
         <div className="mt-6 border border-danger/30 bg-danger-muted px-4 py-3 text-sm text-danger">{error}</div>
@@ -109,7 +111,7 @@ function ResetPasswordForm() {
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-5">
         <div>
-          <label htmlFor="password" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">New password</label>
+          <label htmlFor="password" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">{t("newPassword")}</label>
           <input
             id="password"
             name="password"
@@ -117,12 +119,12 @@ function ResetPasswordForm() {
             required
             minLength={8}
             className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none"
-            placeholder="Min 8 characters"
+            placeholder={t("minChars")}
           />
         </div>
 
         <div>
-          <label htmlFor="confirmPassword" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">Confirm password</label>
+          <label htmlFor="confirmPassword" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">{t("confirmPassword")}</label>
           <input
             id="confirmPassword"
             name="confirmPassword"
@@ -130,7 +132,7 @@ function ResetPasswordForm() {
             required
             minLength={8}
             className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none"
-            placeholder="Repeat your password"
+            placeholder={t("repeatPassword")}
           />
         </div>
 
@@ -139,13 +141,13 @@ function ResetPasswordForm() {
           disabled={loading}
           className="w-full border border-text-primary bg-text-primary px-4 py-3 text-xs font-medium uppercase tracking-widest text-surface-primary transition-colors hover:bg-accent hover:border-accent disabled:opacity-40"
         >
-          {loading ? "Resetting..." : "Reset password"}
+          {loading ? t("resetting") : t("resetPasswordBtn")}
         </button>
       </form>
 
       <p className="mt-8 text-sm text-text-tertiary">
         <Link href="/forgot-password" className="text-text-primary underline underline-offset-4 hover:text-accent">
-          Request a new reset link
+          {t("requestNewResetLink")}
         </Link>
       </p>
     </div>

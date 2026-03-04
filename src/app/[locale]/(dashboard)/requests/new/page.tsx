@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 import { createRequest } from "@/actions/request.actions";
+import { useTranslations } from "next-intl";
 
 export default function CreateRequestPage() {
   return (
@@ -17,6 +18,8 @@ export default function CreateRequestPage() {
 }
 
 function CreateRequestForm() {
+  const t = useTranslations("newRequest");
+  const tc = useTranslations("common");
   const router = useRouter();
   const searchParams = useSearchParams();
   const sitterId = searchParams.get("sitterId");
@@ -72,7 +75,7 @@ function CreateRequestForm() {
 
     const durationHours = calculateDuration();
     if (durationHours <= 0) {
-      setError("End time must be after start time");
+      setError(t("endTimeError"));
       setLoading(false);
       return;
     }
@@ -94,7 +97,7 @@ function CreateRequestForm() {
     try {
       const result = await createRequest(formData);
       if (!result.success) {
-        setError(result.error || "Failed to create request");
+        setError(result.error || t("failedToCreate"));
       }
       // On success, the server action redirects to /requests/[id]
     } catch {
@@ -108,10 +111,10 @@ function CreateRequestForm() {
     <div className="mx-auto max-w-2xl">
       <div className="mb-8">
         <h1 className="font-serif text-2xl text-text-primary">
-          Create a Childcare Request
+          {t("title")}
         </h1>
         <p className="mt-1 text-sm text-text-secondary">
-          Describe what you need and we will match you with the best babysitters.
+          {t("subtitle")}
         </p>
       </div>
 
@@ -125,18 +128,18 @@ function CreateRequestForm() {
         {/* Request Details */}
         <section className="border border-border-default bg-surface-secondary p-6">
           <h2 className="mb-1 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            Request Details
+            {t("requestDetails")}
           </h2>
           <div className="mt-4 space-y-4">
             <Input
-              label="Title"
+              label={t("requestTitle")}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g. Evening babysitter for two kids"
+              placeholder={t("titlePlaceholder")}
               required
             />
             <Input
-              label="Date Needed"
+              label={t("dateNeeded")}
               type="date"
               value={dateNeeded}
               onChange={(e) => setDateNeeded(e.target.value)}
@@ -144,14 +147,14 @@ function CreateRequestForm() {
             />
             <div className="grid gap-4 sm:grid-cols-2">
               <Input
-                label="Start Time"
+                label={t("startTime")}
                 type="time"
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
                 required
               />
               <Input
-                label="End Time"
+                label={t("endTime")}
                 type="time"
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
@@ -160,7 +163,7 @@ function CreateRequestForm() {
             </div>
             {calculateDuration() > 0 && (
               <p className="text-sm text-text-secondary">
-                Duration: {calculateDuration()} hours
+                {t("duration", { hours: calculateDuration() })}
               </p>
             )}
           </div>
@@ -169,28 +172,28 @@ function CreateRequestForm() {
         {/* Children */}
         <section className="border border-border-default bg-surface-secondary p-6">
           <h2 className="mb-1 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            Children
+            {t("children")}
           </h2>
           <div className="mt-4 space-y-3">
             {children.map((child, i) => (
               <div key={i} className="flex items-end gap-3">
                 <div className="flex-1">
                   <Input
-                    label={i === 0 ? "Name" : undefined}
+                    label={i === 0 ? t("name") : undefined}
                     value={child.name}
                     onChange={(e) => updateChild(i, "name", e.target.value)}
-                    placeholder="Child's name"
+                    placeholder={t("childNamePlaceholder")}
                   />
                 </div>
                 <div className="w-24">
                   <Input
-                    label={i === 0 ? "Age" : undefined}
+                    label={i === 0 ? t("age") : undefined}
                     type="number"
                     min="0"
                     max="17"
                     value={child.age}
                     onChange={(e) => updateChild(i, "age", e.target.value)}
-                    placeholder="Age"
+                    placeholder={t("agePlaceholder")}
                   />
                 </div>
                 {children.length > 1 && (
@@ -222,18 +225,18 @@ function CreateRequestForm() {
             onClick={addChild}
             className="mt-3 text-sm font-medium text-accent hover:underline"
           >
-            + Add another child
+            {t("addChild")}
           </button>
         </section>
 
         {/* Location */}
         <section className="border border-border-default bg-surface-secondary p-6">
           <h2 className="mb-1 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            Location
+            {t("location")}
           </h2>
           <div className="mt-4 space-y-4">
             <Input
-              label="City"
+              label={t("city")}
               value={city}
               onChange={(e) => setCity(e.target.value)}
               placeholder="San Francisco"
@@ -241,14 +244,14 @@ function CreateRequestForm() {
             />
             <div className="grid gap-4 sm:grid-cols-2">
               <Input
-                label="State"
+                label={t("state")}
                 value={state}
                 onChange={(e) => setState(e.target.value)}
                 placeholder="CA"
                 required
               />
               <Input
-                label="Zip Code"
+                label={t("zipCode")}
                 value={zipCode}
                 onChange={(e) => setZipCode(e.target.value)}
                 placeholder="94102"
@@ -261,11 +264,11 @@ function CreateRequestForm() {
         {/* Additional Options */}
         <section className="border border-border-default bg-surface-secondary p-6">
           <h2 className="mb-1 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            Additional Options
+            {t("additionalOptions")}
           </h2>
           <div className="mt-4 space-y-4">
             <Input
-              label="Max Hourly Rate (optional)"
+              label={t("maxHourlyRate")}
               type="number"
               min="1"
               step="0.50"
@@ -274,10 +277,10 @@ function CreateRequestForm() {
               placeholder="e.g. 30"
             />
             <Textarea
-              label="Special Notes (optional)"
+              label={t("specialNotes")}
               value={specialNotes}
               onChange={(e) => setSpecialNotes(e.target.value)}
-              placeholder="Any special instructions, dietary needs, allergies, etc."
+              placeholder={t("specialNotesPlaceholder")}
               rows={4}
             />
           </div>
@@ -289,10 +292,10 @@ function CreateRequestForm() {
             variant="secondary"
             onClick={() => router.back()}
           >
-            Cancel
+            {tc("cancel")}
           </Button>
           <Button type="submit" loading={loading}>
-            {loading ? "Creating..." : "Create Request"}
+            {loading ? t("creating") : t("createRequest")}
           </Button>
         </div>
       </form>

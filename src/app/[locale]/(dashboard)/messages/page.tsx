@@ -2,9 +2,12 @@ import { requireAuth } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { getInitials } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
+import { getTranslations, getLocale } from "next-intl/server";
 
 export default async function MessagesListPage() {
   const session = await requireAuth();
+  const t = await getTranslations("messagesList");
+  const locale = await getLocale();
 
   // Fetch all bookings where user is parent or sitter, that are not declined
   const bookings = await prisma.booking.findMany({
@@ -102,19 +105,19 @@ export default async function MessagesListPage() {
     const diffHours = Math.floor(diffMins / 60);
     const diffDays = Math.floor(diffHours / 24);
 
-    if (diffMins < 1) return "Just now";
-    if (diffMins < 60) return `${diffMins}m ago`;
-    if (diffHours < 24) return `${diffHours}h ago`;
-    if (diffDays < 7) return `${diffDays}d ago`;
-    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    if (diffMins < 1) return t("justNow");
+    if (diffMins < 60) return t("minutesAgo", { count: diffMins });
+    if (diffHours < 24) return t("hoursAgo", { count: diffHours });
+    if (diffDays < 7) return t("daysAgo", { count: diffDays });
+    return d.toLocaleDateString(locale === "de" ? "de-DE" : "en-US", { month: "short", day: "numeric" });
   }
 
   return (
     <div>
       <div className="mb-8">
-        <h1 className="font-serif text-2xl text-text-primary">Messages</h1>
+        <h1 className="font-serif text-2xl text-text-primary">{t("title")}</h1>
         <p className="mt-1 text-sm text-text-secondary">
-          Your conversations with parents and babysitters.
+          {t("subtitle")}
         </p>
       </div>
 
@@ -135,9 +138,9 @@ export default async function MessagesListPage() {
               />
             </svg>
           </div>
-          <p className="text-sm text-text-secondary">No conversations yet.</p>
+          <p className="text-sm text-text-secondary">{t("noConversations")}</p>
           <p className="mt-1 text-sm text-text-tertiary">
-            Messages will appear here once you have active bookings.
+            {t("noConversationsHint")}
           </p>
         </div>
       ) : (
@@ -202,13 +205,13 @@ export default async function MessagesListPage() {
                       }`}
                     >
                       {conv.lastMessage.senderId === session.userId
-                        ? "You: "
+                        ? t("you")
                         : ""}
                       {conv.lastMessage.content}
                     </p>
                   ) : (
                     <p className="mt-0.5 text-sm italic text-text-tertiary">
-                      No messages yet
+                      {t("noMessages")}
                     </p>
                   )}
                 </div>

@@ -7,8 +7,11 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { getInitials, cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/Spinner";
 import { Link } from "@/i18n/navigation";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function MessageThreadPage() {
+  const t = useTranslations("messageThread");
+  const locale = useLocale();
   const params = useParams();
   const conversationId = params.conversationId as string;
   const { messages, isLoading, sendMessage } = useMessages(conversationId);
@@ -76,7 +79,7 @@ export default function MessageThreadPage() {
 
   const otherName = otherPerson
     ? `${otherPerson.firstName} ${otherPerson.lastName}`
-    : "Conversation";
+    : t("conversation");
 
   return (
     <div className="flex h-[calc(100vh-8rem)] flex-col">
@@ -121,7 +124,7 @@ export default function MessageThreadPage() {
             href={`/bookings/${conversationId}`}
             className="text-xs text-text-tertiary hover:text-accent"
           >
-            View booking
+            {t("viewBooking")}
           </Link>
         </div>
       </div>
@@ -134,7 +137,7 @@ export default function MessageThreadPage() {
         {messages.length === 0 ? (
           <div className="flex h-full items-center justify-center">
             <p className="text-sm text-text-tertiary">
-              No messages yet. Send one to start the conversation.
+              {t("noMessages")}
             </p>
           </div>
         ) : (
@@ -186,7 +189,7 @@ export default function MessageThreadPage() {
                         isMe ? "text-surface-primary/50" : "text-text-tertiary"
                       )}
                     >
-                      {new Date(message.createdAt).toLocaleTimeString("en-US", {
+                      {new Date(message.createdAt).toLocaleTimeString(locale === "de" ? "de-DE" : "en-US", {
                         hour: "numeric",
                         minute: "2-digit",
                       })}
@@ -209,7 +212,7 @@ export default function MessageThreadPage() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a message..."
+          placeholder={t("typeMessage")}
           className="flex-1 border border-border-default bg-transparent px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-text-primary focus:outline-none"
           disabled={sending}
         />

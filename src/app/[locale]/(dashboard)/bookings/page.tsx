@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { formatDate, formatTime, formatCurrency, getInitials } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
 import { Badge, type BadgeVariant } from "@/components/ui/Badge";
+import { getTranslations } from "next-intl/server";
 
 const statusVariants: Record<string, BadgeVariant> = {
   PENDING: "warning",
@@ -26,6 +27,8 @@ const statusColors: Record<string, string> = {
 
 export default async function BookingsListPage() {
   const session = await requireAuth();
+  const t = await getTranslations("bookingsList");
+  const tc = await getTranslations("common");
 
   const bookings = await prisma.booking.findMany({
     where: {
@@ -61,9 +64,9 @@ export default async function BookingsListPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="font-serif text-2xl text-text-primary">Bookings</h1>
+        <h1 className="font-serif text-2xl text-text-primary">{t("title")}</h1>
         <p className="mt-1 text-sm text-text-secondary">
-          View and manage all your bookings.
+          {t("subtitle")}
         </p>
       </div>
 
@@ -84,13 +87,13 @@ export default async function BookingsListPage() {
               />
             </svg>
           </div>
-          <p className="text-sm text-text-secondary">No bookings yet.</p>
+          <p className="text-sm text-text-secondary">{t("noBookings")}</p>
           {session.role === "PARENT" && (
             <Link
               href="/search"
               className="mt-3 inline-block text-sm font-medium text-accent hover:underline"
             >
-              Find a babysitter
+              {t("findBabysitter")}
             </Link>
           )}
         </div>
@@ -135,7 +138,7 @@ export default async function BookingsListPage() {
                   </div>
                 </div>
                 <Badge variant={statusVariants[booking.status] || "neutral"}>
-                  {booking.status}
+                  {tc(`status.${booking.status}` as any)}
                 </Badge>
               </Link>
             );

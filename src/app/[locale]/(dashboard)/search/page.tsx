@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency, getInitials, cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
@@ -73,11 +74,11 @@ function calculateAge(birthday: string | null): number | null {
   return age;
 }
 
-function sitterToCard(s: SitterResult): CardProfile {
+function sitterToCard(s: SitterResult, t: (key: string, values?: Record<string, unknown>) => string): CardProfile {
   const tags: CardProfile["tags"] = [];
-  if (s.hasCPR) tags.push({ label: "CPR", variant: "success" });
-  if (s.hasFirstAid) tags.push({ label: "First Aid", variant: "success" });
-  if (s.hasTransportation) tags.push({ label: "Transport", variant: "info" });
+  if (s.hasCPR) tags.push({ label: t("cpr"), variant: "success" });
+  if (s.hasFirstAid) tags.push({ label: t("firstAid"), variant: "success" });
+  if (s.hasTransportation) tags.push({ label: t("transport"), variant: "info" });
 
   return {
     id: s.user.id,
@@ -92,7 +93,7 @@ function sitterToCard(s: SitterResult): CardProfile {
     linkHref: `/sitter/${s.user.id}`,
     meta: [
       s.yearsExperience > 0
-        ? `${s.yearsExperience} yr${s.yearsExperience !== 1 ? "s" : ""} exp`
+        ? t("yrsExp", { count: s.yearsExperience })
         : "",
       s.languages || "",
     ]
@@ -101,7 +102,7 @@ function sitterToCard(s: SitterResult): CardProfile {
   };
 }
 
-function parentToCard(p: ParentResult): CardProfile {
+function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, unknown>) => string, locale: string): CardProfile {
   const reqs = p.childcareRequests;
   const totalKids = reqs.reduce((sum, r) => {
     try {
@@ -114,8 +115,10 @@ function parentToCard(p: ParentResult): CardProfile {
 
   const locations = [...new Set(reqs.map((r) => r.city).filter(Boolean))];
   const tags: CardProfile["tags"] = [];
-  if (totalKids > 0) tags.push({ label: `${totalKids} ${totalKids === 1 ? "child" : "children"}`, variant: "info" });
-  if (reqs.length > 0) tags.push({ label: `${reqs.length} ${reqs.length === 1 ? "request" : "requests"}`, variant: "neutral" });
+  if (totalKids > 0) tags.push({ label: t("childCount", { count: totalKids }), variant: "info" });
+  if (reqs.length > 0) tags.push({ label: t("requestCount", { count: reqs.length }), variant: "neutral" });
+
+  const dateLocale = locale === "de" ? "de-DE" : "en-US";
 
   return {
     id: p.id,
@@ -126,15 +129,18 @@ function parentToCard(p: ParentResult): CardProfile {
     location: locations[0] || "",
     bio: reqs.length > 0
       ? reqs.map((r) => r.title).join(" · ")
-      : "Looking to connect with other parents",
+      : t("lookingToConnect"),
     tags,
-    detail: reqs.length > 0 ? "Active requests" : "No active requests",
+    detail: reqs.length > 0 ? t("activeRequests") : t("noActiveRequests"),
     linkHref: `/messages`,
-    meta: `Member since ${new Date(p.createdAt).toLocaleDateString("en-US", { month: "short", year: "numeric" })}`,
+    meta: t("memberSince", { date: new Date(p.createdAt).toLocaleDateString(dateLocale, { month: "short", year: "numeric" }) }),
   };
 }
 
 export default function SearchPage() {
+  const t = useTranslations("search");
+  const tc = useTranslations("common");
+  const locale = useLocale();
   const [mode, setMode] = useState<SwipeMode>("babysitters");
   const [cards, setCards] = useState<CardProfile[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -151,7 +157,7 @@ export default function SearchPage() {
         const res = await fetch("/api/sitters?limit=50");
         const json = await res.json();
         if (json.success && json.data) {
-          setCards((json.data.sitters || []).map(sitterToCard));
+          setCards((json.data.sitters || []).map((s: SitterResult) => sitterToCard(s, t as any)));
         } else {
           setCards([]);
         }
@@ -159,7 +165,7 @@ export default function SearchPage() {
         const res = await fetch("/api/parents?limit=50");
         const json = await res.json();
         if (json.success && json.data) {
-          setCards((json.data.parents || []).map(parentToCard));
+          setCards((json.data.parents || []).map((p: ParentResult) => parentToCard(p, t as any, locale)));
         } else {
           setCards([]);
         }
@@ -169,7 +175,7 @@ export default function SearchPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [t, locale]);
 
   useEffect(() => {
     fetchCards(mode);
@@ -204,11 +210,11 @@ export default function SearchPage() {
       {/* Toggle */}
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="font-serif text-3xl text-text-primary">Discover</h1>
+          <h1 className="font-serif text-3xl text-text-primary">{t("discover")}</h1>
           <p className="mt-1 text-sm text-text-secondary">
             {mode === "babysitters"
-              ? "Swipe to find your perfect babysitter"
-              : "Connect with other moms nearby"}
+              ? t("swipeBabysitters")
+              : t("connectMoms")}
           </p>
         </div>
         <div className="flex border border-border-default bg-surface-secondary">
@@ -221,7 +227,7 @@ export default function SearchPage() {
                 : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
             )}
           >
-            Babysitters
+            {t("babysitters")}
           </button>
           <button
             onClick={() => setMode("moms")}
@@ -232,7 +238,7 @@ export default function SearchPage() {
                 : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
             )}
           >
-            Moms
+            {t("moms")}
           </button>
         </div>
       </div>
@@ -269,12 +275,12 @@ export default function SearchPage() {
                 </svg>
               </div>
               <p className="text-sm font-medium text-text-primary">
-                You&apos;ve seen everyone
+                {t("seenEveryone")}
               </p>
               <p className="mt-1 text-sm text-text-tertiary">
                 {liked.length > 0
-                  ? `You liked ${liked.length} ${mode === "babysitters" ? "sitter" : "mom"}${liked.length !== 1 ? "s" : ""}`
-                  : "Check back later for new profiles"}
+                  ? mode === "babysitters" ? t("likedSitters", { count: liked.length }) : t("likedMoms", { count: liked.length })
+                  : t("checkBackLater")}
               </p>
               <div className="mt-6 flex gap-3">
                 {currentIndex > 0 && (
@@ -282,7 +288,7 @@ export default function SearchPage() {
                     onClick={handleUndo}
                     className="border border-border-default px-4 py-2 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary"
                   >
-                    Go back
+                    {t("goBack")}
                   </button>
                 )}
                 <button
@@ -293,7 +299,7 @@ export default function SearchPage() {
                   }}
                   className="bg-text-primary px-4 py-2 text-sm font-medium text-surface-primary transition-colors hover:bg-accent"
                 >
-                  Start over
+                  {t("startOver")}
                 </button>
               </div>
             </div>
@@ -329,7 +335,7 @@ export default function SearchPage() {
           <button
             onClick={handleSwipeLeft}
             className="flex h-14 w-14 items-center justify-center border-2 border-danger text-danger transition-colors hover:bg-danger-muted"
-            title="Pass"
+            title={t("pass")}
           >
             <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -340,7 +346,7 @@ export default function SearchPage() {
           <button
             onClick={handleSwipeRight}
             className="flex h-14 w-14 items-center justify-center border-2 border-success text-success transition-colors hover:bg-success-muted"
-            title="Like"
+            title={t("like")}
           >
             <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
@@ -359,6 +365,8 @@ function ProfileCard({
   profile: CardProfile;
   mode: SwipeMode;
 }) {
+  const t = useTranslations("search");
+  const tc = useTranslations("common");
   const initials = getInitials(profile.firstName, profile.lastName);
 
   return (
@@ -385,7 +393,7 @@ function ProfileCard({
         <Link
           href={profile.linkHref}
           className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center bg-black/30 text-white/80 backdrop-blur-sm transition hover:bg-black/50 hover:text-white"
-          title="View profile"
+          title={t("viewProfile")}
         >
           <svg className="h-4.5 w-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -417,7 +425,7 @@ function ProfileCard({
             {profile.detail}
           </span>
           <span className="text-xs font-medium uppercase tracking-wide text-text-tertiary">
-            {mode === "babysitters" ? "Babysitter" : "Parent"}
+            {mode === "babysitters" ? tc("roles.BABYSITTER") : tc("roles.PARENT")}
           </span>
         </div>
 

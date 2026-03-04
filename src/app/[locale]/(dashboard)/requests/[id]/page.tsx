@@ -5,6 +5,7 @@ import { notFound, redirect } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Badge, type BadgeVariant } from "@/components/ui/Badge";
 import { MatchedSitters } from "./MatchedSitters";
+import { getTranslations } from "next-intl/server";
 
 const statusVariants: Record<string, BadgeVariant> = {
   OPEN: "success",
@@ -18,6 +19,8 @@ export default async function RequestDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const session = await requireAuth();
+  const t = await getTranslations("requestDetail");
+  const tc = await getTranslations("common");
   const { id } = await params;
 
   const request = await prisma.childcareRequest.findUnique({
@@ -59,37 +62,37 @@ export default async function RequestDetailPage({
             href="/requests"
             className="text-sm text-text-secondary hover:text-text-primary"
           >
-            &larr; Back to requests
+            &larr; {t("backToRequests")}
           </Link>
           <h1 className="mt-2 font-serif text-2xl text-text-primary">
             {request.title}
           </h1>
         </div>
         <Badge variant={statusVariants[request.status] || "neutral"}>
-          {request.status}
+          {tc(`status.${request.status}` as any)}
         </Badge>
       </div>
 
       <div className="space-y-6">
         {/* Request details */}
         <div className="border border-border-default bg-surface-secondary p-6">
-          <h2 className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">Details</h2>
+          <h2 className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("details")}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">Date</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("date")}</p>
               <p className="mt-1 text-sm text-text-primary">
                 {formatDate(request.dateNeeded)}
               </p>
             </div>
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">Time</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("time")}</p>
               <p className="mt-1 text-sm text-text-primary">
                 {formatTime(request.startTime)} -{" "}
                 {formatTime(request.endTime)} ({request.durationHours}h)
               </p>
             </div>
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">Location</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("location")}</p>
               <p className="mt-1 text-sm text-text-primary">
                 {[request.city, request.state, request.zipCode]
                   .filter(Boolean)
@@ -98,7 +101,7 @@ export default async function RequestDetailPage({
             </div>
             {request.maxHourlyRate && (
               <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">Max Rate</p>
+                <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("maxRate")}</p>
                 <p className="mt-1 text-sm text-text-primary">
                   {formatCurrency(request.maxHourlyRate)}/hr
                 </p>
@@ -107,7 +110,7 @@ export default async function RequestDetailPage({
           </div>
           {request.specialNotes && (
             <div className="mt-4">
-              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">Special Notes</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("specialNotes")}</p>
               <p className="mt-1 whitespace-pre-wrap text-sm text-text-secondary">
                 {request.specialNotes}
               </p>
@@ -119,7 +122,7 @@ export default async function RequestDetailPage({
         {children.length > 0 && (
           <div className="border border-border-default bg-surface-secondary p-6">
             <h2 className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-              Children ({children.length})
+              {t("childrenCount", { count: children.length })}
             </h2>
             <div className="space-y-2">
               {children.map((child, i) => (
@@ -132,9 +135,9 @@ export default async function RequestDetailPage({
                   </div>
                   <div>
                     <p className="text-sm text-text-primary font-medium">
-                      {child.name || `Child ${i + 1}`}
+                      {child.name || t("childFallback", { n: i + 1 })}
                     </p>
-                    <p className="text-xs text-text-secondary">Age: {child.age}</p>
+                    <p className="text-xs text-text-secondary">{t("ageLabel", { age: child.age })}</p>
                   </div>
                 </div>
               ))}
@@ -146,7 +149,7 @@ export default async function RequestDetailPage({
         {request.bookings.length > 0 && (
           <div className="border border-border-default bg-surface-secondary p-6">
             <h2 className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-              Bookings
+              {t("bookings")}
             </h2>
             <div className="space-y-2">
               {request.bookings.map((booking) => (
@@ -191,7 +194,7 @@ export default async function RequestDetailPage({
                                 : "neutral"
                     }
                   >
-                    {booking.status}
+                    {tc(`status.${booking.status}` as any)}
                   </Badge>
                 </Link>
               ))}

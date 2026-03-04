@@ -10,6 +10,7 @@ import { notFound, redirect } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Badge, type BadgeVariant } from "@/components/ui/Badge";
 import { BookingActions } from "./BookingActions";
+import { getTranslations } from "next-intl/server";
 
 const statusVariants: Record<string, BadgeVariant> = {
   PENDING: "warning",
@@ -34,6 +35,8 @@ export default async function BookingDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const session = await requireAuth();
+  const t = await getTranslations("bookingDetail");
+  const tc = await getTranslations("common");
   const { id } = await params;
 
   const booking = await prisma.booking.findUnique({
@@ -106,12 +109,12 @@ export default async function BookingDetailPage({
           href="/bookings"
           className="text-sm text-text-secondary hover:text-text-primary"
         >
-          &larr; Back to bookings
+          &larr; {t("backToBookings")}
         </Link>
         <div className="mt-2 flex items-center justify-between">
-          <h1 className="font-serif text-2xl text-text-primary">Booking Details</h1>
+          <h1 className="font-serif text-2xl text-text-primary">{t("bookingDetails")}</h1>
           <Badge variant={statusVariants[booking.status] || "neutral"}>
-            {booking.status}
+            {tc(`status.${booking.status}` as any)}
           </Badge>
         </div>
       </div>
@@ -121,7 +124,7 @@ export default async function BookingDetailPage({
         {!isCancelledOrDeclined && (
           <div className="border border-border-default bg-surface-secondary p-6">
             <p className="mb-5 text-xs font-medium uppercase tracking-wide text-text-secondary">
-              Booking Progress
+              {t("bookingProgress")}
             </p>
             <div className="flex items-center justify-between">
               {TIMELINE_STEPS.map((step, index) => {
@@ -162,7 +165,7 @@ export default async function BookingDetailPage({
                             : "text-text-muted"
                         }`}
                       >
-                        {step.charAt(0) + step.slice(1).toLowerCase()}
+                        {t(step.toLowerCase() as any)}
                       </span>
                     </div>
                     {index < TIMELINE_STEPS.length - 1 && (
@@ -185,16 +188,16 @@ export default async function BookingDetailPage({
         {isCancelledOrDeclined && (
           <div className="border border-danger/30 bg-danger-muted p-5">
             <p className="font-medium text-danger">
-              This booking was {booking.status.toLowerCase()}.
+              {t("bookingWas", { status: tc(`status.${booking.status}` as any) })}
             </p>
             {booking.status === "DECLINED" && booking.declinedReason && (
               <p className="mt-1 text-sm text-danger">
-                Reason: {booking.declinedReason}
+                {t("reason", { reason: booking.declinedReason })}
               </p>
             )}
             {booking.status === "CANCELLED" && booking.cancelledReason && (
               <p className="mt-1 text-sm text-danger">
-                Reason: {booking.cancelledReason}
+                {t("reason", { reason: booking.cancelledReason })}
               </p>
             )}
           </div>
@@ -203,7 +206,7 @@ export default async function BookingDetailPage({
         {/* Booking info */}
         <div className="border border-border-default bg-surface-secondary p-6">
           <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            Booking Info
+            {t("bookingInfo")}
           </p>
           <div className="flex items-center gap-4 pb-4">
             {otherPerson.avatarUrl ? (
@@ -222,34 +225,34 @@ export default async function BookingDetailPage({
                 {otherPerson.firstName} {otherPerson.lastName}
               </p>
               <p className="text-sm text-text-secondary">
-                {isParent ? "Babysitter" : "Parent"}
+                {isParent ? t("babysitter") : t("parent")}
               </p>
             </div>
           </div>
 
           <div className="grid gap-4 border-t border-border-default pt-4 sm:grid-cols-2">
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">Date</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("date")}</p>
               <p className="mt-0.5 text-sm text-text-primary">
                 {formatDate(booking.dateBooked)}
               </p>
             </div>
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">Time</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("time")}</p>
               <p className="mt-0.5 text-sm text-text-primary">
                 {formatTime(booking.startTime)} -{" "}
                 {formatTime(booking.endTime)}
               </p>
             </div>
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">Rate</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("rate")}</p>
               <p className="mt-0.5 text-sm text-text-primary">
                 {formatCurrency(booking.agreedRate)}/hr
               </p>
             </div>
             <div>
               <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
-                Estimated Total
+                {t("estimatedTotal")}
               </p>
               <p className="mt-0.5 text-sm font-medium text-text-primary">
                 {formatCurrency(booking.totalEstimated)}
@@ -259,7 +262,7 @@ export default async function BookingDetailPage({
 
           {booking.request?.title && (
             <div className="mt-4 border-t border-border-default pt-4">
-              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">Request</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("request")}</p>
               <Link
                 href={`/requests/${booking.request.id}`}
                 className="mt-0.5 text-sm text-accent hover:underline"
@@ -272,7 +275,7 @@ export default async function BookingDetailPage({
           {booking.parentNotes && (
             <div className="mt-4 border-t border-border-default pt-4">
               <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
-                Parent Notes
+                {t("parentNotes")}
               </p>
               <p className="mt-0.5 text-sm text-text-primary">
                 {booking.parentNotes}
@@ -285,7 +288,7 @@ export default async function BookingDetailPage({
         {children.length > 0 && (
           <div className="border border-border-default bg-surface-secondary p-6">
             <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">
-              Children
+              {t("children")}
             </p>
             <div className="space-y-2">
               {children.map((child, i) => (
@@ -298,9 +301,9 @@ export default async function BookingDetailPage({
                   </div>
                   <p className="text-sm text-text-secondary">
                     <span className="font-medium text-text-primary">
-                      {child.name || `Child ${i + 1}`}
+                      {child.name || t("childFallback", { n: i + 1 })}
                     </span>
-                    , age {child.age}
+                    {t("age", { age: child.age })}
                   </p>
                 </div>
               ))}
@@ -308,7 +311,7 @@ export default async function BookingDetailPage({
             {booking.request?.specialNotes && (
               <div className="mt-4 border-t border-border-default pt-4">
                 <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
-                  Special Notes
+                  {t("specialNotes")}
                 </p>
                 <p className="mt-0.5 text-sm text-text-primary">
                   {booking.request.specialNotes}
@@ -348,7 +351,7 @@ export default async function BookingDetailPage({
                     d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
                   />
                 </svg>
-                Message {otherPerson.firstName}
+                {t("messageUser", { name: otherPerson.firstName })}
               </Link>
             </div>
           )}

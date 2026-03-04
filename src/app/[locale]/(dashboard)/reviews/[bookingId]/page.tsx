@@ -7,11 +7,14 @@ import { StarRating } from "@/components/ui/StarRating";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
+import { useTranslations } from "next-intl";
 
 export default function ReviewPage() {
   const params = useParams();
   const bookingId = params.bookingId as string;
   const router = useRouter();
+  const t = useTranslations("reviewForm");
+  const tc = useTranslations("common");
 
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState("");
@@ -24,7 +27,7 @@ export default function ReviewPage() {
     setError("");
 
     if (rating === 0) {
-      setError("Please select a rating");
+      setError(t("selectRating"));
       return;
     }
 
@@ -49,7 +52,7 @@ export default function ReviewPage() {
 
       // If there's no /api/reviews route, use server action fallback
       const json = await res.json();
-      setError(json.error || "Failed to submit review");
+      setError(json.error || t("failedToSubmit"));
     } catch {
       // Try the server action as fallback
       try {
@@ -64,10 +67,10 @@ export default function ReviewPage() {
         if (result.success) {
           router.push(`/bookings/${bookingId}`);
         } else {
-          setError(result.error || "Failed to submit review");
+          setError(result.error || t("failedToSubmit"));
         }
       } catch {
-        setError("Failed to submit review");
+        setError(t("failedToSubmit"));
       }
     } finally {
       setLoading(false);
@@ -81,13 +84,13 @@ export default function ReviewPage() {
           href={`/bookings/${bookingId}`}
           className="text-sm text-text-secondary hover:text-text-primary"
         >
-          &larr; Back to booking
+          &larr; {t("backToBooking")}
         </Link>
         <h1 className="mt-2 font-serif text-2xl text-text-primary">
-          Leave a Review
+          {t("leaveReview")}
         </h1>
         <p className="mt-1 text-sm text-text-secondary">
-          Share your experience to help other parents.
+          {t("subtitle")}
         </p>
       </div>
 
@@ -102,20 +105,20 @@ export default function ReviewPage() {
           {/* Rating */}
           <div className="mb-6">
             <label className="mb-3 block text-xs font-medium uppercase tracking-wide text-text-secondary">
-              Rating
+              {t("rating")}
             </label>
             <StarRating value={rating} onChange={setRating} size="lg" />
             {rating > 0 && (
               <p className="mt-2 text-sm text-text-secondary">
                 {rating === 1
-                  ? "Poor"
+                  ? t("poor")
                   : rating === 2
-                    ? "Fair"
+                    ? t("fair")
                     : rating === 3
-                      ? "Good"
+                      ? t("good")
                       : rating === 4
-                        ? "Very Good"
-                        : "Excellent"}
+                        ? t("veryGood")
+                        : t("excellent")}
               </p>
             )}
           </div>
@@ -123,19 +126,19 @@ export default function ReviewPage() {
           {/* Title */}
           <div className="mb-4">
             <Input
-              label="Title (optional)"
+              label={t("titleOptional")}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Summarize your experience"
+              placeholder={t("titlePlaceholder")}
             />
           </div>
 
           {/* Comment */}
           <Textarea
-            label="Your Review (optional)"
+            label={t("reviewOptional")}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            placeholder="Share details about your experience with this babysitter..."
+            placeholder={t("reviewPlaceholder")}
             rows={5}
           />
         </div>
@@ -146,10 +149,10 @@ export default function ReviewPage() {
             variant="secondary"
             onClick={() => router.push(`/bookings/${bookingId}`)}
           >
-            Cancel
+            {tc("cancel")}
           </Button>
           <Button type="submit" loading={loading} disabled={rating === 0}>
-            {loading ? "Submitting..." : "Submit Review"}
+            {loading ? t("submitting") : t("submitReview")}
           </Button>
         </div>
       </form>

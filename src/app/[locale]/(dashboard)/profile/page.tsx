@@ -4,9 +4,12 @@ import { formatDate, formatCurrency, getInitials } from "@/lib/utils";
 import { DAYS_OF_WEEK, TIME_SLOTS } from "@/lib/constants";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
+import { getTranslations } from "next-intl/server";
 
 export default async function ProfilePage() {
   const session = await requireAuth();
+  const t = await getTranslations("profileView");
+  const tc = await getTranslations("common");
 
   const user = await prisma.user.findUnique({
     where: { id: session.userId },
@@ -41,19 +44,19 @@ export default async function ProfilePage() {
       : null;
 
   const certifications: string[] = [];
-  if (profile?.hasFirstAid) certifications.push("First Aid");
-  if (profile?.hasCPR) certifications.push("CPR");
-  if (profile?.hasTransportation) certifications.push("Transportation");
+  if (profile?.hasFirstAid) certifications.push(t("firstAid"));
+  if (profile?.hasCPR) certifications.push(t("cpr"));
+  if (profile?.hasTransportation) certifications.push(t("transportation"));
 
   return (
     <div className="mx-auto max-w-3xl">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="font-serif text-2xl text-text-primary">Your Profile</h1>
+        <h1 className="font-serif text-2xl text-text-primary">{t("yourProfile")}</h1>
         <Link
           href="/profile/edit"
           className="inline-flex items-center bg-text-primary px-5 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent"
         >
-          Edit Profile
+          {t("editProfile")}
         </Link>
       </div>
 
@@ -94,17 +97,16 @@ export default async function ProfilePage() {
             )}
             <div className="mt-1 flex items-center gap-2">
               <Badge variant={isSitter ? "info" : "neutral"}>
-                {user.role === "BABYSITTER" ? "Babysitter" : "Parent"}
+                {tc(`roles.${user.role}` as any)}
               </Badge>
               {avgRating !== null && (
                 <span className="text-sm text-text-secondary">
-                  {avgRating.toFixed(1)} stars ({user.reviewsReceived.length}{" "}
-                  {user.reviewsReceived.length === 1 ? "review" : "reviews"})
+                  {t("stars", { rating: avgRating.toFixed(1), count: user.reviewsReceived.length })}
                 </span>
               )}
             </div>
             <p className="mt-1 text-xs text-text-tertiary">
-              Joined {formatDate(user.createdAt)}
+              {t("joined", { date: formatDate(user.createdAt) })}
             </p>
           </div>
         </div>
@@ -115,9 +117,9 @@ export default async function ProfilePage() {
         <div className="mt-6 space-y-6">
           {/* Bio */}
           <div className="border border-border-default bg-surface-secondary p-6">
-            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">About</p>
+            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("about")}</p>
             <p className="whitespace-pre-wrap text-sm leading-relaxed text-text-secondary">
-              {profile.bio || "No bio added yet."}
+              {profile.bio || t("noBio")}
             </p>
           </div>
 
@@ -125,7 +127,7 @@ export default async function ProfilePage() {
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="border border-border-default bg-surface-secondary p-6">
               <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
-                Hourly Rate
+                {t("hourlyRate")}
               </p>
               <p className="text-2xl font-medium text-text-primary">
                 {formatCurrency(profile.hourlyRate)}
@@ -133,11 +135,10 @@ export default async function ProfilePage() {
             </div>
             <div className="border border-border-default bg-surface-secondary p-6">
               <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
-                Experience
+                {t("experience")}
               </p>
               <p className="text-2xl font-medium text-text-primary">
-                {profile.yearsExperience}{" "}
-                {profile.yearsExperience === 1 ? "year" : "years"}
+                {t("yearCount", { count: profile.yearsExperience })}
               </p>
             </div>
           </div>
@@ -146,7 +147,7 @@ export default async function ProfilePage() {
           {certifications.length > 0 && (
             <div className="border border-border-default bg-surface-secondary p-6">
               <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">
-                Certifications
+                {t("certifications")}
               </p>
               <div className="flex flex-wrap gap-2">
                 {certifications.map((cert) => (
@@ -162,7 +163,7 @@ export default async function ProfilePage() {
           {profile.languages && (
             <div className="border border-border-default bg-surface-secondary p-6">
               <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">
-                Languages
+                {t("languages")}
               </p>
               <div className="flex flex-wrap gap-2">
                 {profile.languages.split(",").map((lang) => (
@@ -177,12 +178,10 @@ export default async function ProfilePage() {
           {/* Age Range */}
           <div className="border border-border-default bg-surface-secondary p-6">
             <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">
-              Age Range
+              {t("ageRange")}
             </p>
             <p className="text-sm text-text-secondary">
-              Comfortable with children ages{" "}
-              <span className="font-medium text-text-primary">{profile.ageRangeMin}</span> to{" "}
-              <span className="font-medium text-text-primary">{profile.ageRangeMax}</span>
+              {t("ageRangeDesc", { min: profile.ageRangeMin, max: profile.ageRangeMax })}
             </p>
           </div>
 
@@ -190,7 +189,7 @@ export default async function ProfilePage() {
           {(profile.city || profile.state) && (
             <div className="border border-border-default bg-surface-secondary p-6">
               <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">
-                Location
+                {t("location")}
               </p>
               <p className="text-sm text-text-secondary">
                 {[profile.city, profile.state, profile.zipCode]
@@ -199,7 +198,7 @@ export default async function ProfilePage() {
               </p>
               {profile.radiusMiles > 0 && (
                 <p className="mt-1 text-sm text-text-secondary">
-                  Willing to travel up to {profile.radiusMiles} miles
+                  {t("travelRadius", { miles: profile.radiusMiles })}
                 </p>
               )}
             </div>
@@ -208,7 +207,7 @@ export default async function ProfilePage() {
           {/* Availability Grid */}
           <div className="border border-border-default bg-surface-secondary p-6">
             <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-              Availability
+              {t("availability")}
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -220,7 +219,7 @@ export default async function ProfilePage() {
                         key={slot}
                         className="pb-3 text-center text-xs font-medium uppercase tracking-wide text-text-secondary"
                       >
-                        {slot}
+                        {tc(`timeSlots.${slot}`)}
                       </th>
                     ))}
                   </tr>
@@ -229,7 +228,7 @@ export default async function ProfilePage() {
                   {DAYS_OF_WEEK.map((day) => (
                     <tr key={day}>
                       <td className="py-2 pr-4 text-sm capitalize text-text-secondary">
-                        {day}
+                        {tc(`days.${day}`)}
                       </td>
                       {TIME_SLOTS.map((slot) => {
                         const isAvailable = (
@@ -264,21 +263,21 @@ export default async function ProfilePage() {
           {/* Location */}
           <div className="border border-border-default bg-surface-secondary p-6">
             <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">
-              Account Info
+              {t("accountInfo")}
             </p>
             <div className="space-y-2 text-sm text-text-secondary">
               <p>
-                <span className="text-xs font-medium uppercase tracking-wide text-text-secondary">Email:</span>{" "}
+                <span className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("emailLabel")}</span>{" "}
                 {user.email}
               </p>
               {user.phone && (
                 <p>
-                  <span className="text-xs font-medium uppercase tracking-wide text-text-secondary">Phone:</span>{" "}
+                  <span className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("phoneLabel")}</span>{" "}
                   {user.phone}
                 </p>
               )}
               <p>
-                <span className="text-xs font-medium uppercase tracking-wide text-text-secondary">Member since:</span>{" "}
+                <span className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("memberSinceLabel")}</span>{" "}
                 {formatDate(user.createdAt)}
               </p>
             </div>

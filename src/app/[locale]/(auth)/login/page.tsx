@@ -34,7 +34,7 @@ export default function LoginPage() {
 
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Login failed");
+        setError(data.error || t("loginFailed"));
         if (data.needsVerification && data.email) {
           setUnverifiedEmail(data.email);
         }
@@ -44,7 +44,7 @@ export default function LoginPage() {
       router.push(data.onboarded ? "/dashboard" : "/onboarding");
       router.refresh();
     } catch {
-      setError("Something went wrong");
+      setError(t("somethingWentWrong"));
     } finally {
       setLoading(false);
     }
@@ -60,9 +60,9 @@ export default function LoginPage() {
         body: JSON.stringify({ email: unverifiedEmail }),
       });
       const data = await res.json();
-      setResendMessage(data.message || "Verification email sent.");
+      setResendMessage(data.message || t("verificationSent"));
     } catch {
-      setResendMessage("Failed to resend. Please try again.");
+      setResendMessage(t("failedResend"));
     } finally {
       setResending(false);
     }

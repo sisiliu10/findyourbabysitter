@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter, Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 
 interface BookingActionsProps {
@@ -20,6 +21,8 @@ export function BookingActions({
   hasReview,
 }: BookingActionsProps) {
   const router = useRouter();
+  const t = useTranslations("bookingActions");
+  const tc = useTranslations("common");
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState("");
 
@@ -36,12 +39,12 @@ export function BookingActions({
 
       const json = await res.json();
       if (!res.ok || !json.success) {
-        setError(json.error || "Failed to update booking");
+        setError(json.error || t("failedToUpdate"));
       } else {
         router.refresh();
       }
     } catch {
-      setError("Something went wrong");
+      setError(tc("somethingWentWrong"));
     } finally {
       setLoading(null);
     }
@@ -56,7 +59,7 @@ export function BookingActions({
 
   return (
     <div className="border border-border-default bg-surface-secondary p-6">
-      <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">Actions</p>
+      <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("actions")}</p>
 
       {error && (
         <div className="mb-4 border border-danger/30 bg-danger-muted p-3 text-sm text-danger">
@@ -72,14 +75,14 @@ export function BookingActions({
               onClick={() => updateStatus("ACCEPTED")}
               loading={loading === "ACCEPTED"}
             >
-              Accept
+              {t("accept")}
             </Button>
             <Button
               variant="danger"
               onClick={() => updateStatus("DECLINED")}
               loading={loading === "DECLINED"}
             >
-              Decline
+              {t("decline")}
             </Button>
           </>
         )}
@@ -91,7 +94,7 @@ export function BookingActions({
             onClick={() => updateStatus("CANCELLED")}
             loading={loading === "CANCELLED"}
           >
-            Cancel Booking
+            {t("cancelBooking")}
           </Button>
         )}
 
@@ -101,7 +104,7 @@ export function BookingActions({
             onClick={() => updateStatus("CONFIRMED")}
             loading={loading === "CONFIRMED"}
           >
-            Confirm Booking
+            {t("confirmBooking")}
           </Button>
         )}
 
@@ -112,14 +115,14 @@ export function BookingActions({
               onClick={() => updateStatus("COMPLETED")}
               loading={loading === "COMPLETED"}
             >
-              Mark as Complete
+              {t("markComplete")}
             </Button>
             <Button
               variant="danger"
               onClick={() => updateStatus("CANCELLED")}
               loading={loading === "CANCELLED"}
             >
-              Cancel Booking
+              {t("cancelBooking")}
             </Button>
           </>
         )}
@@ -127,7 +130,7 @@ export function BookingActions({
         {/* Parent: Leave Review when COMPLETED */}
         {isParent && status === "COMPLETED" && !hasReview && (
           <Link href={`/reviews/${bookingId}`}>
-            <Button variant="secondary">Leave a Review</Button>
+            <Button variant="secondary">{t("leaveReview")}</Button>
           </Link>
         )}
       </div>

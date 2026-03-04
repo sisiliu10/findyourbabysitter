@@ -2,11 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { DAYS_OF_WEEK, TIME_SLOTS } from "@/lib/constants";
 import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
 
 export default function OnboardingPage() {
   const router = useRouter();
+  const t = useTranslations("onboarding");
+  const tc = useTranslations("common");
   const [role, setRole] = useState<string | null>(null);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -93,14 +96,14 @@ export default function OnboardingPage() {
 
       if (!res.ok) {
         const data = await res.json();
-        setError(data.error || "Failed to save profile");
+        setError(data.error || t("failedToSave"));
         return;
       }
 
       router.push("/dashboard");
       router.refresh();
     } catch {
-      setError("Something went wrong");
+      setError(tc("somethingWentWrong"));
     } finally {
       setLoading(false);
     }
@@ -114,8 +117,8 @@ export default function OnboardingPage() {
   return (
     <div className="mx-auto max-w-lg">
       <div className="mb-8">
-        <h1 className="font-serif text-2xl text-text-primary">Complete your profile</h1>
-        <p className="mt-1 text-sm text-text-secondary">Step {step} of {totalSteps}</p>
+        <h1 className="font-serif text-2xl text-text-primary">{t("completeProfile")}</h1>
+        <p className="mt-1 text-sm text-text-secondary">{t("stepOf", { step, total: totalSteps })}</p>
         <div className="mt-4 flex gap-2">
           {Array.from({ length: totalSteps }).map((_, i) => (
             <div
@@ -133,19 +136,19 @@ export default function OnboardingPage() {
       {/* Step 1: Location (both roles) */}
       {step === 1 && (
         <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
-          <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">About you</h2>
+          <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("aboutYou")}</h2>
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Birthday</label>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("birthday")}</label>
             <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} className={inputClass} max={new Date().toISOString().split("T")[0]} />
           </div>
-          <h2 className="mt-2 text-xs font-medium uppercase tracking-wide text-text-secondary">Your location</h2>
+          <h2 className="mt-2 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourLocation")}</h2>
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">City</label>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("city")}</label>
             <input value={city} onChange={(e) => setCity(e.target.value)} className={inputClass} placeholder="Berlin" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Address</label>
+              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("address")}</label>
               <AddressAutocomplete
                 value={state}
                 onChange={setState}
@@ -160,12 +163,12 @@ export default function OnboardingPage() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Zip code</label>
+              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("zipCode")}</label>
               <input value={zipCode} onChange={(e) => setZipCode(e.target.value)} className={inputClass} placeholder="10117" />
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Phone (optional)</label>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("phoneOptional")}</label>
             <input value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="+49 30 123 4567" />
           </div>
 
@@ -174,7 +177,7 @@ export default function OnboardingPage() {
             disabled={!city || !state || !zipCode || !birthday || loading}
             className="mt-4 w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
           >
-            {role === "PARENT" ? (loading ? "Saving..." : "Complete setup") : "Continue"}
+            {role === "PARENT" ? (loading ? tc("saving") : t("completeSetup")) : tc("continue")}
           </button>
         </div>
       )}
@@ -182,10 +185,10 @@ export default function OnboardingPage() {
       {/* Step 2: Sitter - Bio & experience */}
       {step === 2 && role === "BABYSITTER" && (
         <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
-          <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">About you</h2>
+          <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("aboutYou")}</h2>
 
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Profile picture</label>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("profilePicture")}</label>
             <div className="mt-1 flex items-center gap-4">
               {avatarPreview ? (
                 <img src={avatarPreview} alt="Preview" className="h-16 w-16 object-cover" />
@@ -197,7 +200,7 @@ export default function OnboardingPage() {
                 </div>
               )}
               <label className="cursor-pointer border border-border-default px-3 py-2 text-sm text-text-secondary transition hover:border-text-primary hover:text-text-primary">
-                Choose photo
+                {t("choosePhoto")}
                 <input
                   type="file"
                   accept="image/*"
@@ -215,38 +218,38 @@ export default function OnboardingPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Bio</label>
-            <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={4} className={inputClass} placeholder="Tell parents about yourself, your experience, and what makes you a great babysitter..." />
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("bio")}</label>
+            <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={4} className={inputClass} placeholder={t("bioPlaceholder")} />
           </div>
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Hourly rate (&euro;)</label>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("hourlyRate")}</label>
             <input type="number" min="1" value={hourlyRate} onChange={(e) => setHourlyRate(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Languages (comma separated)</label>
-            <input value={languages} onChange={(e) => setLanguages(e.target.value)} className={inputClass} placeholder="English, German" />
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("languagesLabel")}</label>
+            <input value={languages} onChange={(e) => setLanguages(e.target.value)} className={inputClass} placeholder={t("languagesPlaceholder")} />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Youngest age comfortable</label>
+              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("youngestAge")}</label>
               <input type="number" min="0" max="17" value={ageRangeMin} onChange={(e) => setAgeRangeMin(e.target.value)} className={inputClass} />
             </div>
             <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Oldest age comfortable</label>
+              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("oldestAge")}</label>
               <input type="number" min="0" max="17" value={ageRangeMax} onChange={(e) => setAgeRangeMax(e.target.value)} className={inputClass} />
             </div>
           </div>
 
           <div className="mt-4 flex gap-3">
             <button onClick={() => setStep(1)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
-              Back
+              {tc("back")}
             </button>
             <button
               onClick={() => setStep(3)}
               disabled={!bio || bio.length < 10}
               className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
             >
-              Continue
+              {tc("continue")}
             </button>
           </div>
         </div>
@@ -255,22 +258,22 @@ export default function OnboardingPage() {
       {/* Step 3 (sitter): Availability */}
       {step === 3 && role === "BABYSITTER" && (
         <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
-          <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">Your availability</h2>
-          <p className="text-sm text-text-secondary">Select when you&apos;re typically available</p>
+          <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourAvailability")}</h2>
+          <p className="text-sm text-text-secondary">{t("selectAvailability")}</p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr>
                   <th className="pb-2 text-left text-xs font-medium uppercase tracking-wide text-text-secondary" />
                   {TIME_SLOTS.map((slot) => (
-                    <th key={slot} className="pb-2 text-center text-xs font-medium uppercase tracking-wide text-text-secondary">{slot}</th>
+                    <th key={slot} className="pb-2 text-center text-xs font-medium uppercase tracking-wide text-text-secondary">{tc(`timeSlots.${slot}`)}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {DAYS_OF_WEEK.map((day) => (
                   <tr key={day}>
-                    <td className="py-1.5 pr-3 text-sm capitalize text-text-secondary">{day}</td>
+                    <td className="py-1.5 pr-3 text-sm text-text-secondary">{tc(`days.${day}`)}</td>
                     {TIME_SLOTS.map((slot) => (
                       <td key={slot} className="py-1.5 text-center">
                         <button
@@ -293,14 +296,14 @@ export default function OnboardingPage() {
 
           <div className="mt-4 flex gap-3">
             <button onClick={() => setStep(2)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
-              Back
+              {tc("back")}
             </button>
             <button
               onClick={handleSubmit}
               disabled={loading}
               className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
             >
-              {loading ? "Saving..." : "Complete setup"}
+              {loading ? tc("saving") : t("completeSetup")}
             </button>
           </div>
         </div>

@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export default function ForgotPasswordPage() {
+  const t = useTranslations("forgotPassword");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -26,14 +28,14 @@ export default function ForgotPasswordPage() {
 
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Something went wrong");
+        setError(data.error || t("somethingWentWrong"));
         return;
       }
 
       setSubmittedEmail(email);
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError(t("somethingWentWrong"));
     } finally {
       setLoading(false);
     }
@@ -48,14 +50,12 @@ export default function ForgotPasswordPage() {
           </svg>
         </div>
 
-        <h1 className="font-serif text-4xl text-text-primary">Check your email</h1>
+        <h1 className="font-serif text-4xl text-text-primary">{t("checkEmail")}</h1>
         <p className="mt-3 text-sm text-text-secondary">
-          If an account exists for{" "}
-          <span className="text-text-primary font-medium">{submittedEmail}</span>,
-          we sent a password reset link.
+          {t("emailSent", { email: submittedEmail })}
         </p>
         <p className="mt-2 text-sm text-text-tertiary">
-          The link expires in 1 hour. Check your spam folder if you don't see it.
+          {t("linkExpires")}
         </p>
 
         <div className="mt-8 space-y-4">
@@ -63,13 +63,13 @@ export default function ForgotPasswordPage() {
             onClick={() => { setSubmitted(false); setSubmittedEmail(""); }}
             className="w-full border border-border-default px-4 py-3 text-xs font-medium uppercase tracking-widest text-text-primary transition-colors hover:border-text-primary"
           >
-            Try a different email
+            {t("tryDifferentEmail")}
           </button>
         </div>
 
         <p className="mt-8 text-sm text-text-tertiary">
-          Remember your password?{" "}
-          <Link href="/login" className="text-text-primary underline underline-offset-4 hover:text-accent">Log in</Link>
+          {t("rememberPassword")}{" "}
+          <Link href="/login" className="text-text-primary underline underline-offset-4 hover:text-accent">{t("logIn")}</Link>
         </p>
       </div>
     );
@@ -77,9 +77,9 @@ export default function ForgotPasswordPage() {
 
   return (
     <div>
-      <h1 className="font-serif text-4xl text-text-primary">Reset password</h1>
+      <h1 className="font-serif text-4xl text-text-primary">{t("resetPassword")}</h1>
       <p className="mt-3 text-sm text-text-secondary">
-        Enter your email and we'll send you a link to reset your password.
+        {t("subtitle")}
       </p>
 
       {error && (
@@ -88,7 +88,7 @@ export default function ForgotPasswordPage() {
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-5">
         <div>
-          <label htmlFor="email" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">Email</label>
+          <label htmlFor="email" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">{t("email")}</label>
           <input
             id="email"
             name="email"
@@ -104,13 +104,13 @@ export default function ForgotPasswordPage() {
           disabled={loading}
           className="w-full border border-text-primary bg-text-primary px-4 py-3 text-xs font-medium uppercase tracking-widest text-surface-primary transition-colors hover:bg-accent hover:border-accent disabled:opacity-40"
         >
-          {loading ? "Sending..." : "Send reset link"}
+          {loading ? t("sending") : t("sendResetLink")}
         </button>
       </form>
 
       <p className="mt-8 text-sm text-text-tertiary">
-        Remember your password?{" "}
-        <Link href="/login" className="text-text-primary underline underline-offset-4 hover:text-accent">Log in</Link>
+        {t("rememberPassword")}{" "}
+        <Link href="/login" className="text-text-primary underline underline-offset-4 hover:text-accent">{t("logIn")}</Link>
       </p>
     </div>
   );

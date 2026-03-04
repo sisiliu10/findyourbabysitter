@@ -8,6 +8,7 @@ import {
   type PointerEvent,
 } from "react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface SwipeCardProps {
   children: ReactNode;
@@ -25,6 +26,7 @@ export function SwipeCard({
   onSwipeRight,
   isTop,
 }: SwipeCardProps) {
+  const t = useTranslations("search");
   const cardRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -131,7 +133,7 @@ export function SwipeCard({
               transform: "rotate(-15deg)",
             }}
           >
-            Like
+            {t("like")}
           </div>
           {/* NOPE label */}
           <div
@@ -144,7 +146,7 @@ export function SwipeCard({
               transform: "rotate(15deg)",
             }}
           >
-            Nope
+            {t("nope")}
           </div>
         </>
       )}
