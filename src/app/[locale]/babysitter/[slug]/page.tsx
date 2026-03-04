@@ -18,8 +18,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const page = getLandingPage(slug);
+  const { locale, slug } = await params;
+  const page = getLandingPage(slug, locale);
   if (!page) return {};
 
   const url = `https://berlinbabysitter.com/babysitter/${slug}`;
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: page.metaDescription,
       url,
       siteName: "Berlin Babysitter",
-      locale: "en_US",
+      locale: locale === "de" ? "de_DE" : "en_US",
       type: "website",
     },
   };
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function LandingPage({ params }: PageProps) {
   const { locale, slug } = await params;
-  const page = getLandingPage(slug);
+  const page = getLandingPage(slug, locale);
   if (!page) notFound();
 
   const t = await getTranslations({ locale, namespace: "babysitter" });

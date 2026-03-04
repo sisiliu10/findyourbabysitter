@@ -763,6 +763,26 @@ export const PLAYGROUND_GUIDES: PlaygroundGuide[] = [
   },
 ];
 
-export function getPlaygroundGuide(slug: string): PlaygroundGuide | undefined {
-  return PLAYGROUND_GUIDES.find((g) => g.districtSlug === slug);
+import { PLAYGROUND_GUIDE_DE } from "./playground-guides-de";
+
+export function getPlaygroundGuide(slug: string, locale: string = "en"): PlaygroundGuide | undefined {
+  const guide = PLAYGROUND_GUIDES.find((g) => g.districtSlug === slug);
+  if (!guide) return undefined;
+  if (locale === "de" && PLAYGROUND_GUIDE_DE[slug]) {
+    const de = PLAYGROUND_GUIDE_DE[slug];
+    return {
+      ...guide,
+      metaTitle: de.metaTitle,
+      metaDescription: de.metaDescription,
+      h1: de.h1,
+      intro: de.intro,
+      closingNote: de.closingNote,
+      playgrounds: guide.playgrounds.map((pg, i) => ({
+        ...pg,
+        description: de.playgrounds[i]?.description ?? pg.description,
+        highlights: de.playgrounds[i]?.highlights ?? pg.highlights,
+      })),
+    };
+  }
+  return guide;
 }

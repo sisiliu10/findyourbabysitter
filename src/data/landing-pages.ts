@@ -438,6 +438,13 @@ export const LANGUAGES: LandingPage[] = [
 
 export const LANDING_PAGES: LandingPage[] = [...DISTRICTS, ...LANGUAGES];
 
-export function getLandingPage(slug: string): LandingPage | undefined {
-  return LANDING_PAGES.find((p) => p.slug === slug);
+import { LANDING_PAGE_DE } from "./landing-pages-de";
+
+export function getLandingPage(slug: string, locale: string = "en"): LandingPage | undefined {
+  const page = LANDING_PAGES.find((p) => p.slug === slug);
+  if (!page) return undefined;
+  if (locale === "de" && LANDING_PAGE_DE[slug]) {
+    return { ...page, ...LANDING_PAGE_DE[slug] };
+  }
+  return page;
 }

@@ -18,8 +18,8 @@ interface PageProps {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const guide = getPlaygroundGuide(slug);
+  const { locale, slug } = await params;
+  const guide = getPlaygroundGuide(slug, locale);
   if (!guide) return {};
 
   const url = `https://berlinbabysitter.com/babysitter/${slug}/playgrounds`;
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: guide.metaDescription,
       url,
       siteName: "Berlin Babysitter",
-      locale: "en_US",
+      locale: locale === "de" ? "de_DE" : "en_US",
       type: "article",
     },
   };
@@ -41,10 +41,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function PlaygroundGuidePage({ params }: PageProps) {
   const { locale, slug } = await params;
-  const guide = getPlaygroundGuide(slug);
+  const guide = getPlaygroundGuide(slug, locale);
   if (!guide) notFound();
 
-  const district = getLandingPage(slug);
+  const district = getLandingPage(slug, locale);
   if (!district) notFound();
 
   const t = await getTranslations({ locale, namespace: "babysitter" });
