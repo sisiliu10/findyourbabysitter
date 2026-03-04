@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "permissions": {
     "allow": [
       "Bash(npx vercel pull --yes)",
@@ -14,7 +17,11 @@
       "Bash(npx vercel inspect --logs https://findyourbabysitter-e82otowlc-sisiliu10s-projects.vercel.app)",
       "WebFetch(domain:wanderlog.com)",
       "Bash(echo $GOOGLE_MAPS_API_KEY)",
-      "Bash(ls \"/Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\(auth\\)/\")"
+      "Bash(ls \"/Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\(auth\\)/\")",
+      "Bash(vercel env add NEXT_PUBLIC_APP_URL production)",
+      "Bash(vercel --prod)",
+      "Bash(npx tsc --noEmit --pretty)",
+      "Read(//tmp/**)"
     ]
   }
 }

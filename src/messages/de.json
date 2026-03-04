@@ -147,6 +147,24 @@
     "playgrounds": "Spielplätze",
     "reviews": "({count} Bewertungen)"
   },
+  "sitterProfile": {
+    "requestBooking": "Buchung anfragen",
+    "about": "Über mich",
+    "experienceAndCerts": "Erfahrung & Zertifikate",
+    "experience": "Erfahrung",
+    "ageRange": "Altersbereich",
+    "languages": "Sprachen",
+    "availability": "Verfügbarkeit",
+    "rate": "Stundensatz",
+    "perHour": "/Stunde",
+    "perHr": "/Std.",
+    "reviews": "Bewertungen",
+    "noReviews": "Noch keine Bewertungen.",
+    "memberSince": "Mitglied seit {date}",
+    "reviewCount": "{count, plural, one {1 Bewertung} other {# Bewertungen}}",
+    "yearCount": "{count, plural, one {1 Jahr} other {# Jahre}}",
+    "yrs": "Jahre"
+  },
   "notFound": {
     "title": "404",
     "message": "Diese Seite existiert nicht oder wurde verschoben.",

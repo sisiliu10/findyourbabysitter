@@ -6,14 +6,16 @@ import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { StarRating } from "@/components/ui/StarRating";
+import { getTranslations } from "next-intl/server";
 
 export default async function SitterProfilePage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }) {
   await requireAuth();
-  const { id } = await params;
+  const { id, locale } = await params;
+  const t = await getTranslations("sitterProfile");
 
   const profile = await prisma.babysitterProfile.findUnique({
     where: { userId: id },
@@ -98,25 +100,24 @@ export default async function SitterProfilePage({
                     {avgRating.toFixed(1)}
                   </span>
                   <span className="text-sm text-text-tertiary">
-                    ({reviews.length}{" "}
-                    {reviews.length === 1 ? "review" : "reviews"})
+                    ({t("reviewCount", { count: reviews.length })})
                   </span>
                 </div>
               )}
               <span className="text-lg font-medium text-text-primary">
                 {formatCurrency(profile.hourlyRate)}
-                <span className="text-sm font-normal text-text-tertiary">/hr</span>
+                <span className="text-sm font-normal text-text-tertiary">{t("perHr")}</span>
               </span>
             </div>
             <p className="mt-1 text-xs text-text-tertiary">
-              Member since {formatDate(user.createdAt)}
+              {t("memberSince", { date: formatDate(user.createdAt, locale) })}
             </p>
           </div>
           <Link
             href={`/requests/new?sitterId=${id}`}
             className="mt-4 inline-flex items-center justify-center bg-text-primary px-5 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent sm:mt-0"
           >
-            Request Booking
+            {t("requestBooking")}
           </Link>
         </div>
       </div>
@@ -125,7 +126,7 @@ export default async function SitterProfilePage({
         {/* About */}
         {profile.bio && (
           <div className="border border-border-default bg-surface-secondary p-6">
-            <h2 className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">About</h2>
+            <h2 className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("about")}</h2>
             <p className="whitespace-pre-wrap text-sm leading-relaxed text-text-secondary">
               {profile.bio}
             </p>
@@ -135,24 +136,23 @@ export default async function SitterProfilePage({
         {/* Experience & Certifications */}
         <div className="border border-border-default bg-surface-secondary p-6">
           <h2 className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            Experience & Certifications
+            {t("experienceAndCerts")}
           </h2>
           <div className="grid gap-4 sm:grid-cols-3">
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-text-tertiary">Experience</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-tertiary">{t("experience")}</p>
               <p className="mt-1 text-lg font-medium text-text-primary">
-                {profile.yearsExperience}{" "}
-                {profile.yearsExperience === 1 ? "year" : "years"}
+                {t("yearCount", { count: profile.yearsExperience })}
               </p>
             </div>
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-text-tertiary">Age Range</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-tertiary">{t("ageRange")}</p>
               <p className="mt-1 text-lg font-medium text-text-primary">
-                {profile.ageRangeMin} - {profile.ageRangeMax} yrs
+                {profile.ageRangeMin} - {profile.ageRangeMax} {t("yrs")}
               </p>
             </div>
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-text-tertiary">Languages</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-tertiary">{t("languages")}</p>
               <p className="mt-1 text-lg font-medium text-text-primary">
                 {profile.languages}
               </p>
@@ -172,7 +172,7 @@ export default async function SitterProfilePage({
         {/* Availability */}
         <div className="border border-border-default bg-surface-secondary p-6">
           <h2 className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            Availability
+            {t("availability")}
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -222,17 +222,17 @@ export default async function SitterProfilePage({
 
         {/* Rate */}
         <div className="border border-border-default bg-surface-secondary p-6">
-          <h2 className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">Rate</h2>
+          <h2 className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("rate")}</h2>
           <p className="text-3xl font-medium text-text-primary">
             {formatCurrency(profile.hourlyRate)}
-            <span className="text-base font-normal text-text-tertiary"> /hour</span>
+            <span className="text-base font-normal text-text-tertiary"> {t("perHour")}</span>
           </p>
         </div>
 
         {/* Reviews */}
         <div className="border border-border-default bg-surface-secondary p-6">
           <h2 className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            Reviews
+            {t("reviews")}
             {reviews.length > 0 && (
               <span className="ml-2 text-xs font-normal normal-case tracking-normal text-text-tertiary">
                 ({reviews.length})
@@ -240,7 +240,7 @@ export default async function SitterProfilePage({
             )}
           </h2>
           {reviews.length === 0 ? (
-            <p className="text-sm text-text-secondary">No reviews yet.</p>
+            <p className="text-sm text-text-secondary">{t("noReviews")}</p>
           ) : (
             <div className="space-y-5">
               {reviews.map((review) => {
@@ -270,7 +270,7 @@ export default async function SitterProfilePage({
                           {review.author.firstName} {review.author.lastName}
                         </p>
                         <p className="text-xs text-text-tertiary">
-                          {formatDate(review.createdAt)}
+                          {formatDate(review.createdAt, locale)}
                         </p>
                       </div>
                       <div className="ml-auto">

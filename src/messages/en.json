@@ -147,6 +147,24 @@
     "playgrounds": "Playgrounds",
     "reviews": "({count} reviews)"
   },
+  "sitterProfile": {
+    "requestBooking": "Request Booking",
+    "about": "About",
+    "experienceAndCerts": "Experience & Certifications",
+    "experience": "Experience",
+    "ageRange": "Age Range",
+    "languages": "Languages",
+    "availability": "Availability",
+    "rate": "Rate",
+    "perHour": "/hour",
+    "perHr": "/hr",
+    "reviews": "Reviews",
+    "noReviews": "No reviews yet.",
+    "memberSince": "Member since {date}",
+    "reviewCount": "{count, plural, one {1 review} other {# reviews}}",
+    "yearCount": "{count, plural, one {1 year} other {# years}}",
+    "yrs": "yrs"
+  },
   "notFound": {
     "title": "404",
     "message": "This page doesn't exist or has been moved.",

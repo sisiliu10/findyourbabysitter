@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { DAYS_OF_WEEK, TIME_SLOTS } from "@/lib/constants";
 import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
@@ -33,11 +33,8 @@ export default function OnboardingPage() {
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
 
-  // Parent fields
-  const [children, setChildren] = useState([{ name: "", age: "" }]);
-
   // Fetch role on mount, redirect if already onboarded
-  useState(() => {
+  useEffect(() => {
     fetch("/api/auth/me")
       .then((r) => r.json())
       .then((u) => {
@@ -48,7 +45,7 @@ export default function OnboardingPage() {
         setRole(u?.data?.role || "PARENT");
       })
       .catch(() => setRole("PARENT"));
-  });
+  }, [router]);
 
   function toggleAvailability(day: string, slot: string) {
     setAvailability((prev) => {
@@ -60,20 +57,6 @@ export default function OnboardingPage() {
           : [...current, slot],
       };
     });
-  }
-
-  function addChild() {
-    setChildren((prev) => [...prev, { name: "", age: "" }]);
-  }
-
-  function removeChild(index: number) {
-    setChildren((prev) => prev.filter((_, i) => i !== index));
-  }
-
-  function updateChild(index: number, field: "name" | "age", value: string) {
-    setChildren((prev) =>
-      prev.map((c, i) => (i === index ? { ...c, [field]: value } : c))
-    );
   }
 
   async function handleSubmit() {
@@ -99,10 +82,6 @@ export default function OnboardingPage() {
         ageRangeMax: parseInt(ageRangeMax, 10),
         availabilityJson: JSON.stringify(availability),
       });
-    } else {
-      body.childrenJson = JSON.stringify(
-        children.filter((c) => c.name || c.age).map((c) => ({ name: c.name, age: parseInt(c.age, 10) || 0 }))
-      );
     }
 
     try {
@@ -127,7 +106,7 @@ export default function OnboardingPage() {
     }
   }
 
-  const totalSteps = role === "BABYSITTER" ? 3 : 2;
+  const totalSteps = role === "BABYSITTER" ? 3 : 1;
 
   const inputClass =
     "mt-1 block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition focus:border-text-primary focus:outline-none";
@@ -190,38 +169,12 @@ export default function OnboardingPage() {
             <input value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="+49 30 123 4567" />
           </div>
 
-          {role === "PARENT" && (
-            <>
-              <h2 className="mt-6 text-xs font-medium uppercase tracking-wide text-text-secondary">Your children</h2>
-              {children.map((child, i) => (
-                <div key={i} className="flex items-end gap-3">
-                  <div className="flex-1">
-                    <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Name</label>
-                    <input value={child.name} onChange={(e) => updateChild(i, "name", e.target.value)} className={inputClass} />
-                  </div>
-                  <div className="w-20">
-                    <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">Age</label>
-                    <input type="number" min="0" max="17" value={child.age} onChange={(e) => updateChild(i, "age", e.target.value)} className={inputClass} />
-                  </div>
-                  {children.length > 1 && (
-                    <button onClick={() => removeChild(i)} className="mb-1 p-1 text-text-muted hover:text-danger">
-                      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-                    </button>
-                  )}
-                </div>
-              ))}
-              <button onClick={addChild} className="text-sm font-medium text-accent hover:underline">
-                + Add another child
-              </button>
-            </>
-          )}
-
           <button
-            onClick={() => setStep(2)}
-            disabled={!city || !state || !zipCode || !birthday}
+            onClick={role === "BABYSITTER" ? () => setStep(2) : handleSubmit}
+            disabled={!city || !state || !zipCode || !birthday || loading}
             className="mt-4 w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
           >
-            Continue
+            {role === "PARENT" ? (loading ? "Saving..." : "Complete setup") : "Continue"}
           </button>
         </div>
       )}
@@ -299,60 +252,47 @@ export default function OnboardingPage() {
         </div>
       )}
 
-      {/* Step 3 (sitter) or Step 2 (parent): Availability / Final */}
-      {((step === 3 && role === "BABYSITTER") || (step === 2 && role === "PARENT")) && (
+      {/* Step 3 (sitter): Availability */}
+      {step === 3 && role === "BABYSITTER" && (
         <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
-          {role === "BABYSITTER" && (
-            <>
-              <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">Your availability</h2>
-              <p className="text-sm text-text-secondary">Select when you&apos;re typically available</p>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr>
-                      <th className="pb-2 text-left text-xs font-medium uppercase tracking-wide text-text-secondary" />
-                      {TIME_SLOTS.map((slot) => (
-                        <th key={slot} className="pb-2 text-center text-xs font-medium uppercase tracking-wide text-text-secondary">{slot}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {DAYS_OF_WEEK.map((day) => (
-                      <tr key={day}>
-                        <td className="py-1.5 pr-3 text-sm capitalize text-text-secondary">{day}</td>
-                        {TIME_SLOTS.map((slot) => (
-                          <td key={slot} className="py-1.5 text-center">
-                            <button
-                              onClick={() => toggleAvailability(day, slot)}
-                              className={`h-8 w-8 text-xs transition ${
-                                (availability[day] || []).includes(slot)
-                                  ? "bg-text-primary text-surface-primary"
-                                  : "bg-surface-tertiary text-text-muted hover:bg-border-default"
-                              }`}
-                            >
-                              {(availability[day] || []).includes(slot) ? "\u2713" : ""}
-                            </button>
-                          </td>
-                        ))}
-                      </tr>
+          <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">Your availability</h2>
+          <p className="text-sm text-text-secondary">Select when you&apos;re typically available</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr>
+                  <th className="pb-2 text-left text-xs font-medium uppercase tracking-wide text-text-secondary" />
+                  {TIME_SLOTS.map((slot) => (
+                    <th key={slot} className="pb-2 text-center text-xs font-medium uppercase tracking-wide text-text-secondary">{slot}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {DAYS_OF_WEEK.map((day) => (
+                  <tr key={day}>
+                    <td className="py-1.5 pr-3 text-sm capitalize text-text-secondary">{day}</td>
+                    {TIME_SLOTS.map((slot) => (
+                      <td key={slot} className="py-1.5 text-center">
+                        <button
+                          onClick={() => toggleAvailability(day, slot)}
+                          className={`h-8 w-8 text-xs transition ${
+                            (availability[day] || []).includes(slot)
+                              ? "bg-text-primary text-surface-primary"
+                              : "bg-surface-tertiary text-text-muted hover:bg-border-default"
+                          }`}
+                        >
+                          {(availability[day] || []).includes(slot) ? "\u2713" : ""}
+                        </button>
+                      </td>
                     ))}
-                  </tbody>
-                </table>
-              </div>
-            </>
-          )}
-
-          {role === "PARENT" && (
-            <>
-              <h2 className="font-serif text-lg text-text-primary">All set!</h2>
-              <p className="text-sm text-text-secondary">
-                You can start searching for babysitters and creating childcare requests.
-              </p>
-            </>
-          )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           <div className="mt-4 flex gap-3">
-            <button onClick={() => setStep(step - 1)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+            <button onClick={() => setStep(2)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
               Back
             </button>
             <button

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
-import { saveAvatar } from "@/lib/upload";
+import { saveAvatar, deleteAvatar } from "@/lib/upload";
 
 export async function POST(request: Request) {
   try {
@@ -23,12 +23,22 @@ export async function POST(request: Request) {
       );
     }
 
-    const avatarUrl = await saveAvatar(file);
+    const currentUser = await prisma.user.findUnique({
+      where: { id: session.userId },
+      select: { avatarUrl: true },
+    });
+
+    const avatarUrl = await saveAvatar(file, session.userId);
 
     await prisma.user.update({
       where: { id: session.userId },
       data: { avatarUrl },
     });
+
+    // Delete old avatar blob (fire-and-forget)
+    if (currentUser?.avatarUrl) {
+      deleteAvatar(currentUser.avatarUrl).catch(console.error);
+    }
 
     return NextResponse.json({
       success: true,
