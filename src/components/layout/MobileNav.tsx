@@ -37,7 +37,7 @@ export function MobileNav() {
               key={link.href}
               href={link.href}
               className={cn(
-                "flex flex-col items-center gap-0.5 px-3 py-1 text-[10px] uppercase tracking-wide transition-colors",
+                "flex flex-1 flex-col items-center gap-0.5 py-1 text-[10px] uppercase tracking-wide transition-colors",
                 isActive ? "text-accent" : "text-text-tertiary"
               )}
             >

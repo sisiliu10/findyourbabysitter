@@ -128,13 +128,13 @@ export default async function LandingPage({ params }: PageProps) {
             <div className="mt-8 flex items-center gap-6">
               <Link
                 href="/register?role=PARENT"
-                className="border border-text-primary bg-text-primary px-8 py-3.5 text-sm font-medium text-surface-primary transition-colors hover:bg-accent hover:border-accent"
+                className="min-w-[12rem] border border-text-primary bg-text-primary px-8 py-3.5 text-center text-sm font-medium text-surface-primary transition-colors hover:bg-accent hover:border-accent"
               >
                 {t("findBabysitter")}
               </Link>
               <Link
                 href="/register?role=BABYSITTER"
-                className="text-sm text-text-tertiary transition-colors hover:text-text-primary"
+                className="min-w-[9rem] text-center text-sm text-text-tertiary transition-colors hover:text-text-primary"
               >
                 {t("iAmSitter")}
               </Link>
@@ -243,7 +243,7 @@ export default async function LandingPage({ params }: PageProps) {
             </p>
             <Link
               href="/register"
-              className="mt-8 inline-block border border-text-primary bg-text-primary px-8 py-3.5 text-sm font-medium text-surface-primary transition-colors hover:bg-accent hover:border-accent"
+              className="mt-8 inline-block min-w-[12rem] border border-text-primary bg-text-primary px-8 py-3.5 text-center text-sm font-medium text-surface-primary transition-colors hover:bg-accent hover:border-accent"
             >
               {t("getStartedFree")}
             </Link>

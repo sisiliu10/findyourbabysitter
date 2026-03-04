@@ -36,7 +36,7 @@ export function Topbar() {
               </span>
               <button
                 onClick={handleLogout}
-                className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-accent"
+                className="min-w-[5.5rem] text-center text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-accent"
               >
                 {t("logout")}
               </button>

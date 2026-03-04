@@ -17,13 +17,13 @@ export function Header() {
           <LanguageToggle />
           <Link
             href="/login"
-            className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
+            className="min-w-[5.5rem] text-center text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
           >
             {t("login")}
           </Link>
           <Link
             href="/register"
-            className="border border-text-primary bg-text-primary px-5 py-2 text-xs font-medium uppercase tracking-wide text-surface-primary transition-colors hover:bg-accent hover:border-accent"
+            className="min-w-[8.5rem] border border-text-primary bg-text-primary px-5 py-2 text-center text-xs font-medium uppercase tracking-wide text-surface-primary transition-colors hover:bg-accent hover:border-accent"
           >
             {t("signup")}
           </Link>
