@@ -188,7 +188,7 @@ export default function OnboardingPage() {
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("aboutYou")}</h2>
 
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("profilePicture")}</label>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("profilePicture")} <span className="text-danger">*</span></label>
             <div className="mt-1 flex items-center gap-4">
               {avatarPreview ? (
                 <img src={avatarPreview} alt="Preview" className="h-16 w-16 object-cover" />
@@ -246,7 +246,7 @@ export default function OnboardingPage() {
             </button>
             <button
               onClick={() => setStep(3)}
-              disabled={!bio || bio.length < 10}
+              disabled={!avatarFile || !bio || bio.length < 10}
               className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
             >
               {tc("continue")}

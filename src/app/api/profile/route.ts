@@ -38,6 +38,20 @@ export async function PUT(request: NextRequest) {
   if (body.birthday) userUpdates.birthday = new Date(body.birthday);
   if (body.instagram !== undefined) userUpdates.instagram = body.instagram || null;
 
+  // Babysitters must have a profile picture before onboarding
+  if (session.role === "BABYSITTER") {
+    const currentUser = await prisma.user.findUnique({
+      where: { id: session.userId },
+      select: { avatarUrl: true },
+    });
+    if (!currentUser?.avatarUrl) {
+      return NextResponse.json(
+        { error: "Profile picture is required" },
+        { status: 400 }
+      );
+    }
+  }
+
   // Mark as onboarded
   userUpdates.onboarded = true;
 
