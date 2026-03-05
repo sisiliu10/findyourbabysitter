@@ -5,12 +5,16 @@
     "logout": "Abmelden"
   },
   "home": {
-    "heroTagline": "Kinderbetreuung, die einfach stimmt.",
+    "heroTagline": "Babysitter in Berlin finden",
     "heroBody1": "Kein endloses Scrollen mehr durch unbekannte Profile.",
     "heroBody2": "Fang mit Babysittern an, die deine Freunde wirklich nutzen.",
     "heroBody3": "Geprüft, bewertet und unkompliziert buchbar.",
     "getStarted": "Jetzt starten",
     "signIn": "Anmelden",
+    "seoIntroTitle": "Kinderbetreuung, die einfach stimmt",
+    "seoIntro": "Berlin Babysitter hilft Eltern in ganz Berlin, vertrauenswürdige Babysitter zu finden, die von anderen Familien vor Ort empfohlen werden. Suche nach freien Kita-Plätzen in deiner Nachbarschaft, stöbere durch Sitter-Profile mit echten Bewertungen und vernetze dich mit anderen Eltern in der Nähe für Spielverabredungen und geteilte Betreuung. Ob du gerade nach Berlin gezogen bist oder kurzfristig einen Sitter für den Abend brauchst — unsere Community macht es einfach, zuverlässige Kinderbetreuung ohne Rätselraten zu finden.",
+    "trustedTitle": "Von Eltern in ganz Berlin empfohlen",
+    "trustedBody": "Familien in Prenzlauer Berg, Kreuzberg, Mitte, Friedrichshain und Charlottenburg nutzen Berlin Babysitter bereits, um Kinderbetreuung zu finden, auf die sie sich verlassen können. Von englischsprachigen Sittern in Mitte bis zu erfahrenen Kindermädchen in Schöneberg — unsere Plattform verbindet dich mit Betreuungspersonen, denen deine Nachbarn vertrauen.",
     "forParents": "Für Eltern",
     "iAmParent": "Ich bin Elternteil",
     "parentDescription": "Profile durchstöbern, Bewertungen lesen, die richtige Person buchen.",

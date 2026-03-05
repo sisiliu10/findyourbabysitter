@@ -5,12 +5,16 @@
     "logout": "Log out"
   },
   "home": {
-    "heroTagline": "Childcare that feels right.",
+    "heroTagline": "Find a Babysitter in Berlin",
     "heroBody1": "Stop scrolling through random profiles.",
     "heroBody2": "Start with babysitters your friends actually use.",
     "heroBody3": "Verified, reviewed, and easy to book in one place.",
     "getStarted": "Get started",
     "signIn": "Sign in",
+    "seoIntroTitle": "Childcare that feels right",
+    "seoIntro": "Berlin Babysitter helps parents across Berlin find trusted babysitters recommended by other local families. Search for available Kita places in your neighborhood, browse sitter profiles with real reviews, and connect with other parents nearby for playdates and co-sitting. Whether you just moved to Berlin or need a last-minute sitter for the evening, our community makes it easy to find reliable childcare without guesswork.",
+    "trustedTitle": "Trusted by parents across Berlin",
+    "trustedBody": "Families in Prenzlauer Berg, Kreuzberg, Mitte, Friedrichshain, and Charlottenburg already use Berlin Babysitter to find childcare they can rely on. From English-speaking sitters in Mitte to experienced nannies in Schoeneberg, our platform connects you with caregivers your neighbors trust.",
     "forParents": "For parents",
     "iAmParent": "I am a parent",
     "parentDescription": "Browse profiles, read reviews, book the right person.",

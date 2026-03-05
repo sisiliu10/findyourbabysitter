@@ -1,4 +1,3 @@
-import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { DISTRICTS, LANGUAGES } from "@/data/landing-pages";
@@ -11,9 +10,14 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "home" });
+  const isDE = locale === "de";
   return {
-    title: t("heroTagline"),
+    title: isDE
+      ? "Babysitter Berlin | Vertrauenswürdige Babysitter & Kita-Plätze finden"
+      : "Babysitter Berlin | Find Trusted Babysitters & Kita Places",
+    description: isDE
+      ? "Finde vertrauenswürdige Babysitter in Berlin. Stöbere durch Sitter, die von Eltern vor Ort empfohlen werden, entdecke Kita-Plätze und vernetze dich mit anderen Familien in ganz Berlin."
+      : "Find trusted babysitters in Berlin. Browse sitters recommended by local parents, discover Kita places and connect with other families across Berlin.",
   };
 }
 
@@ -65,6 +69,16 @@ export default async function HomePage({ params }: Props) {
           </div>
         </section>
 
+        {/* SEO intro */}
+        <section className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
+          <h2 className="font-serif text-2xl text-text-primary sm:text-3xl mb-4">
+            {t("seoIntroTitle")}
+          </h2>
+          <p className="max-w-3xl text-sm leading-relaxed text-text-secondary">
+            {t("seoIntro")}
+          </p>
+        </section>
+
         {/* Two paths */}
         <section className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 py-6">
@@ -78,7 +92,7 @@ export default async function HomePage({ params }: Props) {
               }}
             >
               <p className="text-xs font-medium uppercase tracking-wide text-text-primary/40 mb-3">{t("forParents")}</p>
-              <h2 className="font-serif text-3xl text-text-primary sm:text-4xl">{t("iAmParent")}</h2>
+              <h3 className="font-serif text-3xl text-text-primary sm:text-4xl">{t("iAmParent")}</h3>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-text-primary/60">{t("parentDescription")}</p>
               <span className="mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-text-primary/40 transition-colors group-hover:text-text-primary">
                 {t("getStarted")}
@@ -98,7 +112,7 @@ export default async function HomePage({ params }: Props) {
               }}
             >
               <p className="text-xs font-medium uppercase tracking-wide text-text-primary/40 mb-3">{t("forSitters")}</p>
-              <h2 className="font-serif text-3xl text-text-primary sm:text-4xl">{t("iAmSitter")}</h2>
+              <h3 className="font-serif text-3xl text-text-primary sm:text-4xl">{t("iAmSitter")}</h3>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-text-primary/60">{t("sitterDescription")}</p>
               <span className="mt-6 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-text-primary/40 transition-colors group-hover:text-text-primary">
                 {t("getStarted")}
@@ -139,10 +153,29 @@ export default async function HomePage({ params }: Props) {
           </div>
         </section>
 
+        {/* Trusted by parents across Berlin */}
+        <section className="border-t border-border-default">
+          <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+            <h2 className="font-serif text-2xl text-text-primary sm:text-3xl mb-4">
+              {t("trustedTitle")}
+            </h2>
+            <p className="max-w-3xl text-sm leading-relaxed text-text-secondary mb-8">
+              {t("trustedBody")}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/babysitter/prenzlauer-berg" className="border border-border-default px-5 py-3 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary">Prenzlauer Berg</Link>
+              <Link href="/babysitter/kreuzberg" className="border border-border-default px-5 py-3 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary">Kreuzberg</Link>
+              <Link href="/babysitter/mitte" className="border border-border-default px-5 py-3 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary">Mitte</Link>
+              <Link href="/babysitter/friedrichshain" className="border border-border-default px-5 py-3 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary">Friedrichshain</Link>
+              <Link href="/babysitter/charlottenburg" className="border border-border-default px-5 py-3 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary">Charlottenburg</Link>
+            </div>
+          </div>
+        </section>
+
         {/* Browse by neighborhood */}
         <section className="border-t border-border-default">
           <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
-            <p className="text-xs uppercase tracking-wide text-text-muted mb-8">{t("browseByNeighborhood")}</p>
+            <h2 className="text-xs uppercase tracking-wide text-text-muted mb-8">{t("browseByNeighborhood")}</h2>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
               {DISTRICTS.map((d) => (
                 <Link
@@ -161,7 +194,7 @@ export default async function HomePage({ params }: Props) {
         {/* Browse by language */}
         <section className="border-t border-border-default">
           <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
-            <p className="text-xs uppercase tracking-wide text-text-muted mb-8">{t("browseByLanguage")}</p>
+            <h2 className="text-xs uppercase tracking-wide text-text-muted mb-8">{t("browseByLanguage")}</h2>
             <div className="flex flex-wrap gap-3">
               {LANGUAGES.map((l) => (
                 <Link
