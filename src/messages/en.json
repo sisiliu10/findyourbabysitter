@@ -2,7 +2,8 @@
   "nav": {
     "login": "Log in",
     "signup": "Sign up",
-    "logout": "Log out"
+    "logout": "Log out",
+    "guides": "Guides"
   },
   "home": {
     "heroTagline": "Find a Babysitter in Berlin",
@@ -41,6 +42,7 @@
     "neighborhoods": "Neighborhoods",
     "languages": "Languages",
     "legal": "Legal",
+    "guides": "Guides",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
     "impressum": "Impressum"
@@ -534,5 +536,25 @@
     "admin": "Admin",
     "dashboard": "Dashboard",
     "users": "Users"
+  },
+  "guides": {
+    "label": "Guides",
+    "title": "Berlin with Kids",
+    "intro": "Local tips on the best cafes, playgrounds, and activities for families in Berlin. Written by parents who live here.",
+    "searchPlaceholder": "Search guides...",
+    "all": "All",
+    "cafes": "Cafes",
+    "playgrounds": "Playgrounds",
+    "activities": "Activities",
+    "updatedOn": "Updated {date}",
+    "noResults": "No guides found matching your search.",
+    "relatedGuides": "Related guides",
+    "needBabysitter": "Need a babysitter in Berlin?",
+    "ctaSubtitle": "Find trusted babysitters recommended by other Berlin parents.",
+    "findBabysitter": "Find a babysitter",
+    "readyToFind": "Ready to find your babysitter?",
+    "browseSitters": "Browse sitters by neighborhood",
+    "tableOfContents": "In this guide",
+    "home": "Home"
   }
 }

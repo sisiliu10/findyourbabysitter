@@ -56,6 +56,9 @@ export function Footer() {
               {t("legal")}
             </p>
             <div className="flex flex-col gap-1.5">
+              <Link href="/guides" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
+                {t("guides")}
+              </Link>
               <Link href="/privacy-policy" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
                 {t("privacyPolicy")}
               </Link>

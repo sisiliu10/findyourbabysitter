@@ -9,11 +9,17 @@ export function Header() {
 
   return (
     <header className="border-b border-border-default">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
-        <Link href="/" className="text-xs font-medium uppercase tracking-[0.2em] text-text-primary">
+      <div className="mx-auto flex min-h-14 max-w-7xl flex-wrap items-center justify-between gap-x-4 px-4 sm:px-6">
+        <Link href="/" className="shrink-0 text-xs font-medium uppercase tracking-[0.2em] text-text-primary">
           Berlin Babysitter
         </Link>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
+          <Link
+            href="/guides"
+            className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
+          >
+            {t("guides")}
+          </Link>
           <LanguageToggle />
           <Link
             href="/login"

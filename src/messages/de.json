@@ -2,7 +2,8 @@
   "nav": {
     "login": "Anmelden",
     "signup": "Registrieren",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "guides": "Guides"
   },
   "home": {
     "heroTagline": "Babysitter in Berlin finden",
@@ -41,6 +42,7 @@
     "neighborhoods": "Bezirke",
     "languages": "Sprachen",
     "legal": "Rechtliches",
+    "guides": "Guides",
     "privacyPolicy": "Datenschutzerklärung",
     "termsOfService": "Nutzungsbedingungen",
     "impressum": "Impressum"
@@ -534,5 +536,25 @@
     "admin": "Admin",
     "dashboard": "Übersicht",
     "users": "Benutzer"
+  },
+  "guides": {
+    "label": "Guides",
+    "title": "Berlin mit Kindern",
+    "intro": "Lokale Tipps zu den besten Cafes, Spielplätzen und Aktivitäten für Familien in Berlin. Geschrieben von Eltern, die hier leben.",
+    "searchPlaceholder": "Guides durchsuchen...",
+    "all": "Alle",
+    "cafes": "Cafes",
+    "playgrounds": "Spielplätze",
+    "activities": "Aktivitäten",
+    "updatedOn": "Aktualisiert {date}",
+    "noResults": "Keine Guides gefunden.",
+    "relatedGuides": "Weitere Guides",
+    "needBabysitter": "Babysitter in Berlin gesucht?",
+    "ctaSubtitle": "Finde vertrauensvolle Babysitter, empfohlen von anderen Berliner Eltern.",
+    "findBabysitter": "Babysitter finden",
+    "readyToFind": "Bereit, deinen Babysitter zu finden?",
+    "browseSitters": "Babysitter nach Kiez",
+    "tableOfContents": "In diesem Guide",
+    "home": "Startseite"
   }
 }

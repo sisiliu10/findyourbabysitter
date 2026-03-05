@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { LANDING_PAGES } from "@/data/landing-pages";
+import { GUIDES } from "@/data/guides";
 import { routing } from "@/i18n/routing";
 
 const BASE = "https://berlinbabysitter.com";
 
-const staticPaths = ["/", "/login", "/register"];
+const staticPaths = ["/", "/login", "/register", "/guides"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const alternateLanguages = (path: string) => ({
@@ -43,5 +44,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
   });
 
-  return [...staticPages, ...landingPages];
+  const guidePages = GUIDES.flatMap((guide) => {
+    const path = `/guides/${guide.slug}`;
+    return routing.locales.map((locale) => ({
+      url:
+        locale === routing.defaultLocale
+          ? `${BASE}${path}`
+          : `${BASE}/de${path}`,
+      lastModified: new Date(guide.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+      alternates: { languages: alternateLanguages(path) },
+    }));
+  });
+
+  return [...staticPages, ...landingPages, ...guidePages];
 }
