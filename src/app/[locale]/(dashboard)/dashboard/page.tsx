@@ -8,19 +8,11 @@ export default async function DashboardPage() {
   const session = await requireAuth();
   const t = await getTranslations("dashboard");
 
-  const user = await prisma.user.findUnique({
-    where: { id: session.userId },
-    include: { babysitterProfile: true },
-  });
-
-  if (!user) return null;
-
-  if (!user.onboarded) {
-    const { redirect } = await import("next/navigation");
-    redirect("/onboarding");
-  }
-
-  const [recentBookings, pendingCount] = await Promise.all([
+  const [user, recentBookings, pendingCount] = await Promise.all([
+    prisma.user.findUnique({
+      where: { id: session.userId },
+      include: { babysitterProfile: true },
+    }),
     prisma.booking.findMany({
       where: {
         OR: [
@@ -44,6 +36,13 @@ export default async function DashboardPage() {
       },
     }),
   ]);
+
+  if (!user) return null;
+
+  if (!user.onboarded) {
+    const { redirect } = await import("next/navigation");
+    redirect("/onboarding");
+  }
 
   const statusColors: Record<string, string> = {
     PENDING: "bg-warning-muted text-warning border border-warning/20",

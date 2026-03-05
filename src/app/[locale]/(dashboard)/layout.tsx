@@ -1,10 +1,12 @@
 import { Topbar } from "@/components/layout/Topbar";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { MobileNav } from "@/components/layout/MobileNav";
+import { NavigationTimings } from "@/components/NavigationTimings";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-surface-primary">
+      <NavigationTimings />
       <Topbar />
       <div className="flex flex-1">
         <Sidebar />

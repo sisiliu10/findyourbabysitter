@@ -17,6 +17,7 @@ const publicBasePaths = [
   "/terms-of-service",
   "/impressum",
   "/api/auth",
+  "/api/health",
 ];
 
 function isPublicPath(normalised: string): boolean {
