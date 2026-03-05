@@ -21,9 +21,6 @@ export function TrustBar() {
   return (
     <section className="w-full border-y border-border-default overflow-hidden py-4">
       <div className="flex items-center">
-        <span className="shrink-0 pl-6 pr-8 text-[10px] font-medium uppercase tracking-widest text-text-muted">
-          {t("trustedBy")}
-        </span>
         <div className="relative flex-1 overflow-hidden">
           <div className="marquee-track flex gap-12">
             {[...TRUST_ITEMS, ...TRUST_ITEMS].map((name, i) => (
