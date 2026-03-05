@@ -54,25 +54,27 @@ export default async function MessagesListPage() {
     orderBy: { updatedAt: "desc" },
   });
 
-  // Count unread messages per booking
-  const unreadCounts = await Promise.all(
-    bookings.map((booking) =>
-      prisma.message.count({
+  // Count unread messages per booking in a single query
+  const bookingIds = bookings.map((b) => b.id);
+  const unreadRows = bookingIds.length > 0
+    ? await prisma.message.groupBy({
+        by: ["bookingId"],
         where: {
-          bookingId: booking.id,
+          bookingId: { in: bookingIds },
           senderId: { not: session.userId },
           isRead: false,
         },
+        _count: { id: true },
       })
-    )
-  );
+    : [];
+  const unreadMap = new Map(unreadRows.map((r) => [r.bookingId, r._count.id]));
 
   // Build conversation list
-  const conversations = bookings.map((booking, index) => {
+  const conversations = bookings.map((booking) => {
     const isParent = booking.parentId === session.userId;
     const otherPerson = isParent ? booking.sitter : booking.parent;
     const lastMessage = booking.messages[0] || null;
-    const unreadCount = unreadCounts[index];
+    const unreadCount = unreadMap.get(booking.id) ?? 0;
 
     return {
       bookingId: booking.id,
