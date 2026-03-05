@@ -20,29 +20,30 @@ export default async function DashboardPage() {
     redirect("/onboarding");
   }
 
-  const recentBookings = await prisma.booking.findMany({
-    where: {
-      OR: [
-        { parentId: session.userId },
-        { sitterId: session.userId },
-      ],
-      status: { in: ["PENDING", "ACCEPTED", "CONFIRMED"] },
-    },
-    include: {
-      request: true,
-      parent: { select: { firstName: true, lastName: true } },
-      sitter: { select: { firstName: true, lastName: true } },
-    },
-    orderBy: { dateBooked: "asc" },
-    take: 5,
-  });
-
-  const pendingCount = await prisma.booking.count({
-    where: {
-      sitterId: session.userId,
-      status: "PENDING",
-    },
-  });
+  const [recentBookings, pendingCount] = await Promise.all([
+    prisma.booking.findMany({
+      where: {
+        OR: [
+          { parentId: session.userId },
+          { sitterId: session.userId },
+        ],
+        status: { in: ["PENDING", "ACCEPTED", "CONFIRMED"] },
+      },
+      include: {
+        request: true,
+        parent: { select: { firstName: true, lastName: true } },
+        sitter: { select: { firstName: true, lastName: true } },
+      },
+      orderBy: { dateBooked: "asc" },
+      take: 5,
+    }),
+    prisma.booking.count({
+      where: {
+        sitterId: session.userId,
+        status: "PENDING",
+      },
+    }),
+  ]);
 
   const statusColors: Record<string, string> = {
     PENDING: "bg-warning-muted text-warning border border-warning/20",
