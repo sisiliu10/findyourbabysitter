@@ -657,4 +657,118 @@ export const LANDING_PAGE_DE: Record<string, LocalizedContent> = {
       },
     ],
   },
+  chinese: {
+    metaTitle: "Chinesischsprachige Babysitter in Berlin",
+    metaDescription:
+      "Chinesischsprachige Babysitter in Berlin finden. Mandarin- und Kantonesisch-sprechende Betreuer für chinesische und ostasiatische Familien.",
+    h1: "Chinesischsprachige Babysitter in Berlin",
+    intro:
+      "Berlins chinesische Gemeinschaft wächst stetig, mit Familien aus Festlandchina, Taiwan, Hongkong und Südostasien. Ein Babysitter, der Mandarin oder Kantonesisch spricht, hilft Kindern, mit ihrer Sprache und Kultur verbunden zu bleiben.",
+    longDescription:
+      "Für Familien, die in einem chinesischsprachigen Haushalt in Berlin Kinder großziehen, ist ein Betreuer, der die Sprache teilt, von unschätzbarem Wert. Unsere chinesischsprachigen Babysitter können Geschichten auf Chinesisch vorlesen, beim Erhalt der Lese- und Schreibfähigkeiten helfen und eine vertraute Atmosphäre schaffen. Viele sind Studierende, Berufstätige oder langjährige Berliner, die sowohl die chinesische als auch die deutsche Kultur verstehen.",
+    highlights: [
+      "Mandarin- und Kantonesisch-sprechende Babysitter verfügbar",
+      "Ideal zum Erhalt der chinesischen Sprachkenntnisse zu Hause",
+      "Babysitter aus China, Taiwan, Hongkong und Südostasien",
+      "Viele Babysitter sprechen auch fließend Deutsch und Englisch",
+    ],
+    faqs: [
+      {
+        question: "Kann ich Mandarin-sprechende Babysitter in Berlin finden?",
+        answer:
+          "Ja. Wir haben Babysitter, die Mandarin als Muttersprache sprechen, viele davon sind Studierende oder Berufstätige in Berlin.",
+      },
+      {
+        question: "Gibt es Kantonesisch-sprechende Babysitter?",
+        answer:
+          "Kantonesisch-Sprecher sind weniger zahlreich, aber verfügbar. Prüfen Sie die Babysitter-Profile für ihre spezifischen chinesischen Sprachkenntnisse.",
+      },
+      {
+        question: "Kann ein chinesischsprachiger Babysitter meinem Kind beim Lesen auf Chinesisch helfen?",
+        answer:
+          "Viele unserer chinesischsprachigen Babysitter üben gerne Lesen und Sprechen auf Chinesisch während des Spielens, auch wenn sie Betreuer und keine formellen Nachhilfelehrer sind.",
+      },
+      {
+        question: "Sprechen chinesischsprachige Babysitter auch Deutsch?",
+        answer:
+          "Die meisten chinesischsprachigen Babysitter in Berlin sprechen auch Deutsch oder Englisch. Prüfen Sie die einzelnen Profile für vollständige Sprachkenntnisse.",
+      },
+    ],
+  },
+  korean: {
+    metaTitle: "Koreanischsprachige Babysitter in Berlin",
+    metaDescription:
+      "Koreanischsprachige Babysitter in Berlin finden. Muttersprachliche 한국어-Sprecher für koreanische Familien und zweisprachige Haushalte in Berlin.",
+    h1: "Koreanischsprachige Babysitter in Berlin",
+    intro:
+      "Berlin hat eine lebendige koreanische Gemeinschaft, von Studierenden und Künstlern bis hin zu etablierten Familien. Für koreanischsprachige Haushalte bringt ein Babysitter, der die Sprache spricht, vom ersten Moment an Vertrautheit und Vertrauen.",
+    longDescription:
+      "Koreanische Familien in Berlin möchten oft, dass ihre Kinder starke koreanische Sprachkenntnisse bewahren, während sie in einem deutschsprachigen Umfeld aufwachsen. Ein koreanischsprachiger Babysitter unterstützt dies natürlich, indem er bei täglichen Routinen auf Koreanisch kommuniziert, koreanische Bücher vorliest und kulturelle Erwartungen rund um Mahlzeiten, Umgangsformen und Familienleben versteht.",
+    highlights: [
+      "Muttersprachlich koreanische Babysitter in Berlin",
+      "Perfekt zum Erhalt von Koreanisch in zweisprachigen Haushalten",
+      "Kulturelles Verständnis koreanischer Familienerwartungen",
+      "Viele Babysitter sprechen auch fließend Deutsch und Englisch",
+    ],
+    faqs: [
+      {
+        question: "Gibt es koreanischsprachige Babysitter in Berlin?",
+        answer:
+          "Ja. Berlin hat eine wachsende koreanische Gemeinschaft und wir haben Babysitter, die muttersprachlich Koreanisch sprechen, viele davon Studierende oder junge Berufstätige.",
+      },
+      {
+        question: "Kann ein koreanischsprachiger Babysitter meinem Kind beim Koreanisch-Üben helfen?",
+        answer:
+          "Auf jeden Fall. Koreanisch sprechen beim Spielen, bei Mahlzeiten und täglichen Aktivitäten hilft Kindern, ihr Koreanisch natürlich zu pflegen und weiterzuentwickeln.",
+      },
+      {
+        question: "Verstehen koreanischsprachige Babysitter koreanische kulturelle Erwartungen?",
+        answer:
+          "Viele unserer koreanischsprachigen Babysitter sind in koreanischen Haushalten aufgewachsen und verstehen kulturelle Normen rund um Mahlzeiten, Respekt und Tagesabläufe.",
+      },
+      {
+        question: "Wo in Berlin finde ich koreanischsprachige Babysitter?",
+        answer:
+          "Koreanischsprachige Babysitter sind in ganz Berlin verfügbar. Viele wohnen in der Nähe von Universitäten oder in zentralen Bezirken, sind aber bereit zu reisen.",
+      },
+    ],
+  },
+  japanese: {
+    metaTitle: "Japanischsprachige Babysitter in Berlin",
+    metaDescription:
+      "Japanischsprachige Babysitter in Berlin finden. Muttersprachliche 日本語-Sprecher für japanische Familien und zweisprachige Haushalte.",
+    h1: "Japanischsprachige Babysitter in Berlin",
+    intro:
+      "Berlins japanische Gemeinschaft umfasst viele Familien, die möchten, dass ihre Kinder mit japanischen Sprachkenntnissen aufwachsen. Ein japanischsprachiger Babysitter macht das möglich.",
+    longDescription:
+      "Für japanische Familien in Berlin hat der Erhalt der Heimsprache Priorität. Ein Babysitter, der Japanisch spricht, kann Bilderbücher vorlesen, Lieder singen und ganz natürlich auf Japanisch mit Ihren Kindern kommunizieren. Unsere japanischsprachigen Babysitter verstehen die Bedeutung von Höflichkeit, Routine und Aufmerksamkeit für Details, die japanische Familien in der Kinderbetreuung schätzen.",
+    highlights: [
+      "Muttersprachlich japanische Babysitter in Berlin verfügbar",
+      "Unterstützung beim Erhalt der japanischen Sprache zu Hause",
+      "Kulturelles Verständnis japanischer Betreuungswerte",
+      "Viele Babysitter sprechen auch Deutsch und Englisch",
+    ],
+    faqs: [
+      {
+        question: "Kann ich japanischsprachige Babysitter in Berlin finden?",
+        answer:
+          "Ja. Berlin hat eine japanische Gemeinschaft und wir haben Babysitter, die japanische Muttersprachler sind, darunter Studierende, Berufstätige und langjährige Einwohner.",
+      },
+      {
+        question: "Kann ein japanischsprachiger Babysitter meinen Kindern japanische Bücher vorlesen?",
+        answer:
+          "Viele unserer japanischsprachigen Babysitter lesen gerne japanische Bilderbücher und Geschichten vor und helfen Kindern, ihre Lese- und Hörfähigkeiten zu erhalten.",
+      },
+      {
+        question: "Verstehen japanischsprachige Babysitter japanische Familienbräuche?",
+        answer:
+          "Ja. Unsere japanischsprachigen Babysitter verstehen kulturelle Erwartungen rund um Mahlzeiten, Umgangsformen und Tagesabläufe, die in japanischen Haushalten üblich sind.",
+      },
+      {
+        question: "Sind japanischsprachige Babysitter in ganz Berlin verfügbar?",
+        answer:
+          "Japanischsprachige Babysitter sind in verschiedenen Berliner Bezirken verfügbar. Prüfen Sie die einzelnen Profile für Standort und Anfahrtsradius.",
+      },
+    ],
+  },
 };
