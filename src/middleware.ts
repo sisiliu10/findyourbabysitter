@@ -34,6 +34,8 @@ export default function middleware(request: NextRequest) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/uploads") ||
     pathname === "/favicon.ico" ||
+    pathname === "/sitemap.xml" ||
+    pathname === "/robots.txt" ||
     /\.(jpg|jpeg|png|svg|gif|webp|ico)$/.test(pathname)
   ) {
     return NextResponse.next();
