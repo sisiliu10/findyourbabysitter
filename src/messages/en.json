@@ -248,7 +248,11 @@
     "activeRequests": "Active requests",
     "noActiveRequests": "No active requests",
     "memberSince": "Member since {date}",
-    "yrsExp": "{count, plural, one {1 yr exp} other {# yrs exp}}"
+    "yrsExp": "{count, plural, one {1 yr exp} other {# yrs exp}}",
+    "itsAMatch": "It's a match!",
+    "matchDescription": "You and {name} liked each other. Start a conversation!",
+    "sendMessage": "Send a message",
+    "keepSwiping": "Keep swiping"
   },
   "onboarding": {
     "completeProfile": "Complete your profile",
@@ -391,10 +395,12 @@
     "justNow": "Just now",
     "minutesAgo": "{count}m ago",
     "hoursAgo": "{count}h ago",
-    "daysAgo": "{count}d ago"
+    "daysAgo": "{count}d ago",
+    "matchConversation": "Match"
   },
   "messageThread": {
     "viewBooking": "View booking",
+    "matchConversation": "Matched via swipe",
     "typeMessage": "Type a message...",
     "noMessages": "No messages yet. Send one to start the conversation.",
     "conversation": "Conversation"

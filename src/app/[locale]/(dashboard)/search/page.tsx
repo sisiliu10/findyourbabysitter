@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency, getInitials, cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/Badge";
 import { Spinner } from "@/components/ui/Spinner";
 import { SwipeCard } from "@/components/search/SwipeCard";
+import { MatchModal } from "@/components/search/MatchModal";
 
 type SwipeMode = "babysitters" | "moms";
 
@@ -138,6 +139,16 @@ function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, 
   };
 }
 
+interface MatchInfo {
+  id: string;
+  matchedUser: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    avatarUrl: string | null;
+  };
+}
+
 export default function SearchPage() {
   const t = useTranslations("search");
   const tc = useTranslations("common");
@@ -148,17 +159,29 @@ export default function SearchPage() {
   const [loading, setLoading] = useState(true);
   const [liked, setLiked] = useState<string[]>([]);
   const [passed, setPassed] = useState<string[]>([]);
+  const [matchInfo, setMatchInfo] = useState<MatchInfo | null>(null);
+  const [showMatchModal, setShowMatchModal] = useState(false);
+  const likedIdsRef = useRef<Set<string>>(new Set());
 
   const fetchCards = useCallback(async (swipeMode: SwipeMode) => {
     setLoading(true);
     setCurrentIndex(0);
 
     try {
+      // Fetch already-liked user IDs to filter them out
+      const likesRes = await fetch("/api/likes");
+      const likesJson = await likesRes.json();
+      const alreadyLiked = new Set<string>(
+        likesJson.success ? likesJson.data.likedUserIds : []
+      );
+      likedIdsRef.current = alreadyLiked;
+
       if (swipeMode === "babysitters") {
         const res = await fetch("/api/sitters?limit=50");
         const json = await res.json();
         if (json.success && json.data) {
-          setCards((json.data.sitters || []).map((s: SitterResult) => sitterToCard(s, t as any)));
+          const all = (json.data.sitters || []).map((s: SitterResult) => sitterToCard(s, t as any));
+          setCards(all.filter((c: CardProfile) => !alreadyLiked.has(c.id)));
         } else {
           setCards([]);
         }
@@ -166,7 +189,8 @@ export default function SearchPage() {
         const res = await fetch("/api/parents?limit=50");
         const json = await res.json();
         if (json.success && json.data) {
-          setCards((json.data.parents || []).map((p: ParentResult) => parentToCard(p, t as any, locale)));
+          const all = (json.data.parents || []).map((p: ParentResult) => parentToCard(p, t as any, locale));
+          setCards(all.filter((c: CardProfile) => !alreadyLiked.has(c.id)));
         } else {
           setCards([]);
         }
@@ -184,8 +208,27 @@ export default function SearchPage() {
 
   const handleSwipeRight = useCallback(() => {
     const card = cards[currentIndex];
-    if (card) setLiked((prev) => [...prev, card.id]);
+    if (!card) return;
+    setLiked((prev) => [...prev, card.id]);
     setCurrentIndex((i) => i + 1);
+
+    // Persist like to server and check for match
+    fetch("/api/likes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ toUserId: card.id }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && json.data.matched) {
+          setMatchInfo({
+            id: json.data.match.id,
+            matchedUser: json.data.match.matchedUser,
+          });
+          setShowMatchModal(true);
+        }
+      })
+      .catch(() => {});
   }, [cards, currentIndex]);
 
   const handleSwipeLeft = useCallback(() => {
@@ -355,6 +398,14 @@ export default function SearchPage() {
           </button>
         </div>
       )}
+
+      {/* Match modal */}
+      <MatchModal
+        open={showMatchModal}
+        onClose={() => setShowMatchModal(false)}
+        matchedUser={matchInfo?.matchedUser ?? null}
+        matchId={matchInfo?.id ?? null}
+      />
     </div>
   );
 }

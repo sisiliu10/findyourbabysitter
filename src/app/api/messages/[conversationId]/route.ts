@@ -4,6 +4,47 @@ import { prisma } from "@/lib/prisma";
 import { messageSchema } from "@/lib/validators";
 import { notifyNewMessage } from "@/lib/email";
 
+// Resolve conversationId to either a booking or a match, returning participant IDs.
+async function resolveConversation(conversationId: string, userId: string) {
+  // Try booking first
+  const booking = await prisma.booking.findUnique({
+    where: { id: conversationId },
+  });
+  if (booking) {
+    if (booking.parentId !== userId && booking.sitterId !== userId) {
+      return { type: "unauthorized" as const };
+    }
+    const otherUserId =
+      booking.parentId === userId ? booking.sitterId : booking.parentId;
+    return {
+      type: "booking" as const,
+      bookingId: conversationId,
+      matchId: null,
+      otherUserId,
+    };
+  }
+
+  // Try match
+  const match = await prisma.match.findUnique({
+    where: { id: conversationId },
+  });
+  if (match) {
+    if (match.user1Id !== userId && match.user2Id !== userId) {
+      return { type: "unauthorized" as const };
+    }
+    const otherUserId =
+      match.user1Id === userId ? match.user2Id : match.user1Id;
+    return {
+      type: "match" as const,
+      bookingId: null,
+      matchId: conversationId,
+      otherUserId,
+    };
+  }
+
+  return { type: "not_found" as const };
+}
+
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ conversationId: string }> }
@@ -17,20 +58,16 @@ export async function GET(
       );
     }
 
-    const { conversationId: bookingId } = await params;
+    const { conversationId } = await params;
+    const conv = await resolveConversation(conversationId, session.userId);
 
-    const booking = await prisma.booking.findUnique({
-      where: { id: bookingId },
-    });
-
-    if (!booking) {
+    if (conv.type === "not_found") {
       return NextResponse.json(
-        { success: false, error: "Booking not found" },
+        { success: false, error: "Conversation not found" },
         { status: 404 }
       );
     }
-
-    if (booking.parentId !== session.userId && booking.sitterId !== session.userId) {
+    if (conv.type === "unauthorized") {
       return NextResponse.json(
         { success: false, error: "Not authorized to view these messages" },
         { status: 403 }
@@ -40,7 +77,9 @@ export async function GET(
     const { searchParams } = new URL(request.url);
     const after = searchParams.get("after");
 
-    const where: Record<string, unknown> = { bookingId };
+    const where: Record<string, unknown> = conv.bookingId
+      ? { bookingId: conv.bookingId }
+      : { matchId: conv.matchId };
 
     if (after) {
       const afterMessage = await prisma.message.findUnique({
@@ -64,16 +103,22 @@ export async function GET(
     });
 
     // Mark unread messages sent by the other party as read
+    const markWhere: Record<string, unknown> = conv.bookingId
+      ? { bookingId: conv.bookingId }
+      : { matchId: conv.matchId };
     await prisma.message.updateMany({
       where: {
-        bookingId,
+        ...markWhere,
         senderId: { not: session.userId },
         isRead: false,
       },
       data: { isRead: true },
     });
 
-    return NextResponse.json({ success: true, data: { messages } });
+    return NextResponse.json({
+      success: true,
+      data: { messages, conversationType: conv.type },
+    });
   } catch (error) {
     return NextResponse.json(
       { success: false, error: error instanceof Error ? error.message : "Failed to get messages" },
@@ -95,7 +140,7 @@ export async function POST(
       );
     }
 
-    const { conversationId: bookingId } = await params;
+    const { conversationId } = await params;
     const body = await request.json();
 
     const parsed = messageSchema.safeParse(body);
@@ -106,18 +151,15 @@ export async function POST(
       );
     }
 
-    const booking = await prisma.booking.findUnique({
-      where: { id: bookingId },
-    });
+    const conv = await resolveConversation(conversationId, session.userId);
 
-    if (!booking) {
+    if (conv.type === "not_found") {
       return NextResponse.json(
-        { success: false, error: "Booking not found" },
+        { success: false, error: "Conversation not found" },
         { status: 404 }
       );
     }
-
-    if (booking.parentId !== session.userId && booking.sitterId !== session.userId) {
+    if (conv.type === "unauthorized") {
       return NextResponse.json(
         { success: false, error: "Not authorized to send messages in this conversation" },
         { status: 403 }
@@ -126,7 +168,9 @@ export async function POST(
 
     const message = await prisma.message.create({
       data: {
-        bookingId,
+        ...(conv.bookingId
+          ? { bookingId: conv.bookingId }
+          : { matchId: conv.matchId }),
         senderId: session.userId,
         content: parsed.data.content,
       },
@@ -138,15 +182,13 @@ export async function POST(
     });
 
     // Send email notification to the other party (fire-and-forget)
-    const recipientId =
-      booking.parentId === session.userId ? booking.sitterId : booking.parentId;
     const recipient = await prisma.user.findUnique({
-      where: { id: recipientId },
+      where: { id: conv.otherUserId },
       select: { email: true },
     });
     if (recipient) {
       const senderName = `${message.sender.firstName} ${message.sender.lastName}`;
-      notifyNewMessage(recipient.email, senderName, parsed.data.content, bookingId).catch(console.error);
+      notifyNewMessage(recipient.email, senderName, parsed.data.content, conversationId).catch(console.error);
     }
 
     return NextResponse.json(

@@ -37,6 +37,10 @@ model User {
   sentMessages      Message[]  @relation("SentMessages")
   reviewsGiven      Review[]   @relation("ReviewAuthor")
   reviewsReceived   Review[]   @relation("ReviewSubject")
+  likesGiven        Like[]     @relation("LikesGiven")
+  likesReceived     Like[]     @relation("LikesReceived")
+  matchesAsUser1    Match[]    @relation("MatchesAsUser1")
+  matchesAsUser2    Match[]    @relation("MatchesAsUser2")
 
   @@index([role])
   @@index([isDisabled])
@@ -156,8 +160,10 @@ model Booking {
 
 model Message {
   id        String   @id @default(cuid())
-  bookingId String
-  booking   Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  bookingId String?
+  booking   Booking? @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  matchId   String?
+  match     Match?   @relation(fields: [matchId], references: [id], onDelete: Cascade)
 
   senderId  String
   sender    User     @relation("SentMessages", fields: [senderId], references: [id])
@@ -167,8 +173,10 @@ model Message {
   createdAt DateTime @default(now())
 
   @@index([bookingId, createdAt])
+  @@index([matchId, createdAt])
   @@index([senderId])
   @@index([bookingId, isRead])
+  @@index([matchId, isRead])
 }
 
 model Review {
@@ -191,4 +199,29 @@ model Review {
 
   @@index([subjectId, rating])
   @@index([authorId])
+}
+
+model Like {
+  id         String   @id @default(cuid())
+  fromUserId String
+  toUserId   String
+  fromUser   User     @relation("LikesGiven", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser     User     @relation("LikesReceived", fields: [toUserId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([fromUserId, toUserId])
+  @@index([toUserId])
+}
+
+model Match {
+  id        String   @id @default(cuid())
+  user1Id   String
+  user2Id   String
+  user1     User     @relation("MatchesAsUser1", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2     User     @relation("MatchesAsUser2", fields: [user2Id], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  messages  Message[]
+
+  @@unique([user1Id, user2Id])
+  @@index([user2Id])
 }

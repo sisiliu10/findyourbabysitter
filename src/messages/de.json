@@ -248,7 +248,11 @@
     "activeRequests": "Aktive Anfragen",
     "noActiveRequests": "Keine aktiven Anfragen",
     "memberSince": "Mitglied seit {date}",
-    "yrsExp": "{count, plural, one {1 Jahr Erfahrung} other {# Jahre Erfahrung}}"
+    "yrsExp": "{count, plural, one {1 Jahr Erfahrung} other {# Jahre Erfahrung}}",
+    "itsAMatch": "Es ist ein Match!",
+    "matchDescription": "Du und {name} habt euch gegenseitig geliked. Starte eine Unterhaltung!",
+    "sendMessage": "Nachricht senden",
+    "keepSwiping": "Weiter swipen"
   },
   "onboarding": {
     "completeProfile": "Profil vervollständigen",
@@ -391,10 +395,12 @@
     "justNow": "Gerade eben",
     "minutesAgo": "vor {count} Min.",
     "hoursAgo": "vor {count} Std.",
-    "daysAgo": "vor {count} T."
+    "daysAgo": "vor {count} T.",
+    "matchConversation": "Match"
   },
   "messageThread": {
     "viewBooking": "Buchung ansehen",
+    "matchConversation": "Per Swipe gematcht",
     "typeMessage": "Nachricht eingeben...",
     "noMessages": "Noch keine Nachrichten. Schreibe eine, um die Unterhaltung zu starten.",
     "conversation": "Unterhaltung"

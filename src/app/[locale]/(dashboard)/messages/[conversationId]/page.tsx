@@ -23,15 +23,19 @@ export default function MessageThreadPage() {
     lastName: string;
     avatarUrl: string | null;
   } | null>(null);
+  const [conversationType, setConversationType] = useState<"booking" | "match" | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Fetch booking details to get other person's name
+  // Fetch conversation details to get other person's name and type
   useEffect(() => {
     fetch(`/api/messages/${conversationId}`)
       .then((res) => res.json())
       .then((json) => {
+        if (json.data?.conversationType) {
+          setConversationType(json.data.conversationType);
+        }
         const msgs = json.data?.messages || json;
         if (Array.isArray(msgs) && msgs.length > 0 && user) {
           const otherMsg = msgs.find(
@@ -120,12 +124,17 @@ export default function MessageThreadPage() {
         )}
         <div>
           <p className="text-sm font-semibold text-text-primary">{otherName}</p>
-          <Link
-            href={`/bookings/${conversationId}`}
-            className="text-xs text-text-tertiary hover:text-accent"
-          >
-            {t("viewBooking")}
-          </Link>
+          {conversationType === "booking" && (
+            <Link
+              href={`/bookings/${conversationId}`}
+              className="text-xs text-text-tertiary hover:text-accent"
+            >
+              {t("viewBooking")}
+            </Link>
+          )}
+          {conversationType === "match" && (
+            <p className="text-xs text-text-tertiary">{t("matchConversation")}</p>
+          )}
         </div>
       </div>
 

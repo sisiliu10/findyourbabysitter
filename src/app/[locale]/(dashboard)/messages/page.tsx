@@ -4,12 +4,30 @@ import { getInitials } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
 import { getTranslations, getLocale } from "next-intl/server";
 
+interface ConversationItem {
+  conversationId: string;
+  otherPerson: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    avatarUrl: string | null;
+  };
+  lastMessage: {
+    content: string;
+    createdAt: Date | string;
+    senderId: string;
+    isRead: boolean;
+  } | null;
+  unreadCount: number;
+  subtitle: string;
+}
+
 export default async function MessagesListPage() {
   const session = await requireAuth();
   const t = await getTranslations("messagesList");
   const locale = await getLocale();
 
-  // Fetch all bookings where user is parent or sitter, that are not declined
+  // Fetch booking-based conversations
   const bookings = await prisma.booking.findMany({
     where: {
       OR: [
@@ -22,30 +40,15 @@ export default async function MessagesListPage() {
     },
     include: {
       parent: {
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
-          avatarUrl: true,
-        },
+        select: { id: true, firstName: true, lastName: true, avatarUrl: true },
       },
       sitter: {
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
-          avatarUrl: true,
-        },
+        select: { id: true, firstName: true, lastName: true, avatarUrl: true },
       },
       messages: {
         orderBy: { createdAt: "desc" },
         take: 1,
-        select: {
-          content: true,
-          createdAt: true,
-          senderId: true,
-          isRead: true,
-        },
+        select: { content: true, createdAt: true, senderId: true, isRead: true },
       },
       request: {
         select: { title: true },
@@ -54,9 +57,33 @@ export default async function MessagesListPage() {
     orderBy: { updatedAt: "desc" },
   });
 
-  // Count unread messages per booking in a single query
+  // Fetch match-based conversations
+  const matches = await prisma.match.findMany({
+    where: {
+      OR: [
+        { user1Id: session.userId },
+        { user2Id: session.userId },
+      ],
+    },
+    include: {
+      user1: {
+        select: { id: true, firstName: true, lastName: true, avatarUrl: true },
+      },
+      user2: {
+        select: { id: true, firstName: true, lastName: true, avatarUrl: true },
+      },
+      messages: {
+        orderBy: { createdAt: "desc" },
+        take: 1,
+        select: { content: true, createdAt: true, senderId: true, isRead: true },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  // Count unread messages per booking
   const bookingIds = bookings.map((b) => b.id);
-  const unreadRows = bookingIds.length > 0
+  const bookingUnreadRows = bookingIds.length > 0
     ? await prisma.message.groupBy({
         by: ["bookingId"],
         where: {
@@ -67,24 +94,52 @@ export default async function MessagesListPage() {
         _count: { id: true },
       })
     : [];
-  const unreadMap = new Map(unreadRows.map((r) => [r.bookingId, r._count.id]));
+  const bookingUnreadMap = new Map(
+    bookingUnreadRows.map((r) => [r.bookingId, r._count.id])
+  );
 
-  // Build conversation list
-  const conversations = bookings.map((booking) => {
+  // Count unread messages per match
+  const matchIds = matches.map((m) => m.id);
+  const matchUnreadRows = matchIds.length > 0
+    ? await prisma.message.groupBy({
+        by: ["matchId"],
+        where: {
+          matchId: { in: matchIds },
+          senderId: { not: session.userId },
+          isRead: false,
+        },
+        _count: { id: true },
+      })
+    : [];
+  const matchUnreadMap = new Map(
+    matchUnreadRows.map((r) => [r.matchId, r._count.id])
+  );
+
+  // Build unified conversation list
+  const conversations: ConversationItem[] = [];
+
+  for (const booking of bookings) {
     const isParent = booking.parentId === session.userId;
-    const otherPerson = isParent ? booking.sitter : booking.parent;
-    const lastMessage = booking.messages[0] || null;
-    const unreadCount = unreadMap.get(booking.id) ?? 0;
+    conversations.push({
+      conversationId: booking.id,
+      otherPerson: isParent ? booking.sitter : booking.parent,
+      lastMessage: booking.messages[0] || null,
+      unreadCount: bookingUnreadMap.get(booking.id) ?? 0,
+      subtitle: booking.request?.title || "",
+    });
+  }
 
-    return {
-      bookingId: booking.id,
+  for (const match of matches) {
+    const otherPerson =
+      match.user1Id === session.userId ? match.user2 : match.user1;
+    conversations.push({
+      conversationId: match.id,
       otherPerson,
-      lastMessage,
-      unreadCount,
-      requestTitle: booking.request?.title || "",
-      status: booking.status,
-    };
-  });
+      lastMessage: match.messages[0] || null,
+      unreadCount: matchUnreadMap.get(match.id) ?? 0,
+      subtitle: t("matchConversation"),
+    });
+  }
 
   // Sort by last message time (most recent first), then by those without messages
   conversations.sort((a, b) => {
@@ -156,8 +211,8 @@ export default async function MessagesListPage() {
 
             return (
               <Link
-                key={conv.bookingId}
-                href={`/messages/${conv.bookingId}`}
+                key={conv.conversationId}
+                href={`/messages/${conv.conversationId}`}
                 className="flex items-center gap-4 px-5 py-4 transition hover:bg-surface-tertiary"
               >
                 <div className="relative">
@@ -195,8 +250,8 @@ export default async function MessagesListPage() {
                       </span>
                     )}
                   </div>
-                  {conv.requestTitle && (
-                    <p className="text-xs text-text-tertiary">{conv.requestTitle}</p>
+                  {conv.subtitle && (
+                    <p className="text-xs text-text-tertiary">{conv.subtitle}</p>
                   )}
                   {conv.lastMessage ? (
                     <p
