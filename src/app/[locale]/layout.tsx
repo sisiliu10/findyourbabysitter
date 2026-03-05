@@ -3,7 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { dmSans, instrumentSerif } from "@/app/layout";
+import { sourceSans, instrumentSerif } from "@/app/layout";
 
 interface Props {
   children: React.ReactNode;
@@ -59,7 +59,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale}>
       <body
-        className={`${dmSans.variable} ${instrumentSerif.variable} font-sans antialiased bg-surface-primary text-text-primary`}
+        className={`${sourceSans.variable} ${instrumentSerif.variable} font-sans antialiased bg-surface-primary text-text-primary`}
       >
         <NextIntlClientProvider messages={messages}>
           {children}
