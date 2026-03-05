@@ -20,6 +20,7 @@ interface UserProfile {
   avatarUrl: string | null;
   birthday: string | null;
   instagram: string | null;
+  bio: string;
   babysitterProfile: {
     bio: string;
     hourlyRate: number;
@@ -89,6 +90,7 @@ export default function ProfileEditPage() {
         setAvatarUrl(user.avatarUrl);
         setInstagram(user.instagram || "");
         setRole(user.role);
+        setBio(user.bio || "");
 
         if (user.babysitterProfile) {
           const p = user.babysitterProfile;
@@ -169,6 +171,7 @@ export default function ProfileEditPage() {
       phone: phone || undefined,
       birthday: birthday || undefined,
       instagram: instagram || "",
+      bio,
     };
 
     if (role === "BABYSITTER") {
@@ -326,6 +329,22 @@ export default function ProfileEditPage() {
             />
           </div>
         </section>
+
+        {/* Bio section for parents */}
+        {!isSitter && (
+          <section className="border border-border-default bg-surface-secondary p-6">
+            <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("aboutYou")}
+            </p>
+            <Textarea
+              label={t("bio")}
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              placeholder={t("bioPlaceholderParent")}
+              rows={4}
+            />
+          </section>
+        )}
 
         {/* Sitter sections */}
         {isSitter && (

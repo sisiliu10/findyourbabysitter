@@ -268,7 +268,9 @@
     "oldestAge": "Ältestes Alter",
     "yourAvailability": "Deine Verfügbarkeit",
     "selectAvailability": "Wähle aus, wann du normalerweise verfügbar bist",
-    "failedToSave": "Profil konnte nicht gespeichert werden"
+    "failedToSave": "Profil konnte nicht gespeichert werden",
+    "bioOptional": "Über mich (optional)",
+    "bioPlaceholderParent": "Erzähle Babysittern ein wenig über deine Familie..."
   },
   "bookingsList": {
     "title": "Buchungen",
@@ -352,6 +354,7 @@
     "aboutYou": "Über dich",
     "bio": "Über mich",
     "bioPlaceholder": "Erzähle den Eltern von dir, deiner Erfahrung und was dich als Babysitter auszeichnet...",
+    "bioPlaceholderParent": "Erzähle Babysittern ein wenig über deine Familie...",
     "hourlyRate": "Stundensatz (€)",
     "yearsExperience": "Jahre Erfahrung",
     "languagesLabel": "Sprachen (kommagetrennt)",

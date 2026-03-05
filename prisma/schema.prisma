@@ -19,6 +19,7 @@ model User {
   avatarUrl    String?
   birthday     DateTime?
   instagram    String?
+  bio          String   @default("")
   isDisabled               Boolean   @default(false)
   onboarded                Boolean   @default(false)
   emailVerified            Boolean   @default(false)

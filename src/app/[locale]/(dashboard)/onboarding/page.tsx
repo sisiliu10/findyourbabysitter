@@ -66,7 +66,7 @@ export default function OnboardingPage() {
     setError("");
     setLoading(true);
 
-    const body: Record<string, unknown> = { city, state, zipCode, phone, latitude, longitude };
+    const body: Record<string, unknown> = { city, state, zipCode, phone, latitude, longitude, bio };
     if (birthday) body.birthday = birthday;
 
     // Upload avatar if selected
@@ -78,7 +78,6 @@ export default function OnboardingPage() {
 
     if (role === "BABYSITTER") {
       Object.assign(body, {
-        bio,
         hourlyRate: parseFloat(hourlyRate),
         languages,
         ageRangeMin: parseInt(ageRangeMin, 10),
@@ -170,6 +169,10 @@ export default function OnboardingPage() {
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("phoneOptional")}</label>
             <input value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="+49 30 123 4567" />
+          </div>
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("bioOptional")}</label>
+            <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={3} className={inputClass} placeholder={t("bioPlaceholderParent")} />
           </div>
 
           <button

@@ -260,7 +260,14 @@ export default async function ProfilePage() {
       {/* Parent-specific sections */}
       {!isSitter && (
         <div className="mt-6 space-y-6">
-          {/* Location */}
+          {/* Bio */}
+          <div className="border border-border-default bg-surface-secondary p-6">
+            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("about")}</p>
+            <p className="whitespace-pre-wrap text-sm leading-relaxed text-text-secondary">
+              {user.bio || t("noBio")}
+            </p>
+          </div>
+          {/* Account Info */}
           <div className="border border-border-default bg-surface-secondary p-6">
             <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">
               {t("accountInfo")}
