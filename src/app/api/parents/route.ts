@@ -40,6 +40,7 @@ export async function GET(request: Request) {
           lastName: true,
           avatarUrl: true,
           birthday: true,
+          bio: true,
           createdAt: true,
           childcareRequests: {
             where: { status: "OPEN" },

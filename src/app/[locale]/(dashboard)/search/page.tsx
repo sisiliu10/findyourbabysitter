@@ -36,6 +36,7 @@ interface ParentResult {
   lastName: string;
   avatarUrl: string | null;
   birthday: string | null;
+  bio: string | null;
   createdAt: string;
   childcareRequests: {
     id: string;
@@ -127,9 +128,9 @@ function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, 
     avatarUrl: p.avatarUrl,
     age: calculateAge(p.birthday),
     location: locations[0] || "",
-    bio: reqs.length > 0
+    bio: p.bio || (reqs.length > 0
       ? reqs.map((r) => r.title).join(" · ")
-      : t("lookingToConnect"),
+      : t("lookingToConnect")),
     tags,
     detail: reqs.length > 0 ? t("activeRequests") : t("noActiveRequests"),
     linkHref: `/messages`,
