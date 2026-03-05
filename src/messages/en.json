@@ -3,10 +3,18 @@
     "login": "Log in",
     "signup": "Sign up",
     "logout": "Log out",
-    "guides": "Guides"
+    "guides": "Guides",
+    "howItWorks": "How it works",
+    "neighborhoods": "Neighborhoods",
+    "menu": "Menu",
+    "getStarted": "Get started"
   },
   "home": {
     "heroTagline": "Find a Babysitter in Berlin",
+    "heroSubtitle": "Stop scrolling through random profiles. Start with babysitters your friends actually use. Verified, reviewed, and easy to book.",
+    "trustedBadge": "Trusted by Berlin families",
+    "trustedBy": "Trusted by",
+    "announcementBar": "Now available in 10+ Berlin neighborhoods",
     "heroBody1": "Stop scrolling through random profiles.",
     "heroBody2": "Start with babysitters your friends actually use.",
     "heroBody3": "Verified, reviewed, and easy to book in one place.",

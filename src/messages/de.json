@@ -3,10 +3,18 @@
     "login": "Anmelden",
     "signup": "Registrieren",
     "logout": "Abmelden",
-    "guides": "Guides"
+    "guides": "Guides",
+    "howItWorks": "So funktioniert's",
+    "neighborhoods": "Bezirke",
+    "menu": "Menü",
+    "getStarted": "Jetzt starten"
   },
   "home": {
     "heroTagline": "Babysitter in Berlin finden",
+    "heroSubtitle": "Kein endloses Scrollen mehr durch unbekannte Profile. Finde Babysitter, die deine Freunde wirklich nutzen. Geprüft, bewertet und einfach buchbar.",
+    "trustedBadge": "Von Berliner Familien empfohlen",
+    "trustedBy": "Vertraut von",
+    "announcementBar": "Jetzt in über 10 Berliner Bezirken verfügbar",
     "heroBody1": "Kein endloses Scrollen mehr durch unbekannte Profile.",
     "heroBody2": "Fang mit Babysittern an, die deine Freunde wirklich nutzen.",
     "heroBody3": "Geprüft, bewertet und unkompliziert buchbar.",

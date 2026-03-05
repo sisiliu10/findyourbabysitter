@@ -3,6 +3,8 @@ import { Link } from "@/i18n/navigation";
 import { DISTRICTS, LANGUAGES } from "@/data/landing-pages";
 import type { Metadata } from "next";
 import { Header } from "@/components/landing/Header";
+import { AnnouncementBar } from "@/components/landing/AnnouncementBar";
+import { TrustBar } from "@/components/landing/TrustBar";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -27,50 +29,56 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <div className="flex min-h-screen flex-col bg-surface-primary">
+      <AnnouncementBar />
       <Header />
 
       <main className="flex-1">
-        {/* Hero */}
-        <section className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 lg:items-center border-b border-border-default">
-            <div className="lg:col-span-7 py-16 sm:py-20 lg:py-24 lg:pr-16">
-              <h1 className="font-serif text-4xl leading-[1.1] tracking-tight text-text-primary sm:text-5xl lg:text-6xl">
-                {t("heroTagline")}
-              </h1>
-              <p className="mt-6 max-w-lg text-base leading-relaxed text-text-secondary">
-                {t("heroBody1")}<br />
-                {t("heroBody2")}<br />
-                {t("heroBody3")}
-              </p>
-              <div className="mt-10 flex items-center gap-6">
-                <Link
-                  href="/register"
-                  className="border border-text-primary bg-text-primary px-8 py-3.5 text-sm font-medium text-surface-primary transition-colors hover:bg-accent hover:border-accent"
-                >
-                  {t("getStarted")}
-                </Link>
-                <Link
-                  href="/login"
-                  className="text-sm text-text-tertiary transition-colors hover:text-text-primary"
-                >
-                  {t("signIn")}
-                </Link>
-              </div>
-            </div>
-            <div className="lg:col-span-5 lg:pl-12">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/hero-drawing.jpg"
-                alt="Child's crayon drawing of a house with flowers and sunshine"
-                className="w-full h-auto"
-                style={{ mixBlendMode: "multiply" }}
-              />
+        {/* Hero — text overlays the sky area, full image visible */}
+        <section className="relative w-full overflow-hidden min-h-[70vh] sm:min-h-[80vh] lg:min-h-[85vh] flex flex-col">
+          {/* Background image — full vibrancy, fully visible */}
+          <div className="absolute inset-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/hero-bg.png"
+              alt=""
+              className="h-full w-full object-cover object-bottom"
+              aria-hidden="true"
+            />
+            {/* Very light veil at the top only — just enough for text readability */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: "linear-gradient(to bottom, color-mix(in srgb, var(--color-surface-primary) 55%, transparent) 0%, color-mix(in srgb, var(--color-surface-primary) 25%, transparent) 35%, transparent 55%)",
+              }}
+            />
+          </div>
+
+          <div className="relative mx-auto max-w-3xl px-6 pt-16 sm:pt-24 lg:pt-32 text-center">
+            <p className="mb-6 text-[10px] font-medium uppercase tracking-widest text-text-tertiary">
+              {t("trustedBadge")}
+            </p>
+            <h1 className="mx-auto max-w-2xl font-serif text-4xl leading-[1.1] tracking-tight text-text-primary sm:text-5xl lg:text-6xl xl:text-7xl">
+              {t("heroTagline")}
+            </h1>
+            <p className="mx-auto mt-6 max-w-lg text-base leading-relaxed text-text-secondary sm:text-lg">
+              {t("heroSubtitle")}
+            </p>
+            <div className="mt-10">
+              <Link
+                href="/register"
+                className="inline-block border border-text-primary bg-text-primary px-10 py-4 text-sm font-medium uppercase tracking-wide text-surface-primary transition-colors hover:bg-accent hover:border-accent"
+              >
+                {t("getStarted")}
+              </Link>
             </div>
           </div>
         </section>
 
+        {/* Scrolling trust bar */}
+        <TrustBar />
+
         {/* SEO intro */}
-        <section className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
+        <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
           <h2 className="font-serif text-2xl text-text-primary sm:text-3xl mb-4">
             {t("seoIntroTitle")}
           </h2>
@@ -125,7 +133,7 @@ export default async function HomePage({ params }: Props) {
         </section>
 
         {/* How it works */}
-        <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+        <section id="how-it-works" className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
           <p className="text-xs uppercase tracking-wide text-text-muted mb-3">{t("howItWorks")}</p>
           <h2 className="font-serif text-3xl text-text-primary sm:text-4xl mb-8">{t("howItWorksTitle")}</h2>
           <div className="grid grid-cols-1 gap-0 sm:grid-cols-3">
@@ -153,28 +161,9 @@ export default async function HomePage({ params }: Props) {
           </div>
         </section>
 
-        {/* Trusted by parents across Berlin */}
-        <section className="border-t border-border-default">
-          <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
-            <h2 className="font-serif text-2xl text-text-primary sm:text-3xl mb-4">
-              {t("trustedTitle")}
-            </h2>
-            <p className="max-w-3xl text-sm leading-relaxed text-text-secondary mb-8">
-              {t("trustedBody")}
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/babysitter/prenzlauer-berg" className="border border-border-default px-5 py-3 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary">Prenzlauer Berg</Link>
-              <Link href="/babysitter/kreuzberg" className="border border-border-default px-5 py-3 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary">Kreuzberg</Link>
-              <Link href="/babysitter/mitte" className="border border-border-default px-5 py-3 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary">Mitte</Link>
-              <Link href="/babysitter/friedrichshain" className="border border-border-default px-5 py-3 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary">Friedrichshain</Link>
-              <Link href="/babysitter/charlottenburg" className="border border-border-default px-5 py-3 text-sm font-medium text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary">Charlottenburg</Link>
-            </div>
-          </div>
-        </section>
-
         {/* Browse by neighborhood */}
-        <section className="border-t border-border-default">
-          <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+        <section id="neighborhoods" className="border-t border-border-default">
+          <div className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
             <h2 className="text-xs uppercase tracking-wide text-text-muted mb-8">{t("browseByNeighborhood")}</h2>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
               {DISTRICTS.map((d) => (
@@ -193,7 +182,7 @@ export default async function HomePage({ params }: Props) {
 
         {/* Browse by language */}
         <section className="border-t border-border-default">
-          <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
+          <div className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
             <h2 className="text-xs uppercase tracking-wide text-text-muted mb-8">{t("browseByLanguage")}</h2>
             <div className="flex flex-wrap gap-3">
               {LANGUAGES.map((l) => (
