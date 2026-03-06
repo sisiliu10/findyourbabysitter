@@ -30,18 +30,6 @@ function isPublicPath(normalised: string): boolean {
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip Next.js internals and static files
-  if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/uploads") ||
-    pathname === "/favicon.ico" ||
-    pathname === "/sitemap.xml" ||
-    pathname === "/robots.txt" ||
-    /\.(jpg|jpeg|png|svg|gif|webp|ico)$/.test(pathname)
-  ) {
-    return NextResponse.next();
-  }
-
   // Strip locale prefix to normalise path for auth/public-path checks.
   // With localePrefix: 'as-needed', only non-default locales are prefixed.
   const normalised = pathname.replace(/^\/de(?=\/|$)/, "") || "/";
@@ -71,5 +59,5 @@ export default function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|uploads/).*)"],
+  matcher: ["/((?!_next|_vercel|uploads|.*\\..*).*)" ],
 };
