@@ -262,7 +262,14 @@
     "itsAMatch": "Es ist ein Match!",
     "matchDescription": "Du und {name} habt euch gegenseitig geliked. Starte eine Unterhaltung!",
     "sendMessage": "Nachricht senden",
-    "keepSwiping": "Weiter swipen"
+    "keepSwiping": "Weiter swipen",
+    "parents": "Eltern",
+    "connectParents": "Andere Eltern für Spielverabredungen finden",
+    "browseFamilies": "Familien mit Betreuungsbedarf entdecken",
+    "likedFamilies": "Du hast {count, plural, one {1 Familie} other {# Familien}} geliked",
+    "likedParents": "Du hast {count, plural, one {1 Elternteil} other {# Eltern}} geliked",
+    "kidsAndAges": "{count, plural, one {1 Kind} other {# Kinder}}, Alter {ages}",
+    "lookingFor": "Sucht"
   },
   "onboarding": {
     "completeProfile": "Profil vervollständigen",

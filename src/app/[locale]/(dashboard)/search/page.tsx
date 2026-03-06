@@ -7,6 +7,7 @@ import { formatCurrency, getInitials, cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/Spinner";
 import { SwipeCard } from "@/components/search/SwipeCard";
 import { MatchModal } from "@/components/search/MatchModal";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 type SwipeMode = "babysitters" | "moms";
 
@@ -51,6 +52,11 @@ interface ParentResult {
   }[];
 }
 
+interface ChildInfo {
+  name: string;
+  age: number;
+}
+
 // Unified card type for both modes
 interface CardProfile {
   id: string;
@@ -64,6 +70,10 @@ interface CardProfile {
   detail: string;
   linkHref: string;
   meta: string;
+  // Rich fields for parent cards
+  children?: ChildInfo[];
+  needsSummary?: string;
+  viewContext?: "sitter" | "parent";
 }
 
 function calculateAge(birthday: string | null): number | null {
@@ -106,43 +116,72 @@ function sitterToCard(s: SitterResult, t: (key: string, values?: Record<string, 
   };
 }
 
-function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, unknown>) => string, locale: string, tn: (key: string) => string): CardProfile {
+function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, unknown>) => string, locale: string, tn: (key: string) => string, viewerRole: "sitter" | "parent" = "parent"): CardProfile {
   const reqs = p.childcareRequests;
-  const totalKids = reqs.reduce((sum, r) => {
+
+  // Parse children from all requests, deduplicate by name
+  const allChildren: ChildInfo[] = [];
+  const seenNames = new Set<string>();
+  for (const req of reqs) {
     try {
-      const children = JSON.parse(r.childrenJson);
-      return sum + (Array.isArray(children) ? children.length : r.numberOfChildren);
-    } catch {
-      return sum + r.numberOfChildren;
-    }
-  }, 0);
+      const parsed = JSON.parse(req.childrenJson);
+      if (Array.isArray(parsed)) {
+        for (const child of parsed) {
+          const key = (child.name || "").toLowerCase();
+          if (!seenNames.has(key)) {
+            seenNames.add(key);
+            allChildren.push({ name: child.name || "", age: child.age || 0 });
+          }
+        }
+      }
+    } catch { /* skip */ }
+  }
+
+  // Fallback child count from numberOfChildren if no childrenJson
+  const totalKids = allChildren.length > 0
+    ? allChildren.length
+    : reqs.reduce((sum, r) => sum + r.numberOfChildren, 0);
 
   const locations = [...new Set(reqs.map((r) => r.city).filter(Boolean))];
   const tags: CardProfile["tags"] = [];
 
-  // Childcare type chips (up to 2)
+  // Build needs summary from childcare types (for sitter view)
+  let needsSummary = "";
   try {
     const types: string[] = JSON.parse(p.childcareTypes || "[]");
-    types.slice(0, 2).forEach((type) => {
-      tags.push({ label: tn(`types.${type}`), variant: "info" });
-    });
-  } catch { /* empty */ }
-
-  // Time of day chip (first one)
-  try {
-    const times: string[] = JSON.parse(p.timesOfDay || "[]");
-    if (times.length > 0) {
-      tags.push({ label: tn(`times.${times[0]}`), variant: "neutral" });
+    if (types.length > 0) {
+      const typeLabels = types.map((type) => tn(`types.${type}`));
+      needsSummary = t("lookingFor") + " " + typeLabels.join(", ").toLowerCase();
     }
   } catch { /* empty */ }
 
-  // Frequency chip
+  // Tags vary by viewer context
+  if (viewerRole === "sitter") {
+    // Sitter sees: times of day + frequency (schedule info)
+    try {
+      const times: string[] = JSON.parse(p.timesOfDay || "[]");
+      times.forEach((time) => {
+        tags.push({ label: tn(`times.${time}`), variant: "info" });
+      });
+    } catch { /* empty */ }
+  }
+
+  // Frequency chip (both contexts — shows activity level)
   if (p.careFrequency) {
     tags.push({ label: tn(`frequencies.${p.careFrequency}`), variant: "neutral" });
   }
 
-  if (totalKids > 0) tags.push({ label: t("childCount", { count: totalKids }), variant: "info" });
-  if (reqs.length > 0) tags.push({ label: t("requestCount", { count: reqs.length }), variant: "neutral" });
+  // Build detail line: kids + ages
+  let detail = "";
+  if (allChildren.length > 0) {
+    const ages = allChildren.map((c) => c.age).sort((a, b) => a - b);
+    const agesStr = ages.length === 1
+      ? String(ages[0])
+      : ages.slice(0, -1).join(", ") + " & " + ages[ages.length - 1];
+    detail = t("kidsAndAges", { count: allChildren.length, ages: agesStr });
+  } else if (totalKids > 0) {
+    detail = t("childCount", { count: totalKids });
+  }
 
   const dateLocale = locale === "de" ? "de-DE" : "en-US";
 
@@ -157,9 +196,12 @@ function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, 
       ? reqs.map((r) => r.title).join(" · ")
       : t("lookingToConnect")),
     tags,
-    detail: reqs.length > 0 ? t("activeRequests") : t("noActiveRequests"),
+    detail,
     linkHref: `/messages`,
     meta: t("memberSince", { date: new Date(p.createdAt).toLocaleDateString(dateLocale, { month: "short", year: "numeric" }) }),
+    children: allChildren,
+    needsSummary: viewerRole === "sitter" ? needsSummary : undefined,
+    viewContext: viewerRole,
   };
 }
 
@@ -178,7 +220,11 @@ export default function SearchPage() {
   const tc = useTranslations("common");
   const tn = useTranslations("childcareNeeds");
   const locale = useLocale();
-  const [mode, setMode] = useState<SwipeMode>("babysitters");
+  const { user: currentUser, loading: userLoading } = useCurrentUser();
+  const userRole = currentUser?.role;
+  const isSitter = userRole === "BABYSITTER";
+
+  const [mode, setMode] = useState<SwipeMode | null>(null);
   const [cards, setCards] = useState<CardProfile[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -187,6 +233,13 @@ export default function SearchPage() {
   const [matchInfo, setMatchInfo] = useState<MatchInfo | null>(null);
   const [showMatchModal, setShowMatchModal] = useState(false);
   const likedIdsRef = useRef<Set<string>>(new Set());
+
+  // Set default mode based on user role
+  useEffect(() => {
+    if (!userLoading && currentUser && mode === null) {
+      setMode(isSitter ? "moms" : "babysitters");
+    }
+  }, [userLoading, currentUser, isSitter, mode]);
 
   const fetchCards = useCallback(async (swipeMode: SwipeMode) => {
     setLoading(true);
@@ -211,10 +264,11 @@ export default function SearchPage() {
           setCards([]);
         }
       } else {
+        const viewerRole = isSitter ? "sitter" : "parent";
         const res = await fetch("/api/parents?limit=50");
         const json = await res.json();
         if (json.success && json.data) {
-          const all = (json.data.parents || []).map((p: ParentResult) => parentToCard(p, t as any, locale, tn as any));
+          const all = (json.data.parents || []).map((p: ParentResult) => parentToCard(p, t as any, locale, tn as any, viewerRole as "sitter" | "parent"));
           setCards(all.filter((c: CardProfile) => !alreadyLiked.has(c.id)));
         } else {
           setCards([]);
@@ -225,10 +279,11 @@ export default function SearchPage() {
     } finally {
       setLoading(false);
     }
-  }, [t, tn, locale]);
+  }, [t, tn, locale, isSitter]);
 
+  // Only fetch when mode is resolved
   useEffect(() => {
-    fetchCards(mode);
+    if (mode) fetchCards(mode);
   }, [mode, fetchCards]);
 
   const handleSwipeRight = useCallback(() => {
@@ -272,45 +327,53 @@ export default function SearchPage() {
 
   const currentCard = cards[currentIndex];
   const nextCard = cards[currentIndex + 1];
-  const isFinished = !loading && currentIndex >= cards.length;
+  const isInitializing = userLoading || mode === null;
+  const isFinished = !loading && !isInitializing && currentIndex >= cards.length;
 
   return (
     <div className="flex h-full flex-col">
-      {/* Toggle */}
-      <div className="mb-6 flex items-center justify-between">
-        <div>
+      {/* Header — role-aware */}
+      {isSitter ? (
+        <div className="mb-6">
           <h1 className="font-serif text-3xl text-text-primary">{t("discover")}</h1>
-          <p className="mt-1 text-sm text-text-secondary">
-            {mode === "babysitters"
-              ? t("swipeBabysitters")
-              : t("connectMoms")}
-          </p>
+          <p className="mt-1 text-sm text-text-secondary">{t("browseFamilies")}</p>
         </div>
-        <div className="flex border border-border-default bg-surface-secondary">
-          <button
-            onClick={() => setMode("babysitters")}
-            className={cn(
-              "px-4 py-2 text-xs font-medium uppercase tracking-wide transition-colors",
-              mode === "babysitters"
-                ? "bg-text-primary text-surface-primary"
-                : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
-            )}
-          >
-            {t("babysitters")}
-          </button>
-          <button
-            onClick={() => setMode("moms")}
-            className={cn(
-              "px-4 py-2 text-xs font-medium uppercase tracking-wide transition-colors",
-              mode === "moms"
-                ? "bg-text-primary text-surface-primary"
-                : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
-            )}
-          >
-            {t("moms")}
-          </button>
+      ) : (
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="font-serif text-3xl text-text-primary">{t("discover")}</h1>
+            <p className="mt-1 text-sm text-text-secondary">
+              {mode === "babysitters"
+                ? t("swipeBabysitters")
+                : t("connectParents")}
+            </p>
+          </div>
+          <div className="flex border border-border-default bg-surface-secondary">
+            <button
+              onClick={() => setMode("babysitters")}
+              className={cn(
+                "px-4 py-2 text-xs font-medium uppercase tracking-wide transition-colors",
+                mode === "babysitters"
+                  ? "bg-text-primary text-surface-primary"
+                  : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
+              )}
+            >
+              {t("babysitters")}
+            </button>
+            <button
+              onClick={() => setMode("moms")}
+              className={cn(
+                "px-4 py-2 text-xs font-medium uppercase tracking-wide transition-colors",
+                mode === "moms"
+                  ? "bg-text-primary text-surface-primary"
+                  : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
+              )}
+            >
+              {t("parents")}
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Counter */}
       {!loading && cards.length > 0 && !isFinished && (
@@ -321,7 +384,7 @@ export default function SearchPage() {
 
       {/* Card stack area */}
       <div className="relative mx-auto w-full max-w-md flex-1" style={{ minHeight: 540 }}>
-        {loading ? (
+        {(loading || isInitializing) ? (
           <div className="flex h-full items-center justify-center">
             <Spinner size="lg" className="text-accent" />
           </div>
@@ -348,7 +411,11 @@ export default function SearchPage() {
               </p>
               <p className="mt-1 text-sm text-text-tertiary">
                 {liked.length > 0
-                  ? mode === "babysitters" ? t("likedSitters", { count: liked.length }) : t("likedMoms", { count: liked.length })
+                  ? mode === "babysitters"
+                    ? t("likedSitters", { count: liked.length })
+                    : isSitter
+                      ? t("likedFamilies", { count: liked.length })
+                      : t("likedParents", { count: liked.length })
                   : t("checkBackLater")}
               </p>
               <div className="mt-6 flex gap-3">
@@ -459,10 +526,11 @@ function ProfileCard({
   const tc = useTranslations("common");
   const initials = getInitials(profile.firstName, profile.lastName);
   const roleLabel = mode === "babysitters" ? tc("roles.BABYSITTER") : tc("roles.PARENT");
+  const isParentCard = mode === "moms";
 
   return (
     <div className="flex h-full flex-col overflow-hidden bg-surface-secondary shadow-[0_4px_24px_rgba(44,36,32,0.08)]">
-      {/* Photo area — taller, more cinematic */}
+      {/* Photo area */}
       <div className="relative flex-shrink-0">
         {profile.avatarUrl ? (
           <img
@@ -479,7 +547,7 @@ function ProfileCard({
           </div>
         )}
 
-        {/* Warm gradient — taller, blends photo into content */}
+        {/* Warm gradient */}
         <div
           className="absolute inset-x-0 bottom-0 h-44"
           style={{
@@ -526,12 +594,31 @@ function ProfileCard({
         </div>
       </div>
 
-      {/* Content — seamless continuation */}
+      {/* Content */}
       <div className="flex flex-1 flex-col px-6 pt-5 pb-5">
-        {/* Detail strip — headline info */}
-        <p className="text-base font-medium text-text-primary">
-          {profile.detail}
-        </p>
+        {/* Parent card: children + needs info */}
+        {isParentCard && profile.detail && (
+          <div className="mb-2 flex items-center gap-2">
+            <svg className="h-4 w-4 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+            </svg>
+            <p className="text-sm font-medium text-text-primary">{profile.detail}</p>
+          </div>
+        )}
+
+        {/* Sitter viewing parent: needs summary */}
+        {isParentCard && profile.needsSummary && (
+          <p className="mb-2 text-[13px] font-medium text-accent">
+            {profile.needsSummary}
+          </p>
+        )}
+
+        {/* Sitter card: rate/detail */}
+        {!isParentCard && (
+          <p className="text-base font-medium text-text-primary">
+            {profile.detail}
+          </p>
+        )}
 
         {/* Bio */}
         {profile.bio && (
@@ -540,7 +627,7 @@ function ProfileCard({
           </p>
         )}
 
-        {/* Tags — refined, softer chips */}
+        {/* Tags */}
         {profile.tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-1.5">
             {profile.tags.map((tag) => (
@@ -559,7 +646,7 @@ function ProfileCard({
           </div>
         )}
 
-        {/* Meta — subtle, no divider */}
+        {/* Meta */}
         {profile.meta && (
           <p className="mt-auto pt-4 text-[11px] tracking-wide text-text-muted">
             {profile.meta}

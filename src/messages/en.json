@@ -262,7 +262,14 @@
     "itsAMatch": "It's a match!",
     "matchDescription": "You and {name} liked each other. Start a conversation!",
     "sendMessage": "Send a message",
-    "keepSwiping": "Keep swiping"
+    "keepSwiping": "Keep swiping",
+    "parents": "Parents",
+    "connectParents": "Connect with other parents for playdates",
+    "browseFamilies": "Browse families looking for childcare",
+    "likedFamilies": "You liked {count, plural, one {1 family} other {# families}}",
+    "likedParents": "You liked {count, plural, one {1 parent} other {# parents}}",
+    "kidsAndAges": "{count, plural, one {1 kid} other {# kids}}, ages {ages}",
+    "lookingFor": "Looking for"
   },
   "onboarding": {
     "completeProfile": "Complete your profile",
