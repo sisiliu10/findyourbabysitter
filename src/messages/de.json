@@ -354,7 +354,20 @@
     "phoneLabel": "Telefon:",
     "memberSinceLabel": "Mitglied seit:",
     "joined": "Beigetreten am {date}",
-    "stars": "{rating} Sterne ({count, plural, one {1 Bewertung} other {# Bewertungen}})"
+    "stars": "{rating} Sterne ({count, plural, one {1 Bewertung} other {# Bewertungen}})",
+    "profileComplete": "Profil {percent}% vollständig",
+    "experienceSkills": "Erfahrung & Fähigkeiten",
+    "trustVerification": "Vertrauen & Verifizierung",
+    "emailVerifiedStatus": "E-Mail bestätigt",
+    "emailNotVerified": "E-Mail nicht bestätigt",
+    "phoneAdded": "Telefon hinterlegt",
+    "phoneNotAdded": "Telefon nicht hinterlegt",
+    "reviewsReceivedCount": "{count, plural, =0 {Noch keine Bewertungen} one {1 Bewertung erhalten} other {# Bewertungen erhalten}}",
+    "bookingsLabel": "Buchungen",
+    "likesLabel": "Likes",
+    "matchesLabel": "Matches",
+    "reviewsLabel": "Bewertungen",
+    "account": "Konto"
   },
   "profileEdit": {
     "title": "Profil bearbeiten",

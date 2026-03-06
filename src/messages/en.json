@@ -354,7 +354,20 @@
     "phoneLabel": "Phone:",
     "memberSinceLabel": "Member since:",
     "joined": "Joined {date}",
-    "stars": "{rating} stars ({count, plural, one {1 review} other {# reviews}})"
+    "stars": "{rating} stars ({count, plural, one {1 review} other {# reviews}})",
+    "profileComplete": "Profile {percent}% complete",
+    "experienceSkills": "Experience & Skills",
+    "trustVerification": "Trust & Verification",
+    "emailVerifiedStatus": "Email verified",
+    "emailNotVerified": "Email not verified",
+    "phoneAdded": "Phone added",
+    "phoneNotAdded": "Phone not added",
+    "reviewsReceivedCount": "{count, plural, =0 {No reviews yet} one {1 review received} other {# reviews received}}",
+    "bookingsLabel": "Bookings",
+    "likesLabel": "Likes",
+    "matchesLabel": "Matches",
+    "reviewsLabel": "Reviews",
+    "account": "Account"
   },
   "profileEdit": {
     "title": "Edit Profile",
