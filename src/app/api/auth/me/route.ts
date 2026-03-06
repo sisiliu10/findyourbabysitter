@@ -26,6 +26,8 @@ export async function GET() {
         childcareTypes: true,
         timesOfDay: true,
         careFrequency: true,
+        zipCode: true,
+        district: true,
         isDisabled: true,
         onboarded: true,
         createdAt: true,

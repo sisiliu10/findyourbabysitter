@@ -44,6 +44,8 @@ export async function GET(request: Request) {
           childcareTypes: true,
           timesOfDay: true,
           careFrequency: true,
+          zipCode: true,
+          district: true,
           createdAt: true,
           childcareRequests: {
             where: { status: "OPEN" },

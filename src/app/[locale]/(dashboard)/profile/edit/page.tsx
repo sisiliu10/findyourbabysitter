@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 import { Spinner } from "@/components/ui/Spinner";
 import { getInitials } from "@/lib/utils";
+import { getDistrictFromZip } from "@/lib/berlin-districts";
 
 interface UserProfile {
   id: string;
@@ -24,6 +25,8 @@ interface UserProfile {
   childcareTypes: string;
   timesOfDay: string;
   careFrequency: string;
+  zipCode: string;
+  district: string;
   babysitterProfile: {
     bio: string;
     hourlyRate: number;
@@ -106,6 +109,9 @@ export default function ProfileEditPage() {
         try { setTimesOfDay(JSON.parse(user.timesOfDay || "[]")); } catch { /* empty */ }
         setCareFrequency(user.careFrequency || "");
 
+        // Load user-level zip for parents
+        if (user.zipCode) setZipCode(user.zipCode);
+
         if (user.babysitterProfile) {
           const p = user.babysitterProfile;
           setBio(p.bio);
@@ -179,6 +185,8 @@ export default function ProfileEditPage() {
     setError("");
     setSuccess("");
 
+    const district = getDistrictFromZip(zipCode);
+
     const body: Record<string, unknown> = {
       firstName,
       lastName,
@@ -186,6 +194,8 @@ export default function ProfileEditPage() {
       birthday: birthday || undefined,
       instagram: instagram || "",
       bio,
+      zipCode,
+      district,
     };
 
     if (role === "PARENT") {
@@ -366,6 +376,26 @@ export default function ProfileEditPage() {
           </section>
         )}
 
+        {/* Location (Parents) */}
+        {!isSitter && (
+          <section className="border border-border-default bg-surface-secondary p-6">
+            <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("location")}
+            </p>
+            <Input
+              label={t("zipCode")}
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
+              placeholder="10117"
+            />
+            {zipCode && getDistrictFromZip(zipCode) && (
+              <p className="mt-2 text-sm text-text-secondary">
+                {getDistrictFromZip(zipCode)}, Berlin
+              </p>
+            )}
+          </section>
+        )}
+
         {/* Childcare Needs (Parents) */}
         {!isSitter && (
           <section className="border border-border-default bg-surface-secondary p-6">
@@ -508,20 +538,20 @@ export default function ProfileEditPage() {
                   label={t("city")}
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  placeholder="San Francisco"
+                  placeholder="Berlin"
                 />
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Input
                     label={t("state")}
                     value={state}
                     onChange={(e) => setState(e.target.value)}
-                    placeholder="CA"
+                    placeholder="Berlin"
                   />
                   <Input
                     label={t("zipCode")}
                     value={zipCode}
                     onChange={(e) => setZipCode(e.target.value)}
-                    placeholder="94102"
+                    placeholder="10117"
                   />
                 </div>
                 <Input

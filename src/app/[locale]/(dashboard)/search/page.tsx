@@ -28,6 +28,7 @@ interface SitterResult {
     lastName: string;
     avatarUrl: string | null;
     birthday: string | null;
+    district: string;
   };
 }
 
@@ -41,6 +42,8 @@ interface ParentResult {
   childcareTypes: string;
   timesOfDay: string;
   careFrequency: string;
+  zipCode: string;
+  district: string;
   createdAt: string;
   childcareRequests: {
     id: string;
@@ -99,7 +102,7 @@ function sitterToCard(s: SitterResult, t: (key: string, values?: Record<string, 
     firstName: s.user.firstName,
     lastName: s.user.lastName,
     avatarUrl: s.user.avatarUrl,
-    location: s.city || "",
+    location: s.user.district || s.city || "",
     bio: s.bio,
     tags,
     age: calculateAge(s.user.birthday),
@@ -191,7 +194,7 @@ function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, 
     lastName: p.lastName,
     avatarUrl: p.avatarUrl,
     age: calculateAge(p.birthday),
-    location: locations[0] || "",
+    location: p.district || locations[0] || "",
     bio: p.bio || (reqs.length > 0
       ? reqs.map((r) => r.title).join(" · ")
       : t("lookingToConnect")),

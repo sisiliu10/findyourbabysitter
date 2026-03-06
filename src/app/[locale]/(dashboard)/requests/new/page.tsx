@@ -239,7 +239,7 @@ function CreateRequestForm() {
               label={t("city")}
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              placeholder="San Francisco"
+              placeholder="Berlin"
               required
             />
             <div className="grid gap-4 sm:grid-cols-2">
@@ -247,14 +247,14 @@ function CreateRequestForm() {
                 label={t("state")}
                 value={state}
                 onChange={(e) => setState(e.target.value)}
-                placeholder="CA"
+                placeholder="Berlin"
                 required
               />
               <Input
                 label={t("zipCode")}
                 value={zipCode}
                 onChange={(e) => setZipCode(e.target.value)}
-                placeholder="94102"
+                placeholder="10117"
                 required
               />
             </div>

@@ -55,6 +55,7 @@ export async function GET(request: Request) {
               lastName: true,
               avatarUrl: true,
               birthday: true,
+              district: true,
             },
           },
         },

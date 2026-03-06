@@ -28,6 +28,8 @@ model User {
   passwordResetToken       String?
   passwordResetExpiry      DateTime?
   lastSeenAt               DateTime?
+  zipCode                  String    @default("")
+  district                 String    @default("")
   childcareTypes           String    @default("[]")
   timesOfDay               String    @default("[]")
   careFrequency            String    @default("")

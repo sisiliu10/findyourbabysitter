@@ -5,6 +5,7 @@ import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES } from "@/lib/constants";
 import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
+import { getDistrictFromZip } from "@/lib/berlin-districts";
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -73,7 +74,8 @@ export default function OnboardingPage() {
     setError("");
     setLoading(true);
 
-    const body: Record<string, unknown> = { city, state, zipCode, phone, latitude, longitude, bio };
+    const district = getDistrictFromZip(zipCode);
+    const body: Record<string, unknown> = { city, state, zipCode, district, phone, latitude, longitude, bio };
     if (birthday) body.birthday = birthday;
 
     // Include parent childcare needs
