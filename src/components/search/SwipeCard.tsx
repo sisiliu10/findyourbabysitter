@@ -114,36 +114,44 @@ export function SwipeCard({
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
     >
-      {/* Swipe indicators */}
+      {/* Swipe indicators — soft glow overlay instead of hard borders */}
       {isTop && dragging && (
         <>
+          {/* Green glow for LIKE */}
           <div
-            className="pointer-events-none absolute inset-0 z-30 border-2 border-success transition-opacity"
-            style={{ opacity: swipeDirection === "right" ? 1 : 0 }}
+            className="pointer-events-none absolute inset-0 z-30 transition-opacity"
+            style={{
+              opacity: Math.min(Math.max(offset.x / SWIPE_THRESHOLD, 0), 0.6),
+              boxShadow: "inset 0 0 60px rgba(90, 138, 98, 0.4)",
+            }}
           />
+          {/* Red glow for NOPE */}
           <div
-            className="pointer-events-none absolute inset-0 z-30 border-2 border-danger transition-opacity"
-            style={{ opacity: swipeDirection === "left" ? 1 : 0 }}
+            className="pointer-events-none absolute inset-0 z-30 transition-opacity"
+            style={{
+              opacity: Math.min(Math.max(-offset.x / SWIPE_THRESHOLD, 0), 0.6),
+              boxShadow: "inset 0 0 60px rgba(196, 90, 74, 0.4)",
+            }}
           />
           {/* LIKE label */}
           <div
-            className="pointer-events-none absolute left-6 top-8 z-30 border-2 border-success px-4 py-2 text-xl font-bold uppercase tracking-widest text-success transition-opacity"
+            className="pointer-events-none absolute left-6 top-10 z-30 bg-success/90 px-5 py-2 text-lg font-semibold uppercase tracking-[0.2em] text-white shadow-lg"
             style={{
               opacity: Math.min(Math.max(offset.x / SWIPE_THRESHOLD, 0), 1),
-              transform: "rotate(-15deg)",
+              transform: "rotate(-12deg)",
             }}
           >
             {t("like")}
           </div>
           {/* NOPE label */}
           <div
-            className="pointer-events-none absolute right-6 top-8 z-30 border-2 border-danger px-4 py-2 text-xl font-bold uppercase tracking-widest text-danger transition-opacity"
+            className="pointer-events-none absolute right-6 top-10 z-30 bg-danger/90 px-5 py-2 text-lg font-semibold uppercase tracking-[0.2em] text-white shadow-lg"
             style={{
               opacity: Math.min(
                 Math.max(-offset.x / SWIPE_THRESHOLD, 0),
                 1
               ),
-              transform: "rotate(15deg)",
+              transform: "rotate(12deg)",
             }}
           >
             {t("nope")}

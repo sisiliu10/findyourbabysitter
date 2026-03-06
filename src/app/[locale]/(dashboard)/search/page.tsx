@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency, getInitials, cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/Badge";
 import { Spinner } from "@/components/ui/Spinner";
 import { SwipeCard } from "@/components/search/SwipeCard";
 import { MatchModal } from "@/components/search/MatchModal";
@@ -321,7 +320,7 @@ export default function SearchPage() {
       )}
 
       {/* Card stack area */}
-      <div className="relative mx-auto w-full max-w-md flex-1" style={{ minHeight: 520 }}>
+      <div className="relative mx-auto w-full max-w-md flex-1" style={{ minHeight: 540 }}>
         {loading ? (
           <div className="flex h-full items-center justify-center">
             <Spinner size="lg" className="text-accent" />
@@ -376,9 +375,9 @@ export default function SearchPage() {
           </div>
         ) : (
           <>
-            {/* Next card (behind) */}
+            {/* Next card (behind) — slightly scaled down for depth */}
             {nextCard && (
-              <div className="absolute inset-0 z-10">
+              <div className="absolute inset-0 z-10 origin-bottom scale-[0.97] opacity-60">
                 <ProfileCard profile={nextCard} mode={mode} />
               </div>
             )}
@@ -398,27 +397,40 @@ export default function SearchPage() {
         )}
       </div>
 
-      {/* Action buttons */}
+      {/* Action buttons — larger, with fill hover, visually connected */}
       {!loading && !isFinished && currentCard && (
-        <div className="mt-6 flex items-center justify-center gap-5">
+        <div className="mt-5 flex items-center justify-center gap-6">
           {/* Pass */}
           <button
             onClick={handleSwipeLeft}
-            className="flex h-14 w-14 items-center justify-center border-2 border-danger text-danger transition-colors hover:bg-danger-muted"
+            className="group flex h-16 w-16 items-center justify-center bg-surface-secondary shadow-[0_2px_12px_rgba(44,36,32,0.06)] transition-all hover:bg-danger hover:shadow-[0_4px_20px_rgba(196,90,74,0.2)] active:scale-95"
             title={t("pass")}
           >
-            <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+            <svg className="h-7 w-7 text-danger transition-colors group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
 
+          {/* Undo — small, subtle, centered */}
+          {currentIndex > 0 && (
+            <button
+              onClick={handleUndo}
+              className="flex h-10 w-10 items-center justify-center text-text-muted transition-colors hover:text-text-secondary"
+              title={t("goBack")}
+            >
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+              </svg>
+            </button>
+          )}
+
           {/* Like */}
           <button
             onClick={handleSwipeRight}
-            className="flex h-14 w-14 items-center justify-center border-2 border-success text-success transition-colors hover:bg-success-muted"
+            className="group flex h-16 w-16 items-center justify-center bg-surface-secondary shadow-[0_2px_12px_rgba(44,36,32,0.06)] transition-all hover:bg-success hover:shadow-[0_4px_20px_rgba(90,138,98,0.2)] active:scale-95"
             title={t("like")}
           >
-            <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+            <svg className="h-7 w-7 text-success transition-colors group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
           </button>
@@ -446,46 +458,65 @@ function ProfileCard({
   const t = useTranslations("search");
   const tc = useTranslations("common");
   const initials = getInitials(profile.firstName, profile.lastName);
+  const roleLabel = mode === "babysitters" ? tc("roles.BABYSITTER") : tc("roles.PARENT");
 
   return (
-    <div className="flex h-full flex-col border border-border-default bg-surface-secondary">
-      {/* Avatar / photo area */}
+    <div className="flex h-full flex-col overflow-hidden bg-surface-secondary shadow-[0_4px_24px_rgba(44,36,32,0.08)]">
+      {/* Photo area — taller, more cinematic */}
       <div className="relative flex-shrink-0">
         {profile.avatarUrl ? (
           <img
             src={profile.avatarUrl}
             alt={`${profile.firstName} ${profile.lastName}`}
-            className="h-72 w-full object-cover"
+            className="h-80 w-full object-cover"
             draggable={false}
           />
         ) : (
-          <div className="flex h-72 w-full items-center justify-center bg-surface-tertiary">
-            <span className="text-6xl font-semibold text-text-muted">
+          <div className="flex h-80 w-full items-center justify-center bg-surface-tertiary">
+            <span className="text-7xl font-serif text-text-muted/60">
               {initials}
             </span>
           </div>
         )}
-        {/* Gradient overlay on photo */}
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
-        {/* View profile link */}
+
+        {/* Warm gradient — taller, blends photo into content */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-44"
+          style={{
+            background: "linear-gradient(to top, rgba(44,36,32,0.55) 0%, rgba(44,36,32,0.25) 40%, transparent 100%)",
+          }}
+        />
+
+        {/* View profile pill */}
         <Link
           href={profile.linkHref}
-          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center bg-black/30 text-white/80 backdrop-blur-sm transition hover:bg-black/50 hover:text-white"
+          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center bg-white/15 text-white/70 backdrop-blur-md transition-all hover:bg-white/25 hover:text-white"
           title={t("viewProfile")}
         >
-          <svg className="h-4.5 w-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
         </Link>
-        {/* Name overlay on photo */}
-        <div className="absolute bottom-0 left-0 p-5">
-          <h2 className="text-2xl font-semibold text-white">
-            {profile.firstName} {profile.lastName}{profile.age !== null && <span className="font-normal text-white/80">, {profile.age}</span>}
+
+        {/* Role badge — top-left, glassy */}
+        <div className="absolute left-4 top-4">
+          <span className="inline-flex items-center bg-white/15 px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest text-white/80 backdrop-blur-md">
+            {roleLabel}
+          </span>
+        </div>
+
+        {/* Name + location over gradient */}
+        <div className="absolute inset-x-0 bottom-0 px-6 pb-5">
+          <h2 className="font-serif text-[28px] leading-tight text-white drop-shadow-sm">
+            {profile.firstName} {profile.lastName}
+            {profile.age !== null && (
+              <span className="font-sans text-xl font-light text-white/70">, {profile.age}</span>
+            )}
           </h2>
           {profile.location && (
-            <p className="mt-0.5 flex items-center gap-1.5 text-sm text-white/80">
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+            <p className="mt-1 flex items-center gap-1.5 text-[13px] font-light text-white/70">
+              <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
               </svg>
@@ -495,39 +526,42 @@ function ProfileCard({
         </div>
       </div>
 
-      {/* Card content */}
-      <div className="flex flex-1 flex-col p-5">
-        {/* Detail (rate for sitters, request status for moms) */}
-        <div className="mb-3 flex items-center justify-between">
-          <span className="text-lg font-medium text-text-primary">
-            {profile.detail}
-          </span>
-          <span className="text-xs font-medium uppercase tracking-wide text-text-tertiary">
-            {mode === "babysitters" ? tc("roles.BABYSITTER") : tc("roles.PARENT")}
-          </span>
-        </div>
+      {/* Content — seamless continuation */}
+      <div className="flex flex-1 flex-col px-6 pt-5 pb-5">
+        {/* Detail strip — headline info */}
+        <p className="text-base font-medium text-text-primary">
+          {profile.detail}
+        </p>
 
         {/* Bio */}
         {profile.bio && (
-          <p className="mb-4 text-sm leading-relaxed text-text-secondary line-clamp-3">
+          <p className="mt-2.5 text-[13px] leading-relaxed text-text-secondary line-clamp-3">
             {profile.bio}
           </p>
         )}
 
-        {/* Tags / badges */}
+        {/* Tags — refined, softer chips */}
         {profile.tags.length > 0 && (
-          <div className="mb-4 flex flex-wrap gap-1.5">
+          <div className="mt-4 flex flex-wrap gap-1.5">
             {profile.tags.map((tag) => (
-              <Badge key={tag.label} variant={tag.variant}>
+              <span
+                key={tag.label}
+                className={cn(
+                  "inline-flex items-center px-2.5 py-1 text-[11px] font-medium tracking-wide",
+                  tag.variant === "success" && "bg-success-muted text-success",
+                  tag.variant === "info" && "bg-info-muted text-info",
+                  tag.variant === "neutral" && "bg-surface-tertiary text-text-secondary",
+                )}
+              >
                 {tag.label}
-              </Badge>
+              </span>
             ))}
           </div>
         )}
 
-        {/* Meta info at bottom */}
+        {/* Meta — subtle, no divider */}
         {profile.meta && (
-          <p className="mt-auto pt-3 border-t border-border-subtle text-xs text-text-tertiary">
+          <p className="mt-auto pt-4 text-[11px] tracking-wide text-text-muted">
             {profile.meta}
           </p>
         )}
