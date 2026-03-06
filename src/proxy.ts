@@ -27,7 +27,7 @@ function isPublicPath(normalised: string): boolean {
   );
 }
 
-export default function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Skip Next.js internals and static files
