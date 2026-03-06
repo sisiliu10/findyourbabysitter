@@ -41,6 +41,9 @@ export async function GET(request: Request) {
           avatarUrl: true,
           birthday: true,
           bio: true,
+          childcareTypes: true,
+          timesOfDay: true,
+          careFrequency: true,
           createdAt: true,
           childcareRequests: {
             where: { status: "OPEN" },

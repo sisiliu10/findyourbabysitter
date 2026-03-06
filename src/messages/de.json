@@ -563,6 +563,34 @@
     "dashboard": "Übersicht",
     "users": "Benutzer"
   },
+  "childcareNeeds": {
+    "title": "Betreuungsbedarf",
+    "subtitle": "Welche Art von Betreuung suchst du?",
+    "childcareType": "Gesuchte Betreuung",
+    "timeOfDay": "Tageszeit",
+    "frequency": "Häufigkeit",
+    "types": {
+      "after_school": "Nach Kita / Schule",
+      "evening": "Abendbetreuung",
+      "weekend": "Wochenendbetreuung",
+      "emergency": "Notfallbetreuung",
+      "baby_toddler": "Baby- / Kleinkindbetreuung",
+      "homework": "Hausaufgabenbetreuung"
+    },
+    "times": {
+      "morning": "Morgens",
+      "midday": "Mittags",
+      "afternoon": "Nachmittags",
+      "evening": "Abends",
+      "night": "Nachts"
+    },
+    "frequencies": {
+      "one_time": "Einmalig",
+      "occasional": "Gelegentlich",
+      "weekly": "Wöchentlich",
+      "multiple_weekly": "Mehrmals pro Woche"
+    }
+  },
   "guides": {
     "label": "Guides",
     "title": "Berlin mit Kindern",

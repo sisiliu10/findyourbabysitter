@@ -28,6 +28,9 @@ model User {
   passwordResetToken       String?
   passwordResetExpiry      DateTime?
   lastSeenAt               DateTime?
+  childcareTypes           String    @default("[]")
+  timesOfDay               String    @default("[]")
+  careFrequency            String    @default("")
   createdAt                DateTime  @default(now())
   updatedAt                DateTime  @updatedAt
 

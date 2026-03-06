@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { DAYS_OF_WEEK, TIME_SLOTS } from "@/lib/constants";
+import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES } from "@/lib/constants";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
@@ -21,6 +21,9 @@ interface UserProfile {
   birthday: string | null;
   instagram: string | null;
   bio: string;
+  childcareTypes: string;
+  timesOfDay: string;
+  careFrequency: string;
   babysitterProfile: {
     bio: string;
     hourlyRate: number;
@@ -43,6 +46,7 @@ export default function ProfileEditPage() {
   const router = useRouter();
   const t = useTranslations("profileEdit");
   const tc = useTranslations("common");
+  const tn = useTranslations("childcareNeeds");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [loading, setLoading] = useState(true);
@@ -78,6 +82,11 @@ export default function ProfileEditPage() {
     {}
   );
 
+  // Parent childcare needs
+  const [childcareTypes, setChildcareTypes] = useState<string[]>([]);
+  const [timesOfDay, setTimesOfDay] = useState<string[]>([]);
+  const [careFrequency, setCareFrequency] = useState("");
+
   useEffect(() => {
     fetch("/api/auth/me")
       .then((res) => res.json())
@@ -91,6 +100,11 @@ export default function ProfileEditPage() {
         setInstagram(user.instagram || "");
         setRole(user.role);
         setBio(user.bio || "");
+
+        // Load childcare needs
+        try { setChildcareTypes(JSON.parse(user.childcareTypes || "[]")); } catch { /* empty */ }
+        try { setTimesOfDay(JSON.parse(user.timesOfDay || "[]")); } catch { /* empty */ }
+        setCareFrequency(user.careFrequency || "");
 
         if (user.babysitterProfile) {
           const p = user.babysitterProfile;
@@ -173,6 +187,12 @@ export default function ProfileEditPage() {
       instagram: instagram || "",
       bio,
     };
+
+    if (role === "PARENT") {
+      body.childcareTypes = JSON.stringify(childcareTypes);
+      body.timesOfDay = JSON.stringify(timesOfDay);
+      body.careFrequency = careFrequency;
+    }
 
     if (role === "BABYSITTER") {
       Object.assign(body, {
@@ -343,6 +363,78 @@ export default function ProfileEditPage() {
               placeholder={t("bioPlaceholderParent")}
               rows={4}
             />
+          </section>
+        )}
+
+        {/* Childcare Needs (Parents) */}
+        {!isSitter && (
+          <section className="border border-border-default bg-surface-secondary p-6">
+            <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {tn("title")}
+            </p>
+            <div className="space-y-5">
+              <div>
+                <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-tertiary">{tn("childcareType")}</p>
+                <div className="flex flex-wrap gap-2">
+                  {CHILDCARE_TYPES.map((type) => (
+                    <button
+                      key={type}
+                      type="button"
+                      onClick={() => setChildcareTypes((prev) =>
+                        prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+                      )}
+                      className={`px-3.5 py-2 text-sm transition ${
+                        childcareTypes.includes(type)
+                          ? "bg-text-primary text-surface-primary"
+                          : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                      }`}
+                    >
+                      {tn(`types.${type}` as any)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-tertiary">{tn("timeOfDay")}</p>
+                <div className="flex flex-wrap gap-2">
+                  {CARE_TIMES_OF_DAY.map((time) => (
+                    <button
+                      key={time}
+                      type="button"
+                      onClick={() => setTimesOfDay((prev) =>
+                        prev.includes(time) ? prev.filter((t) => t !== time) : [...prev, time]
+                      )}
+                      className={`px-3.5 py-2 text-sm transition ${
+                        timesOfDay.includes(time)
+                          ? "bg-text-primary text-surface-primary"
+                          : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                      }`}
+                    >
+                      {tn(`times.${time}` as any)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-tertiary">{tn("frequency")}</p>
+                <div className="flex flex-wrap gap-2">
+                  {CARE_FREQUENCIES.map((freq) => (
+                    <button
+                      key={freq}
+                      type="button"
+                      onClick={() => setCareFrequency((prev) => prev === freq ? "" : freq)}
+                      className={`px-3.5 py-2 text-sm transition ${
+                        careFrequency === freq
+                          ? "bg-text-primary text-surface-primary"
+                          : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                      }`}
+                    >
+                      {tn(`frequencies.${freq}` as any)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           </section>
         )}
 

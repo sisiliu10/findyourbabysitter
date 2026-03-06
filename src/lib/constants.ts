@@ -41,6 +41,36 @@ export const TIME_SLOTS = ["morning", "afternoon", "evening"] as const;
 export type DayOfWeek = (typeof DAYS_OF_WEEK)[number];
 export type TimeSlot = (typeof TIME_SLOTS)[number];
 
+export const CHILDCARE_TYPES = [
+  "after_school",
+  "evening",
+  "weekend",
+  "emergency",
+  "baby_toddler",
+  "homework",
+] as const;
+
+export type ChildcareType = (typeof CHILDCARE_TYPES)[number];
+
+export const CARE_TIMES_OF_DAY = [
+  "morning",
+  "midday",
+  "afternoon",
+  "evening",
+  "night",
+] as const;
+
+export type CareTimeOfDay = (typeof CARE_TIMES_OF_DAY)[number];
+
+export const CARE_FREQUENCIES = [
+  "one_time",
+  "occasional",
+  "weekly",
+  "multiple_weekly",
+] as const;
+
+export type CareFrequency = (typeof CARE_FREQUENCIES)[number];
+
 // Allowed booking status transitions: { [currentStatus]: { [newStatus]: allowedRole[] } }
 export const STATUS_TRANSITIONS: Record<string, Record<string, string[]>> = {
   PENDING: {

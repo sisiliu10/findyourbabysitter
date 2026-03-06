@@ -563,6 +563,34 @@
     "dashboard": "Dashboard",
     "users": "Users"
   },
+  "childcareNeeds": {
+    "title": "Childcare Needs",
+    "subtitle": "What kind of childcare are you looking for?",
+    "childcareType": "Childcare type",
+    "timeOfDay": "Time of day",
+    "frequency": "Frequency",
+    "types": {
+      "after_school": "After daycare / school",
+      "evening": "Evening babysitting",
+      "weekend": "Weekend care",
+      "emergency": "Backup / emergency care",
+      "baby_toddler": "Baby / toddler care",
+      "homework": "Homework / school support"
+    },
+    "times": {
+      "morning": "Morning",
+      "midday": "Midday",
+      "afternoon": "Afternoon",
+      "evening": "Evening",
+      "night": "Night"
+    },
+    "frequencies": {
+      "one_time": "One-time",
+      "occasional": "Occasional",
+      "weekly": "Weekly",
+      "multiple_weekly": "Several times per week"
+    }
+  },
   "guides": {
     "label": "Guides",
     "title": "Berlin with Kids",

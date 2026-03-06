@@ -38,6 +38,9 @@ interface ParentResult {
   avatarUrl: string | null;
   birthday: string | null;
   bio: string | null;
+  childcareTypes: string;
+  timesOfDay: string;
+  careFrequency: string;
   createdAt: string;
   childcareRequests: {
     id: string;
@@ -104,7 +107,7 @@ function sitterToCard(s: SitterResult, t: (key: string, values?: Record<string, 
   };
 }
 
-function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, unknown>) => string, locale: string): CardProfile {
+function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, unknown>) => string, locale: string, tn: (key: string) => string): CardProfile {
   const reqs = p.childcareRequests;
   const totalKids = reqs.reduce((sum, r) => {
     try {
@@ -117,6 +120,28 @@ function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, 
 
   const locations = [...new Set(reqs.map((r) => r.city).filter(Boolean))];
   const tags: CardProfile["tags"] = [];
+
+  // Childcare type chips (up to 2)
+  try {
+    const types: string[] = JSON.parse(p.childcareTypes || "[]");
+    types.slice(0, 2).forEach((type) => {
+      tags.push({ label: tn(`types.${type}`), variant: "info" });
+    });
+  } catch { /* empty */ }
+
+  // Time of day chip (first one)
+  try {
+    const times: string[] = JSON.parse(p.timesOfDay || "[]");
+    if (times.length > 0) {
+      tags.push({ label: tn(`times.${times[0]}`), variant: "neutral" });
+    }
+  } catch { /* empty */ }
+
+  // Frequency chip
+  if (p.careFrequency) {
+    tags.push({ label: tn(`frequencies.${p.careFrequency}`), variant: "neutral" });
+  }
+
   if (totalKids > 0) tags.push({ label: t("childCount", { count: totalKids }), variant: "info" });
   if (reqs.length > 0) tags.push({ label: t("requestCount", { count: reqs.length }), variant: "neutral" });
 
@@ -152,6 +177,7 @@ interface MatchInfo {
 export default function SearchPage() {
   const t = useTranslations("search");
   const tc = useTranslations("common");
+  const tn = useTranslations("childcareNeeds");
   const locale = useLocale();
   const [mode, setMode] = useState<SwipeMode>("babysitters");
   const [cards, setCards] = useState<CardProfile[]>([]);
@@ -189,7 +215,7 @@ export default function SearchPage() {
         const res = await fetch("/api/parents?limit=50");
         const json = await res.json();
         if (json.success && json.data) {
-          const all = (json.data.parents || []).map((p: ParentResult) => parentToCard(p, t as any, locale));
+          const all = (json.data.parents || []).map((p: ParentResult) => parentToCard(p, t as any, locale, tn as any));
           setCards(all.filter((c: CardProfile) => !alreadyLiked.has(c.id)));
         } else {
           setCards([]);
@@ -200,7 +226,7 @@ export default function SearchPage() {
     } finally {
       setLoading(false);
     }
-  }, [t, locale]);
+  }, [t, tn, locale]);
 
   useEffect(() => {
     fetchCards(mode);

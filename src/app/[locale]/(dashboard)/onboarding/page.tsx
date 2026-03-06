@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { DAYS_OF_WEEK, TIME_SLOTS } from "@/lib/constants";
+import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES } from "@/lib/constants";
 import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
 
 export default function OnboardingPage() {
   const router = useRouter();
   const t = useTranslations("onboarding");
   const tc = useTranslations("common");
+  const tn = useTranslations("childcareNeeds");
   const [role, setRole] = useState<string | null>(null);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -35,6 +36,11 @@ export default function OnboardingPage() {
   const [phone, setPhone] = useState("");
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
+
+  // Parent childcare needs
+  const [childcareTypes, setChildcareTypes] = useState<string[]>([]);
+  const [timesOfDay, setTimesOfDay] = useState<string[]>([]);
+  const [careFrequency, setCareFrequency] = useState("");
 
   // Fetch role on mount, redirect if already onboarded
   useEffect(() => {
@@ -68,6 +74,13 @@ export default function OnboardingPage() {
 
     const body: Record<string, unknown> = { city, state, zipCode, phone, latitude, longitude, bio };
     if (birthday) body.birthday = birthday;
+
+    // Include parent childcare needs
+    if (role === "PARENT") {
+      body.childcareTypes = JSON.stringify(childcareTypes);
+      body.timesOfDay = JSON.stringify(timesOfDay);
+      body.careFrequency = careFrequency;
+    }
 
     // Upload avatar if selected
     if (avatarFile) {
@@ -108,7 +121,7 @@ export default function OnboardingPage() {
     }
   }
 
-  const totalSteps = role === "BABYSITTER" ? 3 : 1;
+  const totalSteps = role === "BABYSITTER" ? 3 : 2;
 
   const inputClass =
     "mt-1 block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition focus:border-text-primary focus:outline-none";
@@ -176,12 +189,99 @@ export default function OnboardingPage() {
           </div>
 
           <button
-            onClick={role === "BABYSITTER" ? () => setStep(2) : handleSubmit}
+            onClick={() => setStep(2)}
             disabled={!city || !state || !zipCode || !birthday || loading}
             className="mt-4 w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
           >
-            {role === "PARENT" ? (loading ? tc("saving") : t("completeSetup")) : tc("continue")}
+            {tc("continue")}
           </button>
+        </div>
+      )}
+
+      {/* Step 2: Parent - Childcare Needs */}
+      {step === 2 && role === "PARENT" && (
+        <div className="space-y-6 border border-border-default bg-surface-secondary p-6">
+          <div>
+            <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{tn("childcareType")}</h2>
+            <p className="mt-1 text-sm text-text-tertiary">{tn("subtitle")}</p>
+          </div>
+
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">{tn("childcareType")}</p>
+            <div className="flex flex-wrap gap-2">
+              {CHILDCARE_TYPES.map((type) => (
+                <button
+                  key={type}
+                  type="button"
+                  onClick={() => setChildcareTypes((prev) =>
+                    prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+                  )}
+                  className={`px-3.5 py-2 text-sm transition ${
+                    childcareTypes.includes(type)
+                      ? "bg-text-primary text-surface-primary"
+                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                  }`}
+                >
+                  {tn(`types.${type}`)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">{tn("timeOfDay")}</p>
+            <div className="flex flex-wrap gap-2">
+              {CARE_TIMES_OF_DAY.map((time) => (
+                <button
+                  key={time}
+                  type="button"
+                  onClick={() => setTimesOfDay((prev) =>
+                    prev.includes(time) ? prev.filter((t) => t !== time) : [...prev, time]
+                  )}
+                  className={`px-3.5 py-2 text-sm transition ${
+                    timesOfDay.includes(time)
+                      ? "bg-text-primary text-surface-primary"
+                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                  }`}
+                >
+                  {tn(`times.${time}`)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">{tn("frequency")}</p>
+            <div className="flex flex-wrap gap-2">
+              {CARE_FREQUENCIES.map((freq) => (
+                <button
+                  key={freq}
+                  type="button"
+                  onClick={() => setCareFrequency((prev) => prev === freq ? "" : freq)}
+                  className={`px-3.5 py-2 text-sm transition ${
+                    careFrequency === freq
+                      ? "bg-text-primary text-surface-primary"
+                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                  }`}
+                >
+                  {tn(`frequencies.${freq}`)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-4 flex gap-3">
+            <button onClick={() => setStep(1)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+              {tc("back")}
+            </button>
+            <button
+              onClick={handleSubmit}
+              disabled={loading}
+              className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
+            >
+              {loading ? tc("saving") : t("completeSetup")}
+            </button>
+          </div>
         </div>
       )}
 

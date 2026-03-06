@@ -1,7 +1,7 @@
 import { requireAuth } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { formatDate, formatCurrency, getInitials } from "@/lib/utils";
-import { DAYS_OF_WEEK, TIME_SLOTS } from "@/lib/constants";
+import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES } from "@/lib/constants";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { getTranslations } from "next-intl/server";
@@ -72,6 +72,7 @@ export default async function ProfilePage() {
   const session = await requireAuth();
   const t = await getTranslations("profileView");
   const tc = await getTranslations("common");
+  const tn = await getTranslations("childcareNeeds");
 
   const [user, bookingsCount, likesCount, matchesCount] = await Promise.all([
     prisma.user.findUnique({
@@ -135,6 +136,14 @@ export default async function ProfilePage() {
     user.role === "PARENT" || user.role === "BABYSITTER"
       ? tc(`roles.${user.role}` as "roles.PARENT" | "roles.BABYSITTER")
       : null;
+
+  // Parse childcare needs for parents
+  let parsedChildcareTypes: string[] = [];
+  let parsedTimesOfDay: string[] = [];
+  try { parsedChildcareTypes = JSON.parse(user.childcareTypes || "[]"); } catch { /* empty */ }
+  try { parsedTimesOfDay = JSON.parse(user.timesOfDay || "[]"); } catch { /* empty */ }
+  const parsedCareFrequency = user.careFrequency || "";
+  const hasChildcareNeeds = parsedChildcareTypes.length > 0 || parsedTimesOfDay.length > 0 || parsedCareFrequency;
 
   return (
     <div className="mx-auto max-w-2xl space-y-8 pb-8">
@@ -267,6 +276,61 @@ export default async function ProfilePage() {
           {bio || t("noBio")}
         </p>
       </section>
+
+      {/* ─── Childcare Needs (Parents) ─── */}
+      {!isSitter && hasChildcareNeeds && (
+        <section>
+          <h2 className="mb-4 font-serif text-lg text-text-primary">
+            {tn("title")}
+          </h2>
+          <div className="space-y-4">
+            {parsedChildcareTypes.length > 0 && (
+              <div>
+                <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-tertiary">
+                  {tn("childcareType")}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {parsedChildcareTypes.map((type) => (
+                    <span
+                      key={type}
+                      className="border border-border-default bg-surface-secondary px-3 py-1 text-xs text-text-secondary"
+                    >
+                      {tn(`types.${type}` as any)}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {parsedTimesOfDay.length > 0 && (
+              <div>
+                <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-tertiary">
+                  {tn("timeOfDay")}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {parsedTimesOfDay.map((time) => (
+                    <span
+                      key={time}
+                      className="border border-border-default bg-surface-secondary px-3 py-1 text-xs text-text-secondary"
+                    >
+                      {tn(`times.${time}` as any)}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {parsedCareFrequency && (
+              <div>
+                <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-tertiary">
+                  {tn("frequency")}
+                </p>
+                <span className="border border-border-default bg-surface-secondary px-3 py-1 text-xs text-text-secondary">
+                  {tn(`frequencies.${parsedCareFrequency}` as any)}
+                </span>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* ─── Quick Stats ─── */}
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
