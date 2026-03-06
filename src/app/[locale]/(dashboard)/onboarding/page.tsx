@@ -52,6 +52,7 @@ export default function OnboardingPage() {
           return;
         }
         setRole(u?.data?.role || "PARENT");
+        if (u?.data?.avatarUrl) setAvatarPreview(u.data.avatarUrl);
       })
       .catch(() => setRole("PARENT"));
   }, [router]);
@@ -86,7 +87,13 @@ export default function OnboardingPage() {
     if (avatarFile) {
       const avatarData = new FormData();
       avatarData.append("avatar", avatarFile);
-      await fetch("/api/profile/avatar", { method: "POST", body: avatarData });
+      const avatarRes = await fetch("/api/profile/avatar", { method: "POST", body: avatarData });
+      if (!avatarRes.ok) {
+        const avatarErr = await avatarRes.json();
+        setError(avatarErr.error || t("failedToSave"));
+        setLoading(false);
+        return;
+      }
     }
 
     if (role === "BABYSITTER") {
@@ -349,7 +356,7 @@ export default function OnboardingPage() {
             </button>
             <button
               onClick={() => setStep(3)}
-              disabled={!avatarFile || !bio || bio.length < 10}
+              disabled={(!avatarFile && !avatarPreview) || !bio || bio.length < 10}
               className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
             >
               {tc("continue")}

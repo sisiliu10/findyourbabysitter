@@ -63,6 +63,7 @@ export async function POST(request: Request) {
         role: user.role,
         firstName: user.firstName,
         lastName: user.lastName,
+        onboarded: user.onboarded,
       },
     });
   } catch (error) {
