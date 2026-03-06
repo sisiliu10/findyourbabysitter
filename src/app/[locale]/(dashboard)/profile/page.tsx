@@ -6,6 +6,25 @@ import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { getTranslations } from "next-intl/server";
 
+function formatLastSeen(
+  lastSeenAt: Date | null,
+  t: (key: string, params?: Record<string, unknown>) => string,
+): { text: string; isActive: boolean } {
+  if (!lastSeenAt) return { text: t("activeNow"), isActive: true };
+
+  const now = Date.now();
+  const diff = now - lastSeenAt.getTime();
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(diff / 3600000);
+  const days = Math.floor(diff / 86400000);
+
+  if (minutes < 5) return { text: t("activeNow"), isActive: true };
+  if (minutes < 60) return { text: t("lastSeenMinutes", { count: minutes }), isActive: false };
+  if (hours < 24) return { text: t("lastSeenHours", { count: hours }), isActive: false };
+  if (days < 30) return { text: t("lastSeenDays", { count: days }), isActive: false };
+  return { text: t("lastSeenDate", { date: lastSeenAt.toLocaleDateString() }), isActive: false };
+}
+
 function calculateCompleteness(
   user: {
     avatarUrl: string | null;
@@ -170,6 +189,20 @@ export default async function ProfilePage() {
                 .filter(Boolean)
                 .join(" \u00b7 ")}
             </p>
+
+            {/* Last seen */}
+            {(() => {
+              const { text, isActive } = formatLastSeen(user.lastSeenAt, t as any);
+              return (
+                <p className="flex items-center justify-center gap-1.5 text-xs text-text-tertiary sm:justify-start">
+                  <span
+                    className={`inline-block h-2 w-2 ${isActive ? "bg-success" : "bg-text-muted"}`}
+                    style={{ borderRadius: "50%" }}
+                  />
+                  {text}
+                </p>
+              );
+            })()}
 
             {/* Rating */}
             {avgRating !== null && (

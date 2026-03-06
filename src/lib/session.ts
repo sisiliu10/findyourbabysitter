@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { verifyJwt, type JwtPayload } from "./auth";
+import { prisma } from "./prisma";
 
 const COOKIE_NAME = "fyb_session";
 
@@ -30,6 +31,15 @@ export async function getSession(): Promise<JwtPayload | null> {
 export async function requireAuth(): Promise<JwtPayload> {
   const session = await getSession();
   if (!session) redirect("/login");
+
+  // Fire-and-forget: update lastSeenAt
+  prisma.user
+    .update({
+      where: { id: session.userId },
+      data: { lastSeenAt: new Date() },
+    })
+    .catch(() => {});
+
   return session;
 }
 

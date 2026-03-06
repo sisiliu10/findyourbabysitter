@@ -367,7 +367,12 @@
     "likesLabel": "Likes",
     "matchesLabel": "Matches",
     "reviewsLabel": "Bewertungen",
-    "account": "Konto"
+    "account": "Konto",
+    "activeNow": "Gerade aktiv",
+    "lastSeenMinutes": "Aktiv vor {count} Min.",
+    "lastSeenHours": "Aktiv vor {count} Std.",
+    "lastSeenDays": "Aktiv vor {count} T.",
+    "lastSeenDate": "Zuletzt gesehen am {date}"
   },
   "profileEdit": {
     "title": "Profil bearbeiten",
