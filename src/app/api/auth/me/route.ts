@@ -22,6 +22,8 @@ export async function GET() {
         lastName: true,
         phone: true,
         avatarUrl: true,
+        birthday: true,
+        instagram: true,
         bio: true,
         childcareTypes: true,
         timesOfDay: true,
