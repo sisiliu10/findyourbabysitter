@@ -24,37 +24,13 @@ export default function ImpressumPage() {
         <section>
           <h2 className="text-lg font-medium text-text-primary mb-3">Kontakt</h2>
           <p>
-            E-Mail: TBU<br />
-            Telefon: TBU
-          </p>
-        </section>
-
-        <section>
-          <h2 className="text-lg font-medium text-text-primary mb-3">
-            Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
-          </h2>
-          <p>
-            Sisi Liu<br />
-            Grüntaler Straße 10, 13357 Berlin
-          </p>
-        </section>
-
-        <section>
-          <h2 className="text-lg font-medium text-text-primary mb-3">EU-Streitschlichtung</h2>
-          <p>
-            Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{" "}
+            E-Mail:{" "}
             <a
-              href="https://ec.europa.eu/consumers/odr/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:sisiliu2003@icloud.com"
               className="text-accent underline transition-colors hover:text-text-primary"
             >
-              https://ec.europa.eu/consumers/odr/
+              sisiliu2003@icloud.com
             </a>
-          </p>
-          <p className="mt-3">
-            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
-            Verbraucherschlichtungsstelle teilzunehmen.
           </p>
         </section>
       </div>
