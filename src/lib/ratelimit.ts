@@ -28,6 +28,11 @@ export const emailLimiter = redis
   ? new Ratelimit({ redis, limiter: Ratelimit.slidingWindow(3, "1 h"), prefix: "rl:email" })
   : null;
 
+/** 30 requests per minute — messages, profile updates */
+export const apiLimiter = redis
+  ? new Ratelimit({ redis, limiter: Ratelimit.slidingWindow(30, "1 m"), prefix: "rl:api" })
+  : null;
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------

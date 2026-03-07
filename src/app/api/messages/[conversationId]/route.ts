@@ -3,6 +3,7 @@ import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { messageSchema } from "@/lib/validators";
 import { notifyNewMessage } from "@/lib/email";
+import { apiLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 // Resolve conversationId to either a booking or a match, returning participant IDs.
 async function resolveConversation(conversationId: string, userId: string) {
@@ -132,6 +133,9 @@ export async function POST(
   { params }: { params: Promise<{ conversationId: string }> }
 ) {
   try {
+    const limited = await checkRateLimit(apiLimiter, request);
+    if (limited) return limited;
+
     const session = await getSession();
     if (!session) {
       return NextResponse.json(
