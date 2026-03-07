@@ -83,13 +83,14 @@ interface CardProfile {
 function calculateAge(birthday: string | null): number | null {
   if (!birthday) return null;
   const birth = new Date(birthday);
+  if (isNaN(birth.getTime())) return null;
   const today = new Date();
   let age = today.getFullYear() - birth.getFullYear();
   const monthDiff = today.getMonth() - birth.getMonth();
   if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
     age--;
   }
-  return age;
+  return age > 0 ? age : null;
 }
 
 function sitterToCard(s: SitterResult, t: (key: string, values?: Record<string, unknown>) => string): CardProfile {
