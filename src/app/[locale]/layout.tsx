@@ -39,6 +39,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Berlin Babysitter",
       locale: isDE ? "de_DE" : "en_US",
       type: "website",
+      images: [
+        {
+          url: `${base}/hero-bg.png`,
+          width: 1536,
+          height: 1024,
+          alt: isDE
+            ? "Berlin Babysitter – Vertrauenswürdige Kinderbetreuung in Berlin"
+            : "Berlin Babysitter – Trusted childcare in Berlin",
+        },
+      ],
     },
   };
 }

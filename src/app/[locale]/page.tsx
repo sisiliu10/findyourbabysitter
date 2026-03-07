@@ -5,6 +5,8 @@ import type { Metadata } from "next";
 import { Header } from "@/components/landing/Header";
 import { AnnouncementBar } from "@/components/landing/AnnouncementBar";
 import { TrustBar } from "@/components/landing/TrustBar";
+import { JsonLd } from "@/components/landing/JsonLd";
+import { FAQ } from "@/components/landing/FAQ";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -26,9 +28,83 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
+  const isDE = locale === "de";
+  const base = "https://berlinbabysitter.com";
+  const url = isDE ? `${base}/de` : base;
+
+  const faqItems = [
+    { question: t("faq1Q"), answer: t("faq1A") },
+    { question: t("faq2Q"), answer: t("faq2A") },
+    { question: t("faq3Q"), answer: t("faq3A") },
+    { question: t("faq4Q"), answer: t("faq4A") },
+    { question: t("faq5Q"), answer: t("faq5A") },
+  ];
+
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Berlin Babysitter",
+    url: base,
+    logo: `${base}/hero-bg.png`,
+    description: isDE
+      ? "Finde vertrauenswürdige Babysitter in Berlin, empfohlen von anderen Berliner Familien."
+      : "Find trusted babysitters in Berlin, recommended by local families.",
+    areaServed: {
+      "@type": "City",
+      name: "Berlin, Germany",
+    },
+    sameAs: [],
+  };
+
+  const howToJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: isDE
+      ? "Wie finde ich einen Babysitter in Berlin?"
+      : "How to find a babysitter in Berlin",
+    description: isDE
+      ? "Finde vertrauenswürdige Babysitter in Berlin in drei einfachen Schritten."
+      : "Find trusted babysitters in Berlin in three simple steps.",
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: t("kitaTitle"),
+        text: t("kitaDesc"),
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: t("babysitterTitle"),
+        text: t("babysitterDesc"),
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: t("momsTitle"),
+        text: t("momsDesc"),
+      },
+    ],
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
 
   return (
     <div className="flex min-h-screen flex-col bg-surface-primary">
+      <JsonLd data={organizationJsonLd} />
+      <JsonLd data={howToJsonLd} />
+      <JsonLd data={faqJsonLd} />
       <AnnouncementBar />
       <Header />
 
@@ -195,6 +271,14 @@ export default async function HomePage({ params }: Props) {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="border-t border-border-default">
+          <div className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
+            <h2 className="font-serif text-3xl text-text-primary sm:text-4xl mb-8">{t("faqTitle")}</h2>
+            <FAQ items={faqItems} />
           </div>
         </section>
       </main>
