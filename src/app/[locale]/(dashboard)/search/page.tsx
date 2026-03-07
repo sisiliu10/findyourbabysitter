@@ -561,8 +561,9 @@ function ProfileCard({
         {/* View profile pill */}
         <Link
           href={profile.linkHref}
-          className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center bg-white/15 text-white/70 backdrop-blur-md transition-all hover:bg-white/25 hover:text-white"
+          className="absolute right-4 top-4 z-40 flex h-8 w-8 items-center justify-center bg-white/15 text-white/70 backdrop-blur-md transition-all hover:bg-white/25 hover:text-white"
           title={t("viewProfile")}
+          onPointerDown={(e) => e.stopPropagation()}
         >
           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
