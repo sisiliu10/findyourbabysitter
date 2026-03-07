@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useUnreadCount } from "@/hooks/useUnreadCount";
 import { cn } from "@/lib/utils";
 
 const parentLinks: { href: string; key: string; icon: string }[] = [
@@ -24,6 +25,7 @@ const sitterLinks: { href: string; key: string; icon: string }[] = [
 export function MobileNav() {
   const pathname = usePathname();
   const { user } = useCurrentUser();
+  const unreadCount = useUnreadCount();
   const t = useTranslations("mobilenav");
   const router = useRouter();
   const links = user?.role === "BABYSITTER" ? sitterLinks : parentLinks;
@@ -43,9 +45,16 @@ export function MobileNav() {
                 isActive ? "text-accent" : "text-text-tertiary"
               )}
             >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d={link.icon} />
-              </svg>
+              <span className="relative">
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d={link.icon} />
+                </svg>
+                {link.key === "chat" && unreadCount > 0 && (
+                  <span className="absolute -right-2 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[9px] font-bold text-white">
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </span>
+                )}
+              </span>
               {t(link.key as Parameters<typeof t>[0])}
             </Link>
           );

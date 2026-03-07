@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency, getInitials, cn } from "@/lib/utils";
@@ -227,6 +228,7 @@ export default function SearchPage() {
   const userRole = currentUser?.role;
   const isSitter = userRole === "BABYSITTER";
 
+  const searchParams = useSearchParams();
   const [mode, setMode] = useState<SwipeMode | null>(null);
   const [cards, setCards] = useState<CardProfile[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -237,12 +239,17 @@ export default function SearchPage() {
   const [showMatchModal, setShowMatchModal] = useState(false);
   const likedIdsRef = useRef<Set<string>>(new Set());
 
-  // Set default mode based on user role
+  // Set mode from URL param or default based on user role
   useEffect(() => {
     if (!userLoading && currentUser && mode === null) {
-      setMode(isSitter ? "moms" : "babysitters");
+      const urlMode = searchParams.get("mode");
+      if (urlMode === "moms" || urlMode === "sitters") {
+        setMode(urlMode === "sitters" ? "babysitters" : "moms");
+      } else {
+        setMode(isSitter ? "moms" : "babysitters");
+      }
     }
-  }, [userLoading, currentUser, isSitter, mode]);
+  }, [userLoading, currentUser, isSitter, mode, searchParams]);
 
   const fetchCards = useCallback(async (swipeMode: SwipeMode) => {
     setLoading(true);

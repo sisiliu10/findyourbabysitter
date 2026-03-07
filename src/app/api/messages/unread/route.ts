@@ -1,0 +1,47 @@
+import { NextResponse } from "next/server";
+import { getSession } from "@/lib/session";
+import { prisma } from "@/lib/prisma";
+
+export async function GET() {
+  try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json({ success: false, error: "Not authenticated" }, { status: 401 });
+    }
+
+    const userId = session.userId;
+
+    // Get all booking IDs where user is a participant
+    const bookings = await prisma.booking.findMany({
+      where: { OR: [{ parentId: userId }, { sitterId: userId }] },
+      select: { id: true },
+    });
+    const bookingIds = bookings.map((b) => b.id);
+
+    // Get all match IDs where user is a participant
+    const matches = await prisma.match.findMany({
+      where: { OR: [{ user1Id: userId }, { user2Id: userId }] },
+      select: { id: true },
+    });
+    const matchIds = matches.map((m) => m.id);
+
+    // Count unread messages not sent by the current user
+    const count = await prisma.message.count({
+      where: {
+        senderId: { not: userId },
+        isRead: false,
+        OR: [
+          ...(bookingIds.length > 0 ? [{ bookingId: { in: bookingIds } }] : []),
+          ...(matchIds.length > 0 ? [{ matchId: { in: matchIds } }] : []),
+        ],
+      },
+    });
+
+    return NextResponse.json({ success: true, data: { count } });
+  } catch (error) {
+    return NextResponse.json(
+      { success: false, error: error instanceof Error ? error.message : "Failed to get unread count" },
+      { status: 500 },
+    );
+  }
+}
