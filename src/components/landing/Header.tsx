@@ -24,18 +24,18 @@ export function Header() {
 
           {/* Center: nav links */}
           <nav className="flex items-center gap-8">
-            <a
-              href="#how-it-works"
+            <Link
+              href="/#how-it-works"
               className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
             >
               {t("howItWorks")}
-            </a>
-            <a
-              href="#neighborhoods"
+            </Link>
+            <Link
+              href="/#neighborhoods"
               className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
             >
               {t("neighborhoods")}
-            </a>
+            </Link>
             <Link
               href="/guides"
               className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
@@ -98,20 +98,20 @@ export function Header() {
         {/* Mobile: expandable menu */}
         {menuOpen && (
           <nav className="flex flex-col gap-4 border-t border-border-default py-5 sm:hidden">
-            <a
-              href="#how-it-works"
+            <Link
+              href="/#how-it-works"
               onClick={() => setMenuOpen(false)}
               className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
             >
               {t("howItWorks")}
-            </a>
-            <a
-              href="#neighborhoods"
+            </Link>
+            <Link
+              href="/#neighborhoods"
               onClick={() => setMenuOpen(false)}
               className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
             >
               {t("neighborhoods")}
-            </a>
+            </Link>
             <Link
               href="/guides"
               className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
