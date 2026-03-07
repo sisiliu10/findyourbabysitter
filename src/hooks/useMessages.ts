@@ -25,7 +25,8 @@ export function useMessages(bookingId: string) {
       const after = lastMessageId.current ? `?after=${lastMessageId.current}` : "";
       const res = await fetch(`/api/messages/${bookingId}${after}`);
       if (!res.ok) return;
-      const data: Message[] = await res.json();
+      const json = await res.json();
+      const data: Message[] = json.data?.messages ?? [];
 
       if (data.length > 0) {
         lastMessageId.current = data[data.length - 1].id;
