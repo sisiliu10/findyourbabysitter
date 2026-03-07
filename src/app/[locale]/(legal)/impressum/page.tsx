@@ -15,8 +15,8 @@ export default function ImpressumPage() {
           <h2 className="text-lg font-medium text-text-primary mb-3">Betreiber</h2>
           <p>
             Sisi Liu<br />
-            TBU (Straße und Hausnummer)<br />
-            TBU (PLZ und Ort)<br />
+            Grüntaler Straße 10<br />
+            13357 Berlin<br />
             Deutschland
           </p>
         </section>
@@ -35,7 +35,7 @@ export default function ImpressumPage() {
           </h2>
           <p>
             Sisi Liu<br />
-            TBU (Anschrift wie oben)
+            Grüntaler Straße 10, 13357 Berlin
           </p>
         </section>
 
