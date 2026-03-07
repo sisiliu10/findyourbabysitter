@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
+  <title>Berlin TV Tower Coloring Page for Toddlers</title>
+
+  <!-- Antenna spike -->
+  <line x1="297" y1="60" x2="297" y2="170" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Antenna tip ball -->
+  <circle cx="297" cy="55" r="8" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Small antenna cross bars -->
+  <line x1="285" y1="100" x2="309" y2="100" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="288" y1="130" x2="306" y2="130" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Sphere (the iconic ball) -->
+  <circle cx="297" cy="265" r="95" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Observation deck ring (characteristic horizontal stripe) -->
+  <ellipse cx="297" cy="245" rx="95" ry="18" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Second ring lower on sphere -->
+  <ellipse cx="297" cy="285" rx="88" ry="15" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Upper shaft (above sphere) -->
+  <path d="M285 170 L291 172 L291 170 L297 170 L303 170 L303 172 L309 170" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Shaft from sphere down - tapers to base -->
+  <path d="M275 355 L272 450 L268 550 L264 650 L260 730" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M319 355 L322 450 L326 550 L330 650 L334 730" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Shaft horizontal bands -->
+  <line x1="273" y1="430" x2="321" y2="430" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="270" y1="500" x2="324" y2="500" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="267" y1="570" x2="327" y2="570" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="265" y1="640" x2="329" y2="640" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Base platform -->
+  <path d="M230 730 L260 730 L334 730 L364 730" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Base structure - flared legs -->
+  <path d="M230 730 L210 760 L200 775" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M364 730 L384 760 L394 775" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="200" y1="775" x2="394" y2="775" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Cloud 1 (left, puffy) -->
+  <path d="M80 200 C70 185, 85 165, 105 170 C110 150, 140 148, 150 165 C165 155, 185 162, 185 178 C200 178, 205 195, 190 205 C195 218, 178 228, 165 220 C155 230, 130 232, 125 218 C110 228, 85 222, 80 210 Z" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Cloud 2 (right) -->
+  <path d="M420 310 C412 298, 425 280, 442 285 C447 268, 472 266, 480 280 C492 272, 510 278, 508 292 C520 293, 524 308, 512 316 C516 327, 502 336, 490 330 C482 338, 460 340, 456 328 C444 336, 424 330, 420 320 Z" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Star 1 (upper left) -->
+  <path d="M120 400 L126 418 L145 418 L130 430 L136 448 L120 437 L104 448 L110 430 L95 418 L114 418 Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Star 2 (upper right) -->
+  <path d="M470 150 L475 165 L490 165 L478 174 L483 189 L470 180 L457 189 L462 174 L450 165 L465 165 Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Star 3 (left middle) -->
+  <path d="M100 550 L105 563 L118 563 L108 571 L112 584 L100 576 L88 584 L92 571 L82 563 L95 563 Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Star 4 (right lower) -->
+  <path d="M480 500 L484 512 L497 512 L487 519 L491 531 L480 524 L469 531 L473 519 L463 512 L476 512 Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+</svg>

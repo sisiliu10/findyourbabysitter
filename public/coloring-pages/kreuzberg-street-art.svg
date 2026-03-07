@@ -1,0 +1,430 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
+  <title>Kreuzberg Street Art Building - Berlin Coloring Page for Ages 10+</title>
+
+  <!-- ========== MAIN BUILDING FACADE (Altbau 4-story) ========== -->
+  <!-- Building outline -->
+  <rect x="80" y="100" width="350" height="530" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Roof line with ornate cornice -->
+  <rect x="75" y="93" width="360" height="7" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Decorative dentils along cornice -->
+  <line x1="82" y1="97" x2="82" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="90" y1="97" x2="90" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="98" y1="97" x2="98" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="106" y1="97" x2="106" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="114" y1="97" x2="114" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="122" y1="97" x2="122" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="130" y1="97" x2="130" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="138" y1="97" x2="138" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="146" y1="97" x2="146" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="154" y1="97" x2="154" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="162" y1="97" x2="162" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="170" y1="97" x2="170" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="178" y1="97" x2="178" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="186" y1="97" x2="186" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="194" y1="97" x2="194" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="202" y1="97" x2="202" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="210" y1="97" x2="210" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="218" y1="97" x2="218" y2="100" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Floor dividing lines -->
+  <line x1="80" y1="230" x2="430" y2="230" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="80" y1="360" x2="430" y2="360" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="80" y1="490" x2="430" y2="490" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== 4TH FLOOR WINDOWS (top) ========== -->
+  <!-- Window 1 -->
+  <rect x="100" y="115" width="45" height="70" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M100,115 Q122.5,105 145,115" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="122.5" y1="115" x2="122.5" y2="185" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="100" y1="150" x2="145" y2="150" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Window sill -->
+  <rect x="96" y="185" width="53" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Window 2 -->
+  <rect x="175" y="115" width="45" height="70" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M175,115 Q197.5,105 220,115" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="197.5" y1="115" x2="197.5" y2="185" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="175" y1="150" x2="220" y2="150" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="171" y="185" width="53" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Window 3 -->
+  <rect x="290" y="115" width="45" height="70" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M290,115 Q312.5,105 335,115" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="312.5" y1="115" x2="312.5" y2="185" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="290" y1="150" x2="335" y2="150" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="286" y="185" width="53" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Window 4 -->
+  <rect x="365" y="115" width="45" height="70" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M365,115 Q387.5,105 410,115" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="387.5" y1="115" x2="387.5" y2="185" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="365" y1="150" x2="410" y2="150" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="361" y="185" width="53" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== 3RD FLOOR WINDOWS WITH BALCONIES ========== -->
+  <!-- Window 1 with balcony -->
+  <rect x="100" y="245" width="45" height="75" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="122.5" y1="245" x2="122.5" y2="320" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="100" y1="282" x2="145" y2="282" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Balcony railing -->
+  <rect x="92" y="320" width="61" height="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="95" y1="323" x2="95" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="105" y1="323" x2="105" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="115" y1="323" x2="115" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="125" y1="323" x2="125" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="135" y1="323" x2="135" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="145" y1="323" x2="145" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="92" y1="332" x2="153" y2="332" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="92" y="340" width="61" height="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Balcony floor -->
+  <rect x="92" y="343" width="61" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Iron scroll detail on railing -->
+  <path d="M98,326 Q102,330 98,334" stroke="#2C2420" fill="none" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M138,326 Q142,330 138,334" stroke="#2C2420" fill="none" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Window 2 with balcony -->
+  <rect x="175" y="245" width="45" height="75" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="197.5" y1="245" x2="197.5" y2="320" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="175" y1="282" x2="220" y2="282" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="167" y="320" width="61" height="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="170" y1="323" x2="170" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="180" y1="323" x2="180" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="190" y1="323" x2="190" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="200" y1="323" x2="200" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="210" y1="323" x2="210" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="220" y1="323" x2="220" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="167" y1="332" x2="228" y2="332" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="167" y="340" width="61" height="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="167" y="343" width="61" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Window 3 -->
+  <rect x="290" y="245" width="45" height="75" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="312.5" y1="245" x2="312.5" y2="320" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="290" y1="282" x2="335" y2="282" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="282" y="320" width="61" height="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="285" y1="323" x2="285" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="295" y1="323" x2="295" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="305" y1="323" x2="305" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="315" y1="323" x2="315" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="325" y1="323" x2="325" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="335" y1="323" x2="335" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="282" y1="332" x2="343" y2="332" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="282" y="340" width="61" height="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="282" y="343" width="61" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Window 4 -->
+  <rect x="365" y="245" width="45" height="75" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="387.5" y1="245" x2="387.5" y2="320" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="365" y1="282" x2="410" y2="282" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="361" y="185" width="53" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== 2ND FLOOR WINDOWS ========== -->
+  <rect x="100" y="375" width="45" height="75" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="122.5" y1="375" x2="122.5" y2="450" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="100" y1="412" x2="145" y2="412" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="96" y="450" width="53" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="175" y="375" width="45" height="75" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="197.5" y1="375" x2="197.5" y2="450" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="175" y1="412" x2="220" y2="412" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="171" y="450" width="53" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="290" y="375" width="45" height="75" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="312.5" y1="375" x2="312.5" y2="450" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="290" y1="412" x2="335" y2="412" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="286" y="450" width="53" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="365" y="375" width="45" height="75" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="387.5" y1="375" x2="387.5" y2="450" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="365" y1="412" x2="410" y2="412" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="361" y="450" width="53" height="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== GROUND FLOOR ========== -->
+  <!-- Main entrance door -->
+  <rect x="230" y="520" width="50" height="110" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M230,520 Q255,505 280,520" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Door panels -->
+  <rect x="235" y="545" width="18" height="40" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="257" y="545" width="18" height="40" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="235" y="590" width="18" height="35" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="257" y="590" width="18" height="35" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Door handle -->
+  <circle cx="252" cy="580" r="2" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="259" cy="580" r="2" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Ground floor windows -->
+  <rect x="100" y="510" width="45" height="55" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="122.5" y1="510" x2="122.5" y2="565" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="365" y="510" width="45" height="55" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="387.5" y1="510" x2="387.5" y2="565" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== STREET ART - LARGE EYE MURAL (between 3rd and 4th floor) ========== -->
+  <!-- Outer eye shape -->
+  <path d="M235,130 Q280,95 325,130 Q280,165 235,130" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Iris -->
+  <circle cx="280" cy="130" r="18" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pupil -->
+  <circle cx="280" cy="130" r="9" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pupil highlight -->
+  <circle cx="275" cy="125" r="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Eyelashes top -->
+  <line x1="245" y1="118" x2="240" y2="108" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="255" y1="113" x2="252" y2="102" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="265" y1="108" x2="264" y2="98" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="280" y1="106" x2="280" y2="96" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="295" y1="108" x2="296" y2="98" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="305" y1="113" x2="308" y2="102" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="315" y1="118" x2="320" y2="108" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Tear drop -->
+  <path d="M280,150 Q282,160 280,170 Q278,160 280,150" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== BUBBLE LETTERS GRAFFITI "XBERG" ========== -->
+  <!-- X -->
+  <path d="M88,200 Q92,195 96,200 L108,220 Q112,225 116,220 L128,200 Q132,195 136,200" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M88,225 Q92,230 96,225 L108,205 Q112,200 116,205 L128,225 Q132,230 136,225" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- B -->
+  <path d="M140,195 L140,228 Q155,235 165,225 Q172,218 165,210 Q160,205 165,198 Q170,190 155,192 L140,195" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M140,210 Q155,208 160,212" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== GEOMETRIC PATTERN (2nd-3rd floor right side) ========== -->
+  <!-- Triangle pattern -->
+  <polygon points="355,365 370,345 385,365" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="370,345 385,365 400,345" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="385,365 400,345 415,365" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="355,365 370,385 385,365" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="385,365 400,385 415,365" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Concentric diamonds -->
+  <polygon points="250,470 265,455 280,470 265,485" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="255,470 265,460 275,470 265,480" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="260,470 265,465 270,470 265,475" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== STICKER-LIKE DESIGNS ========== -->
+  <!-- Skull sticker -->
+  <path d="M350,455 Q345,445 350,435 Q355,428 365,428 Q375,428 380,435 Q385,445 380,455 L375,458 L370,455 L365,458 L360,455 L355,458 Z" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="358" cy="442" r="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="372" cy="442" r="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M362,450 Q365,453 368,450" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Heart sticker -->
+  <path d="M92,465 Q92,455 100,455 Q108,455 108,465 L100,478 L92,465" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Star sticker -->
+  <polygon points="165,468 168,460 171,468 179,468 173,474 175,482 168,477 161,482 163,474 157,468" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Small crown sticker -->
+  <path d="M405,468 L405,478 L425,478 L425,468 L420,474 L415,468 L410,474 Z" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== DRIPPING PAINT EFFECTS ========== -->
+  <path d="M87,230 L87,260 Q87,268 89,260 L89,230" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M160,230 L160,250 Q160,256 162,250 L162,230" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M340,230 L340,255 Q340,262 342,255 L342,230" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M420,360 L420,392 Q420,400 422,392 L422,360" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== WHEAT-PASTE POSTER OUTLINES ========== -->
+  <!-- Poster 1 - rectangular with torn edges -->
+  <path d="M85,390 L85,430 Q90,432 95,430 Q100,428 105,430 Q110,432 115,430 L120,430 L120,388 Q115,390 110,388 Q105,386 100,388 Q95,390 90,388 Z" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Abstract face on poster -->
+  <circle cx="102" cy="405" r="8" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="98" y1="403" x2="100" y2="403" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="104" y1="403" x2="106" y2="403" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M98,409 Q102,413 106,409" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Poster 2 -->
+  <path d="M340,195 L340,225 Q345,227 350,225 Q355,223 360,225 L365,225 L365,193 Q360,195 355,193 Q350,191 345,193 Z" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="345" y1="200" x2="360" y2="200" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="345" y1="205" x2="358" y2="205" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="345" y1="210" x2="360" y2="210" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== SWALLOW/BIRD DESIGN ========== -->
+  <path d="M155,350 Q165,340 175,345 Q180,348 178,355 Q175,360 170,358 L160,370 Q155,365 158,358 Q152,356 150,350 Q148,345 155,350" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Wing detail -->
+  <path d="M165,345 Q172,340 180,343" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Tail fork -->
+  <path d="M160,370 Q157,375 153,378" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M160,370 Q162,376 165,378" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== VINES/PLANTS GROWING UP FROM GROUND ========== -->
+  <!-- Vine 1 (left side) -->
+  <path d="M82,630 Q78,590 85,560 Q90,530 82,500 Q78,480 85,460" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Vine leaves -->
+  <path d="M85,580 Q75,575 78,570" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M85,580 Q78,580 75,575" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M83,540 Q92,535 95,530" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M83,540 Q90,540 93,535" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M84,510 Q74,505 72,500" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M84,510 Q76,510 73,505" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M82,480 Q92,476 94,470" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M82,480 Q90,480 93,476" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Vine 2 (right side) -->
+  <path d="M428,630 Q432,600 426,570 Q422,540 428,510 Q432,490 426,470" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M427,590 Q436,585 438,580" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M427,590 Q434,590 437,585" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M425,550 Q416,545 414,540" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M425,550 Q418,550 415,545" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M427,520 Q436,516 438,510" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M427,520 Q434,520 437,516" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== FIRE ESCAPE / EXTERNAL STAIRCASE ========== -->
+  <!-- Vertical rails -->
+  <line x1="440" y1="100" x2="440" y2="630" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="500" y1="100" x2="500" y2="630" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Landings -->
+  <rect x="440" y="230" width="60" height="4" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="440" y="360" width="60" height="4" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="440" y="490" width="60" height="4" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="440" y="625" width="60" height="4" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Stair treads (between floors) -->
+  <line x1="445" y1="250" x2="495" y2="250" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="265" x2="495" y2="265" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="280" x2="495" y2="280" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="295" x2="495" y2="295" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="310" x2="495" y2="310" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="325" x2="495" y2="325" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="340" x2="495" y2="340" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="380" x2="495" y2="380" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="395" x2="495" y2="395" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="410" x2="495" y2="410" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="425" x2="495" y2="425" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="440" x2="495" y2="440" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="455" x2="495" y2="455" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="470" x2="495" y2="470" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="510" x2="495" y2="510" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="530" x2="495" y2="530" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="550" x2="495" y2="550" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="570" x2="495" y2="570" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="590" x2="495" y2="590" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="445" y1="610" x2="495" y2="610" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Railing -->
+  <line x1="440" y1="220" x2="500" y2="220" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="440" y1="350" x2="500" y2="350" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="440" y1="480" x2="500" y2="480" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== HANGING LAUNDRY LINE ========== -->
+  <path d="M145,200 Q250,190 355,200" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- T-shirt -->
+  <path d="M175,200 L172,195 L168,198 L168,215 L182,215 L182,198 L178,195 Z" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sock -->
+  <path d="M210,200 L208,215 Q208,220 213,220 L215,215 L212,200" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pants -->
+  <path d="M250,198 L248,220 L253,220 L255,208 L257,220 L262,220 L260,198 Z" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Towel -->
+  <path d="M300,199 L298,225 L310,225 L312,199" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== STREET LAMP ========== -->
+  <line x1="52" y1="350" x2="52" y2="630" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lamp arm -->
+  <path d="M52,360 Q55,355 65,355" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lamp housing (vintage lantern) -->
+  <path d="M58,345 L58,355 L72,355 L72,345 L65,338 Z" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="62" y1="345" x2="62" y2="355" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="68" y1="345" x2="68" y2="355" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lamp base ornament -->
+  <ellipse cx="52" cy="625" rx="6" ry="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== GROUND LEVEL - CAFE ========== -->
+  <!-- Cafe awning -->
+  <path d="M85,595 L165,595 L170,610 L80,610 Z" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Awning scallops -->
+  <path d="M80,610 Q90,618 100,610 Q110,618 120,610 Q130,618 140,610 Q150,618 160,610 Q165,615 170,610" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Cafe window/storefront -->
+  <rect x="85" y="610" width="80" height="20" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="110" y1="610" x2="110" y2="630" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="140" y1="610" x2="140" y2="630" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Outdoor tables -->
+  <!-- Table 1 -->
+  <ellipse cx="110" cy="660" rx="18" ry="4" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="110" y1="664" x2="110" y2="680" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="100" y1="680" x2="120" y2="680" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Coffee cup on table -->
+  <rect x="106" y="654" width="6" height="5" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M112,655 Q115,657 112,659" stroke="#2C2420" fill="none" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Chair 1 -->
+  <path d="M90,665 L90,680 M85,665 L95,665 M85,672 L95,672" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Chair 2 -->
+  <path d="M130,665 L130,680 M125,665 L135,665 M125,672 L135,672" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Table 2 -->
+  <ellipse cx="165" cy="670" rx="16" ry="4" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="165" y1="674" x2="165" y2="690" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="155" y1="690" x2="175" y2="690" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== BICYCLE ========== -->
+  <!-- Rear wheel -->
+  <circle cx="330" cy="665" r="18" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="330" cy="665" r="2" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Spokes -->
+  <line x1="330" y1="649" x2="330" y2="681" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="314" y1="665" x2="346" y2="665" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="317" y1="653" x2="343" y2="677" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="343" y1="653" x2="317" y2="677" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Front wheel -->
+  <circle cx="395" cy="665" r="18" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="395" cy="665" r="2" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="395" y1="649" x2="395" y2="681" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="379" y1="665" x2="411" y2="665" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="382" y1="653" x2="408" y2="677" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="408" y1="653" x2="382" y2="677" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Frame -->
+  <line x1="330" y1="665" x2="360" y2="640" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="360" y1="640" x2="395" y2="665" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="330" y1="665" x2="365" y2="665" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="365" y1="665" x2="395" y2="665" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Seat post -->
+  <line x1="360" y1="640" x2="355" y2="630" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Seat -->
+  <path d="M348,630 L362,628" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Handlebars -->
+  <line x1="395" y1="665" x2="400" y2="638" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M394,638 L406,635" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pedal area -->
+  <circle cx="365" cy="665" r="4" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Basket on front -->
+  <path d="M398,640 L410,640 L412,655 L396,655 Z" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="400" y1="640" x2="400" y2="655" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="404" y1="640" x2="404" y2="655" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="408" y1="640" x2="408" y2="655" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="396" y1="645" x2="412" y2="645" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="396" y1="650" x2="412" y2="650" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== SIDEWALK / GROUND ========== -->
+  <line x1="40" y1="690" x2="555" y2="690" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sidewalk tiles -->
+  <line x1="40" y1="705" x2="555" y2="705" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="60" y1="690" x2="60" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="100" y1="690" x2="100" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="140" y1="690" x2="140" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="180" y1="690" x2="180" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="220" y1="690" x2="220" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="260" y1="690" x2="260" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="300" y1="690" x2="300" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="340" y1="690" x2="340" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="380" y1="690" x2="380" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="420" y1="690" x2="420" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="460" y1="690" x2="460" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="500" y1="690" x2="500" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="540" y1="690" x2="540" y2="705" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== ADJACENT BUILDING (partial, right side) ========== -->
+  <rect x="510" y="150" width="50" height="480" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Windows -->
+  <rect x="520" y="170" width="25" height="40" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="520" y="240" width="25" height="40" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="520" y="310" width="25" height="40" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="520" y="380" width="25" height="40" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="520" y="450" width="25" height="40" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="520" y="530" width="25" height="40" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== SMALL SATELLITE DISH ON ROOF ========== -->
+  <path d="M420,88 Q428,78 435,88" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="428" y1="83" x2="428" y2="93" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ========== ANTENNA ON ADJACENT BUILDING ========== -->
+  <line x1="535" y1="150" x2="535" y2="120" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="528" y1="130" x2="542" y2="130" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="530" y1="140" x2="540" y2="140" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+</svg>

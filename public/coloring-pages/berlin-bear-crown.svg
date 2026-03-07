@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
+  <title>Berlin Bear with Crown Coloring Page for Kids</title>
+
+  <!-- ============================================ -->
+  <!-- SHIELD behind the bear -->
+  <!-- ============================================ -->
+  <path d="M175,340 L175,250 Q175,210 215,185 Q260,160 297,150 Q334,160 380,185 Q420,210 420,250 L420,340 Q420,500 297,590 Q175,500 175,340Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Shield inner border -->
+  <path d="M192,345 L192,260 Q192,225 225,203 Q260,180 297,172 Q334,180 370,203 Q403,225 403,260 L403,345 Q403,485 297,565 Q192,485 192,345Z" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ============================================ -->
+  <!-- BEAR - standing upright, heraldic pose -->
+  <!-- ============================================ -->
+
+  <!-- CROWN on bear's head -->
+  <!-- Crown base band -->
+  <path d="M255,208 Q260,215 297,218 Q334,215 340,208 L340,198 Q334,192 297,190 Q260,192 255,198Z" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Crown points (5 points) -->
+  <path d="M258,198 L255,175 L270,188" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M270,188 L276,170 L288,188" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M288,188 L297,162 L306,188" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M306,188 L318,170 L325,188" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M325,188 L340,175 L337,198" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Crown jewels (circles on tips) -->
+  <circle cx="255" cy="173" r="4" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="276" cy="168" r="4" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="297" cy="160" r="5" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="318" cy="168" r="4" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="340" cy="173" r="4" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Crown band gems -->
+  <circle cx="275" cy="206" r="3" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="297" cy="208" r="3.5" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="319" cy="206" r="3" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Bear head -->
+  <path d="M262,218 Q255,225 252,240 Q250,255 258,268 Q268,280 297,285 Q326,280 336,268 Q344,255 342,240 Q340,225 332,218" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Bear ears -->
+  <path d="M262,225 Q252,215 248,222 Q245,230 255,235" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Inner ear -->
+  <path d="M256,224 Q252,222 251,226 Q250,230 254,232" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M332,225 Q342,215 346,222 Q349,230 339,235" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M338,224 Q342,222 343,226 Q344,230 340,232" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Bear eyes -->
+  <circle cx="278" cy="245" r="6" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="280" cy="245" r="2" stroke="#2C2420" fill="#2C2420" stroke-width="1"/>
+  <circle cx="316" cy="245" r="6" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="318" cy="245" r="2" stroke="#2C2420" fill="#2C2420" stroke-width="1"/>
+
+  <!-- Bear nose / snout -->
+  <path d="M285,258 Q290,262 297,264 Q304,262 310,258" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Nose tip -->
+  <ellipse cx="297" cy="256" rx="7" ry="5" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Nose dot -->
+  <circle cx="297" cy="255" r="2.5" stroke="#2C2420" fill="#2C2420" stroke-width="1"/>
+
+  <!-- Bear mouth (friendly smile) -->
+  <path d="M288,268 Q292,276 297,278 Q302,276 306,268" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Bear tongue (cute, sticking out just a bit) -->
+  <path d="M293,276 Q297,282 301,276" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ============================================ -->
+  <!-- Bear body (standing upright, heraldic pose) -->
+  <!-- ============================================ -->
+
+  <!-- Torso -->
+  <path d="M258,280 Q245,295 238,320 Q232,350 235,380 Q238,410 245,430 Q255,450 270,460 L297,465 L324,460 Q340,450 349,430 Q356,410 359,380 Q362,350 356,320 Q349,295 336,280" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Belly patch (lighter area) -->
+  <path d="M270,310 Q265,340 268,380 Q272,410 297,420 Q322,410 326,380 Q329,340 324,310 Q310,300 297,298 Q284,300 270,310Z" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ============================================ -->
+  <!-- Left arm (holding flag/pennant) raised up -->
+  <!-- ============================================ -->
+  <path d="M245,310 Q230,300 218,285 Q210,275 205,260 Q200,248 205,242" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left paw -->
+  <path d="M205,242 Q198,238 196,235 Q194,240 196,244 Q198,248 205,248 Q208,245 205,242" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Claws on left paw -->
+  <path d="M196,235 L193,230" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M200,236 L198,231" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M204,238 L203,233" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- FLAG / PENNANT in left paw -->
+  <!-- Flag pole -->
+  <line x1="197" y1="238" x2="197" y2="145" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <!-- Pennant flag (triangular, waving) -->
+  <path d="M197,145 Q170,155 160,170 Q155,180 165,185 Q180,175 197,182" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Flag detail (Berlin bear symbol suggestion) -->
+  <path d="M175,165 Q178,162 180,165 Q182,168 180,170" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pole finial -->
+  <circle cx="197" cy="142" r="4" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ============================================ -->
+  <!-- Right arm (outstretched, heraldic) -->
+  <!-- ============================================ -->
+  <path d="M349,310 Q365,305 380,315 Q395,325 405,340 Q410,348 408,355" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right paw -->
+  <path d="M408,355 Q415,358 418,362 Q420,356 418,352 Q414,348 408,348 Q404,352 408,355" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Claws -->
+  <path d="M418,362 L422,366" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M416,358 L420,361" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M412,355 L416,357" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- ============================================ -->
+  <!-- Bear legs (standing on hind legs) -->
+  <!-- ============================================ -->
+
+  <!-- Left leg -->
+  <path d="M270,455 Q260,475 255,500 Q252,520 255,540 Q258,555 262,560" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left foot/paw -->
+  <path d="M262,560 Q255,565 248,568 Q240,570 238,565 Q236,558 242,555 Q250,552 260,553 Q264,555 262,560" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Toe claws -->
+  <path d="M240,568 L236,572" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M245,569 L242,574" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M250,568 L248,573" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Right leg -->
+  <path d="M324,455 Q334,475 339,500 Q342,520 339,540 Q336,555 332,560" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right foot/paw -->
+  <path d="M332,560 Q339,565 346,568 Q354,570 356,565 Q358,558 352,555 Q344,552 334,553 Q330,555 332,560" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Toe claws -->
+  <path d="M354,568 L358,572" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M349,569 L352,574" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M344,568 L346,573" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- ============================================ -->
+  <!-- Fur texture details -->
+  <!-- ============================================ -->
+  <!-- Shoulder fur tufts -->
+  <path d="M248,300 Q244,295 248,290" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M252,295 Q248,290 252,285" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M342,300 Q346,295 342,290" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M338,295 Q342,290 338,285" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Ground line -->
+  <line x1="180" y1="575" x2="415" y2="575" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Title label -->
+  <text x="297.5" y="630" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#2C2420" stroke="none">Berlin Bear</text>
+
+  <!-- Footer -->
+  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+</svg>

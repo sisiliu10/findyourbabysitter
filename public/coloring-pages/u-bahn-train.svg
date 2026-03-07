@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
+  <title>U-Bahn Train Coloring Page for Toddlers</title>
+
+  <!-- Train body - main rectangle with rounded front -->
+  <path d="M95 280 L95 540 L500 540 C530 540, 545 520, 545 500 L545 320 C545 300, 530 280, 500 280 Z" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Roof line with slight curve -->
+  <path d="M95 280 C95 260, 110 250, 130 250 L480 250 C510 250, 545 260, 545 280" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Roof stripe/detail -->
+  <path d="M120 265 L490 265" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Window 1 (big, left side - with smiley face inside) -->
+  <rect x="130" y="310" width="120" height="100" rx="15" ry="15" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Smiley face in window 1 -->
+  <!-- Left eye -->
+  <circle cx="170" cy="348" r="6" stroke="#2C2420" fill="#2C2420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right eye -->
+  <circle cx="210" cy="348" r="6" stroke="#2C2420" fill="#2C2420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Smile -->
+  <path d="M170 375 Q190 395 210 375" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Door (center, with handle) -->
+  <rect x="280" y="305" width="75" height="175" rx="8" ry="8" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Door handle -->
+  <circle cx="340" cy="400" r="8" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Door window -->
+  <rect x="293" y="318" width="49" height="55" rx="6" ry="6" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Window 2 (big, right side near rounded front) -->
+  <rect x="390" y="310" width="110" height="100" rx="15" ry="15" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Horizontal body stripe -->
+  <line x1="95" y1="480" x2="545" y2="480" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- U-Bahn "U" logo on the front (right side rounded area) -->
+  <!-- U logo circle -->
+  <circle cx="520" cy="440" r="28" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Letter U -->
+  <path d="M508 428 L508 448 C508 458, 520 462, 520 462 C520 462, 532 458, 532 448 L532 428" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Headlight on front -->
+  <ellipse cx="535" cy="510" rx="14" ry="10" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Rear light -->
+  <ellipse cx="105" cy="510" rx="12" ry="10" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Undercarriage / lower body panel -->
+  <path d="M120 540 L120 570 L520 570 L520 540" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Left wheel assembly -->
+  <circle cx="185" cy="610" r="38" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="185" cy="610" r="18" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Wheel connector to body -->
+  <line x1="185" y1="570" x2="185" y2="572" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Right wheel assembly -->
+  <circle cx="450" cy="610" r="38" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="450" cy="610" r="18" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Wheel axle / bogie frame -->
+  <path d="M147 595 L147 580 L223 580 L223 595" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M412 595 L412 580 L488 580 L488 595" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Track / rail line -->
+  <line x1="50" y1="648" x2="545" y2="648" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Second rail -->
+  <line x1="50" y1="660" x2="545" y2="660" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Track ties / sleepers -->
+  <line x1="80" y1="645" x2="80" y2="663" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="130" y1="645" x2="130" y2="663" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="180" y1="645" x2="180" y2="663" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="230" y1="645" x2="230" y2="663" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="280" y1="645" x2="280" y2="663" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="330" y1="645" x2="330" y2="663" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="380" y1="645" x2="380" y2="663" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="430" y1="645" x2="430" y2="663" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="480" y1="645" x2="480" y2="663" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="530" y1="645" x2="530" y2="663" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Pantograph / power connector on roof -->
+  <path d="M297 250 L297 220 L270 195 L324 195 L297 220" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Overhead wire -->
+  <line x1="50" y1="190" x2="545" y2="190" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+</svg>

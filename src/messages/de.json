@@ -7,7 +7,8 @@
     "howItWorks": "So funktioniert's",
     "neighborhoods": "Bezirke",
     "menu": "Menü",
-    "getStarted": "Jetzt starten"
+    "getStarted": "Jetzt starten",
+    "coloringPages": "Ausmalbilder"
   },
   "home": {
     "heroTagline": "Babysitter in Berlin finden",
@@ -51,6 +52,7 @@
     "languages": "Sprachen",
     "legal": "Rechtliches",
     "guides": "Guides",
+    "coloringPages": "Ausmalbilder",
     "privacyPolicy": "Datenschutzerklärung",
     "termsOfService": "Nutzungsbedingungen",
     "impressum": "Impressum"
@@ -617,5 +619,22 @@
     "browseSitters": "Babysitter nach Kiez",
     "tableOfContents": "In diesem Guide",
     "home": "Startseite"
+  },
+  "coloringPages": {
+    "label": "Ausmalbilder",
+    "title": "Berliner Ausmalbilder",
+    "intro": "Kostenlose Ausmalbilder mit Berliner Motiven — vom Fernsehturm bis zur East Side Gallery. Altersgruppe wählen, herunterladen und losmalen.",
+    "print": "Drucken",
+    "download": "Download",
+    "tipsLabel": "Drucktipps",
+    "tip1Title": "Bestes Papier",
+    "tip1Desc": "Dickeres Papier (ab 120g/m\u00b2) verwenden, damit Buntstifte und Filzstifte nicht durchscheinen.",
+    "tip2Title": "Druckeinstellungen",
+    "tip2Desc": "Auf den Drucken-Button klicken, dann 'An Seite anpassen' in den Druckereinstellungen wählen.",
+    "tip3Title": "Frei ausmalen",
+    "tip3Desc": "Es gibt keine falschen Farben. Ein lila Fernsehturm? Ein Regenbogen-Bär? Berlin ist eine kreative Stadt.",
+    "ctaTitle": "Babysitter für die Malzeit gesucht?",
+    "ctaSubtitle": "Finde vertrauenswürdige Babysitter, die von anderen Berliner Eltern empfohlen werden.",
+    "ctaButton": "Babysitter finden"
   }
 }

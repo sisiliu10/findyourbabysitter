@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
+  <title>Brandenburg Gate Coloring Page for Kids</title>
+
+  <!-- Ground line -->
+  <line x1="47" y1="680" x2="548" y2="680" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Column bases (6 columns) -->
+  <!-- Column 1 -->
+  <rect x="120" y="660" width="40" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="124" y="340" width="32" height="320" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Capital -->
+  <rect x="118" y="325" width="44" height="15" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Column fluting lines -->
+  <line x1="134" y1="345" x2="134" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <line x1="146" y1="345" x2="146" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Column 2 -->
+  <rect x="190" y="660" width="40" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="194" y="340" width="32" height="320" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="188" y="325" width="44" height="15" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="204" y1="345" x2="204" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <line x1="216" y1="345" x2="216" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Column 3 -->
+  <rect x="260" y="660" width="40" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="264" y="340" width="32" height="320" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="258" y="325" width="44" height="15" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="274" y1="345" x2="274" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <line x1="286" y1="345" x2="286" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Column 4 -->
+  <rect x="330" y="660" width="40" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="334" y="340" width="32" height="320" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="328" y="325" width="44" height="15" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="344" y1="345" x2="344" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <line x1="356" y1="345" x2="356" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Column 5 -->
+  <rect x="400" y="660" width="40" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="404" y="340" width="32" height="320" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="398" y="325" width="44" height="15" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="414" y1="345" x2="414" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <line x1="426" y1="345" x2="426" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Column 6 -->
+  <rect x="470" y="660" width="40" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="474" y="340" width="32" height="320" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="468" y="325" width="44" height="15" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="484" y1="345" x2="484" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <line x1="496" y1="345" x2="496" y2="655" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Entablature (wide beam across top) -->
+  <rect x="105" y="290" width="420" height="35" rx="3" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Decorative band on entablature -->
+  <line x1="115" y1="305" x2="515" y2="305" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Attic (triangular pediment area) -->
+  <rect x="115" y="260" width="400" height="30" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Flat top platform for Quadriga -->
+  <rect x="200" y="240" width="230" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Quadriga (simplified chariot with 4 horses) -->
+  <!-- Horse 1 (leftmost) -->
+  <path d="M230,235 L230,195 Q232,180 238,178 L242,190 L238,195 L238,235" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Horse 1 head -->
+  <path d="M238,178 Q245,170 242,165 Q238,162 235,168 Q232,175 238,178" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Horse 1 legs -->
+  <line x1="232" y1="235" x2="230" y2="240" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="240" y1="235" x2="242" y2="240" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Horse 2 -->
+  <path d="M258,235 L258,195 Q260,180 266,178 L270,190 L266,195 L266,235" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M266,178 Q273,170 270,165 Q266,162 263,168 Q260,175 266,178" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="260" y1="235" x2="258" y2="240" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="268" y1="235" x2="270" y2="240" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Horse 3 -->
+  <path d="M286,235 L286,195 Q288,180 294,178 L298,190 L294,195 L294,235" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M294,178 Q301,170 298,165 Q294,162 291,168 Q288,175 294,178" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="288" y1="235" x2="286" y2="240" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="296" y1="235" x2="298" y2="240" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Horse 4 -->
+  <path d="M314,235 L314,195 Q316,180 322,178 L326,190 L322,195 L322,235" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M322,178 Q329,170 326,165 Q322,162 319,168 Q316,175 322,178" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="316" y1="235" x2="314" y2="240" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="324" y1="235" x2="326" y2="240" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Chariot behind horses -->
+  <path d="M340,235 L340,190 Q345,180 360,178 L370,182 L375,195 Q378,210 375,235" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Chariot wheel -->
+  <circle cx="358" cy="228" r="10" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Victory figure (simplified) -->
+  <path d="M355,178 L355,155 Q357,148 360,145" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Victory head -->
+  <circle cx="358" cy="142" r="6" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Victory staff/standard held up -->
+  <line x1="362" y1="155" x2="368" y2="130" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <!-- Wreath on top of staff -->
+  <circle cx="370" cy="125" r="7" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Left tree/bush -->
+  <path d="M62,680 Q55,650 60,630 Q50,620 55,600 Q45,590 55,570 Q60,555 72,550 Q85,545 95,555 Q105,560 105,575 Q110,585 105,600 Q112,615 105,630 Q110,650 100,680" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Tree trunk -->
+  <line x1="78" y1="680" x2="78" y2="650" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Right tree/bush -->
+  <path d="M520,680 Q513,650 518,630 Q508,620 513,600 Q503,590 513,570 Q518,555 530,550 Q543,545 553,555 Q563,560 563,575 Q568,585 563,600 Q570,615 563,630 Q568,650 558,680" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="538" y1="680" x2="538" y2="650" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Small bush left -->
+  <path d="M85,680 Q88,665 95,660 Q102,658 108,665 Q112,672 110,680" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Small bush right -->
+  <path d="M500,680 Q503,665 510,660 Q517,658 523,665 Q527,672 525,680" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Steps at base -->
+  <rect x="110" y="680" width="410" height="10" rx="1" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="105" y="690" width="420" height="10" rx="1" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Title label -->
+  <text x="297.5" y="750" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#2C2420" stroke="none">Brandenburg Gate</text>
+
+  <!-- Footer -->
+  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+</svg>

@@ -5,7 +5,7 @@ import { routing } from "@/i18n/routing";
 
 const BASE = "https://berlinbabysitter.com";
 
-const staticPaths = ["/", "/login", "/register", "/guides"];
+const staticPaths = ["/", "/login", "/register", "/guides", "/coloring-pages"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const alternateLanguages = (path: string) => ({

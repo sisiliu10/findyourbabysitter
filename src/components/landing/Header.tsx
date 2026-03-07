@@ -42,6 +42,12 @@ export function Header() {
             >
               {t("guides")}
             </Link>
+            <Link
+              href="/coloring-pages"
+              className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
+            >
+              {t("coloringPages")}
+            </Link>
           </nav>
 
           {/* Right: language + CTA */}
@@ -111,6 +117,12 @@ export function Header() {
               className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
             >
               {t("guides")}
+            </Link>
+            <Link
+              href="/coloring-pages"
+              className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
+            >
+              {t("coloringPages")}
             </Link>
             <LanguageToggle />
             <div className="flex items-center gap-4 pt-2 border-t border-border-subtle">

@@ -7,7 +7,8 @@
     "howItWorks": "How it works",
     "neighborhoods": "Neighborhoods",
     "menu": "Menu",
-    "getStarted": "Get started"
+    "getStarted": "Get started",
+    "coloringPages": "Coloring Pages"
   },
   "home": {
     "heroTagline": "Find a Babysitter in Berlin",
@@ -51,6 +52,7 @@
     "languages": "Languages",
     "legal": "Legal",
     "guides": "Guides",
+    "coloringPages": "Coloring Pages",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
     "impressum": "Impressum"
@@ -617,5 +619,22 @@
     "browseSitters": "Browse sitters by neighborhood",
     "tableOfContents": "In this guide",
     "home": "Home"
+  },
+  "coloringPages": {
+    "label": "Coloring Pages",
+    "title": "Berlin Coloring Pages",
+    "intro": "Free, printable coloring pages inspired by Berlin — from the TV Tower to the East Side Gallery. Pick an age group, download, and let the coloring begin.",
+    "print": "Print",
+    "download": "Download",
+    "tipsLabel": "Printing Tips",
+    "tip1Title": "Best paper",
+    "tip1Desc": "Use thicker paper (120gsm or more) so crayons and markers don't bleed through.",
+    "tip2Title": "Print settings",
+    "tip2Desc": "Click the print button, then select 'Fit to page' in your printer settings for the best results.",
+    "tip3Title": "Color freely",
+    "tip3Desc": "There are no wrong colors. A purple TV Tower? A rainbow bear? Berlin is a creative city.",
+    "ctaTitle": "Need a sitter for coloring time?",
+    "ctaSubtitle": "Find trusted babysitters recommended by other Berlin parents.",
+    "ctaButton": "Find a babysitter"
   }
 }
