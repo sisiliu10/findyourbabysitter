@@ -27,6 +27,7 @@ export default async function SitterProfilePage({
           lastName: true,
           avatarUrl: true,
           district: true,
+          lastSeenAt: true,
           createdAt: true,
         },
       },
@@ -57,6 +58,20 @@ export default async function SitterProfilePage({
 
   const { user } = profile;
   const initials = getInitials(user.firstName, user.lastName);
+
+  // Compute last-seen status
+  const lastSeen = (() => {
+    if (!user.lastSeenAt) return { text: t("activeNow"), isActive: true };
+    const diff = Date.now() - new Date(user.lastSeenAt).getTime();
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(diff / 3600000);
+    const days = Math.floor(diff / 86400000);
+    if (minutes < 5) return { text: t("activeNow"), isActive: true };
+    if (minutes < 60) return { text: t("lastSeenMinutes", { count: minutes }), isActive: false };
+    if (hours < 24) return { text: t("lastSeenHours", { count: hours }), isActive: false };
+    if (days < 30) return { text: t("lastSeenDays", { count: days }), isActive: false };
+    return { text: t("lastSeenDate", { date: new Date(user.lastSeenAt).toLocaleDateString() }), isActive: false };
+  })();
 
   let availability: Record<string, string[]> = {};
   try {
@@ -112,6 +127,10 @@ export default async function SitterProfilePage({
             </div>
             <p className="mt-1 text-xs text-text-tertiary">
               {t("memberSince", { date: formatDate(user.createdAt, locale) })}
+              {" · "}
+              <span className={lastSeen.isActive ? "text-success" : ""}>
+                {lastSeen.text}
+              </span>
             </p>
           </div>
           <Link

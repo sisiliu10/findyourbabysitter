@@ -184,7 +184,12 @@
     "memberSince": "Mitglied seit {date}",
     "reviewCount": "{count, plural, one {1 Bewertung} other {# Bewertungen}}",
     "yearCount": "{count, plural, one {1 Jahr} other {# Jahre}}",
-    "yrs": "Jahre"
+    "yrs": "Jahre",
+    "activeNow": "Gerade aktiv",
+    "lastSeenMinutes": "Aktiv vor {count} Min.",
+    "lastSeenHours": "Aktiv vor {count} Std.",
+    "lastSeenDays": "Aktiv vor {count} T.",
+    "lastSeenDate": "Zuletzt gesehen am {date}"
   },
   "notFound": {
     "title": "404",
