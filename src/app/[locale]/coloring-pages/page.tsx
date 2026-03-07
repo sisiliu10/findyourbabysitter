@@ -4,12 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
 import { ColoringPageGrid } from "@/components/coloring-pages/ColoringPageGrid";
-import {
-  AGE_CATEGORIES,
-  COLORING_PAGES,
-  getAgeCategory,
-  getColoringPage,
-} from "@/data/coloring-pages";
+import { COLORING_PAGES, getColoringPage } from "@/data/coloring-pages";
 
 export const dynamic = "force-dynamic";
 
@@ -23,19 +18,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: isDE
-      ? "Ausmalbilder Berlin | Kostenlose Malvorlagen für Kinder"
-      : "Berlin Coloring Pages | Free Printable Pages for Kids",
+      ? "Ausmalbilder | Kostenlose Malvorlagen für Kinder"
+      : "Coloring Pages | Free Printable Pages for Kids",
     description: isDE
-      ? "Kostenlose Berliner Ausmalbilder für Kinder jeden Alters. Brandenburger Tor, Fernsehturm, Berliner Bär und mehr. Einfach herunterladen und ausdrucken."
-      : "Free Berlin-themed coloring pages for kids of all ages. Brandenburg Gate, TV Tower, Berlin Bear and more. Download and print for free.",
+      ? "Kostenlose Ausmalbilder für Kinder. Einfach herunterladen und ausdrucken."
+      : "Free coloring pages for kids. Download and print for free.",
     alternates: { canonical: "https://berlinbabysitter.com/coloring-pages" },
     openGraph: {
       title: isDE
-        ? "Ausmalbilder Berlin | Kostenlose Malvorlagen für Kinder"
-        : "Berlin Coloring Pages | Free Printable Pages for Kids",
+        ? "Ausmalbilder | Kostenlose Malvorlagen für Kinder"
+        : "Coloring Pages | Free Printable Pages for Kids",
       description: isDE
-        ? "Kostenlose Berliner Ausmalbilder. Brandenburger Tor, Fernsehturm, Berliner Bär und mehr."
-        : "Free Berlin coloring pages. Brandenburg Gate, TV Tower, Berlin Bear and more.",
+        ? "Kostenlose Ausmalbilder für Kinder. Einfach herunterladen und ausdrucken."
+        : "Free coloring pages for kids. Download and print for free.",
       url: "https://berlinbabysitter.com/coloring-pages",
       siteName: "Berlin Babysitter",
       locale: isDE ? "de_DE" : "en_US",
@@ -48,7 +43,6 @@ export default async function ColoringPagesPage({ params }: PageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "coloringPages" });
 
-  const categories = AGE_CATEGORIES.map((cat) => getAgeCategory(cat.id, locale)!);
   const pages = COLORING_PAGES.map((p) => getColoringPage(p.slug, locale)!);
 
   return (
@@ -71,10 +65,10 @@ export default async function ColoringPagesPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* Category tabs + coloring page grids */}
+        {/* Coloring pages grid */}
         <section className="border-t border-border-default">
           <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16">
-            <ColoringPageGrid categories={categories} pages={pages} />
+            <ColoringPageGrid pages={pages} />
           </div>
         </section>
 
