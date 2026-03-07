@@ -26,6 +26,7 @@ export default async function SitterProfilePage({
           firstName: true,
           lastName: true,
           avatarUrl: true,
+          district: true,
           createdAt: true,
         },
       },
@@ -90,7 +91,7 @@ export default async function SitterProfilePage({
               {user.firstName} {user.lastName}
             </h1>
             <p className="text-sm text-text-secondary">
-              {[profile.city, profile.state].filter(Boolean).join(", ")}
+              {user.district || "Berlin"}
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-3">
               {avgRating !== null && (

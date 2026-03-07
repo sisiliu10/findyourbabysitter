@@ -19,13 +19,26 @@ export async function GET(
 
     const profile = await prisma.babysitterProfile.findUnique({
       where: { userId: id },
-      include: {
+      select: {
+        userId: true,
+        bio: true,
+        hourlyRate: true,
+        yearsExperience: true,
+        languages: true,
+        ageRangeMin: true,
+        ageRangeMax: true,
+        hasFirstAid: true,
+        hasCPR: true,
+        hasTransportation: true,
+        availabilityJson: true,
+        isActive: true,
         user: {
           select: {
             id: true,
             firstName: true,
             lastName: true,
             avatarUrl: true,
+            district: true,
             createdAt: true,
           },
         },
