@@ -10,29 +10,23 @@ interface LocalizedAgeCategory {
 }
 
 export const AGE_CATEGORIES_DE: Record<string, LocalizedAgeCategory> = {
-  "little-explorers": {
-    title: "Kleine Entdecker",
-    subtitle: "1–3 Jahre",
+  easy: {
+    title: "Einfach",
+    subtitle: "Leicht",
     description:
       "Große, einfache Formen mit dicken Umrissen. Perfekt für kleine Hände, die gerade Buntstifte entdecken.",
   },
-  kindergarten: {
-    title: "Kindergartenkinder",
-    subtitle: "3–5 Jahre",
+  medium: {
+    title: "Mittel",
+    subtitle: "Moderat",
     description:
-      "Bekannte Berliner Wahrzeichen, vereinfacht zu lustigen Formen mit mittelgroßen Flächen zum Ausmalen.",
+      "Bekannte Berliner Wahrzeichen mit mehr Details und mittelgroßen Flächen zum Ausmalen.",
   },
-  "school-age": {
-    title: "Schulkinder",
-    subtitle: "6–9 Jahre",
+  hard: {
+    title: "Schwer",
+    subtitle: "Detailliert",
     description:
-      "Detailliertere Szenen aus dem Berliner Leben mit kleineren Flächen und mehr Elementen zum Entdecken.",
-  },
-  "big-artists": {
-    title: "Große Künstler",
-    subtitle: "Ab 10 Jahre",
-    description:
-      "Komplexe, detaillierte Designs inspiriert von Berliner Kunst und Architektur. Eine echte Herausforderung.",
+      "Komplexe, detaillierte Szenen aus dem Berliner Leben. Viele kleine Flächen und feine Details — eine echte Herausforderung.",
   },
 };
 

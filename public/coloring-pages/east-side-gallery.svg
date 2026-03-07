@@ -1,253 +1,175 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
-  <title>East Side Gallery - Berlin Wall Coloring Page for Ages 10+</title>
+  <title>East Side Gallery Coloring Page</title>
 
-  <!-- Wall panels in perspective - receding to the right -->
-  <!-- Front face of the wall - Panel 1 (closest, largest) -->
-  <polygon points="60,280 160,280 160,520 60,520" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Panel 1: Peace symbol mural -->
-  <circle cx="110" cy="400" r="45" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="110" y1="355" x2="110" y2="445" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="110" y1="400" x2="78" y2="432" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="110" y1="400" x2="142" y2="432" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Radiating lines around peace symbol -->
-  <line x1="110" y1="340" x2="110" y2="330" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="155" y1="400" x2="162" y2="400" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="65" y1="400" x2="58" y2="400" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="142" y1="368" x2="148" y2="362" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="78" y1="368" x2="72" y2="362" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sky -->
+  <path d="M100 50 C105 42, 115 42, 120 50" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M400 35 C405 27, 415 27, 420 35" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M250 30 C255 22, 265 22, 270 30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Panel 2 -->
-  <polygon points="160,280 265,285 265,515 160,520" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Panel 2: Abstract geometric mural - triangles and circles -->
-  <polygon points="185,310 240,310 212,350" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <polygon points="195,340 250,340 222,380" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="212" cy="420" r="25" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="212" cy="420" r="15" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="212" cy="420" r="5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="185" y="455" width="55" height="40" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="185" y1="455" x2="240" y2="495" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="240" y1="455" x2="185" y2="495" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- The Wall - main structure -->
+  <rect x="30" y="100" width="535" height="550" stroke="#2C2420" fill="none" stroke-width="5"/>
 
-  <!-- Panel 3 (blank for kids to draw) -->
-  <polygon points="265,285 365,290 365,510 265,515" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Small "your art here" hint -->
-  <rect x="290" y="385" width="50" height="30" rx="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4,3"/>
+  <!-- Wall top edge/cap -->
+  <rect x="25" y="90" width="545" height="15" rx="3" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <!-- Pipe on top -->
+  <path d="M25 90 Q297 80, 570 90" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
 
-  <!-- Panel 4: Swirl/wave mural -->
-  <polygon points="365,290 455,295 455,508 365,510" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Swirl pattern -->
-  <path d="M385,340 Q395,310 415,320 Q435,330 420,350 Q405,370 390,355 Q380,345 385,340" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M400,370 Q420,355 430,375 Q440,395 420,400 Q400,405 400,385" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M380,410 Q400,400 415,415 Q430,430 415,445 Q400,460 385,445 Q375,435 380,410" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M420,440 Q440,425 448,445 Q455,465 440,470 Q425,475 420,460 Q415,450 420,440" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Wall panel dividers (5 panels) -->
+  <line x1="137" y1="105" x2="137" y2="645" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="244" y1="105" x2="244" y2="645" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="351" y1="105" x2="351" y2="645" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="458" y1="105" x2="458" y2="645" stroke="#2C2420" fill="none" stroke-width="3"/>
 
-  <!-- Panel 5 (blank for kids to draw) -->
-  <polygon points="455,295 530,298 530,505 455,508" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="472" y="390" width="40" height="22" rx="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4,3"/>
+  <!-- Panel 1: Heart outline -->
+  <path d="M83 280 C83 240, 45 210, 45 260 C45 310, 83 350, 83 350 C83 350, 121 310, 121 260 C121 210, 83 240, 83 280 Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Small hearts inside -->
+  <path d="M75 290 C75 282, 68 278, 68 285 C68 292, 75 298, 75 298 C75 298, 82 292, 82 285 C82 278, 75 282, 75 290 Z" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M92 270 C92 262, 85 258, 85 265 C85 272, 92 278, 92 278 C92 278, 99 272, 99 265 C99 258, 92 262, 92 270 Z" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Stars around -->
+  <path d="M55 180 L58 190 L68 190 L60 196 L63 206 L55 200 L47 206 L50 196 L42 190 L52 190 Z" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M110 170 L113 178 L121 178 L115 183 L117 191 L110 186 L103 191 L105 183 L99 178 L107 178 Z" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Dots pattern -->
+  <circle cx="50" cy="400" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="70" cy="420" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="90" cy="400" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="110" cy="420" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="60" cy="450" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="80" cy="450" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="100" cy="450" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Wavy lines at bottom -->
+  <path d="M40 520 C55 510, 70 530, 85 520 C100 510, 115 530, 130 520" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M40 550 C55 540, 70 560, 85 550 C100 540, 115 560, 130 550" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M40 580 C55 570, 70 590, 85 580 C100 570, 115 590, 130 580" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Panel 6: Abstract face/eye -->
-  <polygon points="530,298 540,299 540,504 530,505" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Panel 2: Peace symbol -->
+  <circle cx="190" cy="280" r="60" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <line x1="190" y1="220" x2="190" y2="340" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <line x1="190" y1="280" x2="150" y2="320" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <line x1="190" y1="280" x2="230" y2="320" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <!-- Flowers below -->
+  <circle cx="160" cy="420" r="12" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <circle cx="160" cy="420" r="4" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="160" y1="432" x2="160" y2="470" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M155 450 C145 445, 142 455, 150 458" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="200" cy="430" r="10" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <circle cx="200" cy="430" r="3" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="200" y1="440" x2="200" y2="475" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="225" cy="415" r="14" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <circle cx="225" cy="415" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="225" y1="429" x2="225" y2="470" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Zigzag pattern -->
+  <path d="M148 510 L160 530 L172 510 L184 530 L196 510 L208 530 L220 510 L232 530" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Spiral -->
+  <path d="M190 580 C200 570, 210 580, 200 590 C190 600, 175 590, 185 575 C195 560, 218 570, 208 590 C198 610, 170 598, 180 570" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Top of wall - perspective receding to the right -->
-  <polygon points="60,280 160,280 265,285 365,290 455,295 530,298 540,299 540,270 530,269 455,266 365,261 265,256 160,251 60,250" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Panel 3: Sun/eye design (YOUR MURAL - empty with frame) -->
+  <rect x="255" y="120" width="85" height="510" rx="5" stroke="#2C2420" fill="none" stroke-width="3" stroke-dasharray="8 4"/>
+  <!-- Large eye/sun -->
+  <ellipse cx="297" cy="260" rx="40" ry="30" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <circle cx="297" cy="260" r="15" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <circle cx="297" cy="260" r="5" fill="#2C2420"/>
+  <!-- Rays around -->
+  <line x1="297" y1="220" x2="297" y2="200" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="297" y1="300" x2="297" y2="320" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="255" y1="260" x2="265" y2="260" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="329" y1="260" x2="339" y2="260" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="270" y1="233" x2="278" y2="241" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="316" y1="279" x2="324" y2="287" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="270" y1="287" x2="278" y2="279" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="316" y1="241" x2="324" y2="233" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <!-- Geometric triangles -->
+  <path d="M270 380 L297 340 L324 380 Z" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <path d="M275 500 L297 460 L319 500 Z" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <path d="M280 440 L297 410 L314 440 Z" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Brick pattern -->
+  <path d="M260 560 L335 560 M260 575 L335 575 M260 590 L335 590 M260 605 L335 605 M260 620 L335 620" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M280 560 L280 575 M310 560 L310 575 M265 575 L265 590 M295 575 L295 590 M325 575 L325 590 M280 590 L280 605 M310 590 L310 605 M265 605 L265 620 M295 605 L295 620 M325 605 L325 620" stroke="#2C2420" fill="none" stroke-width="2"/>
 
-  <!-- Brick pattern on top of wall -->
-  <!-- Row 1 -->
-  <line x1="80" y1="258" x2="80" y2="268" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="100" y1="257" x2="100" y2="270" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="120" y1="255" x2="120" y2="272" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="140" y1="254" x2="140" y2="275" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="180" y1="256" x2="180" y2="278" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="210" y1="258" x2="210" y2="280" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="240" y1="260" x2="240" y2="282" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="290" y1="262" x2="290" y2="284" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="330" y1="264" x2="330" y2="286" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="380" y1="266" x2="380" y2="289" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="420" y1="268" x2="420" y2="291" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="470" y1="270" x2="470" y2="294" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="510" y1="271" x2="510" y2="296" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Horizontal brick line -->
-  <path d="M60,262 L160,267 L265,271 L365,276 L455,280 L530,283 L540,284" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Panel 4: Dove/bird -->
+  <path d="M405 250 C420 220, 440 210, 450 220 L440 240 C445 235, 455 238, 450 245 L438 255 C442 250, 452 252, 448 260 L420 285 C410 290, 395 285, 390 275 C385 265, 390 255, 400 250 Z" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Dove wing -->
+  <path d="M400 260 C380 245, 375 260, 385 275" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <!-- Dove eye -->
+  <circle cx="415" cy="250" r="3" fill="#2C2420"/>
+  <!-- Olive branch -->
+  <path d="M425 285 C435 295, 445 300, 455 298" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M438 292 C442 285, 448 288, 445 294" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M448 296 C452 289, 458 292, 455 298" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Concentric circles -->
+  <circle cx="405" cy="170" r="15" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="405" cy="170" r="25" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="405" cy="170" r="35" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Checkered pattern -->
+  <rect x="365" y="400" width="20" height="20" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="385" y="400" width="20" height="20" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="405" y="400" width="20" height="20" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="425" y="400" width="20" height="20" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="365" y="420" width="20" height="20" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="385" y="420" width="20" height="20" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="405" y="420" width="20" height="20" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="425" y="420" width="20" height="20" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Cross-hatch in alternating cells -->
+  <line x1="365" y1="400" x2="385" y2="420" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <line x1="385" y1="400" x2="365" y2="420" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <line x1="405" y1="400" x2="425" y2="420" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <line x1="425" y1="400" x2="405" y2="420" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <line x1="385" y1="420" x2="405" y2="440" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <line x1="405" y1="420" x2="385" y2="440" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <line x1="425" y1="420" x2="445" y2="440" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <line x1="445" y1="420" x2="425" y2="440" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <!-- Arrow -->
+  <path d="M370 520 L440 520 L430 510 M440 520 L430 530" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Barbed wire on top sections -->
-  <!-- Barbed wire segment 1 -->
-  <path d="M60,248 Q70,240 80,248 Q90,256 100,248 Q110,240 120,248 Q130,256 140,248 Q150,240 160,248" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Barbs -->
-  <line x1="70" y1="244" x2="66" y2="238" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="70" y1="244" x2="74" y2="238" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="90" y1="252" x2="86" y2="258" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="90" y1="252" x2="94" y2="258" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="110" y1="244" x2="106" y2="238" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="110" y1="244" x2="114" y2="238" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="130" y1="252" x2="126" y2="258" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="130" y1="252" x2="134" y2="258" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="150" y1="244" x2="146" y2="238" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="150" y1="244" x2="154" y2="238" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Panel 5: Abstract face -->
+  <circle cx="510" cy="250" r="55" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <!-- Eyes (different styles) -->
+  <circle cx="490" cy="235" r="12" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <circle cx="490" cy="235" r="4" fill="#2C2420"/>
+  <!-- Star eye -->
+  <path d="M530 235 L533 242 L540 242 L535 247 L537 254 L530 250 L523 254 L525 247 L520 242 L527 242 Z" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Big grin -->
+  <path d="M480 270 Q510 300 540 270" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <!-- Teeth -->
+  <line x1="495" y1="275" x2="495" y2="285" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="510" y1="278" x2="510" y2="288" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="525" y1="275" x2="525" y2="285" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Spiky hair -->
+  <path d="M465 210 L470 180 L485 205 L495 175 L510 200 L520 170 L530 198 L540 178 L548 205" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Drips -->
+  <path d="M475 400 L475 440 Q475 450, 480 450 Q485 450, 485 440 L485 410" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M510 420 L510 470 Q510 480, 515 480 Q520 480, 520 470 L520 430" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M545 390 L545 450 Q545 460, 550 460 Q555 460, 555 450 L555 400" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Lightning bolt -->
+  <path d="M490 520 L500 540 L492 540 L502 565 L495 550 L505 550 L490 520" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Barbed wire segment 2 -->
-  <path d="M365,260 Q375,252 385,260 Q395,268 405,260 Q415,252 425,260 Q435,268 445,260 Q455,252 455,264" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="375" y1="256" x2="371" y2="250" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="375" y1="256" x2="379" y2="250" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="395" y1="264" x2="391" y2="270" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="395" y1="264" x2="399" y2="270" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="415" y1="256" x2="411" y2="250" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="415" y1="256" x2="419" y2="250" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="435" y1="264" x2="431" y2="270" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="435" y1="264" x2="439" y2="270" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sidewalk / path -->
+  <rect x="20" y="650" width="555" height="25" stroke="#2C2420" fill="none" stroke-width="4"/>
 
-  <!-- Ground / grass at the base of the wall -->
-  <line x1="30" y1="520" x2="550" y2="505" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- People viewing the wall -->
+  <!-- Person 1 (photographing) -->
+  <circle cx="100" cy="698" r="10" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="100" y1="708" x2="100" y2="740" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M100 718 L85 710" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <rect x="78" y="704" width="12" height="8" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M100 740 L92 770" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M100 740 L108 770" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Grass tufts along the base -->
-  <path d="M50,520 Q52,505 55,520" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M55,520 Q58,508 62,520" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M60,520 Q64,500 68,520" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M90,520 Q93,507 96,520" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M96,520 Q100,510 104,520" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M150,520 Q153,505 156,520" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M156,520 Q160,512 164,520" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M220,518 Q223,503 226,518" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M226,518 Q230,508 234,518" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M234,518 Q238,510 242,518" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M300,515 Q303,500 306,515" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M306,515 Q310,505 314,515" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M370,512 Q373,498 376,512" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M376,512 Q380,502 384,512" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M440,510 Q443,496 446,510" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M446,510 Q450,500 454,510" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M500,508 Q503,495 506,508" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Person 2 (pointing) -->
+  <circle cx="350" cy="700" r="10" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="350" y1="710" x2="350" y2="742" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M350 720 L370 705" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M350 720 L335 725" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M350 742 L342 772" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M350 742 L358 770" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Wildflowers along the base -->
-  <!-- Flower 1 - daisy -->
-  <path d="M75,520 L75,498" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="75" cy="492" rx="4" ry="6" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="69" cy="495" rx="4" ry="6" transform="rotate(-40,69,495)" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="81" cy="495" rx="4" ry="6" transform="rotate(40,81,495)" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="72" cy="500" rx="4" ry="6" transform="rotate(-70,72,500)" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="78" cy="500" rx="4" ry="6" transform="rotate(70,78,500)" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="75" cy="497" r="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Leaf -->
-  <path d="M75,510 Q65,505 60,510" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M75,510 Q65,510 60,510" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Person 3 (kid) -->
+  <circle cx="500" cy="710" r="8" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="500" y1="718" x2="500" y2="745" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M500 745 L493 770" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M500 745 L507 768" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Flower 2 - tulip -->
-  <path d="M130,520 L130,495" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M125,495 Q130,480 135,495" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M122,498 Q125,485 130,495" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M138,498 Q135,485 130,495" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Ground -->
+  <line x1="20" y1="780" x2="575" y2="780" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
 
-  <!-- Flower 3 - small cluster -->
-  <path d="M200,518 L200,500" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="200" cy="497" r="4" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M195,518 L192,502" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="192" cy="499" r="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M205,518 L208,504" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="208" cy="501" r="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Flower 4 - poppy -->
-  <path d="M350,512 L350,488" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M343,490 Q350,478 357,490 Q350,498 343,490" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M345,495 Q350,483 355,495 Q350,502 345,495" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="350" cy="490" r="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Flower 5 -->
-  <path d="M480,508 L480,486" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M475,486 Q480,475 485,486" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M473,490 Q480,479 487,490" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Spree River -->
-  <path d="M30,580 Q100,570 200,575 Q300,580 400,572 Q500,565 565,570" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- River bank - far side -->
-  <path d="M30,555 Q100,548 200,552 Q300,556 400,550 Q500,544 565,548" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Water ripple patterns -->
-  <path d="M50,565 Q60,562 70,565" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M90,568 Q105,564 120,568" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M140,562 Q155,558 170,562" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M200,570 Q215,566 230,570" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M250,565 Q265,561 280,565" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M310,568 Q325,564 340,568" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M360,563 Q375,559 390,563" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M420,560 Q435,556 450,560" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M470,558 Q485,554 500,558" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M75,572 Q85,569 95,572" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M160,575 Q175,571 190,575" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M280,572 Q295,568 310,572" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M400,567 Q415,563 430,567" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M510,562 Q525,558 540,562" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Oberbaum Bridge in the distance -->
-  <!-- Main bridge structure -->
-  <path d="M380,540 L540,535" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M380,548 L540,543" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Bridge arches -->
-  <path d="M390,548 Q400,555 410,548" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M410,548 Q420,555 430,547" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M430,547 Q440,554 450,547" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M450,547 Q460,554 470,546" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M470,546 Q480,553 490,545" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M490,545 Q500,552 510,544" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M510,544 Q520,551 530,543" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Bridge towers -->
-  <rect x="428" y="520" width="10" height="20" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <polygon points="428,520 433,512 438,520" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="488" y="518" width="10" height="18" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <polygon points="488,518 493,510 498,518" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Tower windows -->
-  <path d="M431,525 Q433,523 435,525 L435,530 L431,530 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M491,523 Q493,521 495,523 L495,528 L491,528 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Far riverbank details - trees -->
-  <path d="M50,552 Q55,535 60,552" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="55" cy="538" r="8" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M100,550 Q105,530 110,550" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="105" cy="530" rx="10" ry="8" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M170,550 Q175,535 180,550" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="175" cy="536" r="7" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M250,548 Q255,532 260,548" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="255" cy="534" r="7" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M320,546 Q325,530 330,546" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="325" cy="530" rx="9" ry="7" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Near riverbank path/walkway -->
-  <path d="M30,590 Q150,600 300,598 Q450,596 565,590" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Foreground path with cobblestones -->
-  <path d="M30,620 Q150,630 300,628 Q450,626 565,618" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cobblestone details -->
-  <ellipse cx="80" cy="605" rx="8" ry="5" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="100" cy="610" rx="7" ry="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="120" cy="603" rx="6" ry="5" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="150" cy="608" rx="8" ry="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="175" cy="612" rx="7" ry="5" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="200" cy="605" rx="6" ry="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="230" cy="610" rx="8" ry="5" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="260" cy="604" rx="7" ry="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="290" cy="612" rx="6" ry="5" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="320" cy="606" rx="8" ry="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="350" cy="610" rx="7" ry="5" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="380" cy="604" rx="6" ry="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="410" cy="608" rx="8" ry="5" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="440" cy="602" rx="7" ry="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="470" cy="606" rx="6" ry="5" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="500" cy="600" rx="8" ry="4" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Sky - clouds -->
-  <path d="M80,180 Q100,160 130,170 Q150,155 180,170 Q200,160 210,180" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M350,150 Q370,130 400,140 Q420,125 450,140 Q470,130 490,150" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M250,200 Q270,185 290,195 Q305,182 320,200" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Birds in sky -->
-  <path d="M300,130 Q305,125 310,130" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M310,130 Q315,125 320,130" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M280,145 Q284,141 288,145" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M288,145 Q292,141 296,145" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M330,140 Q334,136 338,140" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M338,140 Q342,136 346,140" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- TV Tower silhouette in far distance -->
-  <line x1="220" y1="240" x2="220" y2="170" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="220" cy="195" rx="6" ry="10" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+  <text x="297.5" y="825" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
 </svg>

@@ -1,72 +1,79 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
-  <title>Berlin Bear Coloring Page for Toddlers</title>
+  <title>Berlin Bear Coloring Page</title>
 
-  <!-- Left Ear -->
-  <ellipse cx="220" cy="175" rx="45" ry="50" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Inner Left Ear -->
-  <ellipse cx="220" cy="180" rx="25" ry="30" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left Ear outer -->
+  <ellipse cx="195" cy="115" rx="65" ry="70" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left Ear inner -->
+  <ellipse cx="195" cy="120" rx="35" ry="40" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Right Ear -->
-  <ellipse cx="375" cy="175" rx="45" ry="50" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Inner Right Ear -->
-  <ellipse cx="375" cy="180" rx="25" ry="30" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right Ear outer -->
+  <ellipse cx="400" cy="115" rx="65" ry="70" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right Ear inner -->
+  <ellipse cx="400" cy="120" rx="35" ry="40" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Head -->
-  <ellipse cx="297" cy="240" rx="120" ry="110" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="297" cy="210" rx="155" ry="140" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Muzzle area -->
-  <ellipse cx="297" cy="280" rx="55" ry="42" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Snout area -->
+  <ellipse cx="297" cy="260" rx="70" ry="55" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Left Eye -->
-  <circle cx="255" cy="230" r="10" stroke="#2C2420" fill="#2C2420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="240" cy="195" rx="18" ry="20" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left pupil -->
+  <circle cx="245" cy="198" r="8" stroke="#2C2420" fill="#2C2420"/>
+
   <!-- Right Eye -->
-  <circle cx="339" cy="230" r="10" stroke="#2C2420" fill="#2C2420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="354" cy="195" rx="18" ry="20" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right pupil -->
+  <circle cx="349" cy="198" r="8" stroke="#2C2420" fill="#2C2420"/>
 
   <!-- Nose -->
-  <ellipse cx="297" cy="268" rx="14" ry="10" stroke="#2C2420" fill="#2C2420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="297" cy="245" rx="20" ry="14" stroke="#2C2420" fill="#2C2420" stroke-width="3"/>
 
-  <!-- Smile -->
-  <path d="M275 290 Q297 315 319 290" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Mouth -->
+  <path d="M270 270 Q297 305 324 270" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Cheeks -->
+  <circle cx="210" cy="250" r="15" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="384" cy="250" r="15" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Body -->
-  <ellipse cx="297" cy="510" rx="150" ry="190" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="297" cy="530" rx="190" ry="240" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Belly circle -->
-  <ellipse cx="297" cy="500" rx="85" ry="95" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Belly -->
+  <ellipse cx="297" cy="520" rx="110" ry="130" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Heart on belly -->
-  <path d="M297 480 C297 468, 278 455, 268 468 C258 481, 270 495, 297 520 C324 495, 336 481, 326 468 C316 455, 297 468, 297 480 Z" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M297 470 C297 455, 272 435, 258 455 C244 475, 262 498, 297 530 C332 498, 350 475, 336 455 C322 435, 297 455, 297 470 Z" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Left Arm (down by side) -->
-  <path d="M155 420 C130 460, 120 520, 140 560 C148 575, 165 578, 175 565 C185 548, 170 520, 160 490" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left Arm -->
+  <path d="M115 400 C75 460, 60 540, 85 600 Q95 625, 120 610 C140 595, 125 550, 118 500" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left paw pad -->
+  <ellipse cx="90" cy="608" rx="35" ry="25" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Right Arm (raised waving) -->
-  <path d="M440 400 C470 360, 485 300, 475 265 C470 248, 455 242, 445 255 C432 275, 445 310, 450 340" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right Arm (waving) -->
+  <path d="M480 380 C520 320, 535 240, 520 200 Q510 175, 488 190 C465 210, 478 280, 485 330" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right paw -->
+  <ellipse cx="516" cy="188" rx="35" ry="25" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Right Paw (waving) -->
-  <ellipse cx="473" cy="255" rx="28" ry="22" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Wave lines -->
+  <path d="M558 168 C566 163, 573 168, 568 176" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
+  <path d="M562 190 C570 185, 577 190, 572 198" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
+  <path d="M555 148 C563 143, 570 148, 565 156" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
 
-  <!-- Left Paw -->
-  <ellipse cx="142" cy="568" rx="28" ry="22" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left Foot -->
+  <ellipse cx="210" cy="760" rx="75" ry="45" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left toe pads -->
+  <ellipse cx="175" cy="755" rx="18" ry="14" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="215" cy="750" rx="18" ry="14" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="250" cy="755" rx="18" ry="14" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Left Leg/Foot -->
-  <ellipse cx="230" cy="700" rx="55" ry="35" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right Foot -->
+  <ellipse cx="384" cy="760" rx="75" ry="45" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right toe pads -->
+  <ellipse cx="349" cy="755" rx="18" ry="14" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="389" cy="750" rx="18" ry="14" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="424" cy="755" rx="18" ry="14" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Right Leg/Foot -->
-  <ellipse cx="364" cy="700" rx="55" ry="35" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Left foot pad -->
-  <ellipse cx="215" cy="700" rx="18" ry="12" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="248" cy="700" rx="18" ry="12" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Right foot pad -->
-  <ellipse cx="349" cy="700" rx="18" ry="12" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="382" cy="700" rx="18" ry="12" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Wave lines near paw -->
-  <path d="M510 240 C518 235, 525 240, 520 248" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M515 260 C523 255, 530 260, 525 268" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M508 220 C516 215, 523 220, 518 228" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+  <text x="297.5" y="825" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
 </svg>

@@ -1,126 +1,71 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
-  <title>Ampelmaennchen Coloring Page for Kids</title>
+  <title>Ampelmaennchen Coloring Page</title>
 
-  <!-- Traffic light post -->
-  <rect x="100" y="200" width="12" height="460" rx="4" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Traffic light base -->
-  <rect x="90" y="650" width="32" height="14" rx="3" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Traffic light pole -->
+  <rect x="68" y="200" width="16" height="580" rx="5" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pole base -->
+  <rect x="40" y="770" width="72" height="20" rx="6" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Traffic light housing -->
-  <rect x="72" y="200" width="68" height="140" rx="12" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Top visor -->
-  <path d="M72,230 Q65,225 62,220 Q60,215 65,212 L72,215" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Bottom visor -->
-  <path d="M72,300 Q65,295 62,290 Q60,285 65,282 L72,285" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="35" y="80" width="82" height="130" rx="12" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Traffic light hood -->
+  <path d="M30 80 L102 80 L110 65 L22 65 Z" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Red light circle -->
+  <circle cx="76" cy="118" r="25" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Green light circle (with Ampelmännchen inside) -->
+  <circle cx="76" cy="178" r="25" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Top circle (red - stop) -->
-  <circle cx="106" cy="245" r="25" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Standing man silhouette inside top circle (arms out to sides) -->
+  <!-- ===== Large Ampelmännchen character ===== -->
+
+  <!-- Hat -->
+  <ellipse cx="340" cy="105" rx="80" ry="20" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M300 105 L300 65 Q300 35, 340 35 Q380 35, 380 65 L380 105" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
   <!-- Head -->
-  <circle cx="106" cy="231" r="5" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Hat brim -->
-  <path d="M98,229 Q106,225 114,229" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Body -->
-  <line x1="106" y1="236" x2="106" y2="253" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-  <!-- Arms out to sides -->
-  <line x1="106" y1="242" x2="90" y2="242" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="106" y1="242" x2="122" y2="242" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-  <!-- Legs standing -->
-  <line x1="106" y1="253" x2="97" y2="264" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="106" y1="253" x2="115" y2="264" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-
-  <!-- Bottom circle (green - walk) -->
-  <circle cx="106" cy="315" r="25" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Walking man mini silhouette -->
-  <circle cx="106" cy="301" r="5" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M98,299 Q106,295 114,299" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="106" y1="306" x2="106" y2="320" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="106" y1="312" x2="93" y2="308" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="106" y1="312" x2="119" y2="316" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="106" y1="320" x2="95" y2="332" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="106" y1="320" x2="117" y2="332" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-
-  <!-- ============================================ -->
-  <!-- MAIN AMPELMANNCHEN - large, center of page -->
-  <!-- ============================================ -->
-
-  <!-- Hat (wide brim, distinctive) -->
-  <ellipse cx="340" cy="205" rx="55" ry="10" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Hat crown (top part) -->
-  <path d="M305,205 Q305,175 340,170 Q375,175 375,205" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Hat band -->
-  <path d="M308,198 Q340,192 372,198" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Head (round, cheerful) -->
-  <circle cx="340" cy="238" r="32" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Left eye -->
-  <circle cx="326" cy="232" r="5" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Left pupil dot -->
-  <circle cx="327" cy="232" r="1.5" stroke="#2C2420" fill="#2C2420" stroke-width="1"/>
-  <!-- Right eye -->
-  <circle cx="354" cy="232" r="5" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Right pupil dot -->
-  <circle cx="355" cy="232" r="1.5" stroke="#2C2420" fill="#2C2420" stroke-width="1"/>
-  <!-- Big cheerful smile -->
-  <path d="M322,248 Q332,262 358,248" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="340" cy="160" r="50" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Eyes -->
+  <circle cx="320" cy="150" r="8" stroke="#2C2420" fill="#2C2420"/>
+  <circle cx="360" cy="150" r="8" stroke="#2C2420" fill="#2C2420"/>
+  <!-- Smile -->
+  <path d="M318 175 Q340 198 362 175" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
   <!-- Nose -->
-  <path d="M338,240 Q340,244 342,240" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Rosy cheeks (small circles) -->
-  <circle cx="315" cy="246" r="5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round"/>
-  <circle cx="365" cy="246" r="5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="340" cy="162" r="5" stroke="#2C2420" fill="#2C2420"/>
 
-  <!-- Neck -->
-  <line x1="332" y1="268" x2="332" y2="285" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round"/>
-  <line x1="348" y1="268" x2="348" y2="285" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Body (round torso) -->
+  <ellipse cx="340" cy="320" rx="85" ry="110" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Body / torso (round, stocky) -->
-  <path d="M290,290 Q285,310 288,370 Q290,390 340,395 Q390,390 392,370 Q395,310 390,290 Q370,280 340,278 Q310,280 290,290Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Buttons -->
+  <circle cx="340" cy="270" r="8" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="340" cy="310" r="8" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="340" cy="350" r="8" stroke="#2C2420" fill="none" stroke-width="5"/>
 
-  <!-- Buttons down the front -->
-  <circle cx="340" cy="310" r="4" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="340" cy="335" r="4" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="340" cy="360" r="4" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left arm (stretched out, walking pose) -->
+  <path d="M260 270 C210 250, 165 260, 140 290 Q125 310, 135 325" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left hand -->
+  <circle cx="135" cy="330" r="18" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Left arm (extended forward, walking) -->
-  <path d="M290,305 Q260,310 230,290 Q215,280 200,285" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Left hand (open, friendly) -->
-  <path d="M200,285 Q192,280 188,282" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M200,285 Q192,285 190,288" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M200,285 Q194,290 192,294" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M200,285 Q197,295 196,300" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Right arm (extended backward, walking) -->
-  <path d="M390,305 Q420,315 450,340 Q465,350 480,345" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right arm (stretched back) -->
+  <path d="M420 270 C465 255, 510 270, 530 300 Q545 320, 535 338" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
   <!-- Right hand -->
-  <path d="M480,345 Q488,340 490,338" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M480,345 Q490,344 492,342" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M480,345 Q488,350 492,348" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="535" cy="342" r="18" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Left leg (forward stride) -->
-  <path d="M315,390 Q300,430 280,470 Q270,490 260,510 Q255,525 258,530" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Left shoe (big, rounded) -->
-  <path d="M258,530 Q250,535 240,538 Q228,540 222,536 Q218,530 225,525 Q235,522 250,524 Q258,526 258,530" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left leg (striding forward) -->
+  <path d="M300 420 L220 560 L180 660 Q170 690, 195 700" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left foot -->
+  <ellipse cx="215" cy="705" rx="50" ry="22" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Right leg (backward stride) -->
-  <path d="M365,390 Q380,430 400,470 Q410,490 420,510 Q425,525 422,530" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Right shoe -->
-  <path d="M422,530 Q430,535 440,538 Q452,540 458,536 Q462,530 455,525 Q445,522 430,524 Q422,526 422,530" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right leg (behind) -->
+  <path d="M375 420 L440 560 L480 660 Q490 690, 465 700" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right foot -->
+  <ellipse cx="445" cy="705" rx="50" ry="22" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- ============================================ -->
-  <!-- Crosswalk / Zebra stripes under his feet -->
-  <!-- ============================================ -->
-  <rect x="170" y="560" width="340" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="170" y="590" width="340" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="170" y="620" width="340" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="170" y="650" width="340" height="20" rx="2" stroke="#2C2420" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Ground line -->
+  <line x1="30" y1="790" x2="565" y2="790" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round"/>
 
-  <!-- Road edges -->
-  <line x1="150" y1="555" x2="530" y2="555" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
-  <line x1="150" y1="675" x2="530" y2="675" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <!-- Motion lines behind the walking figure -->
+  <line x1="530" y1="350" x2="565" y2="345" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <line x1="535" y1="380" x2="570" y2="378" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <line x1="530" y1="410" x2="565" y2="412" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
 
-  <!-- Title label -->
-  <text x="297.5" y="735" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#2C2420" stroke="none">Ampelm&#228;nnchen</text>
-
-  <!-- Footer -->
-  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+  <text x="297.5" y="825" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
 </svg>

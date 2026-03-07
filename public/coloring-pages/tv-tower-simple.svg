@@ -1,63 +1,74 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
-  <title>Berlin TV Tower Coloring Page for Toddlers</title>
-
-  <!-- Antenna spike -->
-  <line x1="297" y1="60" x2="297" y2="170" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <title>Berlin TV Tower Coloring Page</title>
 
   <!-- Antenna tip ball -->
-  <circle cx="297" cy="55" r="8" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="297" cy="38" r="12" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Antenna spike -->
+  <line x1="297" y1="50" x2="297" y2="155" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Small antenna cross bars -->
-  <line x1="285" y1="100" x2="309" y2="100" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="288" y1="130" x2="306" y2="130" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="278" y1="85" x2="316" y2="85" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="282" y1="120" x2="312" y2="120" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Sphere (the iconic ball) -->
-  <circle cx="297" cy="265" r="95" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Upper tapered neck to sphere -->
+  <path d="M285 155 L278 200" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M309 155 L316 200" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Observation deck ring (characteristic horizontal stripe) -->
-  <ellipse cx="297" cy="245" rx="95" ry="18" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sphere (the iconic ball) - LARGE -->
+  <circle cx="297" cy="310" r="120" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Second ring lower on sphere -->
-  <ellipse cx="297" cy="285" rx="88" ry="15" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Observation deck ring -->
+  <ellipse cx="297" cy="280" rx="120" ry="22" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Upper shaft (above sphere) -->
-  <path d="M285 170 L291 172 L291 170 L297 170 L303 170 L303 172 L309 170" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Second ring lower -->
+  <ellipse cx="297" cy="330" rx="112" ry="18" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Shaft from sphere down - tapers to base -->
-  <path d="M275 355 L272 450 L268 550 L264 650 L260 730" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M319 355 L322 450 L326 550 L330 650 L334 730" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Windows on sphere -->
+  <circle cx="260" cy="300" r="15" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="297" cy="300" r="15" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="334" cy="300" r="15" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Shaft - tapers down -->
+  <path d="M265 425 L258 530 L250 630 L244 720" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M329 425 L336 530 L344 630 L350 720" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Shaft horizontal bands -->
-  <line x1="273" y1="430" x2="321" y2="430" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="270" y1="500" x2="324" y2="500" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="267" y1="570" x2="327" y2="570" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="265" y1="640" x2="329" y2="640" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="261" y1="480" x2="333" y2="480" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="256" y1="560" x2="338" y2="560" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="251" y1="640" x2="343" y2="640" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Base platform -->
-  <path d="M230 730 L260 730 L334 730 L364 730" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M210 720 L244 720 L350 720 L384 720" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Base structure - flared legs -->
-  <path d="M230 730 L210 760 L200 775" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M364 730 L384 760 L394 775" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="200" y1="775" x2="394" y2="775" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M210 720 L170 770 L150 790" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M384 720 L424 770 L444 790" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="150" y1="790" x2="444" y2="790" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Cloud 1 (left, puffy) -->
-  <path d="M80 200 C70 185, 85 165, 105 170 C110 150, 140 148, 150 165 C165 155, 185 162, 185 178 C200 178, 205 195, 190 205 C195 218, 178 228, 165 220 C155 230, 130 232, 125 218 C110 228, 85 222, 80 210 Z" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Ground line -->
+  <line x1="40" y1="790" x2="555" y2="790" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Cloud 1 (left) -->
+  <path d="M55 180 C42 162, 62 140, 88 145 C95 122, 130 118, 142 138 C158 127, 182 135, 180 155 C196 156, 200 175, 185 185 C190 200, 172 212, 158 203 C146 214, 118 216, 112 200 C96 212, 60 205, 55 192 Z" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
   <!-- Cloud 2 (right) -->
-  <path d="M420 310 C412 298, 425 280, 442 285 C447 268, 472 266, 480 280 C492 272, 510 278, 508 292 C520 293, 524 308, 512 316 C516 327, 502 336, 490 330 C482 338, 460 340, 456 328 C444 336, 424 330, 420 320 Z" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M415 140 C405 125, 420 108, 440 112 C446 96, 475 93, 484 108 C498 98, 516 105, 514 120 C528 121, 532 138, 518 146 C522 157, 508 165, 496 158 C486 167, 462 169, 457 155 C444 164, 420 158, 415 148 Z" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Star 1 (upper left) -->
-  <path d="M120 400 L126 418 L145 418 L130 430 L136 448 L120 437 L104 448 L110 430 L95 418 L114 418 Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sun (top right) -->
+  <circle cx="510" cy="60" r="35" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="510" y1="15" x2="510" y2="5" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
+  <line x1="510" y1="105" x2="510" y2="115" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
+  <line x1="465" y1="60" x2="455" y2="60" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
+  <line x1="555" y1="60" x2="565" y2="60" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
+  <line x1="478" y1="28" x2="471" y2="21" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
+  <line x1="542" y1="92" x2="549" y2="99" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
+  <line x1="478" y1="92" x2="471" y2="99" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
+  <line x1="542" y1="28" x2="549" y2="21" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
 
-  <!-- Star 2 (upper right) -->
-  <path d="M470 150 L475 165 L490 165 L478 174 L483 189 L470 180 L457 189 L462 174 L450 165 L465 165 Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Trees at base -->
+  <path d="M80 790 L80 730 M60 760 Q80 720 100 760 M55 740 Q80 695 105 740" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M510 790 L510 730 M490 760 Q510 720 530 760 M485 740 Q510 695 535 740" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Star 3 (left middle) -->
-  <path d="M100 550 L105 563 L118 563 L108 571 L112 584 L100 576 L88 584 L92 571 L82 563 L95 563 Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Star 4 (right lower) -->
-  <path d="M480 500 L484 512 L497 512 L487 519 L491 531 L480 524 L469 531 L473 519 L463 512 L476 512 Z" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+  <text x="297.5" y="825" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
 </svg>

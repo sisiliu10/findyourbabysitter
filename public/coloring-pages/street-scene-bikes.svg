@@ -1,439 +1,162 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
-  <title>Berlin Kiez Street Scene Coloring Page - Buildings, bicycles, Spaeti, and neighborhood life</title>
+  <title>Berlin Street with Bikes Coloring Page</title>
 
-  <!-- === SKY ELEMENTS === -->
-  <!-- Cloud left -->
-  <ellipse cx="100" cy="50" rx="40" ry="18" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="80" cy="40" rx="25" ry="14" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="125" cy="42" rx="28" ry="13" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sky -->
+  <path d="M40 40 C45 32, 55 32, 60 40" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M310 30 C315 22, 325 22, 330 30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- Cloud right -->
-  <ellipse cx="440" cy="40" rx="35" ry="15" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="420" cy="32" rx="22" ry="12" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="460" cy="33" rx="20" ry="11" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Birds -->
-  <path d="M250 55 Q254 48 258 55 Q262 48 266 55" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M330 40 Q333 34 336 40 Q339 34 342 40" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- === BUILDING 1 (far left, tall narrow) === -->
-  <rect x="32" y="120" width="80" height="430" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Roof -->
-  <polygon points="32,120 72,80 112,120" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left building -->
+  <rect x="20" y="80" width="180" height="620" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <!-- Roof detail -->
+  <path d="M20 80 L110 40 L200 80" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   <!-- Chimney -->
-  <rect x="85" y="88" width="12" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Smoke from chimney -->
-  <path d="M91 88 Q88 78 91 70 Q94 62 91 55" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="60" y="45" width="20" height="35" stroke="#2C2420" fill="none" stroke-width="3"/>
   <!-- Windows row 1 -->
-  <rect x="42" y="140" width="22" height="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="53" y1="140" x2="53" y2="168" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="42" y1="154" x2="64" y2="154" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="74" y="140" width="22" height="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="85" y1="140" x2="85" y2="168" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="74" y1="154" x2="96" y2="154" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Window box flowers -->
-  <rect x="42" y="168" width="22" height="5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="48" cy="165" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="55" cy="164" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="61" cy="165" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="40" y="110" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="92" y="110" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="145" y="110" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
   <!-- Windows row 2 -->
-  <rect x="42" y="195" width="22" height="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="53" y1="195" x2="53" y2="223" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="42" y1="209" x2="64" y2="209" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="74" y="195" width="22" height="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="85" y1="195" x2="85" y2="223" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="74" y1="209" x2="96" y2="209" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="40" y="190" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="92" y="190" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="145" y="190" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
   <!-- Windows row 3 -->
-  <rect x="42" y="250" width="22" height="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="53" y1="250" x2="53" y2="278" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="42" y1="264" x2="64" y2="264" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="74" y="250" width="22" height="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="85" y1="250" x2="85" y2="278" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="74" y1="264" x2="96" y2="264" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Windows row 4 - with CAT on windowsill -->
-  <rect x="42" y="305" width="22" height="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="53" y1="305" x2="53" y2="333" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="74" y="305" width="22" height="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- CAT sitting on windowsill -->
-  <!-- Windowsill -->
-  <rect x="72" y="333" width="26" height="5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cat body -->
-  <ellipse cx="85" cy="324" rx="7" ry="9" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cat head -->
-  <circle cx="85" cy="312" r="6" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cat ears -->
-  <polygon points="80,308 82,300 84,308" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <polygon points="86,308 88,300 90,308" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cat eyes -->
-  <ellipse cx="83" cy="312" rx="1.5" ry="2" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <ellipse cx="87" cy="312" rx="1.5" ry="2" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cat nose -->
-  <path d="M84.5 314.5 L85 315.5 L85.5 314.5" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cat whiskers -->
-  <line x1="79" y1="314" x2="73" y2="312" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <line x1="79" y1="315" x2="73" y2="316" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <line x1="91" y1="314" x2="97" y2="312" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <line x1="91" y1="315" x2="97" y2="316" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <!-- Cat tail -->
-  <path d="M90 325 Q98 320 96 310" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Windows row 5 -->
-  <rect x="42" y="360" width="22" height="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="53" y1="360" x2="53" y2="388" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="74" y="360" width="22" height="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="85" y1="360" x2="85" y2="388" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Door -->
-  <path d="M55 510 L55 550 L80 550 L80 510 A12.5 12.5 0 0 0 55 510" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="75" cy="532" r="2" stroke="#2C2420" fill="none" stroke-width="1.5"/>
-  <!-- Address number -->
-  <text x="67" y="505" text-anchor="middle" font-family="sans-serif" font-size="10" stroke="#2C2420" fill="none" stroke-width="1">12</text>
-
-  <!-- === BUILDING 2 (SPAETI - center-left) === -->
-  <rect x="112" y="160" width="110" height="390" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Flat roof with ledge -->
-  <line x1="108" y1="160" x2="226" y2="160" stroke="#2C2420" stroke-width="2.5" stroke-linecap="round"/>
-  <!-- Windows row 1 -->
-  <rect x="125" y="180" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="137.5" y1="180" x2="137.5" y2="210" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="165" y="180" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="177.5" y1="180" x2="177.5" y2="210" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Window box flowers on right window -->
-  <rect x="165" y="210" width="25" height="5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="172" cy="207" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="178" cy="206" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="184" cy="207" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Windows row 2 -->
-  <rect x="125" y="235" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="137.5" y1="235" x2="137.5" y2="265" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="165" y="235" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="177.5" y1="235" x2="177.5" y2="265" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Windows row 3 -->
-  <rect x="125" y="290" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="137.5" y1="290" x2="137.5" y2="320" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="165" y="290" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="177.5" y1="290" x2="177.5" y2="320" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="40" y="270" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="92" y="270" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="145" y="270" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
   <!-- Windows row 4 -->
-  <rect x="125" y="345" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="137.5" y1="345" x2="137.5" y2="375" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="165" y="345" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="177.5" y1="345" x2="177.5" y2="375" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-
-  <!-- === SPAETI STOREFRONT (ground floor of building 2) === -->
-  <!-- Awning -->
-  <path d="M108 430 L108 445 L226 445 L226 430" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Awning scallops -->
-  <path d="M108 445 Q118 455 128 445 Q138 455 148 445 Q158 455 168 445 Q178 455 188 445 Q198 455 208 445 Q218 455 226 445" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Awning stripes -->
-  <line x1="118" y1="430" x2="118" y2="445" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="138" y1="430" x2="138" y2="445" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="158" y1="430" x2="158" y2="445" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="178" y1="430" x2="178" y2="445" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="198" y1="430" x2="198" y2="445" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="218" y1="430" x2="218" y2="445" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Spaeti sign -->
-  <rect x="130" y="410" width="75" height="18" rx="3" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="167" y="424" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" stroke="#2C2420" fill="none" stroke-width="1">SPAETI</text>
-  <!-- Store window -->
-  <rect x="118" y="455" width="40" height="50" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Items in window (bottles) -->
-  <rect x="123" y="478" width="6" height="18" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="132" y="475" width="6" height="21" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="141" y="480" width="6" height="16" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="150" y="477" width="6" height="19" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Shelf -->
-  <line x1="120" y1="476" x2="156" y2="476" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Ice cream/candy display -->
-  <rect x="123" y="460" width="30" height="14" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Store door -->
-  <rect x="168" y="455" width="35" height="95" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="197" cy="505" r="3" stroke="#2C2420" fill="none" stroke-width="1.5"/>
-  <!-- "OPEN" sign on door -->
-  <rect x="175" y="465" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="186" y="473" text-anchor="middle" font-family="sans-serif" font-size="6" stroke="#2C2420" fill="none" stroke-width="0.7">OPEN</text>
-
-  <!-- === BUILDING 3 (center, tallest) === -->
-  <rect x="222" y="100" width="100" height="450" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Decorative ledges -->
-  <line x1="222" y1="130" x2="322" y2="130" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="222" y1="400" x2="322" y2="400" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <!-- Roof ornament -->
-  <path d="M252 100 L272 82 L292 100" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Windows (3 columns, 5 rows) -->
-  <!-- Row 1 -->
-  <rect x="235" y="140" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="245" y1="140" x2="245" y2="165" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="262" y="140" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="272" y1="140" x2="272" y2="165" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="289" y="140" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="299" y1="140" x2="299" y2="165" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Row 2 -->
-  <rect x="235" y="190" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="245" y1="190" x2="245" y2="215" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="262" y="190" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="272" y1="190" x2="272" y2="215" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="289" y="190" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="299" y1="190" x2="299" y2="215" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Window box flowers on middle window row 2 -->
-  <rect x="262" y="215" width="20" height="5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="268" cy="212" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="275" cy="211" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Row 3 -->
-  <rect x="235" y="240" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="262" y="240" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="289" y="240" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Row 4 -->
-  <rect x="235" y="290" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="262" y="290" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="289" y="290" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Row 5 -->
-  <rect x="235" y="340" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="262" y="340" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="289" y="340" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="40" y="350" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="92" y="350" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="145" y="350" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <!-- Cat in window -->
+  <path d="M148 380 C152 372, 155 375, 158 380 C161 375, 164 372, 168 380 C168 388, 158 395, 158 395 C158 395, 148 388, 148 380 Z" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Windows row 5 -->
+  <rect x="40" y="430" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="92" y="430" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="145" y="430" width="35" height="50" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <!-- Balcony on one window -->
+  <rect x="85" y="480" width="48" height="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="90" y1="480" x2="90" y2="500" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <line x1="128" y1="480" x2="128" y2="500" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <line x1="85" y1="500" x2="133" y2="500" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Flower box -->
+  <rect x="92" y="492" width="35" height="8" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M100 492 C100 485, 105 482, 108 488" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M115 492 C115 483, 120 480, 122 488" stroke="#2C2420" fill="none" stroke-width="2"/>
   <!-- Door -->
-  <path d="M258 510 L258 550 L287 550 L287 510 A14.5 14.5 0 0 0 258 510" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="282" cy="532" r="2" stroke="#2C2420" fill="none" stroke-width="1.5"/>
-  <!-- Balcony on row 5 -->
-  <line x1="232" y1="365" x2="255" y2="365" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="232" y1="365" x2="232" y2="370" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="255" y1="365" x2="255" y2="370" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="232" y1="370" x2="255" y2="370" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="80" y="580" width="55" height="120" rx="5" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <path d="M80 580 Q107 560, 135 580" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="125" cy="645" r="4" fill="#2C2420"/>
+  <!-- House number -->
+  <rect x="140" y="595" width="22" height="16" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
 
-  <!-- === BUILDING 4 (right-center, shorter) === -->
-  <rect x="322" y="200" width="95" height="350" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right building (Späti) -->
+  <rect x="380" y="120" width="195" height="580" stroke="#2C2420" fill="none" stroke-width="4"/>
   <!-- Flat roof -->
-  <line x1="318" y1="200" x2="421" y2="200" stroke="#2C2420" stroke-width="2.5" stroke-linecap="round"/>
-  <!-- Antenna on roof -->
-  <line x1="370" y1="200" x2="370" y2="175" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="365" y1="180" x2="375" y2="180" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="367" y1="185" x2="373" y2="185" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Windows (2 columns, 4 rows) -->
-  <rect x="338" y="220" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="350.5" y1="220" x2="350.5" y2="250" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <rect x="378" y="220" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="390.5" y1="220" x2="390.5" y2="250" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Window box flowers -->
-  <rect x="378" y="250" width="25" height="5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="385" cy="247" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="392" cy="246" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="399" cy="247" r="3" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="380" y1="120" x2="575" y2="120" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <!-- Windows row 1 -->
+  <rect x="400" y="145" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="450" y="145" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="520" y="145" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <!-- Windows row 2 -->
+  <rect x="400" y="215" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="450" y="215" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="520" y="215" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <!-- Windows row 3 -->
+  <rect x="400" y="285" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="450" y="285" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="520" y="285" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <!-- Windows row 4 -->
+  <rect x="400" y="355" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="450" y="355" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <rect x="520" y="355" width="35" height="45" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
 
-  <rect x="338" y="275" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="378" y="275" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Späti storefront -->
+  <rect x="388" y="440" width="180" height="260" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <!-- Awning -->
+  <path d="M383" y1="440" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <path d="M385 440 Q430 455, 478 440 Q525 455, 572 440" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <!-- Shop sign -->
+  <rect x="420" y="448" width="115" height="25" rx="4" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <!-- Display window -->
+  <rect x="395" y="490" width="80" height="100" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <!-- Items in window -->
+  <rect x="405" y="555" width="12" height="25" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="422" y="550" width="12" height="30" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="439" y="558" width="12" height="22" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="456" y="552" width="12" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Späti door -->
+  <rect x="490" y="500" width="65" height="200" rx="4" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <circle cx="500" cy="605" r="4" fill="#2C2420"/>
+  <!-- Open sign -->
+  <rect x="498" y="530" width="42" height="15" rx="3" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Ice cream sign -->
+  <path d="M575 500 L575 540" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M565 510 Q575 495, 585 510 L575 530 Z" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <rect x="338" y="330" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="378" y="330" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sidewalk -->
+  <rect x="20" y="700" width="555" height="30" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <!-- Sidewalk tiles -->
+  <line x1="80" y1="700" x2="80" y2="730" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="140" y1="700" x2="140" y2="730" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="200" y1="700" x2="200" y2="730" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="260" y1="700" x2="260" y2="730" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="320" y1="700" x2="320" y2="730" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="380" y1="700" x2="380" y2="730" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="440" y1="700" x2="440" y2="730" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="500" y1="700" x2="500" y2="730" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="560" y1="700" x2="560" y2="730" stroke="#2C2420" fill="none" stroke-width="2"/>
 
-  <rect x="338" y="385" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="378" y="385" width="25" height="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Door -->
-  <rect x="353" y="500" width="30" height="50" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="378" cy="527" r="2" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <!-- Road -->
+  <rect x="20" y="730" width="555" height="70" stroke="#2C2420" fill="none" stroke-width="4"/>
 
-  <!-- === BUILDING 5 (far right, medium height) === -->
-  <rect x="417" y="150" width="85" height="400" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Gabled roof -->
-  <polygon points="417,150 459,110 502,150" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Attic window -->
-  <circle cx="459" cy="135" r="8" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="459" y1="127" x2="459" y2="143" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <line x1="451" y1="135" x2="467" y2="135" stroke="#2C2420" stroke-width="1.5" stroke-linecap="round"/>
-  <!-- Windows (2 columns, 5 rows) -->
-  <rect x="430" y="170" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="465" y="170" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Street/road center dashes -->
+  <line x1="60" y1="765" x2="110" y2="765" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="150" y1="765" x2="200" y2="765" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="240" y1="765" x2="290" y2="765" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="330" y1="765" x2="380" y2="765" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="420" y1="765" x2="470" y2="765" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <rect x="430" y="215" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="465" y="215" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Window box flowers -->
-  <rect x="430" y="240" width="20" height="5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="436" cy="237" r="2.5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="443" cy="236" r="2.5" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Bike 1 (parked against left building) -->
+  <circle cx="225" cy="665" r="22" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <circle cx="275" cy="665" r="22" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="225" y1="665" x2="250" y2="640" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="275" y1="665" x2="250" y2="640" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="250" y1="640" x2="245" y2="620" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="240" y1="620" x2="255" y2="620" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="275" y1="665" x2="285" y2="645" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <rect x="430" y="265" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="465" y="265" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Bike 2 -->
+  <circle cx="305" cy="665" r="22" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <circle cx="355" cy="665" r="22" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="305" y1="665" x2="330" y2="640" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="355" y1="665" x2="330" y2="640" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="330" y1="640" x2="325" y2="620" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="320" y1="620" x2="335" y2="620" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="355" y1="665" x2="365" y2="645" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <rect x="430" y="315" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="465" y="315" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <rect x="430" y="365" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="465" y="365" width="20" height="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Door -->
-  <path d="M447 510 L447 550 L472 550 L472 510 A12.5 12.5 0 0 0 447 510" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="467" cy="532" r="2" stroke="#2C2420" fill="none" stroke-width="1.5"/>
-
-  <!-- === SIDEWALK / GROUND LINE === -->
-  <line x1="25" y1="550" x2="565" y2="550" stroke="#2C2420" stroke-width="2.5" stroke-linecap="round"/>
-
-  <!-- === COBBLESTONE TEXTURE === -->
-  <!-- Row 1 -->
-  <rect x="35" y="560" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="58" y="560" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="83" y="560" width="16" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="104" y="560" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="131" y="560" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="154" y="560" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="179" y="560" width="16" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="200" y="560" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="227" y="560" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="250" y="560" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="275" y="560" width="16" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="296" y="560" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="323" y="560" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="346" y="560" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="371" y="560" width="16" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="392" y="560" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="419" y="560" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="442" y="560" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="467" y="560" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="494" y="560" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="517" y="560" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Row 2 (offset) -->
-  <rect x="25" y="575" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="50" y="575" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="73" y="575" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="100" y="575" width="16" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="121" y="575" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="146" y="575" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="169" y="575" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="196" y="575" width="16" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="217" y="575" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="242" y="575" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="265" y="575" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="292" y="575" width="16" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="313" y="575" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="338" y="575" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="361" y="575" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="388" y="575" width="16" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="409" y="575" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="434" y="575" width="18" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="457" y="575" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="484" y="575" width="20" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="509" y="575" width="22" height="10" rx="2" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- === SIDEWALK TREE === -->
-  <rect x="510" y="420" width="10" height="130" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Tree canopy -->
-  <circle cx="515" cy="380" r="40" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="490" cy="400" r="28" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="540" cy="395" r="30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="510" cy="355" r="25" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Tree grate on sidewalk -->
-  <rect x="505" y="548" width="20" height="4" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- === LAMPPOST === -->
-  <line x1="310" y1="550" x2="310" y2="440" stroke="#2C2420" stroke-width="2.5" stroke-linecap="round"/>
-  <!-- Lamp head -->
-  <path d="M300 445 Q310 432 320 445" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="303" y="445" width="14" height="8" rx="2" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Lamp ornament -->
-  <circle cx="310" cy="437" r="4" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- === BICYCLES (leaning against lamppost / bike rack) === -->
   <!-- Bike rack -->
-  <path d="M325 548 Q330 530 335 548" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M345 548 Q350 530 355 548" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="330" y1="536" x2="350" y2="536" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
+  <path d="M215 690 L215 700 M265 690 L265 700 M315 690 L315 700 M365 690 L365 700" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="215" y1="695" x2="365" y2="695" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Bike 1 (left, leaning) -->
-  <!-- Wheels -->
-  <circle cx="290" cy="535" r="14" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="318" cy="535" r="14" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Spokes (simplified) -->
-  <line x1="290" y1="521" x2="290" y2="549" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <line x1="276" y1="535" x2="304" y2="535" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <line x1="318" y1="521" x2="318" y2="549" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <line x1="304" y1="535" x2="332" y2="535" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <!-- Frame -->
-  <line x1="290" y1="535" x2="304" y2="515" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="304" y1="515" x2="318" y2="535" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="304" y1="515" x2="290" y2="515" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="290" y1="515" x2="290" y2="535" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <!-- Handlebars -->
-  <path d="M286 510 L290 515 L294 510" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Seat -->
-  <line x1="310" y1="510" x2="318" y2="510" stroke="#2C2420" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="314" y1="510" x2="312" y2="518" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <!-- Pedal -->
-  <circle cx="304" cy="535" r="2" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <!-- Street lamp -->
+  <line x1="210" y1="490" x2="210" y2="700" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <path d="M195 490 Q210 475, 225 490" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="210" cy="498" rx="18" ry="8" stroke="#2C2420" fill="none" stroke-width="3"/>
 
-  <!-- Bike 2 (right, behind rack) -->
-  <circle cx="340" cy="535" r="14" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="368" cy="535" r="14" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="340" y1="521" x2="340" y2="549" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <line x1="326" y1="535" x2="354" y2="535" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <line x1="368" y1="521" x2="368" y2="549" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <line x1="354" y1="535" x2="382" y2="535" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-  <!-- Frame -->
-  <line x1="340" y1="535" x2="354" y2="515" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="354" y1="515" x2="368" y2="535" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="354" y1="515" x2="340" y2="515" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="340" y1="515" x2="340" y2="535" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <!-- Handlebars -->
-  <path d="M336 510 L340 515 L344 510" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Seat -->
-  <line x1="360" y1="510" x2="368" y2="510" stroke="#2C2420" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="364" y1="510" x2="362" y2="518" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="354" cy="535" r="2" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <!-- Person walking -->
+  <circle cx="250" cy="530" r="10" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="250" y1="540" x2="250" y2="575" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M250 555 L238 545" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M250 555 L262 548" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M250 575 L240 600" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M250 575 L260 598" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Bike 3 (small, further right) -->
-  <circle cx="392" cy="538" r="12" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="416" cy="538" r="12" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="392" y1="538" x2="404" y2="520" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="404" y1="520" x2="416" y2="538" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="404" y1="520" x2="392" y2="523" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <path d="M389 518 L392 523 L395 518" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="410" y1="515" x2="416" y2="515" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <circle cx="404" cy="538" r="2" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <!-- Tree between buildings -->
+  <line x1="300" y1="400" x2="300" y2="700" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="300" cy="340" r="45" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <circle cx="265" cy="365" r="35" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <circle cx="335" cy="365" r="35" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <circle cx="300" cy="380" r="30" stroke="#2C2420" fill="none" stroke-width="4"/>
 
-  <!-- === PERSON WALKING WITH DOG === -->
-  <!-- Person -->
-  <circle cx="170" cy="600" r="9" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Hair -->
-  <path d="M161 597 Q161 590 170 588 Q179 590 179 597" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Body -->
-  <path d="M163 609 L160 645 M177 609 L180 645" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="163" y1="623" x2="177" y2="623" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <!-- Arm holding leash -->
-  <path d="M163 618 L150 625" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
-  <path d="M177 618 L185 610" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
-  <!-- Legs walking -->
-  <path d="M160 645 L155 665 M180 645 L185 665" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
-  <!-- Shoes -->
-  <path d="M152 665 L160 665" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M182 665 L190 665" stroke="#2C2420" fill="none" stroke-width="2.5" stroke-linecap="round"/>
-
-  <!-- Leash -->
-  <path d="M150 625 Q130 635 120 630" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round"/>
-
-  <!-- Dog -->
-  <ellipse cx="105" cy="640" rx="18" ry="11" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Dog head -->
-  <circle cx="88" cy="632" r="9" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Dog ear -->
-  <path d="M84 625 Q80 618 85 622" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M92 625 Q96 618 91 622" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Dog eye -->
-  <circle cx="85" cy="630" r="2" stroke="#2C2420" fill="none" stroke-width="1.5"/>
-  <!-- Dog nose -->
-  <circle cx="80" cy="634" r="2" stroke="#2C2420" fill="none" stroke-width="1.5"/>
-  <!-- Dog mouth -->
-  <path d="M80 636 Q82 639 84 636" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round"/>
-  <!-- Dog legs -->
-  <line x1="95" y1="649" x2="95" y2="665" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="100" y1="650" x2="100" y2="665" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="112" y1="650" x2="112" y2="665" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <line x1="117" y1="649" x2="117" y2="665" stroke="#2C2420" stroke-width="2" stroke-linecap="round"/>
-  <!-- Dog tail -->
-  <path d="M123 635 Q130 625 128 618" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Collar -->
-  <path d="M83 639 Q88 642 93 639" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
-
-  <!-- === PUDDLE on cobblestones === -->
-  <ellipse cx="250" cy="600" rx="25" ry="8" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M238 598 Q245 596 252 598" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round"/>
-
-  <!-- === FALLEN LEAF === -->
-  <path d="M420 595 Q425 588 430 595 Q435 588 440 595" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="430" y1="595" x2="430" y2="600" stroke="#2C2420" stroke-width="1" stroke-linecap="round"/>
-
-  <!-- Footer -->
-  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+  <text x="297.5" y="825" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
 </svg>

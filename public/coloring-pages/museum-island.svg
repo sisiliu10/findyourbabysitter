@@ -1,315 +1,157 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
-  <title>Museum Island (Museumsinsel) from the Spree - Berlin Coloring Page for Ages 10+</title>
+  <title>Museum Island Coloring Page</title>
 
-  <!-- ========== SKY ========== -->
-  <!-- Clouds -->
-  <path d="M60,80 Q80,60 110,72 Q130,55 160,70 Q180,58 200,80" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M320,65 Q345,45 375,58 Q395,42 420,55 Q445,45 460,65" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M200,100 Q220,85 240,95 Q255,82 270,100" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Birds -->
-  <path d="M150,110 Q154,105 158,110" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M158,110 Q162,105 166,110" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M480,90 Q483,86 486,90" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M486,90 Q489,86 492,90" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sky birds -->
+  <path d="M80 40 C85 32, 95 32, 100 40" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M110 50 C115 42, 125 42, 130 50" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M450 30 C455 22, 465 22, 470 30" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- ========== BERLINER DOM (Berlin Cathedral) - largest, behind everything ========== -->
+  <!-- Cloud -->
+  <path d="M340 55 C332 42, 348 28, 365 32 C370 18, 395 15, 402 30 C414 22, 430 28, 428 40 C440 42, 442 56, 430 62 C432 72, 420 78, 410 72 C400 80, 380 82, 376 70 C364 78, 345 74, 340 64 Z" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- ===== BERLINER DOM (center, dominant) ===== -->
   <!-- Main dome -->
-  <path d="M280,130 Q297,80 314,130" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M210 370 L210 240 Q210 140, 297 100 Q384 140, 384 240 L384 370" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <!-- Dome lantern on top -->
+  <rect x="282" y="85" width="30" height="20" rx="3" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M282 85 Q297 68, 312 85" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <!-- Cross on top -->
+  <line x1="297" y1="68" x2="297" y2="50" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="290" y1="58" x2="304" y2="58" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
   <!-- Dome ribs -->
-  <path d="M287,128 Q297,90 307,128" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M293,126 Q297,98 301,126" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Lantern on top -->
-  <rect x="293" y="80" width="8" height="12" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M293,80 Q297,74 301,80" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cross on very top -->
-  <line x1="297" y1="74" x2="297" y2="62" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="292" y1="67" x2="302" y2="67" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Dome base/drum -->
-  <rect x="275" y="130" width="44" height="20" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Windows in drum -->
-  <path d="M280,132 Q282,130 284,132 L284,140 L280,140 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M288,132 Q290,130 292,132 L292,140 L288,140 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M296,132 Q298,130 300,132 L300,140 L296,140 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M304,132 Q306,130 308,132 L308,140 L304,140 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M312,132 Q314,130 316,132 L316,140 L312,140 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cathedral main body -->
-  <rect x="260" y="150" width="74" height="100" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Facade columns -->
-  <line x1="268" y1="155" x2="268" y2="245" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="278" y1="155" x2="278" y2="245" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="316" y1="155" x2="316" y2="245" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="326" y1="155" x2="326" y2="245" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cathedral windows -->
-  <path d="M285,165 Q292,158 299,165 L299,195 L285,195 Z" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M303,165 Q310,158 317,165 L317,195 L303,195 Z" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M285,205 Q292,198 299,205 L299,235 L285,235 Z" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M303,205 Q310,198 317,205 L317,235 L303,235 Z" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Smaller corner domes -->
-  <path d="M258,148 Q265,135 272,148" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M322,148 Q329,135 336,148" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Small crosses on corner domes -->
-  <line x1="265" y1="135" x2="265" y2="128" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="262" y1="131" x2="268" y2="131" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="329" y1="135" x2="329" y2="128" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="326" y1="131" x2="332" y2="131" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M240 280 Q268 160, 297 130 Q326 160, 354 280" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M255 300 Q276 180, 297 155 Q318 180, 339 300" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <!-- Dome windows -->
+  <path d="M255 220 Q255 205, 268 200 Q280 205, 280 220" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M315 220 Q315 205, 328 200 Q340 205, 340 220" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Drum under dome -->
+  <rect x="220" y="240" width="154" height="40" rx="3" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <!-- Drum columns -->
+  <line x1="240" y1="244" x2="240" y2="276" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="260" y1="244" x2="260" y2="276" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="280" y1="244" x2="280" y2="276" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="310" y1="244" x2="310" y2="276" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="330" y1="244" x2="330" y2="276" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="350" y1="244" x2="350" y2="276" stroke="#2C2420" fill="none" stroke-width="2"/>
 
-  <!-- ========== ALTE NATIONALGALERIE (leftmost, temple facade) ========== -->
-  <!-- Main temple body -->
-  <rect x="55" y="200" width="100" height="120" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Pediment (triangular top) -->
-  <polygon points="50,200 105,160 160,200" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Tympanum decoration (relief in pediment) -->
-  <path d="M75,195 Q105,175 135,195" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Front columns (Corinthian) -->
-  <line x1="65" y1="200" x2="65" y2="315" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="80" y1="200" x2="80" y2="315" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="95" y1="200" x2="95" y2="315" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="110" y1="200" x2="110" y2="315" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="125" y1="200" x2="125" y2="315" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="140" y1="200" x2="140" y2="315" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Grand staircase -->
-  <line x1="70" y1="320" x2="140" y2="320" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="65" y1="328" x2="145" y2="328" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="60" y1="336" x2="150" y2="336" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="55" y1="344" x2="155" y2="344" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Equestrian statue on stairs -->
-  <!-- Horse body -->
-  <path d="M100,300 Q108,290 115,295 L115,310 L100,310 Z" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Horse legs -->
-  <line x1="103" y1="310" x2="103" y2="318" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="112" y1="310" x2="112" y2="318" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Horse head -->
-  <path d="M100,300 Q96,292 98,286 Q100,284 102,288 L100,295" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Rider -->
-  <line x1="108" y1="295" x2="108" y2="280" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="108" cy="277" r="3" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Dom main body -->
+  <rect x="195" y="280" width="204" height="180" stroke="#2C2420" fill="none" stroke-width="4"/>
+  <!-- Side towers -->
+  <rect x="195" y="250" width="30" height="210" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <path d="M195 250 L210 230 L225 250" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <rect x="369" y="250" width="30" height="210" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <path d="M369 250 L384 230 L399 250" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Front columns/portico -->
+  <rect x="235" y="370" width="124" height="90" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <path d="M235 370 L297 340 L359 370" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="255" y1="374" x2="255" y2="455" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="275" y1="374" x2="275" y2="455" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="320" y1="374" x2="320" y2="455" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="340" y1="374" x2="340" y2="455" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Main entrance -->
+  <path d="M285 455 Q297 435, 309 455" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Windows on Dom body -->
+  <rect x="240" y="300" width="18" height="28" rx="3" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="268" y="300" width="18" height="28" rx="3" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="310" y="300" width="18" height="28" rx="3" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="338" y="300" width="18" height="28" rx="3" stroke="#2C2420" fill="none" stroke-width="2"/>
+
+  <!-- ===== ALTE NATIONALGALERIE (left) ===== -->
+  <rect x="30" y="350" width="150" height="120" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <path d="M30 350 L105 290 L180 350" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <!-- Steps/podium -->
+  <path d="M50 470 L50 500 L160 500 L160 470" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <line x1="40" y1="500" x2="170" y2="500" stroke="#2C2420" fill="none" stroke-width="3"/>
   <!-- Windows -->
-  <rect x="62" y="225" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="82" y="225" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="102" y="225" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="122" y="225" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="142" y="225" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="48" y="370" width="22" height="35" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="80" y="370" width="22" height="35" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="112" y="370" width="22" height="35" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="144" y="370" width="22" height="35" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Equestrian statue -->
+  <line x1="105" y1="320" x2="105" y2="345" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <circle cx="105" cy="315" r="6" stroke="#2C2420" fill="none" stroke-width="2"/>
 
-  <!-- ========== NEUES MUSEUM (second from left) ========== -->
-  <rect x="160" y="210" width="80" height="140" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Roof line -->
-  <line x1="160" y1="210" x2="240" y2="210" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cornice -->
-  <rect x="158" y="206" width="84" height="4" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Windows Row 1 -->
-  <path d="M168,220 Q173,215 178,220 L178,240 L168,240 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M185,220 Q190,215 195,220 L195,240 L185,240 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M202,220 Q207,215 212,220 L212,240 L202,240 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M219,220 Q224,215 229,220 L229,240 L219,240 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Windows Row 2 -->
-  <rect x="168" y="250" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="185" y="250" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="202" y="250" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="219" y="250" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Windows Row 3 -->
-  <rect x="168" y="280" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="185" y="280" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="202" y="280" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="219" y="280" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Horizontal band -->
-  <line x1="160" y1="275" x2="240" y2="275" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- ===== NEUES MUSEUM (right) ===== -->
+  <rect x="415" y="340" width="155" height="130" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <!-- Roof detail -->
+  <rect x="410" y="330" width="165" height="14" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Windows grid -->
+  <rect x="425" y="355" width="20" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="455" y="355" width="20" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="485" y="355" width="20" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="515" y="355" width="20" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="545" y="355" width="20" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="425" y="398" width="20" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="455" y="398" width="20" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="485" y="398" width="20" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="515" y="398" width="20" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <rect x="545" y="398" width="20" height="28" rx="2" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Entrance -->
+  <rect x="470" y="440" width="40" height="30" rx="3" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <path d="M470 440 Q490 425, 510 440" stroke="#2C2420" fill="none" stroke-width="2"/>
 
-  <!-- ========== PERGAMON MUSEUM (center, grand entrance) ========== -->
-  <rect x="245" y="220" width="105" height="130" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Grand entrance portico -->
-  <rect x="270" y="260" width="55" height="90" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Entrance columns -->
-  <line x1="278" y1="260" x2="278" y2="345" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="287" y1="260" x2="287" y2="345" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="306" y1="260" x2="306" y2="345" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="315" y1="260" x2="315" y2="345" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Pediment over entrance -->
-  <polygon points="268,260 297,240 326,260" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Upper cornice -->
-  <rect x="243" y="216" width="109" height="4" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Upper windows -->
-  <rect x="250" y="228" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="332" y="228" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="250" y="260" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="332" y="260" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="250" y="292" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="332" y="292" width="12" height="18" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- ===== SPREE RIVER ===== -->
+  <path d="M15 530 C80 520, 160 540, 297 528 C420 518, 500 535, 580 525" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <path d="M15 580 C80 570, 160 590, 297 578 C420 568, 500 585, 580 575" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
+  <!-- Water ripples -->
+  <path d="M60 550 C72 545, 82 555, 95 550" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M180 555 C192 550, 202 560, 215 555" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M320 548 C332 543, 342 553, 355 548" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <path d="M440 552 C452 547, 462 557, 475 552" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <!-- Reflections -->
+  <line x1="297" y1="540" x2="297" y2="570" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+  <line x1="200" y1="538" x2="200" y2="565" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
+  <line x1="400" y1="540" x2="400" y2="568" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4"/>
 
-  <!-- ========== BODE MUSEUM (rightmost, with dome at island tip) ========== -->
-  <!-- Main body -->
-  <rect x="380" y="215" width="90" height="135" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Dome -->
-  <path d="M400,215 Q425,175 450,215" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Dome ribs -->
-  <path d="M410,213 Q425,185 440,213" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M420,212 Q425,192 430,212" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Lantern -->
-  <rect x="422" y="178" width="6" height="8" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M422,178 Q425,173 428,178" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Dome drum -->
-  <rect x="398" y="210" width="54" height="8" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Rounded front (island tip) -->
-  <path d="M470,215 Q490,250 490,285 Q490,320 470,350" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Entrance columns at front -->
-  <line x1="460" y1="240" x2="460" y2="345" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="468" y1="240" x2="468" y2="345" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Windows -->
-  <path d="M388,228 Q393,223 398,228 L398,248 L388,248 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M408,228 Q413,223 418,228 L418,248 L408,248 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M428,228 Q433,223 438,228 L438,248 L428,248 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M448,228 Q453,223 458,228 L458,248 L448,248 Z" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="388" y="260" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="408" y="260" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="428" y="260" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="448" y="260" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="388" y="300" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="408" y="300" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="428" y="300" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="448" y="300" width="10" height="16" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Tour boat on Spree -->
+  <path d="M350 558 L350 545 L450 545 L450 558" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M340 558 Q400 570, 460 558" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <!-- Boat cabin -->
+  <rect x="365" y="535" width="60" height="12" rx="3" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <!-- Passengers -->
+  <circle cx="375" cy="530" r="4" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <circle cx="390" cy="530" r="4" stroke="#2C2420" fill="none" stroke-width="1.5"/>
+  <circle cx="405" cy="530" r="4" stroke="#2C2420" fill="none" stroke-width="1.5"/>
 
-  <!-- ========== LUSTGARTEN PARK (trees in front of buildings) ========== -->
-  <!-- Tree 1 -->
-  <line x1="175" y1="350" x2="175" y2="330" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="175" cy="322" r="12" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="168" cy="328" r="8" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="182" cy="328" r="8" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Tree 2 -->
-  <line x1="230" y1="350" x2="230" y2="325" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="230" cy="318" r="10" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="222" cy="322" r="7" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="238" cy="322" r="7" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Tree 3 -->
-  <line x1="360" y1="350" x2="360" y2="328" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="360" cy="320" r="11" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="352" cy="325" r="8" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="368" cy="325" r="8" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Tree 4 -->
-  <line x1="415" y1="350" x2="415" y2="332" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="415" cy="325" r="9" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="408" cy="330" r="7" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="422" cy="330" r="7" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Embankment / Promenade -->
+  <line x1="15" y1="600" x2="580" y2="600" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round"/>
 
-  <!-- Riverbank trees -->
-  <line x1="80" y1="360" x2="80" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="80" cy="334" r="8" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="500" y1="355" x2="500" y2="335" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="500" cy="328" r="10" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="530" y1="358" x2="530" y2="340" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="530" cy="334" r="7" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Trees along promenade -->
+  <circle cx="60" cy="620" r="18" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="60" y1="638" x2="60" y2="670" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="160" cy="615" r="22" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="160" y1="637" x2="160" y2="670" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="400" cy="618" r="20" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="400" y1="638" x2="400" y2="670" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="520" cy="615" r="18" stroke="#2C2420" fill="none" stroke-width="3"/>
+  <line x1="520" y1="633" x2="520" y2="665" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- ========== ISLAND EDGE / RIVERBANK ========== -->
-  <path d="M40,360 Q100,355 200,358 Q300,362 400,358 Q470,354 490,360 Q520,365 560,358" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Stone wall along riverbank -->
-  <path d="M40,370 Q100,365 200,368 Q300,372 400,368 Q470,364 490,370 Q520,375 560,368" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Stone texture -->
-  <line x1="80" y1="362" x2="80" y2="368" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="110" y1="361" x2="110" y2="367" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="140" y1="362" x2="140" y2="368" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="170" y1="361" x2="170" y2="368" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="200" y1="362" x2="200" y2="369" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="230" y1="363" x2="230" y2="370" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="260" y1="364" x2="260" y2="371" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="290" y1="365" x2="290" y2="372" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="320" y1="364" x2="320" y2="371" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="350" y1="363" x2="350" y2="370" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="380" y1="362" x2="380" y2="368" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="410" y1="361" x2="410" y2="367" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="440" y1="360" x2="440" y2="366" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="470" y1="358" x2="470" y2="365" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="500" y1="362" x2="500" y2="369" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="530" y1="365" x2="530" y2="372" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Walking path -->
+  <path d="M15 680 C100 675, 200 685, 297 678 C400 672, 500 682, 580 676" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- ========== SPREE RIVER ========== -->
-  <!-- Water surface ripples -->
-  <path d="M40,395 Q60,390 80,395" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M100,400 Q120,395 140,400" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M160,392 Q180,387 200,392" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M220,398 Q240,393 260,398" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M280,395 Q300,390 320,395" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M340,400 Q360,395 380,400" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M400,393 Q420,388 440,393" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M460,398 Q480,393 500,398" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M520,395 Q540,390 560,395" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- More ripples -->
-  <path d="M60,415 Q80,410 100,415" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M140,420 Q160,415 180,420" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M220,412 Q240,407 260,412" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M300,418 Q320,413 340,418" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M380,415 Q400,410 420,415" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M460,420 Q480,415 500,420" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Row 3 ripples -->
-  <path d="M80,435 Q100,430 120,435" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M180,440 Q200,435 220,440" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M280,432 Q300,427 320,432" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M400,438 Q420,433 440,438" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M500,435 Q520,430 540,435" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Row 4 ripples -->
-  <path d="M50,455 Q70,450 90,455" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M150,458 Q170,453 190,458" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M250,452 Q270,447 290,452" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M350,458 Q370,453 390,458" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M450,455 Q470,450 490,455" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- People walking -->
+  <circle cx="100" cy="665" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="100" y1="670" x2="100" y2="685" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <line x1="100" y1="685" x2="96" y2="700" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <line x1="100" y1="685" x2="104" y2="698" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- ========== TOUR BOAT ========== -->
-  <!-- Hull -->
-  <path d="M180,470 L320,470 Q330,475 320,480 L180,480 Q170,475 180,470" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cabin -->
-  <rect x="200" y="455" width="100" height="15" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cabin windows -->
-  <rect x="208" y="458" width="8" height="8" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="220" y="458" width="8" height="8" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="232" y="458" width="8" height="8" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="244" y="458" width="8" height="8" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="256" y="458" width="8" height="8" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="268" y="458" width="8" height="8" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <rect x="280" y="458" width="8" height="8" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cabin roof -->
-  <path d="M198,455 Q250,448 302,455" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Wheelhouse -->
-  <rect x="306" y="460" width="12" height="10" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Flag -->
-  <line x1="312" y1="460" x2="312" y2="448" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M312,448 L322,452 L312,456" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Wake behind boat -->
-  <path d="M170,475 Q160,475 150,478" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M170,478 Q158,480 145,484" stroke="#2C2420" fill="none" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="280" cy="662" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="280" y1="667" x2="280" y2="682" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="295" cy="663" r="5" stroke="#2C2420" fill="none" stroke-width="2"/>
+  <line x1="295" y1="668" x2="295" y2="683" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round"/>
 
-  <!-- ========== NEAR RIVERBANK (viewer's side) ========== -->
-  <path d="M40,500 Q150,505 300,502 Q450,498 560,505" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Stone wall -->
-  <path d="M40,510 Q150,515 300,512 Q450,508 560,515" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Railing posts -->
-  <line x1="60" y1="490" x2="60" y2="505" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="100" y1="490" x2="100" y2="505" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="140" y1="490" x2="140" y2="505" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="180" y1="490" x2="180" y2="505" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="220" y1="490" x2="220" y2="504" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="260" y1="490" x2="260" y2="503" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="300" y1="490" x2="300" y2="502" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="340" y1="490" x2="340" y2="501" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="380" y1="490" x2="380" y2="500" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="420" y1="490" x2="420" y2="500" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="460" y1="490" x2="460" y2="502" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="500" y1="490" x2="500" y2="504" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="540" y1="490" x2="540" y2="506" stroke="#2C2420" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Railing bar -->
-  <path d="M60,492 L540,492" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Bench -->
+  <path d="M450 680 L450 695 M490 680 L490 695 M445 680 L495 680" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- ========== FOREGROUND TREES (viewer's side) ========== -->
-  <!-- Tree left -->
-  <line x1="70" y1="510" x2="70" y2="530" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M55,530 Q70,515 85,530" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M50,540 Q70,525 90,540" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Tree right -->
-  <line x1="520" y1="510" x2="520" y2="535" stroke="#2C2420" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M505,535 Q520,520 535,535" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M500,545 Q520,530 540,545" stroke="#2C2420" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lower garden area -->
+  <path d="M15 730 C80 725, 160 735, 297 728 C400 722, 500 732, 580 726" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Reflection hints in water -->
-  <line x1="295" y1="385" x2="295" y2="395" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2,3"/>
-  <line x1="300" y1="380" x2="300" y2="392" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2,3"/>
-  <line x1="425" y1="378" x2="425" y2="390" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2,3"/>
-  <line x1="105" y1="380" x2="105" y2="392" stroke="#2C2420" fill="none" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2,3"/>
+  <!-- Bushes -->
+  <path d="M40 722 C50 712, 65 712, 75 722" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M200 728 C210 718, 225 718, 235 728" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M350 725 C360 715, 375 715, 385 725" stroke="#2C2420" fill="none" stroke-width="3" stroke-linecap="round"/>
 
-  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+  <text x="297.5" y="790" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
 </svg>

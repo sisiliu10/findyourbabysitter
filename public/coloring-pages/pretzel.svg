@@ -1,74 +1,53 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" width="595" height="842" style="background: white">
-  <title>German Pretzel Coloring Page for Toddlers</title>
-
-  <!-- Main pretzel shape - the classic twisted knot -->
-  <!-- Outer pretzel body: two big loops with crossed arms at top, thick bottom arc -->
+  <title>German Pretzel Coloring Page</title>
 
   <!-- Bottom thick arc -->
-  <path d="M148 580 C148 680, 297 730, 297 730 C297 730, 447 680, 447 580" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M100 620 C100 740, 297 800, 297 800 C297 800, 494 740, 494 620" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Inner bottom arc -->
+  <path d="M148 608 C148 710, 297 760, 297 760 C297 760, 446 710, 446 608" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Connect bottom arcs -->
+  <path d="M100 620 C96 613, 132 600, 148 608" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M494 620 C498 613, 462 600, 446 608" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Inner bottom arc (gives pretzel thickness at bottom) -->
-  <path d="M188 570 C188 650, 297 690, 297 690 C297 690, 407 650, 407 570" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left loop -->
+  <ellipse cx="175" cy="400" rx="130" ry="155" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="175" cy="388" rx="70" ry="90" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Connect bottom outer to inner on left -->
-  <path d="M148 580 C145 575, 175 565, 188 570" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right loop -->
+  <ellipse cx="420" cy="400" rx="130" ry="155" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="420" cy="388" rx="70" ry="90" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Connect bottom outer to inner on right -->
-  <path d="M447 580 C450 575, 420 565, 407 570" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left arm crossing up -->
+  <path d="M108 300 C100 240, 155 175, 235 150 C285 136, 345 138, 385 160" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M487 300 C495 240, 440 175, 360 150 C310 136, 250 138, 210 160" stroke="#2C2420" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Inner edges -->
+  <path d="M140 288 C135 240, 178 190, 240 172 C278 162, 326 163, 358 178" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M455 288 C460 240, 417 190, 355 172 C317 162, 269 163, 237 178" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Left loop (big open circle) -->
-  <ellipse cx="210" cy="410" rx="105" ry="120" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Knot tips -->
+  <path d="M385 160 C402 172, 408 190, 404 205" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M358 178 C373 186, 380 202, 377 218" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M210 160 C193 172, 187 190, 191 205" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M237 178 C222 186, 215 202, 218 218" stroke="#2C2420" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <!-- Left loop inner hole -->
-  <ellipse cx="210" cy="400" rx="55" ry="70" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Salt dots -->
+  <circle cx="297" cy="770" r="12" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="230" cy="730" r="10" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="365" cy="735" r="10" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="160" cy="660" r="10" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="435" cy="655" r="10" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="130" cy="420" r="11" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="465" cy="415" r="11" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="265" cy="160" r="9" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="330" cy="165" r="9" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="195" cy="560" r="10" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="400" cy="555" r="10" stroke="#2C2420" fill="none" stroke-width="5"/>
+  <circle cx="297" cy="680" r="11" stroke="#2C2420" fill="none" stroke-width="5"/>
 
-  <!-- Right loop (big open circle) -->
-  <ellipse cx="385" cy="410" rx="105" ry="120" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Steam lines -->
+  <path d="M215 110 C208 82, 228 72, 222 44 C216 16, 235 5, 228 -10" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round"/>
+  <path d="M297 95 C290 67, 310 57, 304 29 C298 1, 317 -10, 310 -25" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round"/>
+  <path d="M379 110 C372 82, 392 72, 386 44 C380 16, 399 5, 392 -10" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round"/>
 
-  <!-- Right loop inner hole -->
-  <ellipse cx="385" cy="400" rx="55" ry="70" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Left arm crossing up and over to the right -->
-  <path d="M155 330 C150 280, 195 230, 260 210 C300 198, 350 200, 380 220" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Right arm crossing up and over to the left -->
-  <path d="M440 330 C445 280, 400 230, 335 210 C295 198, 245 200, 215 220" stroke="#2C2420" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Left arm inner edge -->
-  <path d="M180 320 C178 280, 210 245, 260 232 C290 224, 330 225, 355 238" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Right arm inner edge -->
-  <path d="M415 320 C417 280, 385 245, 335 232 C305 224, 265 225, 240 238" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Knot tip left (where arm meets top) -->
-  <path d="M380 220 C395 230, 400 245, 395 258" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M355 238 C368 245, 375 258, 372 270" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Knot tip right (where arm meets top) -->
-  <path d="M215 220 C200 230, 195 245, 200 258" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M240 238 C227 245, 220 258, 223 270" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Salt dots scattered on pretzel -->
-  <circle cx="297" cy="700" r="8" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="250" cy="670" r="7" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="345" cy="675" r="7" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="200" cy="620" r="6" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="395" cy="615" r="6" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="170" cy="430" r="7" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="425" cy="425" r="7" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="280" cy="220" r="6" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="315" cy="225" r="6" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="230" cy="520" r="7" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="370" cy="515" r="7" stroke="#2C2420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Steam line 1 (left wavy) -->
-  <path d="M240 170 C235 148, 250 140, 245 118 C240 96, 255 85, 250 65" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Steam line 2 (center wavy) -->
-  <path d="M297 160 C292 138, 307 130, 302 108 C297 86, 312 75, 307 55" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Steam line 3 (right wavy) -->
-  <path d="M354 170 C349 148, 364 140, 359 118 C354 96, 369 85, 364 65" stroke="#2C2420" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <text x="297.5" y="820" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
+  <text x="297.5" y="830" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#C4B8AB">berlinbabysitter.com</text>
 </svg>
