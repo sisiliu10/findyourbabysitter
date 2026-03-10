@@ -231,3 +231,32 @@ model Match {
   @@unique([user1Id, user2Id])
   @@index([user2Id])
 }
+
+model Kita {
+  id                String   @id @default(cuid())
+  heyAvaSlug        String   @unique
+  name              String
+  carrier           String   @default("")
+  address           String
+  zipCode           String   @default("")
+  district          String   @default("")
+  latitude          Float?
+  longitude         Float?
+  phone             String   @default("")
+  website           String   @default("")
+  photoUrl          String   @default("")
+  rating            Float    @default(0)
+  reviewCount       Int      @default(0)
+  openingHours      String   @default("")
+  capacity          Int?
+  minAge            String   @default("")
+  hasAvailableSpots Boolean  @default(false)
+  isParentFavorite  Boolean  @default(false)
+  hasJobs           Boolean  @default(false)
+  description       String   @default("")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([district])
+  @@index([rating])
+}

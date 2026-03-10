@@ -8,7 +8,8 @@
     "neighborhoods": "Bezirke",
     "menu": "Menü",
     "getStarted": "Jetzt starten",
-    "coloringPages": "Ausmalbilder"
+    "coloringPages": "Ausmalbilder",
+    "kitaSearch": "Kita-Suche"
   },
   "home": {
     "heroTagline": "Babysitter in Berlin finden",
@@ -64,6 +65,7 @@
     "legal": "Rechtliches",
     "guides": "Guides",
     "coloringPages": "Ausmalbilder",
+    "kitaSearch": "Kita-Suche",
     "privacyPolicy": "Datenschutzerklärung",
     "termsOfService": "Nutzungsbedingungen",
     "impressum": "Impressum"
@@ -652,5 +654,27 @@
     "ctaTitle": "Babysitter für die Malzeit gesucht?",
     "ctaSubtitle": "Finde vertrauenswürdige Babysitter, die von anderen Berliner Eltern empfohlen werden.",
     "ctaButton": "Babysitter finden"
+  },
+  "kitaSearch": {
+    "metaTitle": "Kita-Suche Berlin — Kindergärten vergleichen",
+    "metaDescription": "Finde und vergleiche Kindergärten (Kitas) in Berlin. Bewertungen, Verfügbarkeit, Öffnungszeiten und Kapazität auf einen Blick. Daten von HeyAva.",
+    "title": "Kita finden in Berlin",
+    "subtitle": "Kindergärten in Berlin vergleichen — Bewertungen, Verfügbarkeit und mehr",
+    "searchPlaceholder": "Nach Name oder Adresse suchen...",
+    "allDistricts": "Alle Bezirke",
+    "minRating": "Min. Bewertung",
+    "spotsAvailable": "Platz frei",
+    "parentFavorite": "Eltern-Favorit",
+    "hiring": "Jobs",
+    "children": "Kinder",
+    "review": "Bewertung",
+    "reviews": "Bewertungen",
+    "noResults": "Keine Kitas gefunden, die deinen Kriterien entsprechen.",
+    "totalResults": "{count} Kitas",
+    "showList": "Liste",
+    "showMap": "Karte",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "poweredBy": "Kita-Daten bereitgestellt von HeyAva"
   }
 }

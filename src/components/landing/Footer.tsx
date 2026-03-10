@@ -62,6 +62,9 @@ export function Footer() {
               <Link href="/coloring-pages" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
                 {t("coloringPages")}
               </Link>
+              <Link href="/kita-search" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
+                {t("kitaSearch")}
+              </Link>
               <Link href="/privacy-policy" className="text-xs text-text-tertiary transition-colors hover:text-text-primary">
                 {t("privacyPolicy")}
               </Link>

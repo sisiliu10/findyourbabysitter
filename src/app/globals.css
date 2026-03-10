@@ -93,3 +93,23 @@ html {
   animation-play-state: paused;
 }
 
+/* Leaflet map overrides */
+.leaflet-control-zoom a,
+.leaflet-control-attribution {
+  border-radius: 0 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0 !important;
+  box-shadow: 0 2px 8px rgba(44, 36, 32, 0.12);
+}
+
+.leaflet-popup-tip {
+  border-radius: 0 !important;
+}
+
+.kita-marker {
+  background: transparent !important;
+  border: none !important;
+}
+

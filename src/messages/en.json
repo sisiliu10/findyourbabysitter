@@ -8,7 +8,8 @@
     "neighborhoods": "Neighborhoods",
     "menu": "Menu",
     "getStarted": "Get started",
-    "coloringPages": "Coloring Pages"
+    "coloringPages": "Coloring Pages",
+    "kitaSearch": "Kita Search"
   },
   "home": {
     "heroTagline": "Find a Babysitter in Berlin",
@@ -64,6 +65,7 @@
     "legal": "Legal",
     "guides": "Guides",
     "coloringPages": "Coloring Pages",
+    "kitaSearch": "Kita Search",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
     "impressum": "Impressum"
@@ -652,5 +654,27 @@
     "ctaTitle": "Need a sitter for coloring time?",
     "ctaSubtitle": "Find trusted babysitters recommended by other Berlin parents.",
     "ctaButton": "Find a babysitter"
+  },
+  "kitaSearch": {
+    "metaTitle": "Kita Search Berlin — Compare Daycare Centers",
+    "metaDescription": "Find and compare daycare centers (Kitas) across Berlin. Browse ratings, availability, opening hours, and capacity. Data powered by HeyAva.",
+    "title": "Find a Kita in Berlin",
+    "subtitle": "Compare daycare centers across Berlin — ratings, availability, and more",
+    "searchPlaceholder": "Search by name or address...",
+    "allDistricts": "All districts",
+    "minRating": "Min rating",
+    "spotsAvailable": "Spots available",
+    "parentFavorite": "Parent favorite",
+    "hiring": "Jobs",
+    "children": "Children",
+    "review": "Review",
+    "reviews": "Reviews",
+    "noResults": "No Kitas found matching your criteria.",
+    "totalResults": "{count} Kitas",
+    "showList": "List",
+    "showMap": "Map",
+    "previous": "Back",
+    "next": "Next",
+    "poweredBy": "Daycare data provided by HeyAva"
   }
 }

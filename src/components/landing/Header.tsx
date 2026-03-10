@@ -48,6 +48,12 @@ export function Header() {
             >
               {t("coloringPages")}
             </Link>
+            <Link
+              href="/kita-search"
+              className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
+            >
+              {t("kitaSearch")}
+            </Link>
           </nav>
 
           {/* Right: language + CTA */}
@@ -123,6 +129,12 @@ export function Header() {
               className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
             >
               {t("coloringPages")}
+            </Link>
+            <Link
+              href="/kita-search"
+              className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
+            >
+              {t("kitaSearch")}
             </Link>
             <LanguageToggle />
             <div className="flex items-center gap-4 pt-2 border-t border-border-subtle">
