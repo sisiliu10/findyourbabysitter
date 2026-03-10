@@ -46,6 +46,7 @@ export async function GET(request: Request) {
           careFrequency: true,
           zipCode: true,
           district: true,
+          lastSeenAt: true,
           createdAt: true,
           childcareRequests: {
             where: { status: "OPEN" },

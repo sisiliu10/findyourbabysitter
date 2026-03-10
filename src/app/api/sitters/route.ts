@@ -63,6 +63,7 @@ export async function GET(request: Request) {
               avatarUrl: true,
               birthday: true,
               district: true,
+              lastSeenAt: true,
             },
           },
         },

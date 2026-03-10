@@ -29,7 +29,22 @@ interface SitterResult {
     avatarUrl: string | null;
     birthday: string | null;
     district: string;
+    lastSeenAt: string | null;
   };
+}
+
+function formatActivity(lastSeenAt: string | null, t: (key: string, values?: Record<string, unknown>) => string): { label: string; color: "green" | "yellow" | "gray" } {
+  if (!lastSeenAt) return { label: t("offline"), color: "gray" };
+  const diff = Date.now() - new Date(lastSeenAt).getTime();
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 5) return { label: t("onlineNow"), color: "green" };
+  if (minutes < 60) return { label: t("activeMinutes", { count: minutes }), color: "green" };
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return { label: t("activeHours", { count: hours }), color: "yellow" };
+  const days = Math.floor(hours / 24);
+  if (days < 7) return { label: t("activeDays", { count: days }), color: "yellow" };
+  const weeks = Math.floor(days / 7);
+  return { label: t("activeWeeks", { count: weeks }), color: "gray" };
 }
 
 function calculateAge(birthday: string | null): number | null {
@@ -293,10 +308,11 @@ function SitterCard({
 }: {
   sitter: SitterResult;
   t: (key: string, values?: Record<string, unknown>) => string;
-  tc: (key: string) => string;
+  tc: (key: string, values?: Record<string, unknown>) => string;
 }) {
   const initials = getInitials(sitter.user.firstName, sitter.user.lastName);
   const age = calculateAge(sitter.user.birthday);
+  const activity = formatActivity(sitter.user.lastSeenAt, tc);
   const languages = sitter.languages
     .split(",")
     .map((l) => l.trim())
@@ -320,6 +336,16 @@ function SitterCard({
             <span className="text-4xl font-serif text-text-muted/60">{initials}</span>
           </div>
         )}
+        {/* Activity indicator */}
+        <div className="absolute left-3 top-3 flex items-center gap-1.5 bg-black/40 px-2 py-1 backdrop-blur-sm">
+          <span className={cn(
+            "h-1.5 w-1.5 rounded-full",
+            activity.color === "green" && "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.6)]",
+            activity.color === "yellow" && "bg-amber-400",
+            activity.color === "gray" && "bg-white/40",
+          )} />
+          <span className="text-[10px] font-medium text-white/90">{activity.label}</span>
+        </div>
         {/* Rate badge */}
         <div className="absolute bottom-3 right-3 bg-text-primary/80 px-2.5 py-1 text-xs font-medium text-surface-primary backdrop-blur-sm">
           {formatCurrency(sitter.hourlyRate)}/hr

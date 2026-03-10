@@ -258,7 +258,13 @@
     "saving": "Wird gespeichert...",
     "somethingWentWrong": "Etwas ist schiefgelaufen",
     "firstAid": "Erste Hilfe",
-    "cpr": "HLW"
+    "cpr": "HLW",
+    "onlineNow": "Jetzt online",
+    "activeMinutes": "vor {count}m",
+    "activeHours": "vor {count}h",
+    "activeDays": "vor {count}T",
+    "activeWeeks": "vor {count}W",
+    "offline": "Offline"
   },
   "browse": {
     "title": "Babysitter durchsuchen",

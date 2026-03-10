@@ -31,6 +31,7 @@ interface SitterResult {
     avatarUrl: string | null;
     birthday: string | null;
     district: string;
+    lastSeenAt: string | null;
   };
 }
 
@@ -46,6 +47,7 @@ interface ParentResult {
   careFrequency: string;
   zipCode: string;
   district: string;
+  lastSeenAt: string | null;
   createdAt: string;
   childcareRequests: {
     id: string;
@@ -75,10 +77,25 @@ interface CardProfile {
   detail: string;
   linkHref: string;
   meta: string;
+  lastSeenAt: string | null;
   // Rich fields for parent cards
   children?: ChildInfo[];
   needsSummary?: string;
   viewContext?: "sitter" | "parent";
+}
+
+function formatActivity(lastSeenAt: string | null, t: (key: string, values?: Record<string, unknown>) => string): { label: string; color: "green" | "yellow" | "gray" } {
+  if (!lastSeenAt) return { label: t("offline"), color: "gray" };
+  const diff = Date.now() - new Date(lastSeenAt).getTime();
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 5) return { label: t("onlineNow"), color: "green" };
+  if (minutes < 60) return { label: t("activeMinutes", { count: minutes }), color: "green" };
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return { label: t("activeHours", { count: hours }), color: "yellow" };
+  const days = Math.floor(hours / 24);
+  if (days < 7) return { label: t("activeDays", { count: days }), color: "yellow" };
+  const weeks = Math.floor(days / 7);
+  return { label: t("activeWeeks", { count: weeks }), color: "gray" };
 }
 
 function calculateAge(birthday: string | null): number | null {
@@ -111,6 +128,7 @@ function sitterToCard(s: SitterResult, t: (key: string, values?: Record<string, 
     age: calculateAge(s.user.birthday),
     detail: `${formatCurrency(s.hourlyRate)}/hr`,
     linkHref: `/sitter/${s.user.id}`,
+    lastSeenAt: s.user.lastSeenAt,
     meta: [
       s.yearsExperience > 0
         ? t("yrsExp", { count: s.yearsExperience })
@@ -198,6 +216,7 @@ function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, 
     avatarUrl: p.avatarUrl,
     age: calculateAge(p.birthday),
     location: p.district || locations[0] || "",
+    lastSeenAt: p.lastSeenAt,
     bio: p.bio || (reqs.length > 0
       ? reqs.map((r) => r.title).join(" · ")
       : t("lookingToConnect")),
@@ -578,6 +597,7 @@ function ProfileCard({
   const initials = getInitials(profile.firstName, profile.lastName);
   const roleLabel = mode === "babysitters" ? tc("roles.BABYSITTER") : tc("roles.PARENT");
   const isParentCard = mode === "moms";
+  const activity = formatActivity(profile.lastSeenAt, tc as any);
 
   return (
     <div className="flex h-full flex-col overflow-hidden bg-surface-secondary shadow-[0_4px_24px_rgba(44,36,32,0.08)]">
@@ -634,15 +654,26 @@ function ProfileCard({
               <span className="font-sans text-xl font-light text-white/70">, {profile.age}</span>
             )}
           </h2>
-          {profile.location && (
-            <p className="mt-1 flex items-center gap-1.5 text-[13px] font-light text-white/70">
-              <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-              </svg>
-              {profile.location}
-            </p>
-          )}
+          <div className="mt-1 flex items-center gap-3">
+            {profile.location && (
+              <p className="flex items-center gap-1.5 text-[13px] font-light text-white/70">
+                <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+                {profile.location}
+              </p>
+            )}
+            <span className="flex items-center gap-1">
+              <span className={cn(
+                "h-1.5 w-1.5 rounded-full",
+                activity.color === "green" && "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.6)]",
+                activity.color === "yellow" && "bg-amber-400",
+                activity.color === "gray" && "bg-white/40",
+              )} />
+              <span className="text-[11px] font-light text-white/60">{activity.label}</span>
+            </span>
+          </div>
         </div>
       </div>
 

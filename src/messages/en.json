@@ -258,7 +258,13 @@
     "saving": "Saving...",
     "somethingWentWrong": "Something went wrong",
     "firstAid": "First Aid",
-    "cpr": "CPR"
+    "cpr": "CPR",
+    "onlineNow": "Online now",
+    "activeMinutes": "{count}m ago",
+    "activeHours": "{count}h ago",
+    "activeDays": "{count}d ago",
+    "activeWeeks": "{count}w ago",
+    "offline": "Offline"
   },
   "browse": {
     "title": "Browse Babysitters",
