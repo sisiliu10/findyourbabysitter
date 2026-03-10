@@ -25,14 +25,14 @@ export default function SubscriptionPage() {
   const { user } = useCurrentUser();
   const [data, setData] = useState<SubscriptionData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [portalLoading, setPortalLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  // Check for success redirect from Polar checkout
+  // Check for success redirect from Stripe checkout
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("success") === "true") {
       setSuccess(true);
-      // Remove query param from URL
       window.history.replaceState({}, "", window.location.pathname);
     }
   }, []);
@@ -46,6 +46,19 @@ export default function SubscriptionPage() {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
+
+  const handlePortal = async () => {
+    setPortalLoading(true);
+    try {
+      const res = await fetch("/api/stripe/portal", { method: "POST" });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      setPortalLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -97,12 +110,13 @@ export default function SubscriptionPage() {
               </p>
             )}
 
-            <a
-              href="/api/polar/portal"
-              className="mt-4 inline-block border border-border-default px-4 py-2 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary"
+            <button
+              onClick={handlePortal}
+              disabled={portalLoading}
+              className="mt-4 inline-block border border-border-default px-4 py-2 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary disabled:opacity-50"
             >
-              {t("managePlan")}
-            </a>
+              {portalLoading ? "..." : t("managePlan")}
+            </button>
           </div>
         </div>
       ) : (

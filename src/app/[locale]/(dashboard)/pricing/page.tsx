@@ -8,6 +8,7 @@ export default function PricingPage() {
   const t = useTranslations("premium");
   const { user } = useCurrentUser();
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">("monthly");
+  const [loading, setLoading] = useState(false);
   const [usage, setUsage] = useState<{
     conversations: { used: number; limit: number };
     likes: { used: number; limit: number };
@@ -23,11 +24,22 @@ export default function PricingPage() {
       .catch(() => {});
   }, []);
 
-  const monthlyProductId = process.env.NEXT_PUBLIC_POLAR_PRODUCT_MONTHLY || "";
-  const yearlyProductId = process.env.NEXT_PUBLIC_POLAR_PRODUCT_YEARLY || "";
-  const productId = billingPeriod === "monthly" ? monthlyProductId : yearlyProductId;
-
-  const checkoutUrl = `/api/polar/checkout?products=${productId}&customerEmail=${encodeURIComponent(user?.email || "")}`;
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ priceId: billingPeriod }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      setLoading(false);
+    }
+  };
 
   const features = [
     { label: t("feature_unlimitedMessages"), free: t("freeLimit_messages") as string | false },
@@ -156,12 +168,13 @@ export default function PricingPage() {
               {t("currentPlan")}
             </div>
           ) : (
-            <a
-              href={checkoutUrl}
-              className="mt-6 block w-full bg-accent px-4 py-2.5 text-center text-sm font-medium text-white transition hover:bg-accent/90"
+            <button
+              onClick={handleCheckout}
+              disabled={loading}
+              className="mt-6 block w-full bg-accent px-4 py-2.5 text-center text-sm font-medium text-white transition hover:bg-accent/90 disabled:opacity-50"
             >
-              {t("upgrade")}
-            </a>
+              {loading ? "..." : t("upgrade")}
+            </button>
           )}
           <p className="mt-3 text-center text-xs text-text-tertiary">
             {t("cancelAnytime")}

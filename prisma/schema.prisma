@@ -36,7 +36,7 @@ model User {
   createdAt                DateTime  @default(now())
   updatedAt                DateTime  @updatedAt
 
-  polarCustomerId   String?   @unique
+  stripeCustomerId  String?   @unique
   subscription      Subscription?
 
   babysitterProfile BabysitterProfile?
@@ -270,8 +270,8 @@ model Subscription {
   id                     String    @id @default(cuid())
   userId                 String    @unique
   user                   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  polarSubscriptionId    String    @unique
-  polarProductId         String
+  stripeSubscriptionId   String    @unique
+  stripePriceId          String
   status                 String    @default("active") // active | canceled | past_due | expired
   currentPeriodStart     DateTime
   currentPeriodEnd       DateTime

@@ -131,7 +131,8 @@
     "likes": "Likes",
     "chat": "Chat",
     "profile": "Profile",
-    "parents": "Parents"
+    "parents": "Parents",
+    "browse": "Browse"
   },
   "dashboard": {
     "welcomeBack": "Welcome back,",
