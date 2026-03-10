@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES } from "@/lib/constants";
+import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES, SITTER_TYPES } from "@/lib/constants";
 import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
 import { getDistrictFromZip } from "@/lib/berlin-districts";
 
@@ -25,6 +25,7 @@ export default function OnboardingPage() {
   const [ageRangeMin, setAgeRangeMin] = useState("0");
   const [ageRangeMax, setAgeRangeMax] = useState("17");
   const [availability, setAvailability] = useState<Record<string, string[]>>({});
+  const [sitterType, setSitterType] = useState("");
 
   // Profile picture
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
@@ -106,6 +107,7 @@ export default function OnboardingPage() {
         ageRangeMin: parseInt(ageRangeMin, 10),
         ageRangeMax: parseInt(ageRangeMax, 10),
         availabilityJson: JSON.stringify(availability),
+        sitterType,
       });
     }
 
@@ -352,6 +354,25 @@ export default function OnboardingPage() {
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("languagesLabel")}</label>
             <input value={languages} onChange={(e) => setLanguages(e.target.value)} className={inputClass} placeholder={t("languagesPlaceholder")} />
+          </div>
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">{t("sitterTypeLabel")}</label>
+            <div className="flex flex-wrap gap-2">
+              {SITTER_TYPES.map((type) => (
+                <button
+                  key={type}
+                  type="button"
+                  onClick={() => setSitterType(sitterType === type ? "" : type)}
+                  className={`px-3.5 py-2 text-sm transition ${
+                    sitterType === type
+                      ? "bg-text-primary text-surface-primary"
+                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                  }`}
+                >
+                  {t(`sitterTypes.${type}`)}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>

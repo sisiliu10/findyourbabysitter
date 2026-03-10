@@ -114,7 +114,9 @@
   },
   "sidebar": {
     "dashboard": "Übersicht",
-    "findSitters": "Babysitter finden",
+    "browseSitters": "Babysitter durchsuchen",
+    "findSitters": "Entdecken",
+    "kitaSearch": "Kita-Suche",
     "myRequests": "Meine Anfragen",
     "bookings": "Buchungen",
     "messages": "Nachrichten",
@@ -251,7 +253,32 @@
     "back": "Zurück",
     "continue": "Weiter",
     "saving": "Wird gespeichert...",
-    "somethingWentWrong": "Etwas ist schiefgelaufen"
+    "somethingWentWrong": "Etwas ist schiefgelaufen",
+    "firstAid": "Erste Hilfe",
+    "cpr": "HLW"
+  },
+  "browse": {
+    "title": "Babysitter durchsuchen",
+    "subtitle": "Suche und filtere, um den richtigen Babysitter für deine Familie zu finden.",
+    "swipeView": "Swipe-Ansicht",
+    "searchPlaceholder": "Nach Name, Bezirk suchen...",
+    "language": "Sprache",
+    "all": "Alle",
+    "maxRate": "Max. Stundensatz",
+    "anyRate": "Egal",
+    "upTo": "Bis",
+    "resultCount": "{count, plural, one {1 Babysitter} other {# Babysitter}} gefunden",
+    "noResults": "Keine Babysitter passen zu deinen Filtern.",
+    "clearFilters": "Filter zurücksetzen",
+    "yrsExp": "{count, plural, one {1 Jahr Erfahrung} other {# Jahre Erfahrung}}",
+    "sitterType": "Typ",
+    "allTypes": "Alle",
+    "sitterTypes": {
+      "student": "Student/in",
+      "schueler": "Schüler/in",
+      "erzieher_azubi": "Ausbildung zur Erzieher/in",
+      "other": "Anderes"
+    }
   },
   "search": {
     "discover": "Entdecken",
@@ -289,7 +316,9 @@
     "likedFamilies": "Du hast {count, plural, one {1 Familie} other {# Familien}} geliked",
     "likedParents": "Du hast {count, plural, one {1 Elternteil} other {# Eltern}} geliked",
     "kidsAndAges": "{count, plural, one {1 Kind} other {# Kinder}}, Alter {ages}",
-    "lookingFor": "Sucht"
+    "lookingFor": "Sucht",
+    "filterByLanguage": "Sprache filtern",
+    "allLanguages": "Alle"
   },
   "onboarding": {
     "completeProfile": "Profil vervollständigen",
@@ -320,7 +349,14 @@
     "phoneVerificationHint": "Wir kontaktieren dich innerhalb von 24 Stunden zur Identitätsprüfung.",
     "verificationTitle": "Profil eingereicht!",
     "verificationMessage": "Vielen Dank für deine Anmeldung. Jemand aus unserem Team wird dich innerhalb von 24 Stunden unter der angegebenen Telefonnummer kontaktieren, um deine Identität zu verifizieren.",
-    "goToDashboard": "Zum Dashboard"
+    "goToDashboard": "Zum Dashboard",
+    "sitterTypeLabel": "Was beschreibt dich am besten?",
+    "sitterTypes": {
+      "student": "Student/in",
+      "schueler": "Schüler/in",
+      "erzieher_azubi": "Ausbildung zur Erzieher/in",
+      "other": "Anderes"
+    }
   },
   "bookingsList": {
     "title": "Buchungen",
@@ -645,8 +681,8 @@
   },
   "coloringPages": {
     "label": "Ausmalbilder",
-    "title": "Berliner Ausmalbilder",
-    "intro": "Kostenlose Ausmalbilder mit Berliner Motiven — vom Fernsehturm bis zur East Side Gallery. Altersgruppe wählen, herunterladen und losmalen.",
+    "title": "Ausmalbilder für Kinder",
+    "intro": "Kostenlose Ausmalbilder — Tiere, Dinosaurier, Weltraum und mehr. Altersgruppe wählen, herunterladen und losmalen.",
     "print": "Drucken",
     "download": "Download",
     "tipsLabel": "Drucktipps",
@@ -655,7 +691,7 @@
     "tip2Title": "Druckeinstellungen",
     "tip2Desc": "Auf den Drucken-Button klicken, dann 'An Seite anpassen' in den Druckereinstellungen wählen.",
     "tip3Title": "Frei ausmalen",
-    "tip3Desc": "Es gibt keine falschen Farben. Ein lila Fernsehturm? Ein Regenbogen-Bär? Berlin ist eine kreative Stadt.",
+    "tip3Desc": "Es gibt keine falschen Farben. Ein lila Dinosaurier? Eine Regenbogen-Rakete? Einfach kreativ sein.",
     "ctaTitle": "Babysitter für die Malzeit gesucht?",
     "ctaSubtitle": "Finde vertrauenswürdige Babysitter, die von anderen Berliner Eltern empfohlen werden.",
     "ctaButton": "Babysitter finden"

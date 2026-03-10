@@ -114,7 +114,9 @@
   },
   "sidebar": {
     "dashboard": "Dashboard",
-    "findSitters": "Find Sitters",
+    "browseSitters": "Browse Sitters",
+    "findSitters": "Discover",
+    "kitaSearch": "Kita Search",
     "myRequests": "My Requests",
     "bookings": "Bookings",
     "messages": "Messages",
@@ -251,7 +253,32 @@
     "back": "Back",
     "continue": "Continue",
     "saving": "Saving...",
-    "somethingWentWrong": "Something went wrong"
+    "somethingWentWrong": "Something went wrong",
+    "firstAid": "First Aid",
+    "cpr": "CPR"
+  },
+  "browse": {
+    "title": "Browse Babysitters",
+    "subtitle": "Search and filter to find the right babysitter for your family.",
+    "swipeView": "Swipe view",
+    "searchPlaceholder": "Search by name, neighborhood...",
+    "language": "Language",
+    "all": "All",
+    "maxRate": "Max rate",
+    "anyRate": "Any",
+    "upTo": "Up to",
+    "resultCount": "{count, plural, one {1 sitter} other {# sitters}} found",
+    "noResults": "No sitters match your filters.",
+    "clearFilters": "Clear all filters",
+    "yrsExp": "{count, plural, one {1 yr exp} other {# yrs exp}}",
+    "sitterType": "Type",
+    "allTypes": "All",
+    "sitterTypes": {
+      "student": "Student",
+      "schueler": "High school student",
+      "erzieher_azubi": "Childcare trainee",
+      "other": "Other"
+    }
   },
   "search": {
     "discover": "Discover",
@@ -289,7 +316,9 @@
     "likedFamilies": "You liked {count, plural, one {1 family} other {# families}}",
     "likedParents": "You liked {count, plural, one {1 parent} other {# parents}}",
     "kidsAndAges": "{count, plural, one {1 kid} other {# kids}}, ages {ages}",
-    "lookingFor": "Looking for"
+    "lookingFor": "Looking for",
+    "filterByLanguage": "Filter by language",
+    "allLanguages": "All"
   },
   "onboarding": {
     "completeProfile": "Complete your profile",
@@ -320,7 +349,14 @@
     "phoneVerificationHint": "We'll contact you within 24 hours to verify your identity.",
     "verificationTitle": "Profile submitted!",
     "verificationMessage": "Thank you for signing up. Someone from our team will contact you within 24 hours at the phone number you provided to verify your identity.",
-    "goToDashboard": "Go to dashboard"
+    "goToDashboard": "Go to dashboard",
+    "sitterTypeLabel": "What describes you best?",
+    "sitterTypes": {
+      "student": "Student",
+      "schueler": "High school student",
+      "erzieher_azubi": "Childcare trainee",
+      "other": "Other"
+    }
   },
   "bookingsList": {
     "title": "Bookings",
@@ -645,8 +681,8 @@
   },
   "coloringPages": {
     "label": "Coloring Pages",
-    "title": "Berlin Coloring Pages",
-    "intro": "Free, printable coloring pages inspired by Berlin — from the TV Tower to the East Side Gallery. Pick an age group, download, and let the coloring begin.",
+    "title": "Coloring Pages for Kids",
+    "intro": "Free, printable coloring pages — animals, dinosaurs, space and more. Pick an age group, download, and let the coloring begin.",
     "print": "Print",
     "download": "Download",
     "tipsLabel": "Printing Tips",
@@ -655,7 +691,7 @@
     "tip2Title": "Print settings",
     "tip2Desc": "Click the print button, then select 'Fit to page' in your printer settings for the best results.",
     "tip3Title": "Color freely",
-    "tip3Desc": "There are no wrong colors. A purple TV Tower? A rainbow bear? Berlin is a creative city.",
+    "tip3Desc": "There are no wrong colors. A purple dinosaur? A rainbow rocket? Let creativity flow.",
     "ctaTitle": "Need a sitter for coloring time?",
     "ctaSubtitle": "Find trusted babysitters recommended by other Berlin parents.",
     "ctaButton": "Find a babysitter"

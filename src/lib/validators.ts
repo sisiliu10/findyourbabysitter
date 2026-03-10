@@ -37,6 +37,7 @@ export const sitterOnboardingSchema = z.object({
   hasTransportation: z.boolean().default(false),
   availabilityJson: z.string().default("{}"),
   phone: z.string().min(1, "Phone number is required"),
+  sitterType: z.string().optional(),
 });
 
 export const createRequestSchema = z.object({
@@ -91,4 +92,5 @@ export const profileUpdateSchema = z.object({
   hasCPR: z.boolean().optional(),
   hasTransportation: z.boolean().optional(),
   availabilityJson: z.string().optional(),
+  sitterType: z.string().optional(),
 });

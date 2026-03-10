@@ -22,6 +22,8 @@ export async function GET(request: Request) {
     const timeSlot = searchParams.get("timeSlot");
     const hasCPR = searchParams.get("hasCPR");
     const hasFirstAid = searchParams.get("hasFirstAid");
+    const language = searchParams.get("language");
+    const sitterType = searchParams.get("sitterType");
     const page = parseInt(searchParams.get("page") || "1", 10);
     const limit = Math.min(parseInt(searchParams.get("limit") || "20", 10), 100);
     const skip = (page - 1) * limit;
@@ -43,6 +45,8 @@ export async function GET(request: Request) {
 
     if (hasCPR === "true") where.hasCPR = true;
     if (hasFirstAid === "true") where.hasFirstAid = true;
+    if (language) where.languages = { contains: language };
+    if (sitterType) where.sitterType = sitterType;
 
     const [sitters, total] = await Promise.all([
       prisma.babysitterProfile.findMany({

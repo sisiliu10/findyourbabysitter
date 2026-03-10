@@ -71,6 +71,15 @@ export const CARE_FREQUENCIES = [
 
 export type CareFrequency = (typeof CARE_FREQUENCIES)[number];
 
+export const SITTER_TYPES = [
+  "student",
+  "schueler",
+  "erzieher_azubi",
+  "other",
+] as const;
+
+export type SitterType = (typeof SITTER_TYPES)[number];
+
 // Allowed booking status transitions: { [currentStatus]: { [newStatus]: allowedRole[] } }
 export const STATUS_TRANSITIONS: Record<string, Record<string, string[]>> = {
   PENDING: {

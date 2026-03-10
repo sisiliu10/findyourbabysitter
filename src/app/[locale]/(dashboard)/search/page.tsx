@@ -239,6 +239,7 @@ export default function SearchPage() {
   const [matchInfo, setMatchInfo] = useState<MatchInfo | null>(null);
   const [showMatchModal, setShowMatchModal] = useState(false);
   const likedIdsRef = useRef<Set<string>>(new Set());
+  const [languageFilter, setLanguageFilter] = useState("");
 
   // Set mode from URL param or default based on user role
   useEffect(() => {
@@ -266,7 +267,9 @@ export default function SearchPage() {
       likedIdsRef.current = alreadyLiked;
 
       if (swipeMode === "babysitters") {
-        const res = await fetch("/api/sitters?limit=50");
+        const params = new URLSearchParams({ limit: "50" });
+        if (languageFilter) params.set("language", languageFilter);
+        const res = await fetch(`/api/sitters?${params}`);
         const json = await res.json();
         if (json.success && json.data) {
           const all = (json.data.sitters || []).map((s: SitterResult) => sitterToCard(s, t as any));
@@ -290,9 +293,9 @@ export default function SearchPage() {
     } finally {
       setLoading(false);
     }
-  }, [t, tn, locale, isSitter]);
+  }, [t, tn, locale, isSitter, languageFilter]);
 
-  // Only fetch when mode is resolved
+  // Only fetch when mode is resolved or language filter changes
   useEffect(() => {
     if (mode) fetchCards(mode);
   }, [mode, fetchCards]);
@@ -382,6 +385,31 @@ export default function SearchPage() {
             >
               {t("parents")}
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Language filter — prominent, only for babysitter browsing */}
+      {mode === "babysitters" && (
+        <div className="mb-4">
+          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
+            {t("filterByLanguage")}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {["", "English", "German", "Spanish", "French", "Turkish", "Russian", "Arabic"].map((lang) => (
+              <button
+                key={lang}
+                onClick={() => setLanguageFilter(lang)}
+                className={cn(
+                  "px-3 py-1.5 text-xs font-medium transition-colors",
+                  languageFilter === lang
+                    ? "bg-text-primary text-surface-primary"
+                    : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
+                )}
+              >
+                {lang || t("allLanguages")}
+              </button>
+            ))}
           </div>
         </div>
       )}

@@ -73,7 +73,7 @@ export async function PUT(request: NextRequest) {
       "bio", "hourlyRate", "city", "state", "zipCode", "radiusMiles",
       "yearsExperience", "languages", "ageRangeMin", "ageRangeMax",
       "hasFirstAid", "hasCPR", "hasTransportation", "availabilityJson",
-      "latitude", "longitude",
+      "latitude", "longitude", "sitterType",
     ];
 
     for (const field of profileFields) {

@@ -50,7 +50,7 @@ export function Header() {
             </Link>
             <Link
               href="/kita-search"
-              className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
+              className="text-xs uppercase tracking-wide text-accent transition-colors hover:text-text-primary border border-accent/30 px-2.5 py-1"
             >
               {t("kitaSearch")}
             </Link>
@@ -132,7 +132,7 @@ export function Header() {
             </Link>
             <Link
               href="/kita-search"
-              className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
+              className="inline-flex w-fit text-xs uppercase tracking-wide text-accent transition-colors hover:text-text-primary border border-accent/30 px-2.5 py-1"
             >
               {t("kitaSearch")}
             </Link>
