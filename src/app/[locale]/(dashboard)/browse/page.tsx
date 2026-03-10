@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency, getInitials, cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/Spinner";
-import { SITTER_TYPES } from "@/lib/constants";
+import { SITTER_TYPES, LANGUAGE_OPTIONS } from "@/lib/constants";
 
 interface SitterResult {
   id: string;
@@ -30,19 +30,6 @@ interface SitterResult {
     district: string;
   };
 }
-
-const LANGUAGE_OPTIONS = [
-  "English",
-  "German",
-  "Spanish",
-  "French",
-  "Turkish",
-  "Russian",
-  "Arabic",
-  "Chinese",
-  "Korean",
-  "Japanese",
-];
 
 function calculateAge(birthday: string | null): number | null {
   if (!birthday) return null;
@@ -159,16 +146,16 @@ export default function BrowseSittersPage() {
             </button>
             {LANGUAGE_OPTIONS.map((lang) => (
               <button
-                key={lang}
-                onClick={() => setLanguageFilter(languageFilter === lang ? "" : lang)}
+                key={lang.value}
+                onClick={() => setLanguageFilter(languageFilter === lang.value ? "" : lang.value)}
                 className={cn(
                   "px-3 py-1.5 text-xs font-medium transition-colors",
-                  languageFilter === lang
+                  languageFilter === lang.value
                     ? "bg-text-primary text-surface-primary"
                     : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
                 )}
               >
-                {lang}
+                {lang.flag} {lang.value}
               </button>
             ))}
           </div>

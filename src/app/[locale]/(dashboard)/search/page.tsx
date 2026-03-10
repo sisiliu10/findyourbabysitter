@@ -9,6 +9,7 @@ import { Spinner } from "@/components/ui/Spinner";
 import { SwipeCard } from "@/components/search/SwipeCard";
 import { MatchModal } from "@/components/search/MatchModal";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { LANGUAGE_OPTIONS } from "@/lib/constants";
 
 type SwipeMode = "babysitters" | "moms";
 
@@ -396,18 +397,29 @@ export default function SearchPage() {
             {t("filterByLanguage")}
           </p>
           <div className="flex flex-wrap gap-1.5">
-            {["", "English", "German", "Spanish", "French", "Turkish", "Russian", "Arabic"].map((lang) => (
+            <button
+              onClick={() => setLanguageFilter("")}
+              className={cn(
+                "px-3 py-1.5 text-xs font-medium transition-colors",
+                !languageFilter
+                  ? "bg-text-primary text-surface-primary"
+                  : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
+              )}
+            >
+              {t("allLanguages")}
+            </button>
+            {LANGUAGE_OPTIONS.map((lang) => (
               <button
-                key={lang}
-                onClick={() => setLanguageFilter(lang)}
+                key={lang.value}
+                onClick={() => setLanguageFilter(languageFilter === lang.value ? "" : lang.value)}
                 className={cn(
                   "px-3 py-1.5 text-xs font-medium transition-colors",
-                  languageFilter === lang
+                  languageFilter === lang.value
                     ? "bg-text-primary text-surface-primary"
                     : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
                 )}
               >
-                {lang || t("allLanguages")}
+                {lang.flag} {lang.value}
               </button>
             ))}
           </div>
