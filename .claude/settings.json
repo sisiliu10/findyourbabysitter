@@ -21,7 +21,36 @@
       "Bash(vercel env add NEXT_PUBLIC_APP_URL production)",
       "Bash(vercel --prod)",
       "Bash(npx tsc --noEmit --pretty)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(npx --yes png-to-ico /tmp/bear-16.png /tmp/bear-32.png /tmp/bear-64.png)",
+      "Bash(gh api repos/sisiliu10/findyourbabysitter/deployments --jq '.[0] | {state: .statuses_url, created: .created_at, sha: .sha[0:7]}')",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://berlinbabysitter.com/favicon.ico)",
+      "Bash(curl -s https://berlinbabysitter.com/favicon.ico)",
+      "Bash(npx prisma migrate dev --name add-last-seen-at)",
+      "Bash(ls -la /Users/sisi.liu/findyourbabysitter/src/app/[locale]/)",
+      "Bash(ls -la /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/onboarding/)",
+      "Bash(npx prisma db push)",
+      "Bash(npm run build)",
+      "Bash(git add prisma/schema.prisma src/lib/constants.ts src/messages/en.json src/messages/de.json src/app/api/profile/route.ts src/app/api/parents/route.ts src/app/api/auth/me/route.ts \"src/app/[locale]/\\(dashboard\\)/onboarding/page.tsx\" \"src/app/[locale]/\\(dashboard\\)/profile/page.tsx\" \"src/app/[locale]/\\(dashboard\\)/profile/edit/page.tsx\" \"src/app/[locale]/\\(dashboard\\)/search/page.tsx\")",
+      "Bash(npx vercel inspect https://findyourbabysitter-8crjogk1y-sisiliu10s-projects.vercel.app)",
+      "Bash(git diff src/app/[locale]/\\\\\\(dashboard\\\\\\)/search/page.tsx)",
+      "Bash(grep -r \"JWT_SECRET\\\\|NEXT_PUBLIC\" /Users/sisi.liu/findyourbabysitter/.env* /Users/sisi.liu/findyourbabysitter/src --include=\"*.ts\" --include=\"*.tsx\")",
+      "Bash(ls -la /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/)",
+      "Bash(ls /Users/sisi.liu/Downloads/lalala*.jpg /Users/sisi.liu/Downloads/lalal*.jpg)",
+      "Bash(find /Users/sisi.liu/findyourbabysitter/src/app/[locale]/coloring-pages -type f)",
+      "Bash(git add public/coloring-pages/ src/data/coloring-pages.ts src/data/coloring-pages-de.ts src/components/coloring-pages/ColoringPageGrid.tsx src/app/[locale]/coloring-pages/page.tsx)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/sisi.liu/findyourbabysitter/public/hero-bg.png)",
+      "Bash(ls -la /Users/sisi.liu/findyourbabysitter/src/app/[locale]/'\\(dashboard\\)'/)",
+      "Bash(ls -la /Users/sisi.liu/findyourbabysitter/src/app/[locale]/'\\(dashboard\\)'/onboarding/)",
+      "Bash(grep -n \"phone\" /Users/sisi.liu/findyourbabysitter/src/app/[locale]/'\\(dashboard\\)'/onboarding/page.tsx)",
+      "Bash(git add:*)",
+      "Bash(grep -r \"language\" src/components/search src/app/[locale]/\\\\\\(dashboard\\\\\\)/search --include=\"*.tsx\" -l)",
+      "Bash(ls /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/)",
+      "Bash(npx prisma:*)"
+    ],
+    "additionalDirectories": [
+      "/Users/sisi.liu/findyourbabysitter/public/coloring-pages",
+      "/Users/sisi.liu/findyourbabysitter/src/app/[locale]/(dashboard)"
     ]
   }
 }

@@ -14,6 +14,7 @@ const parentLinks: { href: string; key: string; icon: string }[] = [
   { href: "/bookings", key: "bookings", icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" },
   { href: "/messages", key: "messages", icon: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" },
   { href: "/profile", key: "profile", icon: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" },
+  { href: "/pricing", key: "upgrade", icon: "M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" },
 ];
 
 const sitterLinks: { href: string; key: string; icon: string }[] = [
@@ -30,13 +31,22 @@ export function Sidebar() {
   const t = useTranslations("sidebar");
   const router = useRouter();
 
-  const links = user?.role === "BABYSITTER" ? sitterLinks : parentLinks;
+  const baseLinks = user?.role === "BABYSITTER" ? sitterLinks : parentLinks;
+
+  // For parents: swap upgrade/subscription link based on premium status
+  const links = baseLinks.map((link) => {
+    if (link.key === "upgrade" && user?.isPremium) {
+      return { ...link, href: "/subscription", key: "subscription" };
+    }
+    return link;
+  });
 
   return (
     <aside className="hidden w-56 shrink-0 border-r border-border-default lg:block">
       <nav className="flex flex-col py-4">
         {links.map((link) => {
           const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
+          const isUpgrade = link.key === "upgrade";
           return (
             <Link
               key={link.href}
@@ -46,10 +56,18 @@ export function Sidebar() {
                 "flex items-center gap-3 px-6 py-2.5 text-sm transition-colors",
                 isActive
                   ? "text-text-primary border-r-2 border-accent bg-accent-muted"
-                  : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
+                  : isUpgrade
+                    ? "text-accent hover:text-accent/80 hover:bg-accent-muted"
+                    : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
               )}
             >
-              <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <svg
+                className="h-4 w-4 shrink-0"
+                fill={isUpgrade ? "currentColor" : "none"}
+                stroke={isUpgrade ? "none" : "currentColor"}
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+              >
                 <path strokeLinecap="round" strokeLinejoin="round" d={link.icon} />
               </svg>
               {t(link.key as Parameters<typeof t>[0])}

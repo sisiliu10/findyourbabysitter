@@ -1,0 +1,151 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { Spinner } from "@/components/ui/Spinner";
+
+interface SubscriptionData {
+  isPremium: boolean;
+  subscription: {
+    status: string;
+    currentPeriodEnd: string;
+    cancelAtPeriodEnd: boolean;
+  } | null;
+  usage: {
+    conversations: { used: number; limit: number };
+    likes: { used: number; limit: number };
+    requests: { used: number; limit: number };
+  };
+}
+
+export default function SubscriptionPage() {
+  const t = useTranslations("premium");
+  const { user } = useCurrentUser();
+  const [data, setData] = useState<SubscriptionData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [success, setSuccess] = useState(false);
+
+  // Check for success redirect from Polar checkout
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("success") === "true") {
+      setSuccess(true);
+      // Remove query param from URL
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/subscription/status")
+      .then((r) => r.json())
+      .then((json) => {
+        if (json.success) setData(json.data);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Spinner size="lg" className="text-accent" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-lg">
+      <h1 className="mb-6 font-serif text-3xl text-text-primary">{t("subscriptionTitle")}</h1>
+
+      {success && (
+        <div className="mb-6 border border-success/30 bg-success-muted p-4 text-sm text-success">
+          {t("welcomePremium")}
+        </div>
+      )}
+
+      {data?.isPremium && data.subscription ? (
+        <div className="space-y-6">
+          {/* Current plan */}
+          <div className="border border-border-default bg-surface-secondary p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
+                  {t("currentPlan")}
+                </p>
+                <p className="mt-1 font-serif text-xl text-text-primary">{t("premiumPlan")}</p>
+              </div>
+              <span className="bg-success-muted px-2.5 py-1 text-xs font-medium text-success">
+                {t("active")}
+              </span>
+            </div>
+
+            {data.subscription.cancelAtPeriodEnd && (
+              <p className="mt-3 text-sm text-warning">
+                {t("canceledExpires", {
+                  date: new Date(data.subscription.currentPeriodEnd).toLocaleDateString(),
+                })}
+              </p>
+            )}
+
+            {!data.subscription.cancelAtPeriodEnd && (
+              <p className="mt-3 text-sm text-text-tertiary">
+                {t("nextBilling", {
+                  date: new Date(data.subscription.currentPeriodEnd).toLocaleDateString(),
+                })}
+              </p>
+            )}
+
+            <a
+              href="/api/polar/portal"
+              className="mt-4 inline-block border border-border-default px-4 py-2 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary"
+            >
+              {t("managePlan")}
+            </a>
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {/* Free plan info */}
+          <div className="border border-border-default bg-surface-secondary p-6">
+            <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("currentPlan")}
+            </p>
+            <p className="mt-1 font-serif text-xl text-text-primary">{t("free")}</p>
+
+            {data && (
+              <div className="mt-4 space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-text-secondary">{t("contactsThisWeek")}</span>
+                  <span className="text-text-primary">
+                    {data.usage.conversations.used}/{data.usage.conversations.limit}
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-text-secondary">{t("likesToday")}</span>
+                  <span className="text-text-primary">
+                    {data.usage.likes.used}/{data.usage.likes.limit}
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-text-secondary">{t("activeRequests")}</span>
+                  <span className="text-text-primary">
+                    {data.usage.requests.used}/{data.usage.requests.limit}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <Link
+              href="/pricing"
+              className="mt-4 inline-block bg-accent px-4 py-2.5 text-sm font-medium text-white transition hover:bg-accent/90"
+            >
+              {t("upgrade")}
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

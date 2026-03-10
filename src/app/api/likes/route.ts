@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
+import { canLikeToday } from "@/lib/subscription";
 
 // POST /api/likes — Record a like; detect mutual match
 export async function POST(request: Request) {
@@ -28,6 +29,23 @@ export async function POST(request: Request) {
         { success: false, error: "Cannot like yourself" },
         { status: 400 }
       );
+    }
+
+    // Check daily like limit for parents
+    if (session.role === "PARENT") {
+      const check = await canLikeToday(session.userId);
+      if (!check.allowed) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Daily like limit reached",
+            code: "upgrade_required",
+            used: check.used,
+            limit: check.limit,
+          },
+          { status: 403 }
+        );
+      }
     }
 
     // Upsert the like (idempotent)

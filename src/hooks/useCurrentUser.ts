@@ -10,6 +10,7 @@ interface CurrentUser {
   role: string;
   avatarUrl: string | null;
   onboarded: boolean;
+  isPremium: boolean;
 }
 
 // Module-level cache: Sidebar, MobileNav, Topbar all share one request

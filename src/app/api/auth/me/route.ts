@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
+import { isPremium } from "@/lib/subscription";
 
 export async function GET() {
   try {
@@ -44,7 +45,9 @@ export async function GET() {
       );
     }
 
-    return NextResponse.json({ success: true, data: user });
+    const premium = await isPremium(user.id);
+
+    return NextResponse.json({ success: true, data: { ...user, isPremium: premium } });
   } catch (error) {
     return NextResponse.json(
       { success: false, error: error instanceof Error ? error.message : "Failed to get user" },

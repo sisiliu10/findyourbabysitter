@@ -106,6 +106,11 @@ export const LANGUAGE_OPTIONS: { value: string; flag: string }[] = [
   { value: "Bulgarian", flag: "\uD83C\uDDE7\uD83C\uDDEC" },
 ];
 
+// Premium / Free tier limits
+export const FREE_WEEKLY_CONVERSATION_LIMIT = 3;
+export const FREE_DAILY_LIKE_LIMIT = 10;
+export const FREE_ACTIVE_REQUEST_LIMIT = 2;
+
 // Allowed booking status transitions: { [currentStatus]: { [newStatus]: allowedRole[] } }
 export const STATUS_TRANSITIONS: Record<string, Record<string, string[]>> = {
   PENDING: {

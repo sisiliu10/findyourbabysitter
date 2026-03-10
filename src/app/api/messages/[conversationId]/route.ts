@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { messageSchema } from "@/lib/validators";
 import { notifyNewMessage } from "@/lib/email";
 import { apiLimiter, checkRateLimit } from "@/lib/ratelimit";
+import { canStartConversation } from "@/lib/subscription";
 
 // Resolve conversationId to either a booking or a match, returning participant IDs.
 async function resolveConversation(conversationId: string, userId: string) {
@@ -168,6 +169,34 @@ export async function POST(
         { success: false, error: "Not authorized to send messages in this conversation" },
         { status: 403 }
       );
+    }
+
+    // Check if this is a new conversation for this parent (free tier limit)
+    if (session.role === "PARENT") {
+      const existingMessages = await prisma.message.count({
+        where: {
+          senderId: session.userId,
+          ...(conv.bookingId
+            ? { bookingId: conv.bookingId }
+            : { matchId: conv.matchId }),
+        },
+      });
+      // Only check limit on first message in a conversation
+      if (existingMessages === 0) {
+        const check = await canStartConversation(session.userId);
+        if (!check.allowed) {
+          return NextResponse.json(
+            {
+              success: false,
+              error: "Weekly conversation limit reached",
+              code: "upgrade_required",
+              used: check.used,
+              limit: check.limit,
+            },
+            { status: 403 }
+          );
+        }
+      }
     }
 
     const message = await prisma.message.create({

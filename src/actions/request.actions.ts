@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { requireAuth } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { createRequestSchema } from "@/lib/validators";
+import { canCreateRequest } from "@/lib/subscription";
 import type { ActionResult } from "@/types";
 
 export async function createRequest(formData: FormData): Promise<ActionResult> {
@@ -36,6 +37,15 @@ export async function createRequest(formData: FormData): Promise<ActionResult> {
     }
 
     const data = parsed.data;
+
+    // Check request limit for free parents
+    const check = await canCreateRequest(session.userId);
+    if (!check.allowed) {
+      return {
+        success: false,
+        error: "upgrade_required",
+      };
+    }
 
     const request = await prisma.childcareRequest.create({
       data: {
