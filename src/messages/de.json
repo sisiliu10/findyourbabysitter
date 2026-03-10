@@ -709,7 +709,7 @@
   },
   "kitaSearch": {
     "metaTitle": "Kita-Suche Berlin — Kindergärten vergleichen",
-    "metaDescription": "Finde und vergleiche Kindergärten (Kitas) in Berlin. Bewertungen, Verfügbarkeit, Öffnungszeiten und Kapazität auf einen Blick. Daten von HeyAva.",
+    "metaDescription": "Finde und vergleiche Kindergärten (Kitas) in Berlin. Bewertungen, Verfügbarkeit, Öffnungszeiten und Kapazität auf einen Blick.",
     "title": "Kita finden in Berlin",
     "subtitle": "Kindergärten in Berlin vergleichen — Bewertungen, Verfügbarkeit und mehr",
     "searchPlaceholder": "Nach Name oder Adresse suchen...",
@@ -726,7 +726,6 @@
     "showList": "Liste",
     "showMap": "Karte",
     "previous": "Zurück",
-    "next": "Weiter",
-    "poweredBy": "Kita-Daten bereitgestellt von HeyAva"
+    "next": "Weiter"
   }
 }

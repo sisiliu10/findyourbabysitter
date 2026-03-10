@@ -709,7 +709,7 @@
   },
   "kitaSearch": {
     "metaTitle": "Kita Search Berlin — Compare Daycare Centers",
-    "metaDescription": "Find and compare daycare centers (Kitas) across Berlin. Browse ratings, availability, opening hours, and capacity. Data powered by HeyAva.",
+    "metaDescription": "Find and compare daycare centers (Kitas) across Berlin. Browse ratings, availability, opening hours, and capacity.",
     "title": "Find a Kita in Berlin",
     "subtitle": "Compare daycare centers across Berlin — ratings, availability, and more",
     "searchPlaceholder": "Search by name or address...",
@@ -726,7 +726,6 @@
     "showList": "List",
     "showMap": "Map",
     "previous": "Back",
-    "next": "Next",
-    "poweredBy": "Daycare data provided by HeyAva"
+    "next": "Next"
   }
 }

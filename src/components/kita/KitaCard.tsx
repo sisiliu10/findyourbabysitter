@@ -15,7 +15,7 @@ export function KitaCard({ kita, isHighlighted, onHover, onClick }: KitaCardProp
 
   return (
     <div
-      className={`group cursor-pointer border transition-all ${
+      className={`group flex h-full cursor-pointer flex-col border transition-all ${
         isHighlighted
           ? "border-accent bg-accent-muted"
           : "border-border-default bg-surface-secondary hover:border-border-hover"
@@ -108,7 +108,7 @@ export function KitaCard({ kita, isHighlighted, onHover, onClick }: KitaCardProp
       </div>
 
       {/* Content */}
-      <div className="p-3">
+      <div className="flex flex-1 flex-col p-3">
         <h3 className="font-serif text-base leading-tight text-text-primary">
           {kita.name}
         </h3>
@@ -146,7 +146,7 @@ export function KitaCard({ kita, isHighlighted, onHover, onClick }: KitaCardProp
 
         {/* Address */}
         {kita.address && (
-          <p className="mt-2 border-t border-border-subtle pt-2 text-xs text-text-tertiary">
+          <p className="mt-auto border-t border-border-subtle pt-2 text-xs text-text-tertiary">
             {kita.address}
           </p>
         )}

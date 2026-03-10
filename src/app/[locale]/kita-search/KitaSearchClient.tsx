@@ -259,11 +259,6 @@ export function KitaSearchClient({
                 />
               </div>
             )}
-
-            {/* Attribution */}
-            <p className="mt-6 text-center text-[10px] text-text-muted">
-              {t("poweredBy")}
-            </p>
           </div>
         </div>
 
