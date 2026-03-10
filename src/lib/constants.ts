@@ -80,6 +80,9 @@ export const SITTER_TYPES = [
 
 export type SitterType = (typeof SITTER_TYPES)[number];
 
+export const GENDER_OPTIONS = ["female", "male"] as const;
+export type Gender = (typeof GENDER_OPTIONS)[number];
+
 export const LANGUAGE_OPTIONS: { value: string; flag: string }[] = [
   { value: "English", flag: "\uD83C\uDDEC\uD83C\uDDE7" },
   { value: "German", flag: "\uD83C\uDDE9\uD83C\uDDEA" },

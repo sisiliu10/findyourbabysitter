@@ -48,6 +48,9 @@ export async function GET(request: Request) {
     if (language) where.languages = { contains: language };
     if (sitterType) where.sitterType = sitterType;
 
+    const gender = searchParams.get("gender");
+    if (gender) where.gender = gender;
+
     const [sitters, total] = await Promise.all([
       prisma.babysitterProfile.findMany({
         where,

@@ -278,6 +278,12 @@
       "schueler": "Schüler/in",
       "erzieher_azubi": "Ausbildung zur Erzieher/in",
       "other": "Anderes"
+    },
+    "gender": "Geschlecht",
+    "allGenders": "Alle",
+    "genders": {
+      "female": "Weiblich",
+      "male": "Männlich"
     }
   },
   "search": {
@@ -356,6 +362,11 @@
       "schueler": "Schüler/in",
       "erzieher_azubi": "Ausbildung zur Erzieher/in",
       "other": "Anderes"
+    },
+    "genderLabel": "Geschlecht",
+    "genders": {
+      "female": "Weiblich",
+      "male": "Männlich"
     }
   },
   "bookingsList": {

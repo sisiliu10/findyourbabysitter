@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency, getInitials, cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/Spinner";
-import { SITTER_TYPES, LANGUAGE_OPTIONS } from "@/lib/constants";
+import { SITTER_TYPES, LANGUAGE_OPTIONS, GENDER_OPTIONS } from "@/lib/constants";
 
 interface SitterResult {
   id: string;
@@ -21,6 +21,7 @@ interface SitterResult {
   ageRangeMin: number;
   ageRangeMax: number;
   sitterType: string;
+  gender: string;
   user: {
     id: string;
     firstName: string;
@@ -57,6 +58,7 @@ export default function BrowseSittersPage() {
   const [sitterTypeFilter, setSitterTypeFilter] = useState("");
   const [maxRate, setMaxRate] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [genderFilter, setGenderFilter] = useState("");
 
   const fetchSitters = useCallback(async () => {
     setLoading(true);
@@ -64,6 +66,7 @@ export default function BrowseSittersPage() {
       const params = new URLSearchParams({ limit: "100" });
       if (languageFilter) params.set("language", languageFilter);
       if (sitterTypeFilter) params.set("sitterType", sitterTypeFilter);
+      if (genderFilter) params.set("gender", genderFilter);
       if (maxRate) params.set("maxRate", maxRate);
 
       const res = await fetch(`/api/sitters?${params}`);
@@ -78,7 +81,7 @@ export default function BrowseSittersPage() {
     } finally {
       setLoading(false);
     }
-  }, [languageFilter, sitterTypeFilter, maxRate]);
+  }, [languageFilter, sitterTypeFilter, genderFilter, maxRate]);
 
   useEffect(() => {
     fetchSitters();
@@ -195,6 +198,40 @@ export default function BrowseSittersPage() {
           </div>
         </div>
 
+        {/* Gender filter */}
+        <div>
+          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
+            {t("gender")}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            <button
+              onClick={() => setGenderFilter("")}
+              className={cn(
+                "px-3 py-1.5 text-xs font-medium transition-colors",
+                !genderFilter
+                  ? "bg-text-primary text-surface-primary"
+                  : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
+              )}
+            >
+              {t("allGenders")}
+            </button>
+            {GENDER_OPTIONS.map((g) => (
+              <button
+                key={g}
+                onClick={() => setGenderFilter(genderFilter === g ? "" : g)}
+                className={cn(
+                  "px-3 py-1.5 text-xs font-medium transition-colors",
+                  genderFilter === g
+                    ? "bg-text-primary text-surface-primary"
+                    : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
+                )}
+              >
+                {t(`genders.${g}`)}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Max rate */}
         <div className="flex items-center gap-3">
           <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
@@ -229,9 +266,9 @@ export default function BrowseSittersPage() {
       ) : filtered.length === 0 ? (
         <div className="flex flex-1 flex-col items-center justify-center py-20">
           <p className="text-sm text-text-tertiary">{t("noResults")}</p>
-          {(languageFilter || sitterTypeFilter || maxRate || searchQuery) && (
+          {(languageFilter || sitterTypeFilter || genderFilter || maxRate || searchQuery) && (
             <button
-              onClick={() => { setLanguageFilter(""); setSitterTypeFilter(""); setMaxRate(""); setSearchQuery(""); }}
+              onClick={() => { setLanguageFilter(""); setSitterTypeFilter(""); setGenderFilter(""); setMaxRate(""); setSearchQuery(""); }}
               className="mt-3 text-sm text-accent hover:underline"
             >
               {t("clearFilters")}

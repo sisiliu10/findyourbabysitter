@@ -278,6 +278,12 @@
       "schueler": "High school student",
       "erzieher_azubi": "Childcare trainee",
       "other": "Other"
+    },
+    "gender": "Gender",
+    "allGenders": "All",
+    "genders": {
+      "female": "Female",
+      "male": "Male"
     }
   },
   "search": {
@@ -356,6 +362,11 @@
       "schueler": "High school student",
       "erzieher_azubi": "Childcare trainee",
       "other": "Other"
+    },
+    "genderLabel": "Gender",
+    "genders": {
+      "female": "Female",
+      "male": "Male"
     }
   },
   "bookingsList": {

@@ -79,6 +79,7 @@ model BabysitterProfile {
   hasCPR           Boolean @default(false)
   referencesJson   String  @default("[]")
   sitterType       String  @default("")
+  gender           String  @default("")
   isActive         Boolean @default(true)
 
   createdAt        DateTime @default(now())
