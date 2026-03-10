@@ -315,7 +315,12 @@
     "selectAvailability": "Wähle aus, wann du normalerweise verfügbar bist",
     "failedToSave": "Profil konnte nicht gespeichert werden",
     "bioOptional": "Über mich (optional)",
-    "bioPlaceholderParent": "Erzähle Babysittern ein wenig über deine Familie..."
+    "bioPlaceholderParent": "Erzähle Babysittern ein wenig über deine Familie...",
+    "phoneRequired": "Telefonnummer",
+    "phoneVerificationHint": "Wir kontaktieren dich innerhalb von 24 Stunden zur Identitätsprüfung.",
+    "verificationTitle": "Profil eingereicht!",
+    "verificationMessage": "Vielen Dank für deine Anmeldung. Jemand aus unserem Team wird dich innerhalb von 24 Stunden unter der angegebenen Telefonnummer kontaktieren, um deine Identität zu verifizieren.",
+    "goToDashboard": "Zum Dashboard"
   },
   "bookingsList": {
     "title": "Buchungen",

@@ -21,18 +21,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ? "Ausmalbilder | Kostenlose Malvorlagen für Kinder"
       : "Coloring Pages | Free Printable Pages for Kids",
     description: isDE
-      ? "Kostenlose Ausmalbilder für Kinder. Einfach herunterladen und ausdrucken."
-      : "Free coloring pages for kids. Download and print for free.",
+      ? "Kostenlose Ausmalbilder für Kinder — Tiere, Dinosaurier, Weltraum und mehr. Altersgruppe wählen, herunterladen und losmalen."
+      : "Free coloring pages for kids — animals, dinosaurs, space and more. Choose an age group, download and start coloring.",
     alternates: { canonical: "https://berlinbabysitter.com/coloring-pages" },
     openGraph: {
       title: isDE
         ? "Ausmalbilder | Kostenlose Malvorlagen für Kinder"
         : "Coloring Pages | Free Printable Pages for Kids",
       description: isDE
-        ? "Kostenlose Ausmalbilder für Kinder. Einfach herunterladen und ausdrucken."
-        : "Free coloring pages for kids. Download and print for free.",
+        ? "Kostenlose Ausmalbilder für Kinder — Tiere, Dinosaurier, Weltraum und mehr. Altersgruppe wählen, herunterladen und losmalen."
+        : "Free coloring pages for kids — animals, dinosaurs, space and more. Choose an age group, download and start coloring.",
       url: "https://berlinbabysitter.com/coloring-pages",
-      siteName: "Berlin Babysitter",
+      siteName: "BerlinBabysitter",
       locale: isDE ? "de_DE" : "en_US",
       type: "website",
     },

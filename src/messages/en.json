@@ -315,7 +315,12 @@
     "selectAvailability": "Select when you're typically available",
     "failedToSave": "Failed to save profile",
     "bioOptional": "Bio (optional)",
-    "bioPlaceholderParent": "Tell babysitters a bit about your family..."
+    "bioPlaceholderParent": "Tell babysitters a bit about your family...",
+    "phoneRequired": "Phone number",
+    "phoneVerificationHint": "We'll contact you within 24 hours to verify your identity.",
+    "verificationTitle": "Profile submitted!",
+    "verificationMessage": "Thank you for signing up. Someone from our team will contact you within 24 hours at the phone number you provided to verify your identity.",
+    "goToDashboard": "Go to dashboard"
   },
   "bookingsList": {
     "title": "Bookings",

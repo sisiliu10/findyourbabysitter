@@ -16,6 +16,7 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showVerificationNotice, setShowVerificationNotice] = useState(false);
 
   // Sitter fields
   const [bio, setBio] = useState("");
@@ -121,6 +122,11 @@ export default function OnboardingPage() {
         return;
       }
 
+      if (role === "BABYSITTER") {
+        setShowVerificationNotice(true);
+        return;
+      }
+
       router.push("/dashboard");
       router.refresh();
     } catch {
@@ -189,8 +195,14 @@ export default function OnboardingPage() {
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("phoneOptional")}</label>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {role === "BABYSITTER" ? t("phoneRequired") : t("phoneOptional")}
+              {role === "BABYSITTER" && <span className="text-danger"> *</span>}
+            </label>
             <input value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="+49 30 123 4567" />
+            {role === "BABYSITTER" && (
+              <p className="mt-1.5 text-xs text-text-tertiary">{t("phoneVerificationHint")}</p>
+            )}
           </div>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("bioOptional")}</label>
@@ -199,7 +211,7 @@ export default function OnboardingPage() {
 
           <button
             onClick={() => setStep(2)}
-            disabled={!city || !state || !zipCode || !birthday || loading}
+            disabled={!city || !state || !zipCode || !birthday || (role === "BABYSITTER" && !phone) || loading}
             className="mt-4 w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
           >
             {tc("continue")}
@@ -364,6 +376,27 @@ export default function OnboardingPage() {
               {tc("continue")}
             </button>
           </div>
+        </div>
+      )}
+
+      {/* Verification notice (sitter) */}
+      {showVerificationNotice && (
+        <div className="space-y-6 border border-border-default bg-surface-secondary p-6 text-center">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center bg-success-muted">
+            <svg className="h-7 w-7 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="font-serif text-xl text-text-primary">{t("verificationTitle")}</h2>
+            <p className="mt-2 text-sm leading-relaxed text-text-secondary">{t("verificationMessage")}</p>
+          </div>
+          <button
+            onClick={() => { router.push("/dashboard"); router.refresh(); }}
+            className="w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent"
+          >
+            {t("goToDashboard")}
+          </button>
         </div>
       )}
 

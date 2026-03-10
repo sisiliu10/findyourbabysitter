@@ -20,13 +20,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL(base),
     title: {
       default: isDE
-        ? "Babysitter Berlin | Vertrauenswürdige Babysitter & Kita-Plätze finden"
-        : "Babysitter Berlin | Find Trusted Babysitters & Kita Places",
-      template: "%s | Berlin Babysitter",
+        ? "Babysitter in Berlin finden | BerlinBabysitter"
+        : "Find a Babysitter in Berlin | BerlinBabysitter",
+      template: "%s | BerlinBabysitter",
     },
     description: isDE
-      ? "Finde vertrauenswürdige Babysitter in Berlin. Stöbere durch Sitter, die von Eltern vor Ort empfohlen werden, entdecke Kita-Plätze und vernetze dich mit anderen Familien in ganz Berlin."
-      : "Find trusted babysitters in Berlin. Browse sitters recommended by local parents, discover Kita places and connect with other families across Berlin.",
+      ? "Kostenlose Plattform für Babysitter und Familien in Berlin. Profile entdecken, Bewertungen sehen und direkt Kontakt aufnehmen."
+      : "Free platform for babysitters and families in Berlin. Browse profiles, read reviews and get in touch directly.",
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+        { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png" }],
+    },
     alternates: {
       canonical: url,
       languages: {
@@ -36,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     },
     openGraph: {
-      siteName: "Berlin Babysitter",
+      siteName: "BerlinBabysitter",
       locale: isDE ? "de_DE" : "en_US",
       type: "website",
       images: [
@@ -45,8 +53,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           width: 1536,
           height: 1024,
           alt: isDE
-            ? "Berlin Babysitter – Vertrauenswürdige Kinderbetreuung in Berlin"
-            : "Berlin Babysitter – Trusted childcare in Berlin",
+            ? "BerlinBabysitter – Vertrauenswürdige Kinderbetreuung in Berlin"
+            : "BerlinBabysitter – Trusted childcare in Berlin",
         },
       ],
     },
