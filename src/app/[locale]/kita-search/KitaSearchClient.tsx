@@ -239,12 +239,8 @@ export function KitaSearchClient({
                       isHighlighted={hoveredId === kita.id}
                       onHover={setHoveredId}
                       onClick={() => {
-                        if (kita.heyAvaSlug) {
-                          window.open(
-                            `https://www.heyava.de/kita/${kita.heyAvaSlug}`,
-                            "_blank"
-                          );
-                        }
+                        const url = kita.website || `https://www.google.com/search?q=${encodeURIComponent(kita.name + ' Berlin')}`;
+                        window.open(url, "_blank");
                       }}
                     />
                   </div>
