@@ -807,6 +807,8 @@
     "fixPayment": "Fix payment",
     "statusPastDue": "Past due",
     "statusActionRequired": "Action required",
-    "accessPaused": "Premium access is currently paused due to a payment issue."
+    "accessPaused": "Premium access is currently paused due to a payment issue.",
+    "activatingNote": "Your subscription may take a moment to activate.",
+    "portalError": "Could not open the billing portal. Please try again."
   }
 }

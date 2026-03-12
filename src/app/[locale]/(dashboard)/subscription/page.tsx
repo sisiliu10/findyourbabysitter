@@ -26,6 +26,7 @@ export default function SubscriptionPage() {
   const [data, setData] = useState<SubscriptionData | null>(null);
   const [loading, setLoading] = useState(true);
   const [portalLoading, setPortalLoading] = useState(false);
+  const [portalError, setPortalError] = useState(false);
   const [success, setSuccess] = useState(false);
 
   // Check for success redirect from Stripe checkout
@@ -49,13 +50,18 @@ export default function SubscriptionPage() {
 
   const handlePortal = async () => {
     setPortalLoading(true);
+    setPortalError(false);
     try {
       const res = await fetch("/api/stripe/portal", { method: "POST" });
       const data = await res.json();
       if (data.url) {
         window.location.href = data.url;
+      } else {
+        setPortalError(true);
+        setPortalLoading(false);
       }
     } catch {
+      setPortalError(true);
       setPortalLoading(false);
     }
   };
@@ -78,6 +84,15 @@ export default function SubscriptionPage() {
       {success && (
         <div className="mb-6 border border-success/30 bg-success-muted p-4 text-sm text-success">
           {t("welcomePremium")}
+          {!data?.isPremium && (
+            <p className="mt-1 text-xs opacity-75">{t("activatingNote")}</p>
+          )}
+        </div>
+      )}
+
+      {portalError && (
+        <div className="mb-6 border border-error/30 bg-error-muted p-4 text-sm text-error">
+          {t("portalError")}
         </div>
       )}
 

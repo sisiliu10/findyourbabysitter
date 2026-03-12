@@ -19,6 +19,18 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Only parents can subscribe" }, { status: 403 });
     }
 
+    // Block if user already has a non-expired subscription
+    const existingSub = await prisma.subscription.findUnique({
+      where: { userId: user.id },
+      select: { status: true },
+    });
+    if (existingSub && existingSub.status !== "expired") {
+      return NextResponse.json(
+        { error: "You already have an active subscription. Manage it from the subscription page." },
+        { status: 400 }
+      );
+    }
+
     const { priceId } = await request.json();
     const stripePriceId =
       priceId === "yearly"

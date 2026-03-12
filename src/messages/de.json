@@ -807,6 +807,8 @@
     "fixPayment": "Zahlung beheben",
     "statusPastDue": "Zahlung überfällig",
     "statusActionRequired": "Aktion erforderlich",
-    "accessPaused": "Der Premium-Zugang ist aufgrund eines Zahlungsproblems derzeit pausiert."
+    "accessPaused": "Der Premium-Zugang ist aufgrund eines Zahlungsproblems derzeit pausiert.",
+    "activatingNote": "Dein Abonnement wird möglicherweise einen Moment brauchen, um aktiviert zu werden.",
+    "portalError": "Das Abrechnungsportal konnte nicht geöffnet werden. Bitte versuche es erneut."
   }
 }
