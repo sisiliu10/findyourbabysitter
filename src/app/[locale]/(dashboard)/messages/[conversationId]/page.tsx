@@ -71,6 +71,15 @@ export default function MessageThreadPage() {
     }
   }
 
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (input.trim() && !sending) {
+        handleSend(e as unknown as React.FormEvent);
+      }
+    }
+  }
+
   if (isLoading || userLoading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
@@ -215,15 +224,22 @@ export default function MessageThreadPage() {
       {/* Input */}
       <form
         onSubmit={handleSend}
-        className="flex items-center gap-3 border-t border-border-default bg-surface-secondary px-4 py-3"
+        className="flex items-end gap-3 border-t border-border-default bg-surface-secondary px-4 py-3"
       >
-        <input
-          type="text"
+        <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder={t("typeMessage")}
-          className="flex-1 border border-border-default bg-transparent px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-text-primary focus:outline-none"
+          rows={1}
+          className="flex-1 resize-none border border-border-default bg-transparent px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-text-primary focus:outline-none"
+          style={{ maxHeight: "8rem", overflowY: input.split("\n").length > 4 ? "auto" : "hidden" }}
           disabled={sending}
+          onInput={(e) => {
+            const el = e.currentTarget;
+            el.style.height = "auto";
+            el.style.height = `${Math.min(el.scrollHeight, 128)}px`;
+          }}
         />
         <button
           type="submit"
