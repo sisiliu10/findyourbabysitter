@@ -155,7 +155,13 @@ export default async function HomePage({ params }: Props) {
         <TrustBar />
 
         {/* SEO intro - scroll reveal */}
-        <ScrollRevealText title={t("seoIntroTitle")} body={t("seoIntro")} />
+        <ScrollRevealText
+          title={t("seoIntroTitle")}
+          body={t("seoIntro")}
+          highlights={isDE
+            ? ["vertrauen", "Nachbarschaft", "echten", "Spielverabredungen", "entspannt"]
+            : ["trust", "neighborhood", "honest", "playdates", "quickly"]}
+        />
 
         {/* Two paths */}
         <section className="mx-auto max-w-7xl px-6">
