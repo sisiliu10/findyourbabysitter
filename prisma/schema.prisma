@@ -30,6 +30,8 @@ model User {
   lastSeenAt               DateTime?
   zipCode                  String    @default("")
   district                 String    @default("")
+  gender                   String    @default("")
+  languages                String    @default("")
   childcareTypes           String    @default("[]")
   timesOfDay               String    @default("[]")
   careFrequency            String    @default("")

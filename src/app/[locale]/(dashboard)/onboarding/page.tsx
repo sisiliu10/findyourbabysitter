@@ -17,7 +17,6 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [showVerificationNotice, setShowVerificationNotice] = useState(false);
 
   // Sitter fields
   const [bio, setBio] = useState("");
@@ -82,6 +81,9 @@ export default function OnboardingPage() {
   function handleStep1Continue() {
     setStep1Attempted(true);
     const valid =
+      !!(avatarFile || avatarPreview) &&
+      !!gender &&
+      languages.length > 0 &&
       !!birthday &&
       !!city &&
       !!zipCode &&
@@ -106,6 +108,9 @@ export default function OnboardingPage() {
       bio,
     };
     if (birthday) body.birthday = birthday;
+
+    body.gender = gender;
+    body.languages = languages.join(", ");
 
     if (role === "PARENT") {
       body.childcareTypes = JSON.stringify(childcareTypes);
@@ -150,11 +155,6 @@ export default function OnboardingPage() {
         return;
       }
 
-      if (role === "BABYSITTER") {
-        setShowVerificationNotice(true);
-        return;
-      }
-
       router.push("/dashboard");
       router.refresh();
     } catch {
@@ -196,10 +196,55 @@ export default function OnboardingPage() {
         <div className="mb-4 border border-danger/30 bg-danger-muted p-3 text-sm text-danger">{error}</div>
       )}
 
-      {/* Step 1: Location (both roles) */}
+      {/* Step 1: About You + Location (both roles) */}
       {step === 1 && (
-        <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
+        <div className="space-y-5 border border-border-default bg-surface-secondary p-6">
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("aboutYou")}</h2>
+
+          {/* Profile picture — required for all */}
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("profilePicture")} <span className="text-danger">*</span>
+            </label>
+            <div
+              className={`mt-2 flex flex-col items-center gap-3 border-2 border-dashed p-5 transition ${
+                step1Attempted && !avatarFile && !avatarPreview
+                  ? "border-danger bg-danger-muted"
+                  : avatarPreview
+                  ? "border-success"
+                  : "border-border-default hover:border-text-muted"
+              }`}
+            >
+              {avatarPreview ? (
+                <img src={avatarPreview} alt="Preview" className="h-20 w-20 object-cover" />
+              ) : (
+                <div className="flex h-20 w-20 items-center justify-center bg-surface-tertiary text-text-muted">
+                  <svg className="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
+                  </svg>
+                </div>
+              )}
+              <label className="cursor-pointer border border-border-default px-4 py-2 text-sm text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+                {avatarPreview ? t("changePhoto") : t("choosePhoto")}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setAvatarFile(file);
+                      setAvatarPreview(URL.createObjectURL(file));
+                    }
+                  }}
+                />
+              </label>
+              {!avatarPreview && (
+                <p className="text-xs text-text-tertiary">{t("profilePictureHint")}</p>
+              )}
+            </div>
+            <FieldError show={step1Attempted && !avatarFile && !avatarPreview} message={t("profilePictureRequired")} />
+          </div>
 
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
@@ -218,7 +263,46 @@ export default function OnboardingPage() {
             <FieldError show={step1Attempted && !birthday} message={t("birthdayRequired")} />
           </div>
 
-          <h2 className="mt-2 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourLocation")}</h2>
+          <h2 className="pt-1 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourIdentity")}</h2>
+
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
+              {t("genderLabel")} <span className="text-danger">*</span>
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {GENDER_OPTIONS.map((g) => (
+                <button
+                  key={g}
+                  type="button"
+                  onClick={() => setGender(gender === g ? "" : g)}
+                  className={`px-3.5 py-2 text-sm transition ${
+                    gender === g
+                      ? "bg-text-primary text-surface-primary"
+                      : step1Attempted && !gender
+                      ? "border border-danger bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                  }`}
+                >
+                  {t(`genders.${g}`)}
+                </button>
+              ))}
+            </div>
+            <FieldError show={step1Attempted && !gender} message={t("genderRequired")} />
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-0.5">
+              {t("languagesLabel")} <span className="text-danger">*</span>
+            </label>
+            <p className="mb-1.5 text-xs text-text-tertiary">{t("languagesHint")}</p>
+            <TagInput
+              value={languages}
+              onChange={setLanguages}
+              placeholder={t("languagesPlaceholder")}
+            />
+          </div>
+
+          <h2 className="pt-1 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourLocation")}</h2>
 
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
@@ -289,7 +373,7 @@ export default function OnboardingPage() {
           <button
             onClick={handleStep1Continue}
             disabled={loading}
-            className="mt-4 w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
+            className="mt-2 w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
           >
             {tc("continue")}
           </button>
@@ -434,36 +518,6 @@ export default function OnboardingPage() {
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("aboutYou")}</h2>
 
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("profilePicture")} <span className="text-danger">*</span></label>
-            <div className="mt-1 flex items-center gap-4">
-              {avatarPreview ? (
-                <img src={avatarPreview} alt="Preview" className="h-16 w-16 object-cover" />
-              ) : (
-                <div className="flex h-16 w-16 items-center justify-center bg-surface-tertiary text-text-muted">
-                  <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
-                  </svg>
-                </div>
-              )}
-              <label className="cursor-pointer border border-border-default px-3 py-2 text-sm text-text-secondary transition hover:border-text-primary hover:text-text-primary">
-                {t("choosePhoto")}
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      setAvatarFile(file);
-                      setAvatarPreview(URL.createObjectURL(file));
-                    }
-                  }}
-                />
-              </label>
-            </div>
-          </div>
-
-          <div>
             <div className="flex items-baseline justify-between">
               <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("bio")} <span className="text-danger">*</span></label>
               <span className={`text-xs tabular-nums ${bio.length >= 10 ? "text-success" : "text-text-tertiary"}`}>
@@ -480,34 +534,6 @@ export default function OnboardingPage() {
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("hourlyRate")}</label>
             <input type="number" min="1" value={hourlyRate} onChange={(e) => setHourlyRate(e.target.value)} className={inputClass} />
-          </div>
-          <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-0.5">{t("languagesLabel")}</label>
-            <p className="mb-1.5 text-xs text-text-tertiary">{t("languagesHint")}</p>
-            <TagInput
-              value={languages}
-              onChange={setLanguages}
-              placeholder={t("languagesPlaceholder")}
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">{t("genderLabel")}</label>
-            <div className="flex flex-wrap gap-2">
-              {GENDER_OPTIONS.map((g) => (
-                <button
-                  key={g}
-                  type="button"
-                  onClick={() => setGender(gender === g ? "" : g)}
-                  className={`px-3.5 py-2 text-sm transition ${
-                    gender === g
-                      ? "bg-text-primary text-surface-primary"
-                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
-                  }`}
-                >
-                  {t(`genders.${g}`)}
-                </button>
-              ))}
-            </div>
           </div>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">{t("sitterTypeLabel")}</label>
@@ -532,7 +558,7 @@ export default function OnboardingPage() {
             const minVal = parseInt(ageRangeMin, 10);
             const maxVal = parseInt(ageRangeMax, 10);
             const ageInvalid = !isNaN(minVal) && !isNaN(maxVal) && minVal > maxVal;
-            const canContinue = (!!avatarFile || !!avatarPreview) && bio.length >= 10 && !ageInvalid;
+            const canContinue = bio.length >= 10 && !ageInvalid;
             return (
               <>
                 <div>
@@ -584,94 +610,109 @@ export default function OnboardingPage() {
         </div>
       )}
 
-      {/* Verification notice (sitter) */}
-      {showVerificationNotice && (
-        <div className="space-y-6 border border-border-default bg-surface-secondary p-6 text-center">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center bg-success-muted">
-            <svg className="h-7 w-7 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <div>
-            <h2 className="font-serif text-xl text-text-primary">{t("verificationTitle")}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-text-secondary">{t("verificationMessage")}</p>
-          </div>
-          <button
-            onClick={() => { router.push("/dashboard"); router.refresh(); }}
-            className="w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent"
-          >
-            {t("goToDashboard")}
-          </button>
-        </div>
-      )}
 
       {/* Step 3 (sitter): Availability */}
       {step === 3 && role === "BABYSITTER" && (() => {
         const totalSlots = Object.values(availability).reduce((sum, slots) => sum + slots.length, 0);
         const hasAvailability = totalSlots > 0;
 
+        const isDayFull = (day: string) => (availability[day]?.length ?? 0) === TIME_SLOTS.length;
+        const isDayPartial = (day: string) => { const n = availability[day]?.length ?? 0; return n > 0 && n < TIME_SLOTS.length; };
+        const isColFull = (slot: string) => DAYS_OF_WEEK.every((d) => (availability[d] || []).includes(slot));
+
+        function toggleDay(day: string) {
+          setAvailability((prev) => ({ ...prev, [day]: isDayFull(day) ? [] : [...TIME_SLOTS] }));
+        }
+        function toggleCol(slot: string) {
+          const full = isColFull(slot);
+          setAvailability((prev) => {
+            const next = { ...prev };
+            DAYS_OF_WEEK.forEach((d) => {
+              const cur = next[d] || [];
+              next[d] = full ? cur.filter((s) => s !== slot) : cur.includes(slot) ? cur : [...cur, slot];
+            });
+            return next;
+          });
+        }
+
         return (
           <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourAvailability")}</h2>
-                <p className="mt-1 text-sm text-text-secondary">{t("selectAvailability")}</p>
+                <p className="mt-1 text-sm text-text-secondary">{t("selectAvailabilityShort")}</p>
               </div>
               {hasAvailability && (
-                <span className="text-xs text-success tabular-nums">
+                <span className="shrink-0 pl-3 text-xs text-success tabular-nums">
                   {t("slotsSelected", { count: totalSlots })}
                 </span>
               )}
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+
+            {/* Hint */}
+            <p className="text-xs text-text-tertiary">{t("availabilityHint")}</p>
+
+            <div className="overflow-x-auto -mx-6 px-6">
+              <table className="w-full min-w-[280px] text-sm">
                 <thead>
                   <tr>
-                    <th className="pb-2 text-left text-xs font-medium uppercase tracking-wide text-text-secondary" />
+                    <th className="w-[30%] pb-2 text-left" />
                     {TIME_SLOTS.map((slot) => (
-                      <th key={slot} className="pb-2 text-center text-xs font-medium uppercase tracking-wide text-text-secondary">{tc(`timeSlots.${slot}`)}</th>
+                      <th key={slot} className="pb-2 text-center">
+                        <button
+                          type="button"
+                          onClick={() => toggleCol(slot)}
+                          className={`w-full px-1 py-1 text-xs font-medium uppercase tracking-wide transition ${
+                            isColFull(slot)
+                              ? "text-text-primary underline underline-offset-2"
+                              : "text-text-muted hover:text-text-secondary"
+                          }`}
+                          title={t("selectAllColumn")}
+                        >
+                          {tc(`timeSlots.${slot}`)}
+                        </button>
+                      </th>
                     ))}
-                    <th className="pb-2 text-center text-xs font-medium uppercase tracking-wide text-text-secondary">{t("allDay")}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {DAYS_OF_WEEK.map((day) => (
                     <tr key={day}>
-                      <td className="py-1.5 pr-3 text-sm text-text-secondary">{tc(`days.${day}`)}</td>
-                      {TIME_SLOTS.map((slot) => (
-                        <td key={slot} className="py-1.5 text-center">
-                          <button
-                            onClick={() => toggleAvailability(day, slot)}
-                            className={`h-8 w-8 text-xs transition ${
-                              (availability[day] || []).includes(slot)
-                                ? "bg-text-primary text-surface-primary"
-                                : "bg-surface-tertiary text-text-muted hover:bg-border-default"
-                            }`}
-                          >
-                            {(availability[day] || []).includes(slot) ? "\u2713" : ""}
-                          </button>
-                        </td>
-                      ))}
-                      {/* Select all for this day */}
-                      <td className="py-1.5 text-center">
+                      <td className="py-1 pr-2">
                         <button
-                          onClick={() => {
-                            const all = availability[day]?.length === TIME_SLOTS.length;
-                            setAvailability((prev) => ({
-                              ...prev,
-                              [day]: all ? [] : [...TIME_SLOTS],
-                            }));
-                          }}
-                          className={`h-8 w-8 text-xs transition ${
-                            availability[day]?.length === TIME_SLOTS.length
-                              ? "bg-accent text-surface-primary"
-                              : "bg-surface-tertiary text-text-muted hover:bg-border-default"
-                          }`}
+                          type="button"
+                          onClick={() => toggleDay(day)}
                           title={t("selectAllDay")}
+                          className={`w-full px-2 py-2.5 text-left text-sm font-medium transition ${
+                            isDayFull(day)
+                              ? "bg-text-primary text-surface-primary"
+                              : isDayPartial(day)
+                              ? "border-l-2 border-accent bg-surface-tertiary text-text-primary"
+                              : "text-text-secondary hover:bg-surface-tertiary"
+                          }`}
                         >
-                          ✦
+                          <span className="hidden sm:inline">{tc(`days.${day}`)}</span>
+                          <span className="sm:hidden">{tc(`days.${day}`).substring(0, 2)}</span>
                         </button>
                       </td>
+                      {TIME_SLOTS.map((slot) => {
+                        const selected = (availability[day] || []).includes(slot);
+                        return (
+                          <td key={slot} className="py-1 text-center">
+                            <button
+                              type="button"
+                              onClick={() => toggleAvailability(day, slot)}
+                              className={`h-11 w-full min-w-[44px] text-sm transition ${
+                                selected
+                                  ? "bg-text-primary text-surface-primary"
+                                  : "bg-surface-tertiary text-text-muted hover:bg-border-default"
+                              }`}
+                            >
+                              {selected ? "✓" : ""}
+                            </button>
+                          </td>
+                        );
+                      })}
                     </tr>
                   ))}
                 </tbody>

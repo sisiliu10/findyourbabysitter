@@ -164,4 +164,81 @@ export const GUIDES_DE: Record<string, LocalizedGuide> = {
       },
     ],
   },
+  "first-meetup-babysitter": {
+    title: "Das erste Treffen mit einem Babysitter",
+    metaTitle: "Erstes Treffen mit Babysitter | Eltern-Guide | Berlin Babysitter",
+    metaDescription:
+      "So arrangierst du ein erstes Kennenlernen mit einem neuen Babysitter in Berlin. Was du fragen solltest, was du zeigen solltest und wie du weißt, ob die Chemie stimmt.",
+    intro:
+      "Einen Babysitter zu engagieren ist genauso eine Frage des Vertrauens wie der Logistik. Bevor du die Schlüssel übergibst, kann ein kurzes persönliches Kennenlernen alles verraten, was du wissen musst. So machst du dieses erste Treffen sinnvoll — für dich, deine Kinder und den Sitter.",
+    sections: [
+      {
+        heading: "Erst ein Kaffee, dann die Buchung",
+        content:
+          "Widerstehe dem Impuls, sofort einen Termin einzuplanen. Schreibe dem Sitter über die Plattform, stell dich vor und schlage ein 30-minütiges Treffen oder einen Hausbesuch vor, bevor du dich zu etwas verpflichtest. Dieses entspannte Kennenlernen lässt alle zur Ruhe kommen und ein Gefühl füreinander entwickeln — ohne den Druck, dass der Job schon besiegelt ist. Die meisten Sitter auf Berlin Babysitter machen das gerne mit — es liegt auch in ihrem Interesse.",
+        items: [
+          "Halte es kurz — 20 bis 30 Minuten reichen. Du führst kein Bewerbungsgespräch, du lernst jemanden kennen.",
+          "Triff dich wenn möglich bei dir zu Hause. Das ist die Umgebung, in der der Sitter arbeiten wird, und deine Kinder können sich natürlich eingewöhnen.",
+          "Wenn ein Cafe für dich besser passt, wähle etwas Ruhiges in deiner Nähe.",
+        ],
+      },
+      {
+        heading: "Deine Kinder sollten dabei sein",
+        content:
+          "Das ist der wichtigste Teil. Wie ein Sitter in den ersten zehn Minuten mit deinen Kindern umgeht, verrät dir mehr als jede Nachricht hin und her. Achte darauf, ob er oder sie Augenkontakt mit den Kindern sucht, sich auf deren Augenhöhe begibt oder ihnen folgt — diese kleinen Signale zählen.",
+        items: [
+          "Leg das Treffen nicht in die Schlaf- oder Essenszeit. Die Kinder sollten wach, ausgeruht und in neutraler Stimmung sein.",
+          "Lass die Interaktion natürlich entstehen. Versuche nicht, sie zu inszenieren oder deine Kinder zu Höchstleistungen zu animieren.",
+          "Es ist völlig normal, dass jüngere Kinder schüchtern oder anhänglich sind. Achte darauf, wie der Sitter damit umgeht — Geduld und Ruhe sind gute Zeichen.",
+          "Wenn dein Kind sich schnell öffnet und Interesse zeigt, nimm das ebenfalls wahr. Kinder sind oft bessere Menschenkenner, als wir denken.",
+        ],
+      },
+      {
+        heading: "Zeig ihnen deine Wohnung",
+        content:
+          "Eine kurze Führung dauert fünf Minuten und macht alles einfacher. Zeig dem Sitter, wo was ist, damit er oder sie sich auf deine Kinder konzentrieren kann, anstatt im Ernstfall zu suchen.",
+        items: [
+          "Notfallkontakte — deine Nummer, eine Backup-Nummer und die nächste Kinderarztpraxis.",
+          "Wo der Verbandskasten ist.",
+          "Snacks und Mahlzeiten — was die Kinder essen dürfen, Allergien oder Unverträglichkeiten.",
+          "Das Schlafenszeit-Paket — Pyjama-Schublade, Lieblingskuscheltier, wo das Nachtlicht ist.",
+          "Hausregeln — Bildschirmzeiten, Grenzen beim Draußenspielen, was nicht verhandelbar ist.",
+        ],
+      },
+      {
+        heading: "Sinnvolle Fragen",
+        content:
+          "Du brauchst keine formelle Fragenliste. Aber ein paar natürliche Fragen helfen dir zu verstehen, wie der Sitter denkt und ob eure Vorstellungen von Kinderbetreuung zusammenpassen.",
+        items: [
+          "Wie gehst du normalerweise mit einem Kind um, das nicht ins Bett will?",
+          "Gab es mal eine Situation mit einem Kind, die schwierig war? Wie hast du das gehandhabt?",
+          "Was machst du gerne mit Kindern in diesem Alter?",
+          "Sprichst du Deutsch, Englisch oder beides? (Relevant, wenn Sprache für dich wichtig ist.)",
+          "Bist du für regelmäßige Buchungen verfügbar oder bevorzugst du Einzeltermine?",
+        ],
+      },
+      {
+        heading: "Die Probe-Buchung",
+        content:
+          "Nach einem guten Kennenlernen empfiehlt sich eine kurze Probe-Buchung — ein bis zwei Stunden — bevor du etwas Längeres planst. Erledige schnell einen Einkauf in der Nähe, bleib erreichbar und schau beim Zurückkommen kurz nach. Das gibt deinem Kind Zeit, sich zu gewöhnen, ohne dass du gleich für einen ganzen Abend weg bist.",
+        items: [
+          "Erkläre deinem Kind vorher ruhig, dass du bald wieder da bist — kurz und entspannt.",
+          "Verabschiede dich ohne langes Drama. Kurze, sichere Verabschiedungen erleichtern es allen.",
+          "Bitte den Sitter, dir nach 30 Minuten kurz zu schreiben, wenn du beruhigt sein möchtest.",
+          "Debrief kurz nach der Rückkehr — frag, wie es lief, was die Kinder gemacht haben, ob etwas vorgefallen ist.",
+        ],
+      },
+      {
+        heading: "Vertrau deinem Bauchgefühl",
+        content:
+          "Nimm dir nach dem Treffen einen Moment für dich. Hat die Unterhaltung sich leicht angefühlt? Wirkten deine Kinder entspannt? War der Sitter wirklich interessiert oder hat er nur Pflichtprogramm gemacht? Ein gutes Match fühlt sich meistens offensichtlich an — und ein schlechtes auch. Du bist nach einem Kennenlernen zu nichts verpflichtet, und ein guter Sitter wird das verstehen.",
+        items: [
+          "Wenn sich etwas komisch angefühlt hat, du es aber nicht benennen kannst — vertrau diesem Gefühl. Du brauchst keinen konkreten Grund.",
+          "Wenn dein Kind stark negativ reagiert hat, nimm das ernst — aber bedenke auch, ob es situationsbedingt war (müde, hungrig, überwältigt).",
+          "Ein guter Sitter hat kein Problem damit, wenn du dir einen Tag Zeit nimmst. Wer dich zu einem sofortigen Ja drängt, ist ein Warnsignal.",
+          "Wenn du das richtige Match gefunden hast, sag es. Positives Feedback ist für Sitter genauso wertvoll wie für dich.",
+        ],
+      },
+    ],
+  },
 };

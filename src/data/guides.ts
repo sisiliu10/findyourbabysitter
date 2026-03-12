@@ -9,7 +9,7 @@ export interface Guide {
   title: string;
   metaTitle: string;
   metaDescription: string;
-  category: "cafes" | "playgrounds" | "activities";
+  category: "cafes" | "playgrounds" | "activities" | "parenting";
   updatedAt: string;
   neighborhoods: string[];
   intro: string;
@@ -184,6 +184,87 @@ export const GUIDES: Guide[] = [
           "Stadtbibliothek (any branch) — Berlin's public libraries have excellent children's sections with reading corners and regular story hours in German and English.",
           "Indoor swimming pools — Stadtbad Neukölln and Schwimmhalle Fischerinsel are family-friendly pools with slides and warm water.",
           "Bouldering gyms — BoulderKlub and Bright Site have kids sections and family sessions on weekends.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "first-meetup-babysitter",
+    title: "Your First Meetup with a Babysitter",
+    metaTitle: "First Meetup with a Babysitter | Parent's Guide | Berlin Babysitter",
+    metaDescription:
+      "How to arrange a first meetup with a new babysitter in Berlin. What to ask, what to show, and how to know if the fit is right — a practical guide for parents.",
+    category: "parenting",
+    updatedAt: "2026-03-12",
+    neighborhoods: ["prenzlauer-berg", "kreuzberg", "mitte", "friedrichshain", "charlottenburg"],
+    intro:
+      "Hiring a babysitter is as much about trust as it is about logistics. Before you hand over the keys, a short in-person meetup can tell you everything you need to know. Here is how to make that first meeting count — for you, your kids, and the sitter.",
+    sections: [
+      {
+        heading: "Start with a coffee, not a booking",
+        content:
+          "Resist the urge to jump straight into scheduling. Reach out to the sitter via the platform, introduce yourself, and suggest a 30-minute coffee or home visit before committing to anything. This low-stakes meeting lets everyone relax and get a feel for each other without the pressure of a job already on the line. Most sitters on Berlin Babysitter are happy to do this — it is in their interest too.",
+        items: [
+          "Keep it short — 20 to 30 minutes is enough. You are not interviewing them, you are meeting them.",
+          "Meet at your home if possible. It is the environment they will be working in, and your kids can warm up naturally.",
+          "If a cafe works better for you, choose somewhere calm and close to where you live.",
+        ],
+      },
+      {
+        heading: "Have your kids there",
+        content:
+          "This is the most important part. How a sitter interacts with your children in those first ten minutes tells you more than any amount of messaging back and forth. Watch whether they make eye contact with the kids, get down to their level, or follow their lead — these small signals matter.",
+        items: [
+          "Do not arrange the meetup during nap time or mealtime. Kids should be awake, rested, and in a neutral mood.",
+          "Let the interaction happen naturally. Resist the urge to script it or prompt your kids to perform.",
+          "It is completely normal for younger children to be shy or clingy. Watch how the sitter handles that — patience and calm are good signs.",
+          "If your child warms up quickly and shows interest, pay attention to that too. Kids are often better judges than we give them credit for.",
+        ],
+      },
+      {
+        heading: "Walk them through your home",
+        content:
+          "A quick tour takes five minutes and sets everyone up for success. Show the sitter where things are so they can focus on your kids instead of hunting for supplies when the time comes.",
+        items: [
+          "Emergency contacts — your number, a backup number, and where the nearest Kinderarzt (pediatrician) is.",
+          "First aid kit location.",
+          "Snacks and meals — what the kids can have, any allergies or dietary restrictions.",
+          "Bedtime kit — pajamas drawer, favorite stuffed animal, where the nightlight is.",
+          "House rules — screen time limits, outdoor play boundaries, anything non-negotiable.",
+        ],
+      },
+      {
+        heading: "Questions worth asking",
+        content:
+          "You do not need a formal interview list. But a few natural questions help you understand how the sitter thinks and whether your approaches to childcare are compatible.",
+        items: [
+          "How do you usually handle a child who does not want to go to bed?",
+          "Have you ever had a situation with a child that felt difficult? How did you handle it?",
+          "What do you enjoy doing with kids this age?",
+          "Do you speak German, English, or both? (Relevant if language is important to you.)",
+          "Are you available for regular bookings or do you prefer one-offs?",
+        ],
+      },
+      {
+        heading: "The trial booking",
+        content:
+          "After a successful meetup, consider a short trial booking — one to two hours — before you plan anything longer. Do a quick errand nearby, stay reachable, and check in when you get back. This gives your child time to adjust without you being gone for a full evening.",
+        items: [
+          "Tell your child beforehand that you will be back soon — keep it simple and calm.",
+          "Leave the house without a long goodbye. Short, confident farewells are easier on everyone.",
+          "Ask the sitter to text you a quick update after 30 minutes if you want peace of mind.",
+          "Debrief briefly when you return — ask how it went, what the kids did, whether anything came up.",
+        ],
+      },
+      {
+        heading: "Trust your gut",
+        content:
+          "After the meetup, take a moment to check in with yourself. Did the conversation feel easy? Did your kids seem comfortable? Did the sitter seem genuinely interested, or just going through the motions? A good fit usually feels obvious — and so does a mismatch. There is no obligation to book after a meetup, and a sitter worth hiring will understand that.",
+        items: [
+          "If something felt off but you cannot name it, trust that feeling. You do not need a specific reason.",
+          "If your child had a strong negative reaction, give it weight — but also consider whether it was situational (tired, hungry, overwhelmed).",
+          "A good sitter will be fine with you taking a day to decide. Anyone who pressures you into an immediate yes is a yellow flag.",
+          "When you find the right fit, let the sitter know. A little positive feedback goes a long way.",
         ],
       },
     ],

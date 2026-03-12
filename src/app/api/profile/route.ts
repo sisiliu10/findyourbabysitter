@@ -43,19 +43,19 @@ export async function PUT(request: NextRequest) {
   if (body.childcareTypes !== undefined) userUpdates.childcareTypes = body.childcareTypes;
   if (body.timesOfDay !== undefined) userUpdates.timesOfDay = body.timesOfDay;
   if (body.careFrequency !== undefined) userUpdates.careFrequency = body.careFrequency;
+  if (body.gender !== undefined) userUpdates.gender = body.gender;
+  if (body.languages !== undefined) userUpdates.languages = body.languages;
 
-  // Babysitters must have a profile picture before onboarding
-  if (session.role === "BABYSITTER") {
-    const currentUser = await prisma.user.findUnique({
-      where: { id: session.userId },
-      select: { avatarUrl: true },
-    });
-    if (!currentUser?.avatarUrl) {
-      return NextResponse.json(
-        { error: "Profile picture is required" },
-        { status: 400 }
-      );
-    }
+  // All users must have a profile picture before onboarding
+  const currentUser = await prisma.user.findUnique({
+    where: { id: session.userId },
+    select: { avatarUrl: true },
+  });
+  if (!currentUser?.avatarUrl) {
+    return NextResponse.json(
+      { error: "Profile picture is required" },
+      { status: 400 }
+    );
   }
 
   // Mark as onboarded
