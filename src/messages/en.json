@@ -211,7 +211,10 @@
     "lastSeenMinutes": "Active {count}m ago",
     "lastSeenHours": "Active {count}h ago",
     "lastSeenDays": "Active {count}d ago",
-    "lastSeenDate": "Last seen {date}"
+    "lastSeenDate": "Last seen {date}",
+    "beforeYouBook": "Before you book",
+    "meetupTip": "We recommend arranging a short in-person meetup first — it's the best way to see if there's a good fit before committing.",
+    "meetupTipLink": "How to make the most of that first meeting →"
   },
   "notFound": {
     "title": "404",

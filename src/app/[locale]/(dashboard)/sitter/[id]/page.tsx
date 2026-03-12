@@ -249,6 +249,22 @@ export default async function SitterProfilePage({
           </p>
         </div>
 
+        {/* Before you book tip */}
+        <div className="border border-accent/20 bg-accent-muted p-5">
+          <p className="text-xs font-medium uppercase tracking-wide text-accent">
+            {t("beforeYouBook")}
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+            {t("meetupTip")}
+          </p>
+          <Link
+            href="/guides/first-meetup-babysitter"
+            className="mt-3 inline-block text-sm font-medium text-accent underline-offset-2 hover:underline"
+          >
+            {t("meetupTipLink")}
+          </Link>
+        </div>
+
         {/* Reviews */}
         <div className="border border-border-default bg-surface-secondary p-6">
           <h2 className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">

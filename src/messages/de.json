@@ -211,7 +211,10 @@
     "lastSeenMinutes": "Aktiv vor {count} Min.",
     "lastSeenHours": "Aktiv vor {count} Std.",
     "lastSeenDays": "Aktiv vor {count} T.",
-    "lastSeenDate": "Zuletzt gesehen am {date}"
+    "lastSeenDate": "Zuletzt gesehen am {date}",
+    "beforeYouBook": "Bevor du buchst",
+    "meetupTip": "Wir empfehlen, zuerst ein kurzes persönliches Kennenlernen zu vereinbaren — so findest du am besten heraus, ob es passt.",
+    "meetupTipLink": "Wie du dieses erste Treffen optimal nutzt →"
   },
   "notFound": {
     "title": "404",

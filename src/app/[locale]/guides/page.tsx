@@ -43,7 +43,9 @@ export default async function GuidesIndexPage({ params }: PageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "guides" });
 
-  const guides = GUIDES.map((g) => getGuide(g.slug, locale)!);
+  const guides = GUIDES
+    .filter((g) => g.category !== "parenting")
+    .map((g) => getGuide(g.slug, locale)!);
 
   return (
     <div className="flex min-h-screen flex-col bg-surface-primary">
