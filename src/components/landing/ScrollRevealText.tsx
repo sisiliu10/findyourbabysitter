@@ -19,23 +19,8 @@ function SparkleIcon({ size = 20, className = "" }: { size?: number; className?:
   );
 }
 
-// Sentence icons — trust, kita/reviews, ease
-const SENTENCE_ICONS = [
-  // Two overlapping circles (trust / community)
-  <svg key="trust" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden>
-    <circle cx="9" cy="12" r="6" />
-    <circle cx="15" cy="12" r="6" />
-  </svg>,
-  // Star outline (reviews / quality)
-  <svg key="star" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-  </svg>,
-  // Checkmark circle (ease / speed)
-  <svg key="check" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <circle cx="12" cy="12" r="10" />
-    <polyline points="8,12 11,15 16,9" />
-  </svg>,
-];
+// Editorial sentence numbers
+const SENTENCE_NUMBERS = ["01", "02", "03"];
 
 export default function ScrollRevealText({
   title,
@@ -147,32 +132,34 @@ export default function ScrollRevealText({
           <div>
             {sentenceEntries.map((sentence, si) => {
               const firstWordIndex = sentence.words[0].globalIndex;
-              const iconStart = 0.05 + (firstWordIndex / totalWords) * 0.83;
-              const iconEnd = Math.min(iconStart + 0.08, 0.96);
-              const iconOpacity = useTransform(scrollYProgress, [iconStart, iconEnd], [0.08, 1]);
-              const iconY = useTransform(scrollYProgress, [iconStart, iconEnd], [10, 0]);
+              const numStart = 0.05 + (firstWordIndex / totalWords) * 0.83;
+              const numEnd = Math.min(numStart + 0.08, 0.96);
+              const numOpacity = useTransform(scrollYProgress, [numStart, numEnd], [0, 1]);
+              const numY = useTransform(scrollYProgress, [numStart, numEnd], [10, 0]);
 
               return (
                 <div key={si}>
-                  <p className="font-serif text-xl sm:text-2xl lg:text-3xl leading-relaxed text-text-primary mb-10 sm:mb-12">
-                    {/* Sentence icon */}
+                  <div className="flex gap-5 items-start mb-10 sm:mb-12">
+                    {/* Editorial sentence number */}
                     <motion.span
-                      style={{ opacity: iconOpacity, y: iconY, display: "inline-block", marginRight: "0.4em", verticalAlign: "middle", color: "var(--color-accent)" }}
+                      style={{ opacity: numOpacity, y: numY }}
+                      className="font-mono text-xs text-accent mt-2 shrink-0 select-none"
                     >
-                      {SENTENCE_ICONS[si]}
+                      {SENTENCE_NUMBERS[si]}
                     </motion.span>
-                    {sentence.words.map((entry, wi) => (
-                      <Word
-                        key={wi}
-                        word={entry.word}
-                        globalIndex={entry.globalIndex}
-                        totalWords={totalWords}
-                        scrollYProgress={scrollYProgress}
-                        normHighlights={normHighlights}
-                      />
-                    ))}
-                  </p>
-
+                    <p className="font-serif text-xl sm:text-2xl lg:text-3xl leading-relaxed text-text-primary">
+                      {sentence.words.map((entry, wi) => (
+                        <Word
+                          key={wi}
+                          word={entry.word}
+                          globalIndex={entry.globalIndex}
+                          totalWords={totalWords}
+                          scrollYProgress={scrollYProgress}
+                          normHighlights={normHighlights}
+                        />
+                      ))}
+                    </p>
+                  </div>
                   {/* Decorative separator between sentences */}
                   {si < sentenceEntries.length - 1 && (
                     <SentenceSeparator

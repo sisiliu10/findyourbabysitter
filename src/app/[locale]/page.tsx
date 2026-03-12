@@ -160,8 +160,8 @@ export default async function HomePage({ params }: Props) {
           body={t("seoIntro")}
           label="Berlin Babysitter"
           highlights={isDE
-            ? ["vertrauen", "Nachbarschaft", "echten", "Spielverabredungen", "entspannt"]
-            : ["trust", "neighborhood", "honest", "playdates", "quickly"]}
+            ? ["vertrauen", "Nachbarschaft", "Kita-Plätze", "Bewertungen", "Spielverabredungen", "spontan", "schnell"]
+            : ["trust", "neighborhood", "Kita", "reviews", "playdates", "last-minute", "quickly"]}
         />
 
         {/* Two paths */}
