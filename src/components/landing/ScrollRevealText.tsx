@@ -40,9 +40,6 @@ export default function ScrollRevealText({
   // Progress dot visibility — fade in at start, fade out at end of section
   const dotOpacity = useTransform(scrollYProgress, [0, 0.04, 0.94, 1], [0, 1, 1, 0]);
 
-  // Scroll hint arrow — visible until user starts scrolling
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.04], [1, 0]);
-
   // Normalise highlight words for matching
   const normHighlights = highlights.map((h) => h.toLowerCase());
 
@@ -106,27 +103,6 @@ export default function ScrollRevealText({
             </h2>
           </div>
 
-          {/* Scroll hint */}
-          <motion.div
-            style={{ opacity: hintOpacity }}
-            className="flex flex-col items-start gap-1 mb-6 text-text-muted"
-          >
-            <span className="text-xs uppercase tracking-widest">scroll</span>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-bounce"
-              aria-hidden
-            >
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </motion.div>
 
           {/* Sentences */}
           <div>
