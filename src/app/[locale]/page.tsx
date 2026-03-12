@@ -158,6 +158,7 @@ export default async function HomePage({ params }: Props) {
         <ScrollRevealText
           title={t("seoIntroTitle")}
           body={t("seoIntro")}
+          label="Berlin Babysitter"
           highlights={isDE
             ? ["vertrauen", "Nachbarschaft", "echten", "Spielverabredungen", "entspannt"]
             : ["trust", "neighborhood", "honest", "playdates", "quickly"]}
