@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import { PasswordInput } from "@/components/ui/PasswordInput";
+import { useResendCooldown } from "@/hooks/useResendCooldown";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,8 +13,8 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [unverifiedEmail, setUnverifiedEmail] = useState("");
-  const [resending, setResending] = useState(false);
   const [resendMessage, setResendMessage] = useState("");
+  const { cooldown, startCooldown, isOnCooldown } = useResendCooldown();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -51,8 +53,9 @@ export default function LoginPage() {
   }
 
   async function handleResend() {
-    setResending(true);
+    if (isOnCooldown) return;
     setResendMessage("");
+    startCooldown();
     try {
       const res = await fetch("/api/auth/resend-verification", {
         method: "POST",
@@ -63,8 +66,6 @@ export default function LoginPage() {
       setResendMessage(data.message || t("verificationSent"));
     } catch {
       setResendMessage(t("failedResend"));
-    } finally {
-      setResending(false);
     }
   }
 
@@ -80,10 +81,12 @@ export default function LoginPage() {
             <div className="mt-3">
               <button
                 onClick={handleResend}
-                disabled={resending}
+                disabled={isOnCooldown}
                 className="text-text-primary underline underline-offset-4 hover:text-accent text-sm disabled:opacity-40"
               >
-                {resending ? t("sending") : t("resendVerification")}
+                {isOnCooldown
+                  ? t("resendCooldown", { seconds: cooldown })
+                  : t("resendVerification")}
               </button>
               {resendMessage && (
                 <p className="mt-2 text-text-secondary">{resendMessage}</p>
@@ -108,19 +111,13 @@ export default function LoginPage() {
           />
         </div>
 
-        <div>
-          <label htmlFor="password" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
-            {t("password")}
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            required
-            className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none"
-            placeholder={t("passwordPlaceholder")}
-          />
-        </div>
+        <PasswordInput
+          id="password"
+          name="password"
+          label={t("password")}
+          required
+          placeholder={t("passwordPlaceholder")}
+        />
 
         <div className="flex justify-end">
           <Link href="/forgot-password" className="text-xs text-text-tertiary underline underline-offset-4 hover:text-accent">

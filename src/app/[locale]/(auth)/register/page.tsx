@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Suspense } from "react";
 import { useTranslations } from "next-intl";
+import { PasswordInput } from "@/components/ui/PasswordInput";
+import { useResendCooldown } from "@/hooks/useResendCooldown";
 
 function RegisterForm() {
   const searchParams = useSearchParams();
@@ -14,24 +16,34 @@ function RegisterForm() {
   const [step, setStep] = useState(preselectedRole ? 2 : 1);
   const [role, setRole] = useState(preselectedRole);
   const [error, setError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
   const [registeredEmail, setRegisteredEmail] = useState("");
-  const [resending, setResending] = useState(false);
   const [resendMessage, setResendMessage] = useState("");
+  const { cooldown, startCooldown, isOnCooldown } = useResendCooldown();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
-    setLoading(true);
+    setPasswordError("");
 
     const formData = new FormData(e.currentTarget);
+    const password = formData.get("password") as string;
+    const confirmPassword = formData.get("confirmPassword") as string;
+
+    if (password !== confirmPassword) {
+      setPasswordError(t("passwordMismatch"));
+      return;
+    }
+
+    setLoading(true);
     try {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: formData.get("email"),
-          password: formData.get("password"),
+          password,
           firstName: formData.get("firstName"),
           lastName: formData.get("lastName"),
           role,
@@ -40,21 +52,22 @@ function RegisterForm() {
 
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Registration failed");
+        setError(data.error || t("registrationFailed"));
         return;
       }
 
       setRegisteredEmail(data.email);
     } catch {
-      setError("Something went wrong");
+      setError(t("somethingWentWrong"));
     } finally {
       setLoading(false);
     }
   }
 
   async function handleResend() {
-    setResending(true);
+    if (isOnCooldown) return;
     setResendMessage("");
+    startCooldown();
     try {
       const res = await fetch("/api/auth/resend-verification", {
         method: "POST",
@@ -62,15 +75,13 @@ function RegisterForm() {
         body: JSON.stringify({ email: registeredEmail }),
       });
       const data = await res.json();
-      setResendMessage(data.message || "Verification email sent.");
+      setResendMessage(data.message || t("verificationSent"));
     } catch {
-      setResendMessage("Failed to resend. Please try again.");
-    } finally {
-      setResending(false);
+      setResendMessage(t("failedResend"));
     }
   }
 
-  // Show "check your email" screen after successful registration
+  // "Check your email" screen
   if (registeredEmail) {
     return (
       <div>
@@ -82,23 +93,26 @@ function RegisterForm() {
 
         <h1 className="font-serif text-4xl text-text-primary">{t("checkEmail")}</h1>
         <p className="mt-3 text-sm text-text-secondary">
-          {t("verificationSentPrefix")}{" "}
-          <span className="text-text-primary font-medium">{registeredEmail}</span>
-          {t("verificationSentSuffix")}
+          {t("verificationSentTo")}{" "}
+          <span className="font-medium text-text-primary">{registeredEmail}</span>.
         </p>
-        <p className="mt-2 text-sm text-text-tertiary">
-          {t("clickToVerify")}
+        <p className="mt-2 text-sm text-text-secondary">
+          {t("clickLinkInEmail")}
+        </p>
+        <p className="mt-3 text-sm text-text-tertiary">
+          {t("checkSpam")}
         </p>
 
-        <div className="mt-8 space-y-4">
+        <div className="mt-8 space-y-3">
           <button
             onClick={handleResend}
-            disabled={resending}
+            disabled={isOnCooldown}
             className="w-full border border-border-default px-4 py-3 text-xs font-medium uppercase tracking-widest text-text-primary transition-colors hover:border-text-primary disabled:opacity-40"
           >
-            {resending ? t("sending") : t("resendVerification")}
+            {isOnCooldown
+              ? t("resendCooldown", { seconds: cooldown })
+              : t("resendVerification")}
           </button>
-
           {resendMessage && (
             <p className="text-sm text-text-secondary">{resendMessage}</p>
           )}
@@ -107,7 +121,7 @@ function RegisterForm() {
         <p className="mt-8 text-sm text-text-tertiary">
           {t("wrongEmail")}{" "}
           <button
-            onClick={() => { setRegisteredEmail(""); setError(""); }}
+            onClick={() => { setRegisteredEmail(""); setError(""); setResendMessage(""); }}
             className="text-text-primary underline underline-offset-4 hover:text-accent"
           >
             {t("registerAgain")}
@@ -168,7 +182,7 @@ function RegisterForm() {
       <h1 className="font-serif text-4xl text-text-primary">{t("createAccount")}</h1>
       <p className="mt-3 text-sm text-text-secondary">
         {t("signingUpAs")}{" "}
-        <span className="text-text-primary font-medium">
+        <span className="font-medium text-text-primary">
           {role === "PARENT" ? t("signingUpAsParent") : t("signingUpAsSitter")}
         </span>
       </p>
@@ -200,12 +214,24 @@ function RegisterForm() {
           <input id="email" name="email" type="email" required className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none" placeholder={t("emailPlaceholder")} />
         </div>
 
-        <div>
-          <label htmlFor="password" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
-            {t("password")}
-          </label>
-          <input id="password" name="password" type="password" required minLength={8} className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none" placeholder={t("passwordMinLength")} />
-        </div>
+        <PasswordInput
+          id="password"
+          name="password"
+          label={t("password")}
+          required
+          minLength={8}
+          placeholder={t("passwordMinLength")}
+        />
+
+        <PasswordInput
+          id="confirmPassword"
+          name="confirmPassword"
+          label={t("confirmPassword")}
+          required
+          minLength={8}
+          placeholder={t("confirmPasswordPlaceholder")}
+          error={passwordError}
+        />
 
         <button
           type="submit"
