@@ -69,7 +69,7 @@ export default function ScrollRevealText({
     ((sentenceEntries[0].words.length + sentenceEntries[1].words.length) / totalWords) * 0.8 + 0.05;
 
   return (
-    <div ref={containerRef} className="relative" style={{ minHeight: "200vh" }}>
+    <div ref={containerRef} className="relative" style={{ minHeight: "170vh" }}>
       {/* Scroll progress indicator — right edge, scoped to section */}
       <motion.div
         style={{ opacity: dotOpacity }}
@@ -87,7 +87,7 @@ export default function ScrollRevealText({
       </motion.div>
 
       <div className="sticky top-0 min-h-screen flex items-center">
-        <div className="mx-auto max-w-4xl px-6 py-16 w-full">
+        <div className="mx-auto max-w-4xl px-6 py-10 w-full">
 
           {/* Section label + title */}
           <div
@@ -101,7 +101,7 @@ export default function ScrollRevealText({
             {label && (
               <p className="text-xs uppercase tracking-widest text-text-muted mb-4">{label}</p>
             )}
-            <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl text-text-primary mb-10 leading-tight">
+            <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl text-text-primary mb-6 leading-tight">
               {title}
             </h2>
           </div>
@@ -109,7 +109,7 @@ export default function ScrollRevealText({
           {/* Scroll hint */}
           <motion.div
             style={{ opacity: hintOpacity }}
-            className="flex flex-col items-start gap-1 mb-10 text-text-muted"
+            className="flex flex-col items-start gap-1 mb-6 text-text-muted"
           >
             <span className="text-xs uppercase tracking-widest">scroll</span>
             <svg
@@ -139,7 +139,7 @@ export default function ScrollRevealText({
 
               return (
                 <div key={si}>
-                  <div className="flex gap-5 items-start mb-10 sm:mb-12">
+                  <div className="flex gap-5 items-start mb-5 sm:mb-6">
                     {/* Editorial sentence number */}
                     <motion.span
                       style={{ opacity: numOpacity, y: numY }}
@@ -204,35 +204,8 @@ function Word({
     ? useTransform(scrollYProgress, [start, end], ["#C4A882", "#D4845C"])
     : undefined;
 
-  const underlineScaleX = isHighlight
-    ? useTransform(scrollYProgress, [start, end], [0, 1])
-    : undefined;
-
-  if (isHighlight) {
-    return (
-      <motion.span
-        style={{ opacity, y, color, display: "inline-block", marginRight: "0.28em", position: "relative" }}
-      >
-        {word}
-        <motion.span
-          style={{
-            scaleX: underlineScaleX,
-            transformOrigin: "left",
-            position: "absolute",
-            bottom: "-2px",
-            left: 0,
-            width: "100%",
-            height: "2px",
-            background: "#D4845C",
-            display: "block",
-          }}
-        />
-      </motion.span>
-    );
-  }
-
   return (
-    <motion.span style={{ opacity, y, display: "inline-block", marginRight: "0.28em" }}>
+    <motion.span style={{ opacity, y, color, display: "inline-block", marginRight: "0.28em" }}>
       {word}
     </motion.span>
   );
@@ -251,7 +224,7 @@ function SentenceSeparator({
   return (
     <motion.div
       style={{ opacity, scale }}
-      className="flex items-center gap-3 mb-10 sm:mb-12 text-accent/50"
+      className="flex items-center gap-3 mb-5 sm:mb-6 text-accent/50"
     >
       <SparkleIcon size={10} />
       <SparkleIcon size={14} />
