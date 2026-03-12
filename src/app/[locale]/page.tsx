@@ -7,6 +7,7 @@ import { AnnouncementBar } from "@/components/landing/AnnouncementBar";
 import { TrustBar } from "@/components/landing/TrustBar";
 import { JsonLd } from "@/components/landing/JsonLd";
 import { FAQ } from "@/components/landing/FAQ";
+import ScrollRevealText from "@/components/landing/ScrollRevealText";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -153,15 +154,8 @@ export default async function HomePage({ params }: Props) {
         {/* Scrolling trust bar */}
         <TrustBar />
 
-        {/* SEO intro */}
-        <section className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
-          <h2 className="font-serif text-2xl text-text-primary sm:text-3xl mb-4">
-            {t("seoIntroTitle")}
-          </h2>
-          <p className="max-w-3xl text-sm leading-relaxed text-text-secondary">
-            {t("seoIntro")}
-          </p>
-        </section>
+        {/* SEO intro - scroll reveal */}
+        <ScrollRevealText title={t("seoIntroTitle")} body={t("seoIntro")} />
 
         {/* Two paths */}
         <section className="mx-auto max-w-7xl px-6">
