@@ -45,6 +45,7 @@ export default function OnboardingPage() {
   const [childcareTypes, setChildcareTypes] = useState<string[]>([]);
   const [timesOfDay, setTimesOfDay] = useState<string[]>([]);
   const [careFrequency, setCareFrequency] = useState("");
+  const [needsAttempted, setNeedsAttempted] = useState(false);
 
   // Fetch role on mount, redirect if already onboarded
   useEffect(() => {
@@ -169,8 +170,11 @@ export default function OnboardingPage() {
         <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("aboutYou")}</h2>
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("birthday")}</label>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("birthday")} <span className="text-danger">*</span>
+            </label>
             <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} className={inputClass} max={new Date().toISOString().split("T")[0]} />
+            <p className="mt-1.5 text-xs text-text-tertiary">{t("birthdayHint")}</p>
           </div>
           <h2 className="mt-2 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourLocation")}</h2>
           <div>
@@ -224,91 +228,130 @@ export default function OnboardingPage() {
       )}
 
       {/* Step 2: Parent - Childcare Needs */}
-      {step === 2 && role === "PARENT" && (
-        <div className="space-y-6 border border-border-default bg-surface-secondary p-6">
-          <div>
-            <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{tn("childcareType")}</h2>
-            <p className="mt-1 text-sm text-text-tertiary">{tn("subtitle")}</p>
-          </div>
+      {step === 2 && role === "PARENT" && (() => {
+        const typesOk = childcareTypes.length > 0;
+        const timesOk = timesOfDay.length > 0;
+        const freqOk = !!careFrequency;
+        const canSubmit = typesOk && timesOk && freqOk;
 
-          <div>
-            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">{tn("childcareType")}</p>
-            <div className="flex flex-wrap gap-2">
-              {CHILDCARE_TYPES.map((type) => (
-                <button
-                  key={type}
-                  type="button"
-                  onClick={() => setChildcareTypes((prev) =>
-                    prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
-                  )}
-                  className={`px-3.5 py-2 text-sm transition ${
-                    childcareTypes.includes(type)
-                      ? "bg-text-primary text-surface-primary"
-                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
-                  }`}
-                >
-                  {tn(`types.${type}`)}
-                </button>
-              ))}
+        function SectionLabel({ label, done }: { label: string; done: boolean }) {
+          return (
+            <div className="mb-3 flex items-center gap-2">
+              <span
+                className={`flex h-4 w-4 shrink-0 items-center justify-center transition-colors ${
+                  done ? "text-success" : needsAttempted ? "text-danger" : "text-text-muted"
+                }`}
+              >
+                {done ? (
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                ) : (
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <circle cx="12" cy="12" r="9" />
+                  </svg>
+                )}
+              </span>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{label}</p>
+            </div>
+          );
+        }
+
+        return (
+          <div className="space-y-6 border border-border-default bg-surface-secondary p-6">
+            <div>
+              <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{tn("childcareType")}</h2>
+              <p className="mt-1 text-sm text-text-tertiary">{tn("subtitle")}</p>
+            </div>
+
+            <div>
+              <SectionLabel label={tn("childcareType")} done={typesOk} />
+              <div className="flex flex-wrap gap-2">
+                {CHILDCARE_TYPES.map((type) => (
+                  <button
+                    key={type}
+                    type="button"
+                    onClick={() => setChildcareTypes((prev) =>
+                      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+                    )}
+                    className={`px-3.5 py-2 text-sm transition ${
+                      childcareTypes.includes(type)
+                        ? "bg-text-primary text-surface-primary"
+                        : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                    }`}
+                  >
+                    {tn(`types.${type}`)}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <SectionLabel label={tn("timeOfDay")} done={timesOk} />
+              <div className="flex flex-wrap gap-2">
+                {CARE_TIMES_OF_DAY.map((time) => (
+                  <button
+                    key={time}
+                    type="button"
+                    onClick={() => setTimesOfDay((prev) =>
+                      prev.includes(time) ? prev.filter((t) => t !== time) : [...prev, time]
+                    )}
+                    className={`px-3.5 py-2 text-sm transition ${
+                      timesOfDay.includes(time)
+                        ? "bg-text-primary text-surface-primary"
+                        : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                    }`}
+                  >
+                    {tn(`times.${time}`)}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <SectionLabel label={tn("frequency")} done={freqOk} />
+              <div className="flex flex-wrap gap-2">
+                {CARE_FREQUENCIES.map((freq) => (
+                  <button
+                    key={freq}
+                    type="button"
+                    onClick={() => setCareFrequency((prev) => prev === freq ? "" : freq)}
+                    className={`px-3.5 py-2 text-sm transition ${
+                      careFrequency === freq
+                        ? "bg-text-primary text-surface-primary"
+                        : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                    }`}
+                  >
+                    {tn(`frequencies.${freq}`)}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {needsAttempted && !canSubmit && (
+              <p className="text-xs text-danger">
+                {t("selectAllSections")}
+              </p>
+            )}
+
+            <div className="mt-4 flex gap-3">
+              <button onClick={() => setStep(1)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+                {tc("back")}
+              </button>
+              <button
+                onClick={() => {
+                  setNeedsAttempted(true);
+                  if (canSubmit) handleSubmit();
+                }}
+                disabled={loading}
+                className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
+              >
+                {loading ? tc("saving") : t("completeSetup")}
+              </button>
             </div>
           </div>
-
-          <div>
-            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">{tn("timeOfDay")}</p>
-            <div className="flex flex-wrap gap-2">
-              {CARE_TIMES_OF_DAY.map((time) => (
-                <button
-                  key={time}
-                  type="button"
-                  onClick={() => setTimesOfDay((prev) =>
-                    prev.includes(time) ? prev.filter((t) => t !== time) : [...prev, time]
-                  )}
-                  className={`px-3.5 py-2 text-sm transition ${
-                    timesOfDay.includes(time)
-                      ? "bg-text-primary text-surface-primary"
-                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
-                  }`}
-                >
-                  {tn(`times.${time}`)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-secondary">{tn("frequency")}</p>
-            <div className="flex flex-wrap gap-2">
-              {CARE_FREQUENCIES.map((freq) => (
-                <button
-                  key={freq}
-                  type="button"
-                  onClick={() => setCareFrequency((prev) => prev === freq ? "" : freq)}
-                  className={`px-3.5 py-2 text-sm transition ${
-                    careFrequency === freq
-                      ? "bg-text-primary text-surface-primary"
-                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
-                  }`}
-                >
-                  {tn(`frequencies.${freq}`)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-4 flex gap-3">
-            <button onClick={() => setStep(1)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
-              {tc("back")}
-            </button>
-            <button
-              onClick={handleSubmit}
-              disabled={loading}
-              className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
-            >
-              {loading ? tc("saving") : t("completeSetup")}
-            </button>
-          </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* Step 2: Sitter - Bio & experience */}
       {step === 2 && role === "BABYSITTER" && (
