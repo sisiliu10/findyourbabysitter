@@ -5,6 +5,7 @@ import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES, SITTER_TYPES, GENDER_OPTIONS } from "@/lib/constants";
 import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
+import { TagInput } from "@/components/ui/TagInput";
 import { getDistrictFromZip } from "@/lib/berlin-districts";
 
 export default function OnboardingPage() {
@@ -21,12 +22,13 @@ export default function OnboardingPage() {
   // Sitter fields
   const [bio, setBio] = useState("");
   const [hourlyRate, setHourlyRate] = useState("20");
-  const [languages, setLanguages] = useState("English");
+  const [languages, setLanguages] = useState<string[]>(["English"]);
   const [ageRangeMin, setAgeRangeMin] = useState("0");
   const [ageRangeMax, setAgeRangeMax] = useState("17");
   const [availability, setAvailability] = useState<Record<string, string[]>>({});
   const [sitterType, setSitterType] = useState("");
   const [gender, setGender] = useState("");
+  const [availAttempted, setAvailAttempted] = useState(false);
 
   // Profile picture
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
@@ -126,7 +128,7 @@ export default function OnboardingPage() {
     if (role === "BABYSITTER") {
       Object.assign(body, {
         hourlyRate: parseFloat(hourlyRate),
-        languages,
+        languages: languages.join(", "),
         ageRangeMin: parseInt(ageRangeMin, 10),
         ageRangeMax: parseInt(ageRangeMax, 10),
         availabilityJson: JSON.stringify(availability),
@@ -462,16 +464,31 @@ export default function OnboardingPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("bio")}</label>
+            <div className="flex items-baseline justify-between">
+              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("bio")} <span className="text-danger">*</span></label>
+              <span className={`text-xs tabular-nums ${bio.length >= 10 ? "text-success" : "text-text-tertiary"}`}>
+                {bio.length >= 10 ? `${bio.length} ✓` : `${bio.length} / 10`}
+              </span>
+            </div>
             <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={4} className={inputClass} placeholder={t("bioPlaceholder")} />
+            {bio.length > 0 && bio.length < 10 && (
+              <p className="mt-1 text-xs text-text-tertiary">
+                {t("bioMinHint", { remaining: 10 - bio.length })}
+              </p>
+            )}
           </div>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("hourlyRate")}</label>
             <input type="number" min="1" value={hourlyRate} onChange={(e) => setHourlyRate(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("languagesLabel")}</label>
-            <input value={languages} onChange={(e) => setLanguages(e.target.value)} className={inputClass} placeholder={t("languagesPlaceholder")} />
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-0.5">{t("languagesLabel")}</label>
+            <p className="mb-1.5 text-xs text-text-tertiary">{t("languagesHint")}</p>
+            <TagInput
+              value={languages}
+              onChange={setLanguages}
+              placeholder={t("languagesPlaceholder")}
+            />
           </div>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">{t("genderLabel")}</label>
@@ -511,29 +528,59 @@ export default function OnboardingPage() {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("youngestAge")}</label>
-              <input type="number" min="0" max="17" value={ageRangeMin} onChange={(e) => setAgeRangeMin(e.target.value)} className={inputClass} />
-            </div>
-            <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("oldestAge")}</label>
-              <input type="number" min="0" max="17" value={ageRangeMax} onChange={(e) => setAgeRangeMax(e.target.value)} className={inputClass} />
-            </div>
-          </div>
+          {(() => {
+            const minVal = parseInt(ageRangeMin, 10);
+            const maxVal = parseInt(ageRangeMax, 10);
+            const ageInvalid = !isNaN(minVal) && !isNaN(maxVal) && minVal > maxVal;
+            const canContinue = (!!avatarFile || !!avatarPreview) && bio.length >= 10 && !ageInvalid;
+            return (
+              <>
+                <div>
+                  <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-1">{t("ageRangeLabel")}</label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs text-text-tertiary mb-1">{t("youngestAge")}</label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="17"
+                        value={ageRangeMin}
+                        onChange={(e) => setAgeRangeMin(e.target.value)}
+                        className={ageInvalid ? inputErrorClass : inputClass}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-text-tertiary mb-1">{t("oldestAge")}</label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="17"
+                        value={ageRangeMax}
+                        onChange={(e) => setAgeRangeMax(e.target.value)}
+                        className={ageInvalid ? inputErrorClass : inputClass}
+                      />
+                    </div>
+                  </div>
+                  {ageInvalid && (
+                    <p className="mt-1.5 text-xs text-danger">{t("ageRangeError")}</p>
+                  )}
+                </div>
 
-          <div className="mt-4 flex gap-3">
-            <button onClick={() => setStep(1)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
-              {tc("back")}
-            </button>
-            <button
-              onClick={() => setStep(3)}
-              disabled={(!avatarFile && !avatarPreview) || !bio || bio.length < 10}
-              className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
-            >
-              {tc("continue")}
-            </button>
-          </div>
+                <div className="mt-4 flex gap-3">
+                  <button onClick={() => setStep(1)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+                    {tc("back")}
+                  </button>
+                  <button
+                    onClick={() => { if (canContinue) setStep(3); }}
+                    disabled={!canContinue}
+                    className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
+                  >
+                    {tc("continue")}
+                  </button>
+                </div>
+              </>
+            );
+          })()}
         </div>
       )}
 
@@ -559,58 +606,100 @@ export default function OnboardingPage() {
       )}
 
       {/* Step 3 (sitter): Availability */}
-      {step === 3 && role === "BABYSITTER" && (
-        <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
-          <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourAvailability")}</h2>
-          <p className="text-sm text-text-secondary">{t("selectAvailability")}</p>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr>
-                  <th className="pb-2 text-left text-xs font-medium uppercase tracking-wide text-text-secondary" />
-                  {TIME_SLOTS.map((slot) => (
-                    <th key={slot} className="pb-2 text-center text-xs font-medium uppercase tracking-wide text-text-secondary">{tc(`timeSlots.${slot}`)}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {DAYS_OF_WEEK.map((day) => (
-                  <tr key={day}>
-                    <td className="py-1.5 pr-3 text-sm text-text-secondary">{tc(`days.${day}`)}</td>
+      {step === 3 && role === "BABYSITTER" && (() => {
+        const totalSlots = Object.values(availability).reduce((sum, slots) => sum + slots.length, 0);
+        const hasAvailability = totalSlots > 0;
+
+        return (
+          <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
+            <div className="flex items-start justify-between">
+              <div>
+                <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourAvailability")}</h2>
+                <p className="mt-1 text-sm text-text-secondary">{t("selectAvailability")}</p>
+              </div>
+              {hasAvailability && (
+                <span className="text-xs text-success tabular-nums">
+                  {t("slotsSelected", { count: totalSlots })}
+                </span>
+              )}
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr>
+                    <th className="pb-2 text-left text-xs font-medium uppercase tracking-wide text-text-secondary" />
                     {TIME_SLOTS.map((slot) => (
-                      <td key={slot} className="py-1.5 text-center">
+                      <th key={slot} className="pb-2 text-center text-xs font-medium uppercase tracking-wide text-text-secondary">{tc(`timeSlots.${slot}`)}</th>
+                    ))}
+                    <th className="pb-2 text-center text-xs font-medium uppercase tracking-wide text-text-secondary">{t("allDay")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {DAYS_OF_WEEK.map((day) => (
+                    <tr key={day}>
+                      <td className="py-1.5 pr-3 text-sm text-text-secondary">{tc(`days.${day}`)}</td>
+                      {TIME_SLOTS.map((slot) => (
+                        <td key={slot} className="py-1.5 text-center">
+                          <button
+                            onClick={() => toggleAvailability(day, slot)}
+                            className={`h-8 w-8 text-xs transition ${
+                              (availability[day] || []).includes(slot)
+                                ? "bg-text-primary text-surface-primary"
+                                : "bg-surface-tertiary text-text-muted hover:bg-border-default"
+                            }`}
+                          >
+                            {(availability[day] || []).includes(slot) ? "\u2713" : ""}
+                          </button>
+                        </td>
+                      ))}
+                      {/* Select all for this day */}
+                      <td className="py-1.5 text-center">
                         <button
-                          onClick={() => toggleAvailability(day, slot)}
+                          onClick={() => {
+                            const all = availability[day]?.length === TIME_SLOTS.length;
+                            setAvailability((prev) => ({
+                              ...prev,
+                              [day]: all ? [] : [...TIME_SLOTS],
+                            }));
+                          }}
                           className={`h-8 w-8 text-xs transition ${
-                            (availability[day] || []).includes(slot)
-                              ? "bg-text-primary text-surface-primary"
+                            availability[day]?.length === TIME_SLOTS.length
+                              ? "bg-accent text-surface-primary"
                               : "bg-surface-tertiary text-text-muted hover:bg-border-default"
                           }`}
+                          title={t("selectAllDay")}
                         >
-                          {(availability[day] || []).includes(slot) ? "\u2713" : ""}
+                          ✦
                         </button>
                       </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-          <div className="mt-4 flex gap-3">
-            <button onClick={() => setStep(2)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
-              {tc("back")}
-            </button>
-            <button
-              onClick={handleSubmit}
-              disabled={loading}
-              className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
-            >
-              {loading ? tc("saving") : t("completeSetup")}
-            </button>
+            {availAttempted && !hasAvailability && (
+              <p className="text-xs text-danger">{t("availabilityRequired")}</p>
+            )}
+
+            <div className="mt-4 flex gap-3">
+              <button onClick={() => setStep(2)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+                {tc("back")}
+              </button>
+              <button
+                onClick={() => {
+                  setAvailAttempted(true);
+                  if (hasAvailability) handleSubmit();
+                }}
+                disabled={loading}
+                className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
+              >
+                {loading ? tc("saving") : t("completeSetup")}
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
