@@ -54,9 +54,11 @@ export function useMessages(bookingId: string) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content }),
       });
-      if (res.ok) {
-        await fetchMessages();
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        throw new Error(json.error || "Failed to send message");
       }
+      await fetchMessages();
     },
     [bookingId, fetchMessages]
   );

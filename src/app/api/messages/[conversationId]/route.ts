@@ -94,15 +94,21 @@ export async function GET(
       }
     }
 
-    const messages = await prisma.message.findMany({
-      where,
-      include: {
-        sender: {
-          select: { id: true, firstName: true, lastName: true, avatarUrl: true },
+    const [messages, otherUser] = await Promise.all([
+      prisma.message.findMany({
+        where,
+        include: {
+          sender: {
+            select: { id: true, firstName: true, lastName: true, avatarUrl: true },
+          },
         },
-      },
-      orderBy: { createdAt: "asc" },
-    });
+        orderBy: { createdAt: "asc" },
+      }),
+      prisma.user.findUnique({
+        where: { id: conv.otherUserId },
+        select: { id: true, firstName: true, lastName: true, avatarUrl: true },
+      }),
+    ]);
 
     // Mark unread messages sent by the other party as read
     const markWhere: Record<string, unknown> = conv.bookingId
@@ -119,7 +125,7 @@ export async function GET(
 
     return NextResponse.json({
       success: true,
-      data: { messages, conversationType: conv.type },
+      data: { messages, conversationType: conv.type, otherUser },
     });
   } catch (error) {
     return NextResponse.json(

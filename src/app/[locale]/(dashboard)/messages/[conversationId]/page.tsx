@@ -36,18 +36,12 @@ export default function MessageThreadPage() {
         if (json.data?.conversationType) {
           setConversationType(json.data.conversationType);
         }
-        const msgs = json.data?.messages || json;
-        if (Array.isArray(msgs) && msgs.length > 0 && user) {
-          const otherMsg = msgs.find(
-            (m: { senderId: string }) => m.senderId !== user.id
-          );
-          if (otherMsg?.sender) {
-            setOtherPerson(otherMsg.sender);
-          }
+        if (json.data?.otherUser) {
+          setOtherPerson(json.data.otherUser);
         }
       })
       .catch(() => {});
-  }, [conversationId, user, messages.length]);
+  }, [conversationId]);
 
   // Scroll to bottom on new messages
   useEffect(() => {
