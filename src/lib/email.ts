@@ -275,6 +275,7 @@ export async function notifyNewMessage(
 // 8. Review Submitted  (Parent reviews → Sitter gets email)
 // -------------------------------------------------------------------
 
+
 export async function notifyReviewSubmitted(
   sitterEmail: string,
   parentName: string,
@@ -291,6 +292,99 @@ export async function notifyReviewSubmitted(
       <p><strong>${parentName}</strong> left you a ${rating}-star review.</p>
       <p style="font-size: 24px;">${stars}</p>
       <p><a href="${bookingLink(bookingId)}">View the full review</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 9. Payment Failed  (Stripe webhook → User gets email)
+// -------------------------------------------------------------------
+
+export async function notifyPaymentFailed(
+  email: string,
+  firstName: string,
+): Promise<void> {
+  const subscriptionLink = `${APP_URL}/subscription`;
+
+  return sendEmail({
+    to: email,
+    subject: "Your payment failed — action required",
+    html: `
+      <h2>Payment failed</h2>
+      <p>Hi ${firstName}, we were unable to process your subscription payment.</p>
+      <p>Your Premium access has been paused. To restore it, please update your payment method.</p>
+      <p><a href="${subscriptionLink}" style="display:inline-block;padding:12px 24px;background:#111;color:#fff;text-decoration:none;font-size:14px;letter-spacing:0.05em;">Fix my payment</a></p>
+      <p style="margin-top:24px;font-size:12px;color:#999;">Stripe will automatically retry your payment. If it fails again, your subscription will be cancelled.</p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 10. Payment Action Required  (SCA/3DS needed → User gets email)
+// -------------------------------------------------------------------
+
+export async function notifyPaymentActionRequired(
+  email: string,
+  firstName: string,
+): Promise<void> {
+  const subscriptionLink = `${APP_URL}/subscription`;
+
+  return sendEmail({
+    to: email,
+    subject: "Action required: authenticate your payment",
+    html: `
+      <h2>Your payment needs authentication</h2>
+      <p>Hi ${firstName}, your bank requires you to verify this payment (3D Secure / SCA).</p>
+      <p>Your Premium access has been paused until you complete the authentication.</p>
+      <p><a href="${subscriptionLink}" style="display:inline-block;padding:12px 24px;background:#111;color:#fff;text-decoration:none;font-size:14px;letter-spacing:0.05em;">Authenticate now</a></p>
+      <p style="margin-top:24px;font-size:12px;color:#999;">This is required by EU payment regulations (PSD2). It only takes a moment.</p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 11. Subscription Renewed  (Stripe webhook → User gets email)
+// -------------------------------------------------------------------
+
+export async function notifySubscriptionRenewed(
+  email: string,
+  firstName: string,
+  nextBillingDate?: Date,
+): Promise<void> {
+  const subscriptionLink = `${APP_URL}/subscription`;
+
+  return sendEmail({
+    to: email,
+    subject: "Your Premium subscription has been renewed",
+    html: `
+      <h2>Subscription renewed</h2>
+      <p>Hi ${firstName}, your FindYourBabysitter Premium subscription has been successfully renewed.</p>
+      ${nextBillingDate ? `<p><strong>Next billing date:</strong> ${formatDate(nextBillingDate)}</p>` : ""}
+      <p><a href="${subscriptionLink}">View your subscription</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 12. Subscription Canceled  (Stripe webhook → User gets email)
+// -------------------------------------------------------------------
+
+export async function notifySubscriptionCanceled(
+  email: string,
+  firstName: string,
+  accessUntil: Date,
+): Promise<void> {
+  const pricingLink = `${APP_URL}/pricing`;
+
+  return sendEmail({
+    to: email,
+    subject: "Your Premium subscription has been cancelled",
+    html: `
+      <h2>Subscription cancelled</h2>
+      <p>Hi ${firstName}, your FindYourBabysitter Premium subscription has been cancelled.</p>
+      <p>You will retain access to Premium features until <strong>${formatDate(accessUntil)}</strong>.</p>
+      <p>After that, your account will revert to the free plan.</p>
+      <p><a href="${pricingLink}">Resubscribe anytime</a></p>
     `,
   });
 }

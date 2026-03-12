@@ -68,6 +68,9 @@ export default function SubscriptionPage() {
     );
   }
 
+  const subStatus = data?.subscription?.status;
+  const hasPaymentIssue = subStatus === "past_due" || subStatus === "action_required";
+
   return (
     <div className="mx-auto max-w-lg">
       <h1 className="mb-6 font-serif text-3xl text-text-primary">{t("subscriptionTitle")}</h1>
@@ -75,6 +78,27 @@ export default function SubscriptionPage() {
       {success && (
         <div className="mb-6 border border-success/30 bg-success-muted p-4 text-sm text-success">
           {t("welcomePremium")}
+        </div>
+      )}
+
+      {/* Payment issue banner — shown prominently above everything else */}
+      {hasPaymentIssue && (
+        <div className="mb-6 border border-warning/40 bg-warning-muted p-4">
+          <p className="text-sm font-medium text-warning">
+            {subStatus === "action_required" ? t("actionRequired") : t("paymentFailed")}
+          </p>
+          <p className="mt-1 text-sm text-text-secondary">
+            {subStatus === "action_required"
+              ? t("actionRequiredMessage")
+              : t("paymentFailedMessage")}
+          </p>
+          <button
+            onClick={handlePortal}
+            disabled={portalLoading}
+            className="mt-3 inline-block bg-warning px-4 py-2 text-sm font-medium text-white transition hover:bg-warning/90 disabled:opacity-50"
+          >
+            {portalLoading ? "..." : t("fixPayment")}
+          </button>
         </div>
       )}
 
@@ -121,43 +145,65 @@ export default function SubscriptionPage() {
         </div>
       ) : (
         <div className="space-y-6">
-          {/* Free plan info */}
-          <div className="border border-border-default bg-surface-secondary p-6">
-            <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
-              {t("currentPlan")}
-            </p>
-            <p className="mt-1 font-serif text-xl text-text-primary">{t("free")}</p>
+          {/* Free plan info — only shown if no active subscription issue */}
+          {!hasPaymentIssue && (
+            <div className="border border-border-default bg-surface-secondary p-6">
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
+                {t("currentPlan")}
+              </p>
+              <p className="mt-1 font-serif text-xl text-text-primary">{t("free")}</p>
 
-            {data && (
-              <div className="mt-4 space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-text-secondary">{t("contactsThisWeek")}</span>
-                  <span className="text-text-primary">
-                    {data.usage.conversations.used}/{data.usage.conversations.limit}
-                  </span>
+              {data && (
+                <div className="mt-4 space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-text-secondary">{t("contactsThisWeek")}</span>
+                    <span className="text-text-primary">
+                      {data.usage.conversations.used}/{data.usage.conversations.limit}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-text-secondary">{t("likesToday")}</span>
+                    <span className="text-text-primary">
+                      {data.usage.likes.used}/{data.usage.likes.limit}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-text-secondary">{t("activeRequests")}</span>
+                    <span className="text-text-primary">
+                      {data.usage.requests.used}/{data.usage.requests.limit}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-text-secondary">{t("likesToday")}</span>
-                  <span className="text-text-primary">
-                    {data.usage.likes.used}/{data.usage.likes.limit}
-                  </span>
+              )}
+
+              <Link
+                href="/pricing"
+                className="mt-4 inline-block bg-accent px-4 py-2.5 text-sm font-medium text-white transition hover:bg-accent/90"
+              >
+                {t("upgrade")}
+              </Link>
+            </div>
+          )}
+
+          {/* Paused subscription info — shown when issue exists but no active premium */}
+          {hasPaymentIssue && data?.subscription && (
+            <div className="border border-border-default bg-surface-secondary p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
+                    {t("currentPlan")}
+                  </p>
+                  <p className="mt-1 font-serif text-xl text-text-primary">{t("premiumPlan")}</p>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-text-secondary">{t("activeRequests")}</span>
-                  <span className="text-text-primary">
-                    {data.usage.requests.used}/{data.usage.requests.limit}
-                  </span>
-                </div>
+                <span className="bg-warning-muted px-2.5 py-1 text-xs font-medium text-warning">
+                  {subStatus === "action_required" ? t("statusActionRequired") : t("statusPastDue")}
+                </span>
               </div>
-            )}
-
-            <Link
-              href="/pricing"
-              className="mt-4 inline-block bg-accent px-4 py-2.5 text-sm font-medium text-white transition hover:bg-accent/90"
-            >
-              {t("upgrade")}
-            </Link>
-          </div>
+              <p className="mt-3 text-sm text-text-tertiary">
+                {t("accessPaused")}
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>

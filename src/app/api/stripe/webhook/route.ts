@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
+import {
+  notifyPaymentFailed,
+  notifyPaymentActionRequired,
+  notifySubscriptionRenewed,
+  notifySubscriptionCanceled,
+} from "@/lib/email";
 import type Stripe from "stripe";
 
 export async function POST(request: Request) {
@@ -102,10 +108,22 @@ export async function POST(request: Request) {
 
       case "customer.subscription.deleted": {
         const sub = event.data.object as Stripe.Subscription;
+
+        // Fetch record before updating so we can get periodEnd for the email
+        const record = await prisma.subscription.findFirst({
+          where: { stripeSubscriptionId: sub.id },
+          include: { user: { select: { email: true, firstName: true } } },
+        });
+
         await prisma.subscription.updateMany({
           where: { stripeSubscriptionId: sub.id },
           data: { status: "expired" },
         });
+
+        if (record?.user) {
+          const accessUntil = record.currentPeriodEnd;
+          notifySubscriptionCanceled(record.user.email, record.user.firstName, accessUntil).catch(console.error);
+        }
         break;
       }
 
@@ -114,10 +132,81 @@ export async function POST(request: Request) {
         const subRef = invoice.parent?.subscription_details?.subscription;
         if (!subRef) break;
         const subId = typeof subRef === "string" ? subRef : subRef.id;
+
         await prisma.subscription.updateMany({
           where: { stripeSubscriptionId: subId },
           data: { status: "past_due" },
         });
+
+        // Send payment failed email
+        const customerId = typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id;
+        if (customerId) {
+          const user = await prisma.user.findFirst({
+            where: { stripeCustomerId: customerId },
+            select: { email: true, firstName: true },
+          });
+          if (user) {
+            notifyPaymentFailed(user.email, user.firstName).catch(console.error);
+          }
+        }
+        break;
+      }
+
+      case "invoice.payment_action_required": {
+        // SCA / 3D Secure authentication required (common in Germany/EU)
+        const invoice = event.data.object as Stripe.Invoice;
+        const subRef = invoice.parent?.subscription_details?.subscription;
+        if (!subRef) break;
+        const subId = typeof subRef === "string" ? subRef : subRef.id;
+
+        await prisma.subscription.updateMany({
+          where: { stripeSubscriptionId: subId },
+          data: { status: "action_required" },
+        });
+
+        // Send authentication required email
+        const customerId = typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id;
+        if (customerId) {
+          const user = await prisma.user.findFirst({
+            where: { stripeCustomerId: customerId },
+            select: { email: true, firstName: true },
+          });
+          if (user) {
+            notifyPaymentActionRequired(user.email, user.firstName).catch(console.error);
+          }
+        }
+        break;
+      }
+
+      case "invoice.payment_succeeded": {
+        // Subscription renewal succeeded — restore active status
+        // (initial checkout is handled by checkout.session.completed)
+        const invoice = event.data.object as Stripe.Invoice;
+        if (invoice.billing_reason !== "subscription_cycle") break;
+
+        const subRef = invoice.parent?.subscription_details?.subscription;
+        if (!subRef) break;
+        const subId = typeof subRef === "string" ? subRef : subRef.id;
+
+        await prisma.subscription.updateMany({
+          where: { stripeSubscriptionId: subId },
+          data: { status: "active" },
+        });
+
+        // Send renewal confirmation email
+        const customerId = typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id;
+        if (customerId) {
+          const user = await prisma.user.findFirst({
+            where: { stripeCustomerId: customerId },
+            select: { email: true, firstName: true },
+          });
+          if (user) {
+            const nextBillingDate = invoice.lines?.data?.[0]?.period?.end
+              ? new Date(invoice.lines.data[0].period.end * 1000)
+              : undefined;
+            notifySubscriptionRenewed(user.email, user.firstName, nextBillingDate).catch(console.error);
+          }
+        }
         break;
       }
     }

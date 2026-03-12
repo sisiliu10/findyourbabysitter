@@ -799,6 +799,14 @@
     "feature_seeWhoLikedYou": "See who liked you",
     "freeLimit_messages": "3 contacts/week",
     "freeLimit_likes": "10 likes/day",
-    "freeLimit_requests": "2 active requests"
+    "freeLimit_requests": "2 active requests",
+    "paymentFailed": "Payment failed",
+    "paymentFailedMessage": "We couldn't process your payment. Please update your payment method to restore Premium access.",
+    "actionRequired": "Authentication required",
+    "actionRequiredMessage": "Your bank requires you to verify this payment (3D Secure). Please authenticate to restore Premium access.",
+    "fixPayment": "Fix payment",
+    "statusPastDue": "Past due",
+    "statusActionRequired": "Action required",
+    "accessPaused": "Premium access is currently paused due to a payment issue."
   }
 }

@@ -799,6 +799,14 @@
     "feature_seeWhoLikedYou": "Sehen, wer dich geliked hat",
     "freeLimit_messages": "3 Kontakte/Woche",
     "freeLimit_likes": "10 Likes/Tag",
-    "freeLimit_requests": "2 aktive Anfragen"
+    "freeLimit_requests": "2 aktive Anfragen",
+    "paymentFailed": "Zahlung fehlgeschlagen",
+    "paymentFailedMessage": "Deine Zahlung konnte nicht verarbeitet werden. Bitte aktualisiere deine Zahlungsmethode, um den Premium-Zugang wiederherzustellen.",
+    "actionRequired": "Authentifizierung erforderlich",
+    "actionRequiredMessage": "Deine Bank verlangt eine Verifizierung dieser Zahlung (3D Secure). Bitte authentifiziere dich, um den Premium-Zugang wiederherzustellen.",
+    "fixPayment": "Zahlung beheben",
+    "statusPastDue": "Zahlung überfällig",
+    "statusActionRequired": "Aktion erforderlich",
+    "accessPaused": "Der Premium-Zugang ist aufgrund eines Zahlungsproblems derzeit pausiert."
   }
 }
