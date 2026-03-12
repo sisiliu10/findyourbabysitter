@@ -32,14 +32,17 @@ export default function OnboardingPage() {
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
 
-  // Shared fields
+  // Shared fields — "streetAddress" replaces the old misnamed "state" variable
   const [birthday, setBirthday] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [phone, setPhone] = useState("");
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
+
+  // Step 1 validation
+  const [step1Attempted, setStep1Attempted] = useState(false);
 
   // Parent childcare needs
   const [childcareTypes, setChildcareTypes] = useState<string[]>([]);
@@ -74,22 +77,40 @@ export default function OnboardingPage() {
     });
   }
 
+  function handleStep1Continue() {
+    setStep1Attempted(true);
+    const valid =
+      !!birthday &&
+      !!city &&
+      !!zipCode &&
+      (role !== "BABYSITTER" || !!phone);
+    if (valid) setStep(2);
+  }
+
   async function handleSubmit() {
     setError("");
     setLoading(true);
 
     const district = getDistrictFromZip(zipCode);
-    const body: Record<string, unknown> = { city, state, zipCode, district, phone, latitude, longitude, bio };
+    // API key stays "state" to keep backend contract intact
+    const body: Record<string, unknown> = {
+      city,
+      state: streetAddress,
+      zipCode,
+      district,
+      phone,
+      latitude,
+      longitude,
+      bio,
+    };
     if (birthday) body.birthday = birthday;
 
-    // Include parent childcare needs
     if (role === "PARENT") {
       body.childcareTypes = JSON.stringify(childcareTypes);
       body.timesOfDay = JSON.stringify(timesOfDay);
       body.careFrequency = careFrequency;
     }
 
-    // Upload avatar if selected
     if (avatarFile) {
       const avatarData = new FormData();
       avatarData.append("avatar", avatarFile);
@@ -146,6 +167,14 @@ export default function OnboardingPage() {
   const inputClass =
     "mt-1 block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition focus:border-text-primary focus:outline-none";
 
+  const inputErrorClass =
+    "mt-1 block w-full border border-danger bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition focus:border-danger focus:outline-none";
+
+  function FieldError({ show, message }: { show: boolean; message: string }) {
+    if (!show) return null;
+    return <p className="mt-1 text-xs text-danger">{message}</p>;
+  }
+
   return (
     <div className="mx-auto max-w-lg">
       <div className="mb-8">
@@ -155,7 +184,7 @@ export default function OnboardingPage() {
           {Array.from({ length: totalSteps }).map((_, i) => (
             <div
               key={i}
-              className={`h-1 flex-1 transition ${i < step ? "bg-text-primary" : "bg-surface-tertiary"}`}
+              className={`h-1 flex-1 transition-colors duration-300 ${i < step ? "bg-text-primary" : "bg-surface-tertiary"}`}
             />
           ))}
         </div>
@@ -169,26 +198,47 @@ export default function OnboardingPage() {
       {step === 1 && (
         <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("aboutYou")}</h2>
+
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
               {t("birthday")} <span className="text-danger">*</span>
             </label>
-            <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} className={inputClass} max={new Date().toISOString().split("T")[0]} />
-            <p className="mt-1.5 text-xs text-text-tertiary">{t("birthdayHint")}</p>
+            <input
+              type="date"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+              className={step1Attempted && !birthday ? inputErrorClass : inputClass}
+              max={new Date().toISOString().split("T")[0]}
+            />
+            {!step1Attempted && (
+              <p className="mt-1.5 text-xs text-text-tertiary">{t("birthdayHint")}</p>
+            )}
+            <FieldError show={step1Attempted && !birthday} message={t("birthdayRequired")} />
           </div>
+
           <h2 className="mt-2 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourLocation")}</h2>
+
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("city")}</label>
-            <input value={city} onChange={(e) => setCity(e.target.value)} className={inputClass} placeholder="Berlin" />
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("city")} <span className="text-danger">*</span>
+            </label>
+            <input
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className={step1Attempted && !city ? inputErrorClass : inputClass}
+              placeholder="Berlin"
+            />
+            <FieldError show={step1Attempted && !city} message={t("cityRequired")} />
           </div>
+
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("address")}</label>
               <AddressAutocomplete
-                value={state}
-                onChange={setState}
+                value={streetAddress}
+                onChange={setStreetAddress}
                 onSelect={(result) => {
-                  setState(result.address);
+                  setStreetAddress(result.address);
                   setCity(result.city);
                   setZipCode(result.zipCode);
                   setLatitude(result.latitude);
@@ -198,28 +248,45 @@ export default function OnboardingPage() {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("zipCode")}</label>
-              <input value={zipCode} onChange={(e) => setZipCode(e.target.value)} className={inputClass} placeholder="10117" />
+              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
+                {t("zipCode")} <span className="text-danger">*</span>
+              </label>
+              <input
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
+                className={step1Attempted && !zipCode ? inputErrorClass : inputClass}
+                placeholder="10117"
+              />
+              <FieldError show={step1Attempted && !zipCode} message={t("zipRequired")} />
             </div>
           </div>
+
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
               {role === "BABYSITTER" ? t("phoneRequired") : t("phoneOptional")}
               {role === "BABYSITTER" && <span className="text-danger"> *</span>}
             </label>
-            <input value={phone} onChange={(e) => setPhone(e.target.value)} className={inputClass} placeholder="+49 30 123 4567" />
-            {role === "BABYSITTER" && (
+            <input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className={step1Attempted && role === "BABYSITTER" && !phone ? inputErrorClass : inputClass}
+              placeholder="+49 30 123 4567"
+            />
+            {role === "BABYSITTER" && !phone && step1Attempted ? (
+              <FieldError show message={t("phoneRequired2")} />
+            ) : role === "BABYSITTER" ? (
               <p className="mt-1.5 text-xs text-text-tertiary">{t("phoneVerificationHint")}</p>
-            )}
+            ) : null}
           </div>
+
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("bioOptional")}</label>
             <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={3} className={inputClass} placeholder={t("bioPlaceholderParent")} />
           </div>
 
           <button
-            onClick={() => setStep(2)}
-            disabled={!city || !state || !zipCode || !birthday || (role === "BABYSITTER" && !phone) || loading}
+            onClick={handleStep1Continue}
+            disabled={loading}
             className="mt-4 w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
           >
             {tc("continue")}
@@ -238,7 +305,7 @@ export default function OnboardingPage() {
           return (
             <div className="mb-3 flex items-center gap-2">
               <span
-                className={`flex h-4 w-4 shrink-0 items-center justify-center transition-colors ${
+                className={`flex h-4 w-4 shrink-0 items-center justify-center transition-colors duration-200 ${
                   done ? "text-success" : needsAttempted ? "text-danger" : "text-text-muted"
                 }`}
               >
@@ -329,12 +396,18 @@ export default function OnboardingPage() {
             </div>
 
             {needsAttempted && !canSubmit && (
-              <p className="text-xs text-danger">
-                {t("selectAllSections")}
-              </p>
+              <p className="text-xs text-danger">{t("selectAllSections")}</p>
             )}
 
-            <div className="mt-4 flex gap-3">
+            {/* "What happens next" hint */}
+            <div className="flex items-start gap-2.5 border border-border-default bg-surface-primary px-4 py-3">
+              <svg className="mt-0.5 h-4 w-4 shrink-0 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-xs leading-relaxed text-text-secondary">{t("afterSetupHint")}</p>
+            </div>
+
+            <div className="flex gap-3">
               <button onClick={() => setStep(1)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
                 {tc("back")}
               </button>
