@@ -10,15 +10,6 @@ interface ScrollRevealTextProps {
   label?: string;
 }
 
-// Small decorative 4-pointed star SVG
-function SparkleIcon({ size = 20, className = "" }: { size?: number; className?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
-      <path d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z" />
-    </svg>
-  );
-}
-
 // Editorial sentence numbers
 const SENTENCE_NUMBERS = ["01", "02", "03"];
 
@@ -59,11 +50,6 @@ export default function ScrollRevealText({
     });
     return { words };
   });
-
-  // Separator trigger points
-  const sep1Progress = (sentenceEntries[0].words.length / totalWords) * 0.8 + 0.05;
-  const sep2Progress =
-    ((sentenceEntries[0].words.length + sentenceEntries[1].words.length) / totalWords) * 0.8 + 0.05;
 
   return (
     <div ref={containerRef} className="relative" style={{ minHeight: "170vh" }}>
@@ -136,13 +122,6 @@ export default function ScrollRevealText({
                       ))}
                     </p>
                   </div>
-                  {/* Decorative separator between sentences */}
-                  {si < sentenceEntries.length - 1 && (
-                    <SentenceSeparator
-                      scrollYProgress={scrollYProgress}
-                      triggerAt={si === 0 ? sep1Progress : sep2Progress}
-                    />
-                  )}
                 </div>
               );
             })}
@@ -187,24 +166,3 @@ function Word({
   );
 }
 
-function SentenceSeparator({
-  scrollYProgress,
-  triggerAt,
-}: {
-  scrollYProgress: MotionValue<number>;
-  triggerAt: number;
-}) {
-  const opacity = useTransform(scrollYProgress, [triggerAt - 0.02, triggerAt + 0.05], [0, 1]);
-  const scale = useTransform(scrollYProgress, [triggerAt - 0.02, triggerAt + 0.05], [0.6, 1]);
-
-  return (
-    <motion.div
-      style={{ opacity, scale }}
-      className="flex items-center gap-3 mb-5 sm:mb-6 text-accent/50"
-    >
-      <SparkleIcon size={10} />
-      <SparkleIcon size={14} />
-      <SparkleIcon size={10} />
-    </motion.div>
-  );
-}
