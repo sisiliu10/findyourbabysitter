@@ -872,6 +872,8 @@
     "step5Title": "Erzähl Babysittern von deiner Familie",
     "descriptionLabel": "Was suchst du?",
     "descriptionPlaceholder": "Beschreibe deine Familie, besondere Bedürfnisse, wie ein typischer Tag aussieht...",
+    "descriptionMinHint": "Mindestens {min} Zeichen erforderlich ({current}/{min})",
+    "descriptionMinHintDone": "{current} Zeichen ✓",
     "cityLabel": "Stadt",
     "zipCodeLabel": "Postleitzahl",
     "budgetLabel": "Dein Budget (optional)",

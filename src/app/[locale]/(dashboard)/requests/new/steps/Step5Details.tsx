@@ -15,22 +15,38 @@ interface Props {
 export function Step5Details({ state, onChange, onNext, onBack }: Props) {
   const t = useTranslations("requestWizard");
 
+  const MIN_DESCRIPTION = 20;
+
   function canContinue() {
-    return state.city.trim().length > 0 && state.zipCode.trim().length >= 4;
+    return (
+      state.description.trim().length >= MIN_DESCRIPTION &&
+      state.city.trim().length > 0 &&
+      state.zipCode.trim().length >= 4
+    );
   }
+
+  const descLen = state.description.trim().length;
+  const descMet = descLen >= MIN_DESCRIPTION;
 
   return (
     <div className="space-y-6">
       <h2 className="font-serif text-xl text-text-primary">{t("step5Title")}</h2>
 
-      <Textarea
-        label={t("descriptionLabel")}
-        value={state.description}
-        onChange={(e) => onChange({ description: e.target.value })}
-        placeholder={t("descriptionPlaceholder")}
-        rows={4}
-        maxLength={2000}
-      />
+      <div className="space-y-1">
+        <Textarea
+          label={t("descriptionLabel")}
+          value={state.description}
+          onChange={(e) => onChange({ description: e.target.value })}
+          placeholder={t("descriptionPlaceholder")}
+          rows={4}
+          maxLength={2000}
+        />
+        <p className={`text-xs ${descMet ? "text-green-600" : "text-text-tertiary"}`}>
+          {descMet
+            ? t("descriptionMinHintDone", { current: descLen })
+            : t("descriptionMinHint", { current: descLen, min: MIN_DESCRIPTION })}
+        </p>
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Input

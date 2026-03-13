@@ -872,6 +872,8 @@
     "step5Title": "Tell sitters about your family",
     "descriptionLabel": "What are you looking for?",
     "descriptionPlaceholder": "Describe your family, any special needs, what a typical day looks like...",
+    "descriptionMinHint": "At least {min} characters required ({current}/{min})",
+    "descriptionMinHintDone": "{current} characters ✓",
     "cityLabel": "City",
     "zipCodeLabel": "Zip code",
     "budgetLabel": "Your budget (optional)",
