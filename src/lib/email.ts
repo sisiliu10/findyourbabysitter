@@ -272,8 +272,30 @@ export async function notifyNewMessage(
 }
 
 // -------------------------------------------------------------------
-// 8. Review Submitted  (Parent reviews → Sitter gets email)
+// 8. New Match  (Both users like each other → waiting user gets email)
 // -------------------------------------------------------------------
+
+export async function notifyNewMatch(
+  recipientEmail: string,
+  matchedUserName: string,
+  matchId: string,
+): Promise<void> {
+  return sendEmail({
+    to: recipientEmail,
+    subject: `It's a match! ${matchedUserName} liked you back`,
+    html: `
+      <h2>It's a match!</h2>
+      <p><strong>${matchedUserName}</strong> liked you back on FindYourBabysitter.</p>
+      <p>Say hello and start a conversation!</p>
+      <p><a href="${APP_URL}/messages/${matchId}" style="display:inline-block;padding:12px 24px;background:#111;color:#fff;text-decoration:none;font-size:14px;letter-spacing:0.05em;">Say hello</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
+// 9. Review Submitted  (Parent reviews → Sitter gets email)
+// -------------------------------------------------------------------
+
 
 
 export async function notifyReviewSubmitted(

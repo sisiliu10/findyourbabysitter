@@ -102,7 +102,10 @@ model ChildcareRequest {
 
   title           String
   description     String   @default("")
-  dateNeeded      DateTime
+  careType        String   @default("occasional") // "recurring" | "occasional"
+  recurringDays   String?  // JSON array e.g. ["MON","WED","FRI"]
+  careCategory    String?  // "after_school"|"full_day"|"overnight"|"date_night"|"other"
+  dateNeeded      DateTime?
   startTime       String
   endTime         String
   durationHours   Float

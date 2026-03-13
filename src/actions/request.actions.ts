@@ -7,6 +7,25 @@ import { createRequestSchema } from "@/lib/validators";
 import { canCreateRequest } from "@/lib/subscription";
 import type { ActionResult } from "@/types";
 
+function generateTitle(
+  careType: string,
+  careCategory?: string,
+  numberOfChildren?: number
+): string {
+  const catLabels: Record<string, string> = {
+    after_school: "After school care",
+    full_day: "Full day care",
+    overnight: "Overnight care",
+    date_night: "Date night babysitting",
+    other: "Childcare",
+  };
+  const catLabel = careCategory ? (catLabels[careCategory] ?? "Childcare") : "Childcare";
+  const freq = careType === "recurring" ? "Recurring" : "One-time";
+  const n = numberOfChildren ?? 1;
+  const childWord = n === 1 ? "1 child" : `${n} children`;
+  return `${freq} ${catLabel} — ${childWord}`;
+}
+
 export async function createRequest(formData: FormData): Promise<ActionResult> {
   let requestId: string | undefined;
 
@@ -14,21 +33,21 @@ export async function createRequest(formData: FormData): Promise<ActionResult> {
     const session = await requireAuth();
 
     const raw = {
-      title: formData.get("title") as string,
-      description: (formData.get("description") as string) || undefined,
-      dateNeeded: formData.get("dateNeeded") as string,
+      careType: formData.get("careType") as string,
+      careCategory: (formData.get("careCategory") as string) || undefined,
+      recurringDays: (formData.get("recurringDays") as string) || undefined,
+      dateNeeded: (formData.get("dateNeeded") as string) || undefined,
       startTime: formData.get("startTime") as string,
       endTime: formData.get("endTime") as string,
       durationHours: parseFloat(formData.get("durationHours") as string),
       numberOfChildren: parseInt(formData.get("numberOfChildren") as string, 10),
       childrenJson: formData.get("childrenJson") as string,
       city: formData.get("city") as string,
-      state: formData.get("state") as string,
       zipCode: formData.get("zipCode") as string,
+      description: (formData.get("description") as string) || undefined,
       maxHourlyRate: formData.get("maxHourlyRate")
         ? parseFloat(formData.get("maxHourlyRate") as string)
         : undefined,
-      specialNotes: (formData.get("specialNotes") as string) || undefined,
     };
 
     const parsed = createRequestSchema.safeParse(raw);
@@ -41,28 +60,30 @@ export async function createRequest(formData: FormData): Promise<ActionResult> {
     // Check request limit for free parents
     const check = await canCreateRequest(session.userId);
     if (!check.allowed) {
-      return {
-        success: false,
-        error: "upgrade_required",
-      };
+      return { success: false, error: "upgrade_required" };
     }
+
+    const title = generateTitle(data.careType, data.careCategory, data.numberOfChildren);
 
     const request = await prisma.childcareRequest.create({
       data: {
         parentId: session.userId,
-        title: data.title,
+        title,
         description: data.description || "",
-        dateNeeded: new Date(data.dateNeeded),
+        careType: data.careType,
+        careCategory: data.careCategory ?? null,
+        recurringDays: data.recurringDays ?? null,
+        dateNeeded: data.dateNeeded ? new Date(data.dateNeeded) : null,
         startTime: data.startTime,
         endTime: data.endTime,
         durationHours: data.durationHours,
         numberOfChildren: data.numberOfChildren,
         childrenJson: data.childrenJson,
         city: data.city,
-        state: data.state,
+        state: "Berlin",
         zipCode: data.zipCode,
         maxHourlyRate: data.maxHourlyRate ?? null,
-        specialNotes: data.specialNotes || "",
+        specialNotes: "",
       },
     });
 
@@ -75,6 +96,60 @@ export async function createRequest(formData: FormData): Promise<ActionResult> {
   }
 
   redirect(`/requests/${requestId}`);
+}
+
+export async function expressInterest(requestId: string): Promise<ActionResult> {
+  try {
+    const session = await requireAuth();
+
+    if (session.role !== "BABYSITTER") {
+      return { success: false, error: "Only sitters can express interest" };
+    }
+
+    const request = await prisma.childcareRequest.findUnique({
+      where: { id: requestId },
+    });
+
+    if (!request || request.status !== "OPEN") {
+      return { success: false, error: "Request not found or no longer open" };
+    }
+
+    const existing = await prisma.booking.findUnique({
+      where: { requestId_sitterId: { requestId, sitterId: session.userId } },
+    });
+    if (existing) {
+      return { success: false, error: "already_expressed" };
+    }
+
+    const profile = await prisma.babysitterProfile.findUnique({
+      where: { userId: session.userId },
+      select: { hourlyRate: true },
+    });
+
+    const agreedRate = profile?.hourlyRate ?? 0;
+    const totalEstimated = agreedRate * request.durationHours;
+
+    const booking = await prisma.booking.create({
+      data: {
+        requestId,
+        parentId: request.parentId,
+        sitterId: session.userId,
+        dateBooked: request.dateNeeded ?? new Date(),
+        startTime: request.startTime,
+        endTime: request.endTime,
+        agreedRate,
+        totalEstimated,
+        status: "PENDING",
+      },
+    });
+
+    return { success: true, data: { bookingId: booking.id } };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to express interest",
+    };
+  }
 }
 
 export async function closeRequest(requestId: string): Promise<ActionResult> {

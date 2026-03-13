@@ -47,12 +47,21 @@ export default async function RequestDetailPage({
     redirect("/dashboard");
   }
 
-  let children: { name: string; age: number }[] = [];
+  type LegacyChild = { name: string; age: number };
+  type NewChild = { ageRange: string };
+  type AnyChild = LegacyChild | NewChild;
+  let children: AnyChild[] = [];
   try {
     children = JSON.parse(request.childrenJson);
   } catch {
     children = [];
   }
+
+  const DAY_LABELS: Record<string, string> = { MON: "Mon", TUE: "Tue", WED: "Wed", THU: "Thu", FRI: "Fri", SAT: "Sat", SUN: "Sun" };
+  const CAT_LABELS: Record<string, string> = {
+    after_school: "After school", full_day: "Full day", overnight: "Overnight",
+    date_night: "Date night / Evening", other: "Other",
+  };
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -79,9 +88,29 @@ export default async function RequestDetailPage({
           <h2 className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("details")}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("date")}</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("careType")}</p>
               <p className="mt-1 text-sm text-text-primary">
-                {formatDate(request.dateNeeded)}
+                {request.careType === "recurring" ? t("recurring") : t("occasional")}
+                {request.careCategory ? ` · ${CAT_LABELS[request.careCategory] ?? request.careCategory}` : ""}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
+                {request.careType === "recurring" ? t("recurringDays") : t("date")}
+              </p>
+              <p className="mt-1 text-sm text-text-primary">
+                {request.careType === "recurring"
+                  ? (() => {
+                      if (!request.recurringDays) return "—";
+                      try {
+                        const days = JSON.parse(request.recurringDays) as string[];
+                        return days.map((d) => DAY_LABELS[d] ?? d).join(", ");
+                      } catch { return "—"; }
+                    })()
+                  : request.dateNeeded
+                    ? formatDate(request.dateNeeded)
+                    : "—"
+                }
               </p>
             </div>
             <div>
@@ -94,7 +123,7 @@ export default async function RequestDetailPage({
             <div>
               <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("location")}</p>
               <p className="mt-1 text-sm text-text-primary">
-                {[request.city, request.state, request.zipCode]
+                {[request.city, request.zipCode]
                   .filter(Boolean)
                   .join(", ")}
               </p>
@@ -108,11 +137,11 @@ export default async function RequestDetailPage({
               </div>
             )}
           </div>
-          {request.specialNotes && (
+          {(request.description || request.specialNotes) && (
             <div className="mt-4">
-              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("specialNotes")}</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("descriptionLabel")}</p>
               <p className="mt-1 whitespace-pre-wrap text-sm text-text-secondary">
-                {request.specialNotes}
+                {request.description || request.specialNotes}
               </p>
             </div>
           )}
@@ -125,22 +154,33 @@ export default async function RequestDetailPage({
               {t("childrenCount", { count: children.length })}
             </h2>
             <div className="space-y-2">
-              {children.map((child, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-3 border border-border-default bg-surface-tertiary px-4 py-2.5"
-                >
-                  <div className="flex h-8 w-8 items-center justify-center bg-accent-muted text-xs font-semibold text-accent">
-                    {child.name?.charAt(0)?.toUpperCase() || "C"}
+              {children.map((child, i) => {
+                const isLegacy = "age" in child;
+                const label = isLegacy
+                  ? t("ageLabel", { age: (child as LegacyChild).age })
+                  : (child as NewChild).ageRange + " yrs";
+                const initials = isLegacy && (child as LegacyChild).name
+                  ? (child as LegacyChild).name.charAt(0).toUpperCase()
+                  : String(i + 1);
+                return (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 border border-border-default bg-surface-tertiary px-4 py-2.5"
+                  >
+                    <div className="flex h-8 w-8 items-center justify-center bg-accent-muted text-xs font-semibold text-accent">
+                      {initials}
+                    </div>
+                    <div>
+                      <p className="text-sm text-text-primary font-medium">
+                        {isLegacy && (child as LegacyChild).name
+                          ? (child as LegacyChild).name
+                          : t("childFallback", { n: i + 1 })}
+                      </p>
+                      <p className="text-xs text-text-secondary">{label}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-text-primary font-medium">
-                      {child.name || t("childFallback", { n: i + 1 })}
-                    </p>
-                    <p className="text-xs text-text-secondary">{t("ageLabel", { age: child.age })}</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

@@ -26,7 +26,7 @@ export async function GET() {
     const matchIds = matches.map((m) => m.id);
 
     // Count unread messages not sent by the current user
-    const count = await prisma.message.count({
+    const unreadMessages = await prisma.message.count({
       where: {
         senderId: { not: userId },
         isRead: false,
@@ -36,6 +36,18 @@ export async function GET() {
         ],
       },
     });
+
+    // Count new matches with no messages yet (waiting to be contacted)
+    const newMatchCount = matchIds.length > 0
+      ? await prisma.match.count({
+          where: {
+            id: { in: matchIds },
+            messages: { none: {} },
+          },
+        })
+      : 0;
+
+    const count = unreadMessages + newMatchCount;
 
     return NextResponse.json({ success: true, data: { count } });
   } catch (error) {

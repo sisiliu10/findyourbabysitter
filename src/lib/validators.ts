@@ -41,21 +41,32 @@ export const sitterOnboardingSchema = z.object({
   gender: z.string().optional(),
 });
 
-export const createRequestSchema = z.object({
-  title: z.string().min(3, "Title must be at least 3 characters").max(200),
-  description: z.string().max(2000).optional(),
-  dateNeeded: z.string(),
-  startTime: z.string().regex(/^\d{2}:\d{2}$/, "Use HH:MM format"),
-  endTime: z.string().regex(/^\d{2}:\d{2}$/, "Use HH:MM format"),
-  durationHours: z.number().positive(),
-  numberOfChildren: z.number().int().min(1).max(10),
-  childrenJson: z.string(),
-  city: z.string().min(1),
-  state: z.string().min(1),
-  zipCode: z.string().min(5),
-  maxHourlyRate: z.number().positive().optional(),
-  specialNotes: z.string().max(1000).optional(),
-});
+export const createRequestSchema = z
+  .object({
+    careType: z.enum(["recurring", "occasional"]),
+    careCategory: z
+      .enum(["after_school", "full_day", "overnight", "date_night", "other"])
+      .optional(),
+    recurringDays: z.string().optional(), // JSON array e.g. '["MON","WED"]'
+    dateNeeded: z.string().optional(),    // ISO date, only for occasional
+    startTime: z.string().regex(/^\d{2}:\d{2}$/, "Use HH:MM format"),
+    endTime: z.string().regex(/^\d{2}:\d{2}$/, "Use HH:MM format"),
+    durationHours: z.number().positive(),
+    numberOfChildren: z.number().int().min(1).max(10),
+    childrenJson: z.string(), // JSON array of { ageRange: string }
+    city: z.string().min(1),
+    zipCode: z.string().min(4),
+    description: z.string().max(2000).optional(),
+    maxHourlyRate: z.number().positive().optional(),
+  })
+  .refine((d) => d.careType === "recurring" || !!d.dateNeeded, {
+    message: "Date is required for one-time care",
+    path: ["dateNeeded"],
+  })
+  .refine((d) => d.careType === "occasional" || !!d.recurringDays, {
+    message: "Please select at least one day",
+    path: ["recurringDays"],
+  });
 
 export const createBookingSchema = z.object({
   requestId: z.string().min(1),

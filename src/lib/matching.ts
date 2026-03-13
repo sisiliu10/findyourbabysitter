@@ -37,14 +37,26 @@ export async function findMatchingSitters(requestId: string): Promise<ScoredSitt
   });
   if (!request) throw new Error("Request not found");
 
-  const children = JSON.parse(request.childrenJson) as { age: number }[];
-  const childAges = children.map((c) => c.age);
+  const children = JSON.parse(request.childrenJson) as Array<{ age?: number; ageRange?: string }>;
+  // Support both legacy {age} and new {ageRange} child formats
+  const childAges = children
+    .map((c) => c.age ?? (c.ageRange ? parseInt(c.ageRange.split("-")[0]) : null))
+    .filter((a): a is number => a !== null);
   const minAge = childAges.length > 0 ? Math.min(...childAges) : 0;
   const maxAge = childAges.length > 0 ? Math.max(...childAges) : 17;
 
-  const dayOfWeek = new Date(request.dateNeeded)
-    .toLocaleDateString("en-US", { weekday: "long" })
-    .toLowerCase();
+  // Determine which day(s) to check availability against
+  const recurringDayMap: Record<string, string> = {
+    MON: "monday", TUE: "tuesday", WED: "wednesday", THU: "thursday",
+    FRI: "friday", SAT: "saturday", SUN: "sunday",
+  };
+  let daysToCheck: string[] = [];
+  if (request.dateNeeded) {
+    daysToCheck = [new Date(request.dateNeeded).toLocaleDateString("en-US", { weekday: "long" }).toLowerCase()];
+  } else if (request.recurringDays) {
+    const codes = JSON.parse(request.recurringDays) as string[];
+    daysToCheck = codes.map((c) => recurringDayMap[c]).filter(Boolean);
+  }
   const timeBucket = getTimeBucket(request.startTime);
 
   const sitters = await prisma.babysitterProfile.findMany({
@@ -87,7 +99,8 @@ export async function findMatchingSitters(requestId: string): Promise<ScoredSitt
     }
 
     const availability = JSON.parse(profile.availabilityJson) as Record<string, string[]>;
-    if (availability[dayOfWeek]?.includes(timeBucket)) {
+    const isAvailable = daysToCheck.some((day) => availability[day]?.includes(timeBucket));
+    if (isAvailable) {
       score += 25;
       reasons.push("Available at requested time");
     }

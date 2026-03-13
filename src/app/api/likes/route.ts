@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
+import { notifyNewMatch } from "@/lib/email";
 import { canLikeToday } from "@/lib/subscription";
 
 // POST /api/likes — Record a like; detect mutual match
@@ -96,6 +97,18 @@ export async function POST(request: Request) {
       const matchedUser =
         match.user1Id === session.userId ? match.user2 : match.user1;
 
+      // Notify the waiting user (who liked first) — that's matchedUser (User A)
+      // Tell them the current user's name (User B, who just completed the match)
+      const currentUserInMatch = match.user1Id === session.userId ? match.user1 : match.user2;
+      const waitingUserRecord = await prisma.user.findUnique({
+        where: { id: matchedUser.id },
+        select: { email: true },
+      });
+      if (waitingUserRecord?.email) {
+        const myName = `${currentUserInMatch.firstName} ${currentUserInMatch.lastName}`;
+        notifyNewMatch(waitingUserRecord.email, myName, match.id).catch(console.error);
+      }
+
       return NextResponse.json({
         success: true,
         data: {
@@ -119,6 +132,54 @@ export async function POST(request: Request) {
         success: false,
         error:
           error instanceof Error ? error.message : "Failed to process like",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE /api/likes — Undo a like (and the match if one was created)
+export async function DELETE(request: Request) {
+  try {
+    const session = await getSession();
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: "Not authenticated" },
+        { status: 401 }
+      );
+    }
+
+    const body = await request.json();
+    const { toUserId } = body;
+
+    if (!toUserId || typeof toUserId !== "string") {
+      return NextResponse.json(
+        { success: false, error: "toUserId is required" },
+        { status: 400 }
+      );
+    }
+
+    // Delete the like
+    await prisma.like.deleteMany({
+      where: { fromUserId: session.userId, toUserId },
+    });
+
+    // Delete the match if one exists (match messages cascade-delete automatically)
+    const [u1, u2] =
+      session.userId < toUserId
+        ? [session.userId, toUserId]
+        : [toUserId, session.userId];
+
+    await prisma.match.deleteMany({
+      where: { user1Id: u1, user2Id: u2 },
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to undo like",
       },
       { status: 500 }
     );

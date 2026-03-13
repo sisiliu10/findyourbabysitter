@@ -62,7 +62,7 @@ export async function createBooking(formData: FormData): Promise<ActionResult> {
         requestId,
         parentId: session.userId,
         sitterId,
-        dateBooked: request.dateNeeded,
+        dateBooked: request.dateNeeded ?? new Date(),
         startTime: request.startTime,
         endTime: request.endTime,
         agreedRate,

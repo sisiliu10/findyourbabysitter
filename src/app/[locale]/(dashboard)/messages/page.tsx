@@ -20,6 +20,7 @@ interface ConversationItem {
   } | null;
   unreadCount: number;
   subtitle: string;
+  isNewMatch: boolean;
 }
 
 export default async function MessagesListPage() {
@@ -126,23 +127,28 @@ export default async function MessagesListPage() {
       lastMessage: booking.messages[0] || null,
       unreadCount: bookingUnreadMap.get(booking.id) ?? 0,
       subtitle: booking.request?.title || "",
+      isNewMatch: false,
     });
   }
 
   for (const match of matches) {
     const otherPerson =
       match.user1Id === session.userId ? match.user2 : match.user1;
+    const lastMessage = match.messages[0] || null;
     conversations.push({
       conversationId: match.id,
       otherPerson,
-      lastMessage: match.messages[0] || null,
+      lastMessage,
       unreadCount: matchUnreadMap.get(match.id) ?? 0,
       subtitle: t("matchConversation"),
+      isNewMatch: lastMessage === null,
     });
   }
 
-  // Sort by last message time (most recent first), then by those without messages
+  // Sort: new matches first, then by last message time, then unmessaged non-matches last
   conversations.sort((a, b) => {
+    if (a.isNewMatch && !b.isNewMatch) return -1;
+    if (!a.isNewMatch && b.isNewMatch) return 1;
     if (a.lastMessage && b.lastMessage) {
       return (
         new Date(b.lastMessage.createdAt).getTime() -
@@ -213,7 +219,7 @@ export default async function MessagesListPage() {
               <Link
                 key={conv.conversationId}
                 href={`/messages/${conv.conversationId}`}
-                className="flex items-center gap-4 px-5 py-4 transition hover:bg-surface-tertiary"
+                className={`flex items-center gap-4 px-5 py-4 transition hover:bg-surface-tertiary ${conv.isNewMatch ? "bg-accent-muted" : ""}`}
               >
                 <div className="relative">
                   {otherPerson.avatarUrl ? (
@@ -253,7 +259,14 @@ export default async function MessagesListPage() {
                   {conv.subtitle && (
                     <p className="text-xs text-text-tertiary">{conv.subtitle}</p>
                   )}
-                  {conv.lastMessage ? (
+                  {conv.isNewMatch ? (
+                    <span className="mt-0.5 inline-flex items-center gap-1 text-xs font-semibold text-accent">
+                      <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                      </svg>
+                      New Match!
+                    </span>
+                  ) : conv.lastMessage ? (
                     <p
                       className={`mt-0.5 truncate text-sm ${
                         conv.unreadCount > 0

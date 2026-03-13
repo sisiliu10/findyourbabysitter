@@ -9,6 +9,7 @@ import { Spinner } from "@/components/ui/Spinner";
 import { SwipeCard } from "@/components/search/SwipeCard";
 import { MatchModal } from "@/components/search/MatchModal";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useToast } from "@/components/ui/Toast";
 import { LANGUAGE_OPTIONS } from "@/lib/constants";
 
 type SwipeMode = "babysitters" | "moms";
@@ -246,6 +247,7 @@ export default function SearchPage() {
   const tn = useTranslations("childcareNeeds");
   const locale = useLocale();
   const { user: currentUser, loading: userLoading } = useCurrentUser();
+  const { toast } = useToast();
   const userRole = currentUser?.role;
   const isSitter = userRole === "BABYSITTER";
 
@@ -340,10 +342,18 @@ export default function SearchPage() {
             matchedUser: json.data.match.matchedUser,
           });
           setShowMatchModal(true);
+        } else if (!json.success && json.code === "upgrade_required") {
+          // Revert the optimistic update — like was not saved
+          setLiked((prev) => prev.filter((id) => id !== card.id));
+          setCurrentIndex((i) => i - 1);
+          toast(
+            `You've reached your daily limit of ${json.limit} likes. Upgrade to like more.`,
+            "error"
+          );
         }
       })
       .catch(() => {});
-  }, [cards, currentIndex]);
+  }, [cards, currentIndex, toast]);
 
   const handleSwipeLeft = useCallback(() => {
     const card = cards[currentIndex];
@@ -354,10 +364,20 @@ export default function SearchPage() {
   const handleUndo = useCallback(() => {
     if (currentIndex === 0) return;
     const prevCard = cards[currentIndex - 1];
+    const wasLiked = liked.includes(prevCard.id);
     setLiked((prev) => prev.filter((id) => id !== prevCard.id));
     setPassed((prev) => prev.filter((id) => id !== prevCard.id));
     setCurrentIndex((i) => i - 1);
-  }, [currentIndex, cards]);
+
+    // If the card was liked, delete the like (and match if created) from the DB
+    if (wasLiked) {
+      fetch("/api/likes", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ toUserId: prevCard.id }),
+      }).catch(() => {});
+    }
+  }, [currentIndex, cards, liked]);
 
   const currentCard = cards[currentIndex];
   const nextCard = cards[currentIndex + 1];

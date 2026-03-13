@@ -23,7 +23,7 @@ export default async function RequestsListPage() {
 
   const requests = await prisma.childcareRequest.findMany({
     where: { parentId: session.userId },
-    orderBy: { dateNeeded: "desc" },
+    orderBy: { createdAt: "desc" },
   });
 
   return (
@@ -103,7 +103,19 @@ export default async function RequestsListPage() {
                     {request.title}
                   </h3>
                   <p className="mt-1 text-sm text-text-secondary">
-                    {formatDate(request.dateNeeded)} &middot;{" "}
+                    {request.careType === "recurring"
+                      ? (request.recurringDays
+                          ? (() => {
+                              try {
+                                const days = JSON.parse(request.recurringDays) as string[];
+                                return days.map(d => d.charAt(0) + d.slice(1).toLowerCase()).join(", ");
+                              } catch { return "Recurring"; }
+                            })()
+                          : "Recurring")
+                      : request.dateNeeded
+                        ? formatDate(request.dateNeeded)
+                        : "—"
+                    }{" "}&middot;{" "}
                     {formatTime(request.startTime)} -{" "}
                     {formatTime(request.endTime)}
                   </p>
