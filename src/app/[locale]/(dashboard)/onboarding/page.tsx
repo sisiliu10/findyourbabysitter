@@ -533,7 +533,7 @@ export default function OnboardingPage() {
           </div>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("hourlyRate")}</label>
-            <input type="number" min="1" value={hourlyRate} onChange={(e) => setHourlyRate(e.target.value)} className={inputClass} />
+            <input type="number" min="1" max="500" value={hourlyRate} onChange={(e) => setHourlyRate(e.target.value)} className={inputClass} />
           </div>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">{t("sitterTypeLabel")}</label>

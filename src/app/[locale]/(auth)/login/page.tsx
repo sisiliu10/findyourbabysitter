@@ -43,7 +43,7 @@ export default function LoginPage() {
         return;
       }
 
-      router.push(data.onboarded ? "/dashboard" : "/onboarding");
+      router.push(data.data.onboarded ? "/dashboard" : "/onboarding");
       router.refresh();
     } catch {
       setError(t("somethingWentWrong"));
@@ -106,6 +106,7 @@ export default function LoginPage() {
             name="email"
             type="email"
             required
+            autoComplete="email"
             className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none"
             placeholder={t("emailPlaceholder")}
           />
@@ -116,6 +117,7 @@ export default function LoginPage() {
           name="password"
           label={t("password")}
           required
+          autoComplete="current-password"
           placeholder={t("passwordPlaceholder")}
         />
 

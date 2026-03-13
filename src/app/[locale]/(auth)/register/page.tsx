@@ -197,13 +197,13 @@ function RegisterForm() {
             <label htmlFor="firstName" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
               {t("firstName")}
             </label>
-            <input id="firstName" name="firstName" required className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none" />
+            <input id="firstName" name="firstName" required autoComplete="given-name" className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none" />
           </div>
           <div>
             <label htmlFor="lastName" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
               {t("lastName")}
             </label>
-            <input id="lastName" name="lastName" required className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none" />
+            <input id="lastName" name="lastName" required autoComplete="family-name" className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none" />
           </div>
         </div>
 
@@ -211,7 +211,7 @@ function RegisterForm() {
           <label htmlFor="email" className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
             {t("email")}
           </label>
-          <input id="email" name="email" type="email" required className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none" placeholder={t("emailPlaceholder")} />
+          <input id="email" name="email" type="email" required autoComplete="email" className="block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition-colors focus:border-text-primary focus:outline-none" placeholder={t("emailPlaceholder")} />
         </div>
 
         <PasswordInput
@@ -220,6 +220,7 @@ function RegisterForm() {
           label={t("password")}
           required
           minLength={8}
+          autoComplete="new-password"
           placeholder={t("passwordMinLength")}
         />
 
@@ -229,6 +230,7 @@ function RegisterForm() {
           label={t("confirmPassword")}
           required
           minLength={8}
+          autoComplete="new-password"
           placeholder={t("confirmPasswordPlaceholder")}
           error={passwordError}
         />
