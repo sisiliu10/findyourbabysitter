@@ -27,19 +27,15 @@ export async function POST(request: Request) {
     const { token, password } = parsed.data;
 
     const user = await prisma.user.findFirst({
-      where: { passwordResetToken: token },
+      where: {
+        passwordResetToken: token,
+        passwordResetExpiry: { gt: new Date() },
+      },
     });
 
     if (!user) {
       return NextResponse.json(
         { success: false, error: "Invalid or expired reset link. Please request a new one." },
-        { status: 400 }
-      );
-    }
-
-    if (user.passwordResetExpiry && user.passwordResetExpiry < new Date()) {
-      return NextResponse.json(
-        { success: false, error: "This reset link has expired. Please request a new one." },
         { status: 400 }
       );
     }

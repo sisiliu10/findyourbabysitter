@@ -274,12 +274,12 @@ export default async function HomePage({ params }: Props) {
         <section className="border-t border-border-default">
           <div className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
             <h2 className="text-xs uppercase tracking-wide text-text-muted mb-8">{t("browseByLanguage")}</h2>
-            <div className="flex flex-wrap gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
               {LANGUAGES.map((l) => (
                 <Link
                   key={l.slug}
                   href={`/babysitter/${l.slug}`}
-                  className="group flex items-center gap-3 border border-border-default bg-surface-secondary px-5 py-3.5 transition-all hover:border-text-primary hover:bg-surface-tertiary"
+                  className="group flex items-center gap-3 border border-border-default bg-surface-secondary px-4 py-4 transition-all hover:border-text-primary hover:bg-surface-tertiary"
                 >
                   <span className="text-2xl leading-none" role="img" aria-hidden="true">
                     {LANGUAGE_FLAGS[l.slug] ?? "🌐"}

@@ -27,7 +27,7 @@ export async function CrossLinks({ current, locale }: { current: LandingPage; lo
         <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-4">
           {isDistrict ? t("otherNeighborhoods") : t("otherLanguages")}
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
           {siblings
             .filter((p) => p.slug !== current.slug)
             .map((page) => {
@@ -36,7 +36,7 @@ export async function CrossLinks({ current, locale }: { current: LandingPage; lo
                 <Link
                   key={page.slug}
                   href={`/babysitter/${page.slug}`}
-                  className="flex items-center gap-2.5 border border-border-default bg-surface-secondary px-4 py-2.5 transition-all hover:border-text-primary hover:bg-surface-tertiary"
+                  className="flex items-center gap-2.5 border border-border-default bg-surface-secondary px-4 py-3 transition-all hover:border-text-primary hover:bg-surface-tertiary"
                 >
                   {flag && (
                     <span className="text-xl leading-none" role="img" aria-hidden="true">{flag}</span>
@@ -57,7 +57,7 @@ export async function CrossLinks({ current, locale }: { current: LandingPage; lo
         <p className="text-xs font-medium uppercase tracking-wide text-text-muted mb-4">
           {isDistrict ? t("browseByLanguage") : t("browseByNeighborhood")}
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
           {otherType.map((page) => {
             const isLang = !isDistrict;
             const flag = LANGUAGE_FLAGS[page.slug];
@@ -65,7 +65,7 @@ export async function CrossLinks({ current, locale }: { current: LandingPage; lo
               <Link
                 key={page.slug}
                 href={`/babysitter/${page.slug}`}
-                className="group flex items-center gap-2.5 border border-border-default bg-surface-secondary px-4 py-2.5 transition-all hover:border-text-primary hover:bg-surface-tertiary"
+                className="group flex items-center gap-2.5 border border-border-default bg-surface-secondary px-4 py-3 transition-all hover:border-text-primary hover:bg-surface-tertiary"
               >
                 {isLang && flag && (
                   <span className="text-xl leading-none" role="img" aria-hidden="true">{flag}</span>
