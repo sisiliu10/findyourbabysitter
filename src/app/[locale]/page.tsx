@@ -9,6 +9,19 @@ import { JsonLd } from "@/components/landing/JsonLd";
 import { FAQ } from "@/components/landing/FAQ";
 import ScrollRevealText from "@/components/landing/ScrollRevealText";
 
+const LANGUAGE_FLAGS: Record<string, string> = {
+  english: "🇬🇧",
+  german: "🇩🇪",
+  spanish: "🇪🇸",
+  french: "🇫🇷",
+  russian: "🇷🇺",
+  turkish: "🇹🇷",
+  arabic: "🇸🇦",
+  chinese: "🇨🇳",
+  korean: "🇰🇷",
+  japanese: "🇯🇵",
+};
+
 interface Props {
   params: Promise<{ locale: string }>;
 }
@@ -266,9 +279,17 @@ export default async function HomePage({ params }: Props) {
                 <Link
                   key={l.slug}
                   href={`/babysitter/${l.slug}`}
-                  className="border border-border-default px-5 py-3 text-sm text-text-secondary transition-colors hover:border-text-primary hover:text-text-primary"
+                  className="group flex items-center gap-3 border border-border-default bg-surface-secondary px-5 py-3.5 transition-all hover:border-text-primary hover:bg-surface-tertiary"
                 >
-                  {l.name}{l.nativeName ? ` — ${l.nativeName}` : ""}
+                  <span className="text-2xl leading-none" role="img" aria-hidden="true">
+                    {LANGUAGE_FLAGS[l.slug] ?? "🌐"}
+                  </span>
+                  <span className="flex flex-col">
+                    <span className="text-sm font-medium text-text-primary leading-tight">{l.name}</span>
+                    {l.nativeName && l.nativeName !== l.name && (
+                      <span className="text-xs text-text-tertiary leading-tight">{l.nativeName}</span>
+                    )}
+                  </span>
                 </Link>
               ))}
             </div>
