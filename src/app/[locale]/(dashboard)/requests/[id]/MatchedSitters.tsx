@@ -122,12 +122,12 @@ export function MatchedSitters({ requestId }: { requestId: string }) {
                 key={match.sitterId}
                 className="border border-border-default p-4 transition hover:border-text-primary"
               >
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-3">
                   {user.avatarUrl ? (
                     <img
                       src={user.avatarUrl}
                       alt={`${user.firstName} ${user.lastName}`}
-                      className="h-12 w-12 object-cover"
+                      className="h-12 w-12 shrink-0 object-cover"
                     />
                   ) : (
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-accent-muted text-sm font-semibold text-accent">
@@ -135,34 +135,38 @@ export function MatchedSitters({ requestId }: { requestId: string }) {
                     </div>
                   )}
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                       <h3 className="text-text-primary font-medium">
                         {user.firstName} {user.lastName}
                       </h3>
                       <Badge variant="info">{t("match", { score: match.score })}</Badge>
                     </div>
-                    <p className="text-sm text-text-secondary">
-                      {[profile.city, profile.state].filter(Boolean).join(", ")}{" "}
-                      &middot; {formatCurrency(profile.hourlyRate)}/hr
+                    <p className="mt-0.5 text-sm text-text-secondary">
+                      {profile.city}
+                      {" "}&middot;{" "}{formatCurrency(profile.hourlyRate)}/hr
                     </p>
-                    <div className="mt-2 flex flex-wrap gap-1.5">
-                      {match.matchReasons.map((reason, i) => (
-                        <span
-                          key={i}
-                          className="inline-flex items-center border border-accent/20 bg-accent-muted px-2 py-0.5 text-xs text-accent"
-                        >
-                          {reason}
-                        </span>
-                      ))}
+                    {match.matchReasons.length > 0 && (
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {match.matchReasons.map((reason, i) => (
+                          <span
+                            key={i}
+                            className="inline-flex items-center border border-accent/20 bg-accent-muted px-2 py-0.5 text-xs text-accent"
+                          >
+                            {reason}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <div className="mt-3">
+                      <Button
+                        size="sm"
+                        loading={bookingLoading === match.sitterId}
+                        onClick={() => handleRequestBooking(match)}
+                      >
+                        {t("requestBooking")}
+                      </Button>
                     </div>
                   </div>
-                  <Button
-                    size="sm"
-                    loading={bookingLoading === match.sitterId}
-                    onClick={() => handleRequestBooking(match)}
-                  >
-                    {t("requestBooking")}
-                  </Button>
                 </div>
               </div>
             );
