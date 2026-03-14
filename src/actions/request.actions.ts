@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { requireAuth } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { createRequestSchema } from "@/lib/validators";
@@ -176,6 +177,7 @@ export async function deleteRequest(requestId: string): Promise<ActionResult> {
     };
   }
 
+  revalidatePath("/requests");
   redirect("/requests");
 }
 
@@ -232,6 +234,8 @@ export async function updateRequest(requestId: string, formData: FormData): Prom
     };
   }
 
+  revalidatePath("/requests");
+  revalidatePath(`/requests/${requestId}`);
   redirect(`/requests/${requestId}`);
 }
 
