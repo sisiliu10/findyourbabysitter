@@ -30,7 +30,7 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     descEn: "Keep an eye on your little one while your sitter is in charge.",
     descDe: "Behalte dein Kind im Blick, während die Babysitterin aufpasst.",
     icon: "📹",
-    url: "https://www.amazon.de/s?k=babyphone", // ← replace with affiliate link
+    url: "https://amzn.to/4bkEtvx",
     context: "booking",
   },
   {
@@ -72,7 +72,7 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     descEn: "Hands-free comfort for your sitter and your baby.",
     descDe: "Freie Hände für die Babysitterin und Komfort für dein Baby.",
     icon: "🤱",
-    url: "https://www.amazon.de/s?k=babytrage+ergonomisch", // ← replace with affiliate link
+    url: "https://amzn.to/4sEU7sH",
     context: "profile",
   },
   {

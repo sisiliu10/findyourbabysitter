@@ -1,5 +1,6 @@
 /**
- * Berlin zip code (PLZ) prefix → district mapping.
+
+* Berlin zip code (PLZ) prefix → district mapping.
  * Uses the first 3 digits of the 5-digit PLZ to determine the Bezirk/Kiez.
  */
 const DISTRICT_MAP: Record<string, string> = {
