@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useUnreadCount } from "@/hooks/useUnreadCount";
 import { cn } from "@/lib/utils";
@@ -27,7 +27,6 @@ export function MobileNav() {
   const { user } = useCurrentUser();
   const unreadCount = useUnreadCount();
   const t = useTranslations("mobilenav");
-  const router = useRouter();
   const links = user?.role === "BABYSITTER" ? sitterLinks : parentLinks;
 
   return (
@@ -39,7 +38,6 @@ export function MobileNav() {
             <Link
               key={link.href}
               href={link.href}
-              onTouchStart={() => router.prefetch(link.href)}
               className={cn(
                 "flex flex-1 flex-col items-center gap-0.5 py-1 text-[10px] uppercase tracking-wide transition-colors",
                 isActive ? "text-accent" : "text-text-tertiary"
