@@ -28,9 +28,7 @@ export default async function LegalLayout({ children }: { children: React.ReactN
           <div className="flex flex-wrap items-center justify-between gap-4">
             <span className="text-xs uppercase tracking-wide text-text-muted">Berlin Babysitter</span>
             <nav className="flex items-center gap-6">
-              <Link href="/privacy-policy" className="text-xs text-text-muted transition-colors hover:text-text-primary">{t("privacyPolicy")}</Link>
-              <Link href="/terms-of-service" className="text-xs text-text-muted transition-colors hover:text-text-primary">{t("termsOfService")}</Link>
-              <Link href="/impressum" className="text-xs text-text-muted transition-colors hover:text-text-primary">{t("impressum")}</Link>
+              <Link href="/legal" className="text-xs text-text-muted transition-colors hover:text-text-primary">{t("impressum")} · {t("privacyPolicy")} · {t("termsOfService")}</Link>
             </nav>
             <span className="text-xs text-text-muted">{new Date().getFullYear()}</span>
           </div>

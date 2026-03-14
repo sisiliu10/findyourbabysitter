@@ -14,6 +14,7 @@ const publicBasePaths = [
   "/reset-password",
   "/babysitter",
   "/guides",
+  "/legal",
   "/privacy-policy",
   "/terms-of-service",
   "/impressum",
