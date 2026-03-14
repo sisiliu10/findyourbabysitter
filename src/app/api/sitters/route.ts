@@ -55,7 +55,7 @@ export async function GET(request: Request) {
     if (district) {
       where.user = {
         ...(where.user as Prisma.UserWhereInput),
-        district: { contains: district },
+        district: { equals: district, mode: "insensitive" },
       };
     }
 

@@ -20,8 +20,8 @@ export async function GET(request: Request) {
     }
 
     const { searchParams } = new URL(request.url);
-    const page = parseInt(searchParams.get("page") || "1", 10);
-    const limit = Math.min(parseInt(searchParams.get("limit") || "20", 10), 100);
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
+    const limit = Math.max(1, Math.min(parseInt(searchParams.get("limit") || "20", 10), 100));
     const skip = (page - 1) * limit;
 
     const [users, total] = await Promise.all([
@@ -59,8 +59,9 @@ export async function GET(request: Request) {
       },
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to list users" },
+      { success: false, error: "Failed to list users" },
       { status: 500 }
     );
   }

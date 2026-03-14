@@ -64,8 +64,9 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Registration failed" },
+      { success: false, error: "Registration failed" },
       { status: 500 }
     );
   }

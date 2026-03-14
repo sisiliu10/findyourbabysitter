@@ -10,6 +10,7 @@ import { notFound, redirect } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Badge, type BadgeVariant } from "@/components/ui/Badge";
 import { BookingActions } from "./BookingActions";
+import { AffiliateRecommendations } from "@/components/affiliate/AffiliateRecommendations";
 import { getTranslations } from "next-intl/server";
 
 const statusVariants: Record<string, BadgeVariant> = {
@@ -32,12 +33,12 @@ const TIMELINE_STEPS = [
 export default async function BookingDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }) {
   const session = await requireAuth();
   const t = await getTranslations("bookingDetail");
   const tc = await getTranslations("common");
-  const { id } = await params;
+  const { id, locale } = await params;
 
   const booking = await prisma.booking.findUnique({
     where: { id },
@@ -329,6 +330,11 @@ export default async function BookingDetailPage({
           isSitter={isSitter}
           hasReview={!!booking.review}
         />
+
+        {/* Affiliate recommendations — shown to parents on active bookings */}
+        {isParent && !isCancelledOrDeclined && (
+          <AffiliateRecommendations locale={locale} context="booking" />
+        )}
 
         {/* Message link */}
         {!isCancelledOrDeclined &&

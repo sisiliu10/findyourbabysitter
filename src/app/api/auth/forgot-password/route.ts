@@ -40,8 +40,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, message: SUCCESS_MESSAGE });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Request failed" },
+      { success: false, error: "Request failed" },
       { status: 500 }
     );
   }

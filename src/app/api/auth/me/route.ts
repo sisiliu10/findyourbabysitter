@@ -49,8 +49,9 @@ export async function GET() {
 
     return NextResponse.json({ success: true, data: { ...user, isPremium: premium } });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to get user" },
+      { success: false, error: "Failed to get user" },
       { status: 500 }
     );
   }

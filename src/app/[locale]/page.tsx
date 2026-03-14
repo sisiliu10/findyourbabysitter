@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { DISTRICTS, LANGUAGES } from "@/data/landing-pages";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Header } from "@/components/landing/Header";
 import { AnnouncementBar } from "@/components/landing/AnnouncementBar";
 import { TrustBar } from "@/components/landing/TrustBar";
@@ -143,12 +144,14 @@ export default async function HomePage({ params }: Props) {
         <section className="relative w-full overflow-hidden min-h-[70vh] sm:min-h-[80vh] lg:min-h-[85vh] flex flex-col">
           {/* Background image — full vibrancy, fully visible */}
           <div className="absolute inset-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/hero-bg.png"
               alt=""
-              className="h-full w-full object-cover object-bottom"
+              fill
+              priority
+              className="object-cover object-bottom"
               aria-hidden="true"
+              sizes="100vw"
             />
             {/* Very light veil at the top only — just enough for text readability */}
             <div

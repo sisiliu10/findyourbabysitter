@@ -43,8 +43,9 @@ export async function GET(
       data: { matches },
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to find matches" },
+      { success: false, error: "Failed to find matches" },
       { status: 500 }
     );
   }

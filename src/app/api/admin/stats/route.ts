@@ -41,8 +41,9 @@ export async function GET() {
       },
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to get stats" },
+      { success: false, error: "Failed to get stats" },
       { status: 500 }
     );
   }

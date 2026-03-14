@@ -56,7 +56,7 @@ export function Step5Details({ state, onChange, onNext, onBack }: Props) {
           rows={4}
           maxLength={2000}
         />
-        <p className={`text-xs ${descMet ? "text-green-600" : "text-text-tertiary"}`}>
+        <p className={`text-xs ${descMet ? "text-success" : "text-text-tertiary"}`}>
           {descMet
             ? t("descriptionMinHintDone", { current: descLen })
             : t("descriptionMinHint", { current: descLen, min: MIN_DESCRIPTION })}

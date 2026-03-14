@@ -51,8 +51,9 @@ export async function GET() {
 
     return NextResponse.json({ success: true, data: { count } });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to get unread count" },
+      { success: false, error: "Failed to get unread count" },
       { status: 500 },
     );
   }

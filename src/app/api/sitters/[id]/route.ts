@@ -52,33 +52,37 @@ export async function GET(
       );
     }
 
-    const reviews = await prisma.review.findMany({
-      where: { subjectId: id, isVisible: true },
-      include: {
-        author: {
-          select: { id: true, firstName: true, lastName: true, avatarUrl: true },
+    const [reviews, reviewStats] = await Promise.all([
+      prisma.review.findMany({
+        where: { subjectId: id, isVisible: true },
+        include: {
+          author: {
+            select: { id: true, firstName: true, lastName: true, avatarUrl: true },
+          },
         },
-      },
-      orderBy: { createdAt: "desc" },
-    });
-
-    const avgRating =
-      reviews.length > 0
-        ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
-        : null;
+        orderBy: { createdAt: "desc" },
+        take: 50,
+      }),
+      prisma.review.aggregate({
+        where: { subjectId: id, isVisible: true },
+        _count: { id: true },
+        _avg: { rating: true },
+      }),
+    ]);
 
     return NextResponse.json({
       success: true,
       data: {
         profile,
         reviews,
-        averageRating: avgRating,
-        reviewCount: reviews.length,
+        averageRating: reviewStats._avg.rating,
+        reviewCount: reviewStats._count.id,
       },
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to get sitter" },
+      { success: false, error: "Failed to get sitter" },
       { status: 500 }
     );
   }

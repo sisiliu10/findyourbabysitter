@@ -128,8 +128,9 @@ export async function GET(
       data: { messages, conversationType: conv.type, otherUser },
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to get messages" },
+      { success: false, error: "Failed to get messages" },
       { status: 500 }
     );
   }
@@ -235,8 +236,9 @@ export async function POST(
       { status: 201 }
     );
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to send message" },
+      { success: false, error: "Failed to send message" },
       { status: 500 }
     );
   }

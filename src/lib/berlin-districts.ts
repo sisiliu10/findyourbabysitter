@@ -54,17 +54,17 @@ const DISTRICT_MAP: Record<string, string> = {
   "139": "Treptow",
   // Lichtenberg
   "140": "Lichtenberg",
-  // Marzahn / Hellersdorf
-  "141": "Marzahn",
-  // Lichterfelde
-  "142": "Lichterfelde",
+  // Marzahn-Hellersdorf
+  "141": "Marzahn-Hellersdorf",
+  // Steglitz (Lichterfelde is a Kiez within Steglitz)
+  "142": "Steglitz",
   // Zehlendorf / Wannsee
   "143": "Zehlendorf",
   // Buckow / Rudow (southern Neukölln)
   "144": "Neukölln",
   // Treptow-Köpenick
   "145": "Treptow-Köpenick",
-  "146": "Köpenick",
+  "146": "Treptow-Köpenick",
   // Marzahn-Hellersdorf
   "147": "Marzahn-Hellersdorf",
   // Hohenschönhausen / Lichtenberg

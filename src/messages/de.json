@@ -369,7 +369,8 @@
     "lookingFor": "Sucht",
     "filterByLanguage": "Sprache filtern",
     "allLanguages": "Alle",
-    "kitas": "Kitas"
+    "kitas": "Kitas",
+    "dailyLimitReached": "Du hast dein tägliches Limit von {limit} Likes erreicht. Upgrade für mehr Likes."
   },
   "onboarding": {
     "completeProfile": "Profil vervollständigen",
@@ -572,7 +573,8 @@
     "minutesAgo": "vor {count} Min.",
     "hoursAgo": "vor {count} Std.",
     "daysAgo": "vor {count} T.",
-    "matchConversation": "Match"
+    "matchConversation": "Match",
+    "newMatch": "Neues Match!"
   },
   "messageThread": {
     "viewBooking": "Buchung ansehen",
@@ -610,6 +612,13 @@
     "cat_overnight": "Übernachtung",
     "cat_date_night": "Abendbetreuung",
     "cat_other": "Sonstiges",
+    "dayMON": "Mo",
+    "dayTUE": "Di",
+    "dayWED": "Mi",
+    "dayTHU": "Do",
+    "dayFRI": "Fr",
+    "daySAT": "Sa",
+    "daySUN": "So",
     "recurring": "Regelmäßig",
     "occasional": "Einmalig",
     "editRequest": "Bearbeiten",
@@ -817,6 +826,12 @@
     "showMap": "Karte",
     "previous": "Zurück",
     "next": "Weiter"
+  },
+  "affiliateRecommendations": {
+    "bookingHeading": "Bereite dich auf deine Babysitterin vor",
+    "profileHeading": "Nützlich zu Hause",
+    "viewOnAmazon": "Auf Amazon ansehen →",
+    "disclaimer": "Affiliate-Links – wir verdienen ggf. eine kleine Provision, ohne Mehrkosten für dich."
   },
   "premium": {
     "title": "Wähle deinen Plan",

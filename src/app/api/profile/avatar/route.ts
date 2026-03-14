@@ -45,8 +45,9 @@ export async function POST(request: Request) {
       data: { avatarUrl },
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to upload avatar" },
+      { success: false, error: "Failed to upload avatar" },
       { status: 500 }
     );
   }

@@ -45,8 +45,9 @@ export async function POST(request: Request) {
       message: "If an account exists with that email, a verification link has been sent.",
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to resend" },
+      { success: false, error: "Failed to resend" },
       { status: 500 }
     );
   }

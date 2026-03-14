@@ -573,7 +573,8 @@
     "minutesAgo": "{count}m ago",
     "hoursAgo": "{count}h ago",
     "daysAgo": "{count}d ago",
-    "matchConversation": "Match"
+    "matchConversation": "Match",
+    "newMatch": "New Match!"
   },
   "messageThread": {
     "viewBooking": "View booking",
@@ -611,6 +612,13 @@
     "cat_overnight": "Overnight",
     "cat_date_night": "Date night",
     "cat_other": "Other",
+    "dayMON": "Mon",
+    "dayTUE": "Tue",
+    "dayWED": "Wed",
+    "dayTHU": "Thu",
+    "dayFRI": "Fri",
+    "daySAT": "Sat",
+    "daySUN": "Sun",
     "recurring": "Recurring",
     "occasional": "One-time",
     "editRequest": "Edit",
@@ -818,6 +826,12 @@
     "showMap": "Map",
     "previous": "Back",
     "next": "Next"
+  },
+  "affiliateRecommendations": {
+    "bookingHeading": "Get ready for your sitter",
+    "profileHeading": "Useful to have at home",
+    "viewOnAmazon": "View on Amazon →",
+    "disclaimer": "Affiliate links — we may earn a small commission at no extra cost to you."
   },
   "premium": {
     "title": "Choose your plan",

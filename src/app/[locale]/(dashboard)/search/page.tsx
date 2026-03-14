@@ -346,10 +346,7 @@ export default function SearchPage() {
           // Revert the optimistic update — like was not saved
           setLiked((prev) => prev.filter((id) => id !== card.id));
           setCurrentIndex((i) => i - 1);
-          toast(
-            `You've reached your daily limit of ${json.limit} likes. Upgrade to like more.`,
-            "error"
-          );
+          toast(t("dailyLimitReached", { limit: json.limit }), "error");
         }
       })
       .catch(() => {});
@@ -568,6 +565,7 @@ export default function SearchPage() {
             onClick={handleSwipeLeft}
             className="group flex h-16 w-16 items-center justify-center bg-surface-secondary shadow-[0_2px_12px_rgba(44,36,32,0.06)] transition-all hover:bg-danger hover:shadow-[0_4px_20px_rgba(196,90,74,0.2)] active:scale-95"
             title={t("pass")}
+            aria-label={t("pass")}
           >
             <svg className="h-7 w-7 text-danger transition-colors group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -580,6 +578,7 @@ export default function SearchPage() {
               onClick={handleUndo}
               className="flex h-10 w-10 items-center justify-center text-text-muted transition-colors hover:text-text-secondary"
               title={t("goBack")}
+              aria-label={t("goBack")}
             >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -592,6 +591,7 @@ export default function SearchPage() {
             onClick={handleSwipeRight}
             className="group flex h-16 w-16 items-center justify-center bg-surface-secondary shadow-[0_2px_12px_rgba(44,36,32,0.06)] transition-all hover:bg-success hover:shadow-[0_4px_20px_rgba(90,138,98,0.2)] active:scale-95"
             title={t("like")}
+            aria-label={t("like")}
           >
             <svg className="h-7 w-7 text-success transition-colors group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />

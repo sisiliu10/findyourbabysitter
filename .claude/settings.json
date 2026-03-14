@@ -49,7 +49,16 @@
       "Bash(npx prisma:*)",
       "Bash(find /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/requests -type f)",
       "Bash(find /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/requests -type d)",
-      "Bash(ls -la /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/requests/[id\\\\\\)/)"
+      "Bash(ls -la /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/requests/[id\\\\\\)/)",
+      "Bash(wc -l /Users/sisi.liu/findyourbabysitter/src/app/api/sitters/[id]/route.ts)",
+      "Bash(cat /Users/sisi.liu/findyourbabysitter/src/app/api/sitters/[id]/route.ts)",
+      "Bash(wc -l /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/messages/page.tsx)",
+      "Bash(head -80 /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/profile/page.tsx)",
+      "Bash(head -150 /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/profile/page.tsx)",
+      "Bash(grep -n \"prisma\\\\.\" /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/profile/page.tsx)",
+      "Bash(wc -l /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/profile/page.tsx)",
+      "Bash(head -100 /Users/sisi.liu/findyourbabysitter/src/app/[locale]/kita-search/page.tsx)",
+      "Bash(head -100 /Users/sisi.liu/findyourbabysitter/src/app/[locale]/guides/page.tsx)"
     ],
     "additionalDirectories": [
       "/Users/sisi.liu/findyourbabysitter/public/coloring-pages",

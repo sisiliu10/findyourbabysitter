@@ -51,8 +51,9 @@ export async function POST(request: Request) {
       message: "Your email has been verified. You can now log in.",
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Verification failed" },
+      { success: false, error: "Verification failed" },
       { status: 500 }
     );
   }

@@ -130,8 +130,9 @@ export async function PATCH(
 
     return NextResponse.json({ success: true, data: updated });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to update status" },
+      { success: false, error: "Failed to update status" },
       { status: 500 }
     );
   }

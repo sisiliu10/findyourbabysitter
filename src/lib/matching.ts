@@ -63,6 +63,9 @@ export async function findMatchingSitters(requestId: string): Promise<ScoredSitt
     where: {
       isActive: true,
       user: { isDisabled: false, role: "BABYSITTER" },
+      // Pre-filter by city/state in DB to avoid full table scan
+      city: { equals: request.city, mode: "insensitive" },
+      state: { equals: request.state, mode: "insensitive" },
     },
     include: {
       user: {

@@ -58,10 +58,10 @@ export default async function RequestDetailPage({
     children = [];
   }
 
-  const DAY_LABELS: Record<string, string> = { MON: "Mon", TUE: "Tue", WED: "Wed", THU: "Thu", FRI: "Fri", SAT: "Sat", SUN: "Sun" };
+  const DAY_LABELS: Record<string, string> = { MON: t("dayMON"), TUE: t("dayTUE"), WED: t("dayWED"), THU: t("dayTHU"), FRI: t("dayFRI"), SAT: t("daySAT"), SUN: t("daySUN") };
   const CAT_LABELS: Record<string, string> = {
-    after_school: "After school", full_day: "Full day", overnight: "Overnight",
-    date_night: "Date night / Evening", other: "Other",
+    after_school: t("cat_after_school"), full_day: t("cat_full_day"), overnight: t("cat_overnight"),
+    date_night: t("cat_date_night"), other: t("cat_other"),
   };
 
   return (

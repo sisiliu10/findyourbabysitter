@@ -10,8 +10,8 @@ export async function GET(request: Request) {
       ? parseFloat(searchParams.get("minRating")!)
       : undefined;
     const hasSpots = searchParams.get("hasSpots") === "true" || undefined;
-    const page = parseInt(searchParams.get("page") || "1", 10);
-    const limit = Math.min(parseInt(searchParams.get("limit") || "18", 10), 50);
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
+    const limit = Math.max(1, Math.min(parseInt(searchParams.get("limit") || "18", 10), 50));
 
     const result = await getKitas({ q, district, minRating, hasSpots, page, limit });
 
@@ -20,10 +20,11 @@ export async function GET(request: Request) {
       data: result,
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : "Failed to search kitas",
+        error: "Failed to search kitas",
       },
       { status: 500 }
     );

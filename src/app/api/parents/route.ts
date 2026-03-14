@@ -12,10 +12,17 @@ export async function GET(request: Request) {
       );
     }
 
+    if (session.role !== "BABYSITTER") {
+      return NextResponse.json(
+        { success: false, error: "Forbidden" },
+        { status: 403 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const city = searchParams.get("city");
-    const page = parseInt(searchParams.get("page") || "1", 10);
-    const limit = Math.min(parseInt(searchParams.get("limit") || "20", 10), 100);
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
+    const limit = Math.max(1, Math.min(parseInt(searchParams.get("limit") || "20", 10), 100));
     const skip = (page - 1) * limit;
 
     const where: Record<string, unknown> = {
@@ -77,8 +84,9 @@ export async function GET(request: Request) {
       },
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to fetch parents" },
+      { success: false, error: "Failed to fetch parents" },
       { status: 500 }
     );
   }

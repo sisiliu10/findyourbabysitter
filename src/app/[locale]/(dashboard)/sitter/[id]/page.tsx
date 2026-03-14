@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { StarRating } from "@/components/ui/StarRating";
+import { AffiliateRecommendations } from "@/components/affiliate/AffiliateRecommendations";
 import { getTranslations } from "next-intl/server";
 
 export default async function SitterProfilePage({
@@ -264,6 +265,9 @@ export default async function SitterProfilePage({
             {t("meetupTipLink")}
           </Link>
         </div>
+
+        {/* Affiliate recommendations */}
+        <AffiliateRecommendations locale={locale} context="profile" />
 
         {/* Reviews */}
         <div className="border border-border-default bg-surface-secondary p-6">

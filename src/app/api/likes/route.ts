@@ -127,11 +127,12 @@ export async function POST(request: Request) {
       data: { liked: true, matched: false },
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       {
         success: false,
         error:
-          error instanceof Error ? error.message : "Failed to process like",
+          "Failed to process like",
       },
       { status: 500 }
     );
@@ -176,10 +177,11 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : "Failed to undo like",
+        error: "Failed to undo like",
       },
       { status: 500 }
     );
@@ -207,11 +209,12 @@ export async function GET() {
       data: { likedUserIds: likes.map((l) => l.toUserId) },
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       {
         success: false,
         error:
-          error instanceof Error ? error.message : "Failed to fetch likes",
+          "Failed to fetch likes",
       },
       { status: 500 }
     );
