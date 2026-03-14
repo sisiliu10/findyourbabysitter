@@ -882,6 +882,8 @@
     "yearly": "Yearly",
     "monthlyPrice": "€9.99",
     "yearlyPrice": "€79.99",
+    "yearlyPriceMonthly": "€6.67",
+    "billedAnnually": "billed annually · €79.99/yr",
     "perMonth": "per month",
     "perYear": "per year",
     "yearlyDiscount": "Save 33%",

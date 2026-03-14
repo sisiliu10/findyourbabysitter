@@ -209,11 +209,12 @@ export default function PricingPage() {
           {!hasPaymentIssue && (
             <>
               <p className="mt-2 font-serif text-2xl text-text-primary">
-                {billingPeriod === "monthly" ? t("monthlyPrice") : t("yearlyPrice")}
+                {billingPeriod === "monthly" ? t("monthlyPrice") : t("yearlyPriceMonthly")}
               </p>
-              <p className="mt-1 text-xs text-text-tertiary">
-                {billingPeriod === "monthly" ? t("perMonth") : t("perYear")}
-              </p>
+              <p className="mt-1 text-xs text-text-tertiary">{t("perMonth")}</p>
+              {billingPeriod === "yearly" && (
+                <p className="mt-0.5 text-xs text-text-muted">{t("billedAnnually")}</p>
+              )}
             </>
           )}
 

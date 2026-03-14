@@ -882,6 +882,8 @@
     "yearly": "Jährlich",
     "monthlyPrice": "9,99 €",
     "yearlyPrice": "79,99 €",
+    "yearlyPriceMonthly": "6,67 €",
+    "billedAnnually": "jährlich abgerechnet · 79,99 €/Jahr",
     "perMonth": "pro Monat",
     "perYear": "pro Jahr",
     "yearlyDiscount": "33% sparen",
