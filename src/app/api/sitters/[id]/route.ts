@@ -18,7 +18,7 @@ export async function GET(
     const { id } = await params;
 
     const profile = await prisma.babysitterProfile.findUnique({
-      where: { userId: id },
+      where: { userId: id, isActive: true, user: { onboarded: true, isDisabled: false } },
       select: {
         userId: true,
         bio: true,

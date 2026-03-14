@@ -30,7 +30,7 @@ export async function GET(request: Request) {
 
     const where: Prisma.BabysitterProfileWhereInput = {
       isActive: true,
-      user: { isDisabled: false, role: "BABYSITTER" },
+      user: { isDisabled: false, role: "BABYSITTER", onboarded: true },
     };
 
     // SQLite doesn't support mode: "insensitive", so use contains for case-insensitive search
