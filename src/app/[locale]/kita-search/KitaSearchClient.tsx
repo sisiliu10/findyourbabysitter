@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import type { Kita } from "@prisma/client";
@@ -26,12 +26,14 @@ interface KitaSearchClientProps {
     totalPages: number;
   };
   districts: { name: string; count: number }[];
+  lastSyncDate: string | null;
 }
 
 export function KitaSearchClient({
   initialKitas,
   initialPagination,
   districts,
+  lastSyncDate,
 }: KitaSearchClientProps) {
   const t = useTranslations("kitaSearch");
 
@@ -44,6 +46,7 @@ export function KitaSearchClient({
   const [district, setDistrict] = useState("");
   const [minRating, setMinRating] = useState("");
   const [hasSpots, setHasSpots] = useState(false);
+  const [openingHours, setOpeningHours] = useState("");
   const [page, setPage] = useState(1);
 
   // Map interaction
@@ -59,6 +62,7 @@ export function KitaSearchClient({
       district?: string;
       minRating?: string;
       hasSpots?: boolean;
+      openingHours?: string;
       page?: number;
     }) => {
       setLoading(true);
@@ -68,6 +72,7 @@ export function KitaSearchClient({
         if (params.district) searchParams.set("district", params.district);
         if (params.minRating) searchParams.set("minRating", params.minRating);
         if (params.hasSpots) searchParams.set("hasSpots", "true");
+        if (params.openingHours) searchParams.set("openingHours", params.openingHours);
         searchParams.set("page", String(params.page || 1));
 
         const res = await fetch(`/api/kitas?${searchParams.toString()}`);
@@ -93,54 +98,64 @@ export function KitaSearchClient({
       setPage(1);
       if (debounceRef.current) clearTimeout(debounceRef.current);
       debounceRef.current = setTimeout(() => {
-        fetchKitas({ q, district, minRating, hasSpots, page: 1 });
+        fetchKitas({ q, district, minRating, hasSpots, openingHours, page: 1 });
       }, 400);
     },
-    [district, minRating, hasSpots, fetchKitas]
+    [district, minRating, hasSpots, openingHours, fetchKitas]
   );
 
   const handleDistrictChange = useCallback(
     (d: string) => {
       setDistrict(d);
       setPage(1);
-      fetchKitas({ q: query, district: d, minRating, hasSpots, page: 1 });
+      fetchKitas({ q: query, district: d, minRating, hasSpots, openingHours, page: 1 });
     },
-    [query, minRating, hasSpots, fetchKitas]
+    [query, minRating, hasSpots, openingHours, fetchKitas]
   );
 
   const handleMinRatingChange = useCallback(
     (r: string) => {
       setMinRating(r);
       setPage(1);
-      fetchKitas({ q: query, district, minRating: r, hasSpots, page: 1 });
+      fetchKitas({ q: query, district, minRating: r, hasSpots, openingHours, page: 1 });
     },
-    [query, district, hasSpots, fetchKitas]
+    [query, district, hasSpots, openingHours, fetchKitas]
   );
 
   const handleHasSpotsChange = useCallback(
     (v: boolean) => {
       setHasSpots(v);
       setPage(1);
-      fetchKitas({ q: query, district, minRating, hasSpots: v, page: 1 });
+      fetchKitas({ q: query, district, minRating, hasSpots: v, openingHours, page: 1 });
     },
-    [query, district, minRating, fetchKitas]
+    [query, district, minRating, openingHours, fetchKitas]
+  );
+
+  const handleOpeningHoursChange = useCallback(
+    (v: string) => {
+      setOpeningHours(v);
+      setPage(1);
+      fetchKitas({ q: query, district, minRating, hasSpots, openingHours: v, page: 1 });
+    },
+    [query, district, minRating, hasSpots, fetchKitas]
   );
 
   const handlePageChange = useCallback(
     (p: number) => {
       setPage(p);
-      fetchKitas({ q: query, district, minRating, hasSpots, page: p });
+      fetchKitas({ q: query, district, minRating, hasSpots, openingHours, page: p });
       listRef.current?.scrollTo({ top: 0, behavior: "smooth" });
     },
-    [query, district, minRating, hasSpots, fetchKitas]
+    [query, district, minRating, hasSpots, openingHours, fetchKitas]
   );
 
   const handleMarkerClick = useCallback((kita: Kita) => {
     setHoveredId(kita.id);
-    // Scroll card into view
     const card = document.getElementById(`kita-${kita.id}`);
     card?.scrollIntoView({ behavior: "smooth", block: "center" });
   }, []);
+
+  const noResultsWithSpotsFilter = !loading && kitas.length === 0 && hasSpots;
 
   return (
     <div className="flex flex-col h-[calc(100vh-57px)]">
@@ -152,11 +167,14 @@ export function KitaSearchClient({
             district={district}
             minRating={minRating}
             hasSpots={hasSpots}
+            openingHours={openingHours}
+            lastSyncDate={lastSyncDate}
             districts={districts}
             onQueryChange={handleQueryChange}
             onDistrictChange={handleDistrictChange}
             onMinRatingChange={handleMinRatingChange}
             onHasSpotsChange={handleHasSpotsChange}
+            onOpeningHoursChange={handleOpeningHoursChange}
           />
         </div>
       </div>
@@ -214,7 +232,7 @@ export function KitaSearchClient({
                 ))}
               </div>
             ) : kitas.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-20 text-center">
+              <div className="flex flex-col items-center justify-center py-20 text-center max-w-sm mx-auto">
                 <svg
                   className="mb-3 h-10 w-10 text-text-muted"
                   fill="none"
@@ -228,7 +246,12 @@ export function KitaSearchClient({
                     d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
                   />
                 </svg>
-                <p className="text-sm text-text-tertiary">{t("noResults")}</p>
+                <p className="text-sm text-text-secondary">
+                  {noResultsWithSpotsFilter ? t("noSpotsMessage") : t("noResults")}
+                </p>
+                {noResultsWithSpotsFilter && (
+                  <p className="mt-2 text-xs text-text-tertiary">{t("noSpotsHint")}</p>
+                )}
               </div>
             ) : (
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -330,7 +330,7 @@ export default async function HomePage({ params }: Props) {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <span className="text-xs uppercase tracking-wide text-text-muted">Berlin Babysitter</span>
             <nav className="flex items-center gap-6">
-              <Link href="/legal" className="text-xs text-text-muted transition-colors hover:text-text-primary">{t("impressum")} · {t("privacyPolicy")} · {t("termsOfService")}</Link>
+              <Link href="/legal" className="text-xs text-text-muted transition-colors hover:text-text-primary">{t("impressum")}</Link>
             </nav>
             <span className="text-xs text-text-muted">{new Date().getFullYear()}</span>
           </div>

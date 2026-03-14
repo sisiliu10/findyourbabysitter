@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { getKitas, getDistrictsWithCounts } from "@/lib/kita";
+import { getKitas, getDistrictsWithCounts, getLastKitaSyncDate } from "@/lib/kita";
 import { Header } from "@/components/landing/Header";
 import { Footer } from "@/components/landing/Footer";
 import { KitaSearchClient } from "./KitaSearchClient";
@@ -37,9 +37,10 @@ export async function generateMetadata({
 }
 
 export default async function KitaSearchPage() {
-  const [{ kitas, pagination }, districts] = await Promise.all([
+  const [{ kitas, pagination }, districts, lastSyncDate] = await Promise.all([
     getKitas({ page: 1, limit: 18 }),
     getDistrictsWithCounts(),
+    getLastKitaSyncDate(),
   ]);
 
   return (
@@ -50,6 +51,7 @@ export default async function KitaSearchPage() {
           initialKitas={kitas}
           initialPagination={pagination}
           districts={districts}
+          lastSyncDate={lastSyncDate ? lastSyncDate.toISOString() : null}
         />
       </main>
       <Footer />
