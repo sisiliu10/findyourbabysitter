@@ -1,11 +1,20 @@
 import { requireAuth } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { formatDate, formatCurrency, getInitials } from "@/lib/utils";
-import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES } from "@/lib/constants";
+import { DAYS_OF_WEEK, TIME_SLOTS } from "@/lib/constants";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { getTranslations } from "next-intl/server";
 import { isPremium } from "@/lib/subscription";
+
+const CARE_TYPE_EMOJI: Record<string, string> = {
+  after_school: "🎒",
+  evening: "🌙",
+  weekend: "☀️",
+  emergency: "🚨",
+  baby_toddler: "👶",
+  homework: "📚",
+};
 
 function formatLastSeen(
   lastSeenAt: Date | null,
@@ -54,8 +63,7 @@ function calculateCompleteness(
     if (profile.hourlyRate > 0) filled++;
     if (profile.yearsExperience > 0) filled++;
     if (profile.languages) filled++;
-    if (profile.hasFirstAid || profile.hasCPR || profile.hasTransportation)
-      filled++;
+    if (profile.hasFirstAid || profile.hasCPR || profile.hasTransportation) filled++;
     if (profile.city) filled++;
     return Math.round((filled / total) * 100);
   } else {
@@ -76,7 +84,7 @@ export default async function ProfilePage() {
   const tn = await getTranslations("childcareNeeds");
   const tp = await getTranslations("premium");
 
-  const [user, bookingsCount, likesCount, matchesCount, userIsPremium] = await Promise.all([
+  const [user, userIsPremium] = await Promise.all([
     prisma.user.findUnique({
       where: { id: session.userId },
       include: {
@@ -85,19 +93,6 @@ export default async function ProfilePage() {
           where: { isVisible: true },
           select: { rating: true },
         },
-      },
-    }),
-    prisma.booking.count({
-      where: {
-        OR: [{ parentId: session.userId }, { sitterId: session.userId }],
-      },
-    }),
-    prisma.like.count({
-      where: { toUserId: session.userId },
-    }),
-    prisma.match.count({
-      where: {
-        OR: [{ user1Id: session.userId }, { user2Id: session.userId }],
       },
     }),
     isPremium(session.userId),
@@ -121,8 +116,7 @@ export default async function ProfilePage() {
 
   const avgRating =
     reviewsCount > 0
-      ? user.reviewsReceived.reduce((sum, r) => sum + r.rating, 0) /
-        reviewsCount
+      ? user.reviewsReceived.reduce((sum, r) => sum + r.rating, 0) / reviewsCount
       : null;
 
   const certifications: string[] = [];
@@ -182,20 +176,14 @@ export default async function ProfilePage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm text-accent transition hover:text-accent-hover"
               >
-                <svg
-                  className="h-3.5 w-3.5"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
+                <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                 </svg>
-                {user.instagram.startsWith("@")
-                  ? user.instagram
-                  : `@${user.instagram}`}
+                {user.instagram.startsWith("@") ? user.instagram : `@${user.instagram}`}
               </a>
             )}
 
-            {/* Context line: role + location + joined */}
+            {/* Context line */}
             <p className="text-sm text-text-secondary">
               {[roleLabel, location, t("joined", { date: formatDate(user.createdAt) })]
                 .filter(Boolean)
@@ -220,19 +208,14 @@ export default async function ProfilePage() {
             {avgRating !== null && (
               <p className="text-sm text-text-secondary">
                 <span className="text-accent">{"\u2605"}</span>{" "}
-                {t("stars", {
-                  rating: avgRating.toFixed(1),
-                  count: reviewsCount,
-                })}
+                {t("stars", { rating: avgRating.toFixed(1), count: reviewsCount })}
               </p>
             )}
 
             {/* Pill tags */}
             <div className="flex flex-wrap justify-center gap-2 pt-1 sm:justify-start">
               {roleLabel && (
-                <Badge variant={isSitter ? "info" : "neutral"}>
-                  {roleLabel}
-                </Badge>
+                <Badge variant={isSitter ? "info" : "neutral"}>{roleLabel}</Badge>
               )}
               {user.emailVerified && (
                 <Badge variant="success">{t("emailVerifiedStatus")}</Badge>
@@ -275,11 +258,7 @@ export default async function ProfilePage() {
         <div className="border border-accent/30 bg-accent-muted p-5">
           <div className="mb-4 flex items-center gap-3">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center bg-accent/15">
-              <svg
-                className="h-5 w-5 text-accent"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="h-5 w-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.562.562 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
               </svg>
             </div>
@@ -289,18 +268,9 @@ export default async function ProfilePage() {
             </div>
           </div>
           <ul className="mb-5 space-y-2">
-            {(
-              [
-                "feature_unlimitedMessages",
-                "feature_unlimitedLikes",
-                "feature_unlimitedRequests",
-                "feature_seeWhoLikedYou",
-              ] as const
-            ).map((key) => (
+            {(["feature_unlimitedMessages", "feature_unlimitedLikes", "feature_unlimitedRequests", "feature_seeWhoLikedYou"] as const).map((key) => (
               <li key={key} className="flex items-center gap-2 text-sm text-text-secondary">
-                <span className="flex h-4 w-4 shrink-0 items-center justify-center bg-accent/15 text-[10px] font-bold text-accent">
-                  ✓
-                </span>
+                <span className="flex h-4 w-4 shrink-0 items-center justify-center bg-accent/15 text-[10px] font-bold text-accent">✓</span>
                 {tp(key)}
               </li>
             ))}
@@ -317,23 +287,27 @@ export default async function ProfilePage() {
         </div>
       )}
 
-      {/* ─── About ─── */}
-      <section>
-        <h2 className="mb-3 font-serif text-lg text-text-primary">
-          {t("about")}
-        </h2>
-        <p className="whitespace-pre-wrap text-sm leading-relaxed text-text-secondary">
-          {bio || t("noBio")}
-        </p>
-      </section>
-
-      {/* ─── Childcare Needs (Parents) ─── */}
-      {!isSitter && hasChildcareNeeds && (
+      {/* ─── Sitter: About ─── */}
+      {isSitter && (
         <section>
-          <h2 className="mb-4 font-serif text-lg text-text-primary">
-            {tn("title")}
-          </h2>
-          <div className="space-y-4">
+          <h2 className="mb-3 font-serif text-lg text-text-primary">{t("about")}</h2>
+          <p className="whitespace-pre-wrap text-sm leading-relaxed text-text-secondary">
+            {bio || t("noBio")}
+          </p>
+        </section>
+      )}
+
+      {/* ─── Parent: Looking for in a sitter ─── */}
+      {!isSitter && hasChildcareNeeds && (
+        <section className="border border-accent/20 bg-accent-muted/30 p-5">
+          <div className="mb-4 flex items-center gap-2">
+            <span className="text-lg">🧸</span>
+            <h2 className="font-serif text-lg text-text-primary">{tn("title")}</h2>
+            <span className="ml-auto text-[10px] font-medium uppercase tracking-wide text-text-tertiary">
+              {t("visibleToSitters")}
+            </span>
+          </div>
+          <div className="space-y-3">
             {parsedChildcareTypes.length > 0 && (
               <div>
                 <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-tertiary">
@@ -343,8 +317,9 @@ export default async function ProfilePage() {
                   {parsedChildcareTypes.map((type) => (
                     <span
                       key={type}
-                      className="border border-border-default bg-surface-secondary px-3 py-1 text-xs text-text-secondary"
+                      className="inline-flex items-center gap-1.5 bg-accent-muted px-3 py-1.5 text-xs font-medium text-accent"
                     >
+                      {CARE_TYPE_EMOJI[type] && <span>{CARE_TYPE_EMOJI[type]}</span>}
                       {tn(`types.${type}` as any)}
                     </span>
                   ))}
@@ -360,7 +335,7 @@ export default async function ProfilePage() {
                   {parsedTimesOfDay.map((time) => (
                     <span
                       key={time}
-                      className="border border-border-default bg-surface-secondary px-3 py-1 text-xs text-text-secondary"
+                      className="bg-surface-tertiary px-3 py-1 text-xs text-text-secondary"
                     >
                       {tn(`times.${time}` as any)}
                     </span>
@@ -373,7 +348,7 @@ export default async function ProfilePage() {
                 <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-tertiary">
                   {tn("frequency")}
                 </p>
-                <span className="border border-border-default bg-surface-secondary px-3 py-1 text-xs text-text-secondary">
+                <span className="bg-surface-tertiary px-3 py-1 text-xs text-text-secondary">
                   {tn(`frequencies.${parsedCareFrequency}` as any)}
                 </span>
               </div>
@@ -382,65 +357,60 @@ export default async function ProfilePage() {
         </section>
       )}
 
-      {/* ─── Quick Stats ─── */}
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {[
-          { value: bookingsCount, label: t("bookingsLabel") },
-          { value: likesCount, label: t("likesLabel") },
-          { value: matchesCount, label: t("matchesLabel") },
-          { value: reviewsCount, label: t("reviewsLabel") },
-        ].map((stat) => (
-          <div
-            key={stat.label}
-            className="border border-border-subtle bg-surface-secondary p-4 text-center"
-          >
-            <p className="text-xl font-semibold text-text-primary">
-              {stat.value}
-            </p>
-            <p className="mt-1 text-xs text-text-tertiary">{stat.label}</p>
+      {/* ─── Parent: For other parents ─── */}
+      {!isSitter && (
+        <section className="border border-border-default bg-surface-secondary p-5">
+          <div className="mb-3 flex items-center gap-2">
+            <span className="text-lg">☕</span>
+            <h2 className="font-serif text-lg text-text-primary">{t("forParents")}</h2>
+            <span className="ml-auto text-[10px] font-medium uppercase tracking-wide text-text-tertiary">
+              {t("visibleToEveryone")}
+            </span>
           </div>
-        ))}
-      </section>
+          <p className="whitespace-pre-wrap text-sm leading-relaxed text-text-secondary">
+            {bio || t("noBio")}
+          </p>
+          {user.district && (
+            <div className="mt-3 inline-flex items-center gap-1.5 bg-surface-tertiary px-3 py-1 text-xs text-text-secondary">
+              📍 {user.district}
+            </div>
+          )}
+          {user.languages && (
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {user.languages.split(",").map((l) => (
+                <span key={l.trim()} className="bg-surface-tertiary px-2.5 py-1 text-xs text-text-secondary">
+                  {l.trim()}
+                </span>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
 
       {/* ─── Sitter: Experience & Skills ─── */}
       {isSitter && profile && (
         <section>
-          <h2 className="mb-4 font-serif text-lg text-text-primary">
-            {t("experienceSkills")}
-          </h2>
+          <h2 className="mb-4 font-serif text-lg text-text-primary">{t("experienceSkills")}</h2>
 
-          {/* Rate & Experience highlight cards */}
           <div className="mb-5 grid grid-cols-2 gap-3">
             <div className="bg-accent-muted p-5">
-              <p className="text-2xl font-semibold text-accent">
-                {formatCurrency(profile.hourlyRate)}
-              </p>
-              <p className="mt-1 text-xs text-text-secondary">
-                {t("hourlyRate")}
-              </p>
+              <p className="text-2xl font-semibold text-accent">{formatCurrency(profile.hourlyRate)}</p>
+              <p className="mt-1 text-xs text-text-secondary">{t("hourlyRate")}</p>
             </div>
             <div className="bg-success-muted p-5">
               <p className="text-2xl font-semibold text-success">
                 {t("yearCount", { count: profile.yearsExperience })}
               </p>
-              <p className="mt-1 text-xs text-text-secondary">
-                {t("experience")}
-              </p>
+              <p className="mt-1 text-xs text-text-secondary">{t("experience")}</p>
             </div>
           </div>
 
-          {/* Languages */}
           {profile.languages && (
             <div className="mb-4">
-              <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-tertiary">
-                {t("languages")}
-              </p>
+              <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-tertiary">{t("languages")}</p>
               <div className="flex flex-wrap gap-2">
                 {profile.languages.split(",").map((lang) => (
-                  <span
-                    key={lang.trim()}
-                    className="border border-border-default bg-surface-secondary px-3 py-1 text-xs text-text-secondary"
-                  >
+                  <span key={lang.trim()} className="border border-border-default bg-surface-secondary px-3 py-1 text-xs text-text-secondary">
                     {lang.trim()}
                   </span>
                 ))}
@@ -448,18 +418,12 @@ export default async function ProfilePage() {
             </div>
           )}
 
-          {/* Certifications */}
           {certifications.length > 0 && (
             <div className="mb-4">
-              <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-tertiary">
-                {t("certifications")}
-              </p>
+              <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-tertiary">{t("certifications")}</p>
               <div className="flex flex-wrap gap-2">
                 {certifications.map((cert) => (
-                  <span
-                    key={cert}
-                    className="border border-success/20 bg-success-muted px-3 py-1 text-xs text-success"
-                  >
+                  <span key={cert} className="border border-success/20 bg-success-muted px-3 py-1 text-xs text-success">
                     {"\u2713"} {cert}
                   </span>
                 ))}
@@ -467,88 +431,45 @@ export default async function ProfilePage() {
             </div>
           )}
 
-          {/* Age Range */}
           <div className="flex items-center gap-2 text-sm text-text-secondary">
-            <svg
-              className="h-4 w-4 text-text-tertiary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={1.5}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-              />
+            <svg className="h-4 w-4 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
             </svg>
-            <span>
-              {t("ageRangeDesc", {
-                min: profile.ageRangeMin,
-                max: profile.ageRangeMax,
-              })}
-            </span>
+            <span>{t("ageRangeDesc", { min: profile.ageRangeMin, max: profile.ageRangeMax })}</span>
           </div>
         </section>
       )}
 
-      {/* ─── Location ─── */}
+      {/* ─── Sitter: Location ─── */}
       {isSitter && profile && (profile.city || profile.state) && (
         <section>
-          <h2 className="mb-3 font-serif text-lg text-text-primary">
-            {t("location")}
-          </h2>
+          <h2 className="mb-3 font-serif text-lg text-text-primary">{t("location")}</h2>
           <div className="flex items-start gap-2 text-sm text-text-secondary">
-            <svg
-              className="mt-0.5 h-4 w-4 shrink-0 text-text-tertiary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={1.5}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-              />
+            <svg className="mt-0.5 h-4 w-4 shrink-0 text-text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
             </svg>
             <div>
-              <p>
-                {[profile.city, profile.state, profile.zipCode]
-                  .filter(Boolean)
-                  .join(", ")}
-              </p>
+              <p>{[profile.city, profile.state, profile.zipCode].filter(Boolean).join(", ")}</p>
               {profile.radiusMiles > 0 && (
-                <p className="mt-0.5 text-text-tertiary">
-                  {t("travelRadius", { miles: profile.radiusMiles })}
-                </p>
+                <p className="mt-0.5 text-text-tertiary">{t("travelRadius", { miles: profile.radiusMiles })}</p>
               )}
             </div>
           </div>
         </section>
       )}
 
-      {/* ─── Availability ─── */}
+      {/* ─── Sitter: Availability ─── */}
       {isSitter && profile && (
         <section>
-          <h2 className="mb-4 font-serif text-lg text-text-primary">
-            {t("availability")}
-          </h2>
+          <h2 className="mb-4 font-serif text-lg text-text-primary">{t("availability")}</h2>
           <div className="overflow-x-auto border border-border-subtle bg-surface-secondary p-4 sm:p-5">
             <table className="w-full text-sm">
               <thead>
                 <tr>
                   <th className="pb-3 text-left text-xs font-medium uppercase tracking-wide text-text-tertiary" />
                   {TIME_SLOTS.map((slot) => (
-                    <th
-                      key={slot}
-                      className="pb-3 text-center text-xs font-medium uppercase tracking-wide text-text-tertiary"
-                    >
+                    <th key={slot} className="pb-3 text-center text-xs font-medium uppercase tracking-wide text-text-tertiary">
                       {tc(`timeSlots.${slot}` as "timeSlots.morning" | "timeSlots.afternoon" | "timeSlots.evening")}
                     </th>
                   ))}
@@ -561,18 +482,10 @@ export default async function ProfilePage() {
                       {tc(`days.${day}` as "days.monday" | "days.tuesday" | "days.wednesday" | "days.thursday" | "days.friday" | "days.saturday" | "days.sunday")}
                     </td>
                     {TIME_SLOTS.map((slot) => {
-                      const isAvailable = (
-                        availability[day] || []
-                      ).includes(slot);
+                      const isAvailable = (availability[day] || []).includes(slot);
                       return (
                         <td key={slot} className="py-2.5 text-center">
-                          <span
-                            className={`inline-flex h-7 w-7 items-center justify-center text-xs ${
-                              isAvailable
-                                ? "bg-success-muted text-success"
-                                : "bg-surface-tertiary text-text-muted"
-                            }`}
-                          >
+                          <span className={`inline-flex h-7 w-7 items-center justify-center text-xs ${isAvailable ? "bg-success-muted text-success" : "bg-surface-tertiary text-text-muted"}`}>
                             {isAvailable ? "\u2713" : "\u2013"}
                           </span>
                         </td>
@@ -588,51 +501,26 @@ export default async function ProfilePage() {
 
       {/* ─── Trust & Verification ─── */}
       <section>
-        <h2 className="mb-4 font-serif text-lg text-text-primary">
-          {t("trustVerification")}
-        </h2>
+        <h2 className="mb-4 font-serif text-lg text-text-primary">{t("trustVerification")}</h2>
         <div className="space-y-3">
-          {/* Email */}
           <div className="flex items-center gap-3">
-            <span
-              className={`flex h-6 w-6 items-center justify-center text-xs ${
-                user.emailVerified
-                  ? "bg-success-muted text-success"
-                  : "bg-surface-tertiary text-text-muted"
-              }`}
-            >
+            <span className={`flex h-6 w-6 items-center justify-center text-xs ${user.emailVerified ? "bg-success-muted text-success" : "bg-surface-tertiary text-text-muted"}`}>
               {user.emailVerified ? "\u2713" : "\u2013"}
             </span>
             <span className="text-sm text-text-secondary">
-              {user.emailVerified
-                ? t("emailVerifiedStatus")
-                : t("emailNotVerified")}
+              {user.emailVerified ? t("emailVerifiedStatus") : t("emailNotVerified")}
             </span>
           </div>
-          {/* Phone */}
           <div className="flex items-center gap-3">
-            <span
-              className={`flex h-6 w-6 items-center justify-center text-xs ${
-                user.phone
-                  ? "bg-success-muted text-success"
-                  : "bg-surface-tertiary text-text-muted"
-              }`}
-            >
+            <span className={`flex h-6 w-6 items-center justify-center text-xs ${user.phone ? "bg-success-muted text-success" : "bg-surface-tertiary text-text-muted"}`}>
               {user.phone ? "\u2713" : "\u2013"}
             </span>
             <span className="text-sm text-text-secondary">
               {user.phone ? t("phoneAdded") : t("phoneNotAdded")}
             </span>
           </div>
-          {/* Reviews */}
           <div className="flex items-center gap-3">
-            <span
-              className={`flex h-6 w-6 items-center justify-center text-xs ${
-                reviewsCount > 0
-                  ? "bg-accent-muted text-accent"
-                  : "bg-surface-tertiary text-text-muted"
-              }`}
-            >
+            <span className={`flex h-6 w-6 items-center justify-center text-xs ${reviewsCount > 0 ? "bg-accent-muted text-accent" : "bg-surface-tertiary text-text-muted"}`}>
               {"\u2605"}
             </span>
             <span className="text-sm text-text-secondary">
@@ -644,9 +532,7 @@ export default async function ProfilePage() {
 
       {/* ─── Account (de-emphasized) ─── */}
       <section className="border-t border-border-subtle pt-6">
-        <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-muted">
-          {t("account")}
-        </p>
+        <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-muted">{t("account")}</p>
         <div className="space-y-1.5 text-xs text-text-tertiary">
           <p>{user.email}</p>
           {user.phone && <p>{user.phone}</p>}

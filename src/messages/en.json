@@ -494,7 +494,10 @@
     "lastSeenMinutes": "Active {count}m ago",
     "lastSeenHours": "Active {count}h ago",
     "lastSeenDays": "Active {count}d ago",
-    "lastSeenDate": "Last seen {date}"
+    "lastSeenDate": "Last seen {date}",
+    "visibleToSitters": "Visible to sitters",
+    "visibleToEveryone": "Visible to everyone",
+    "forParents": "For other parents"
   },
   "profileEdit": {
     "title": "Edit Profile",

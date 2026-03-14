@@ -494,7 +494,10 @@
     "lastSeenMinutes": "Aktiv vor {count} Min.",
     "lastSeenHours": "Aktiv vor {count} Std.",
     "lastSeenDays": "Aktiv vor {count} T.",
-    "lastSeenDate": "Zuletzt gesehen am {date}"
+    "lastSeenDate": "Zuletzt gesehen am {date}",
+    "visibleToSitters": "Für Babysitter sichtbar",
+    "visibleToEveryone": "Für alle sichtbar",
+    "forParents": "Für andere Eltern"
   },
   "profileEdit": {
     "title": "Profil bearbeiten",
