@@ -508,7 +508,7 @@ export default function SearchPage() {
                       : t("likedParents", { count: liked.length })
                   : t("checkBackLater")}
               </p>
-              <div className="mt-6 flex gap-3">
+              <div className="mt-6 flex justify-center gap-3">
                 {currentIndex > 0 && (
                   <button
                     onClick={handleUndo}

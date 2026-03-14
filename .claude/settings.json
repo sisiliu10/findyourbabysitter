@@ -46,7 +46,10 @@
       "Bash(git add:*)",
       "Bash(grep -r \"language\" src/components/search src/app/[locale]/\\\\\\(dashboard\\\\\\)/search --include=\"*.tsx\" -l)",
       "Bash(ls /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/)",
-      "Bash(npx prisma:*)"
+      "Bash(npx prisma:*)",
+      "Bash(find /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/requests -type f)",
+      "Bash(find /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/requests -type d)",
+      "Bash(ls -la /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/requests/[id\\\\\\)/)"
     ],
     "additionalDirectories": [
       "/Users/sisi.liu/findyourbabysitter/public/coloring-pages",
