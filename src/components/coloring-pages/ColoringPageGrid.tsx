@@ -58,7 +58,7 @@ export function ColoringPageGrid({ pages }: Props) {
                 </svg>
                 {t("download")}
               </a>
-              <p className="mt-2 text-center text-xs text-text-tertiary sm:hidden">
+              <p className="mt-2 text-center text-xs text-text-tertiary hidden [@media(hover:none)]:block">
                 {t("iphoneHint")}
               </p>
             </div>
