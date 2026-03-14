@@ -114,7 +114,13 @@
     "registrationFailed": "Registration failed",
     "somethingWentWrong": "Something went wrong",
     "verificationSent": "Verification email sent.",
-    "failedResend": "Failed to resend. Please try again."
+    "failedResend": "Failed to resend. Please try again.",
+    "forParents": "For parents",
+    "forSitters": "For sitters",
+    "getStarted": "Get started",
+    "iAmParent": "I am a parent",
+    "parentDescription": "Browse profiles, read reviews, book the right person.",
+    "sitterDescription": "Create your profile, set your rates, connect with families."
   },
   "sidebar": {
     "dashboard": "Dashboard",

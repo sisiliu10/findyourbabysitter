@@ -137,23 +137,45 @@ function RegisterForm() {
         <h1 className="font-serif text-4xl text-text-primary">{t("joinUs")}</h1>
         <p className="mt-3 text-sm text-text-secondary">{t("howUsePlatform")}</p>
 
-        <div className="mt-10 space-y-0">
+        <div className="mt-8 flex flex-col gap-3">
           <button
             onClick={() => { setRole("PARENT"); setStep(2); }}
-            className="group w-full border border-border-default p-6 text-left transition-colors hover:border-text-primary"
+            className="group relative overflow-hidden p-7 text-left transition-transform hover:-translate-y-0.5"
+            style={{
+              background: "linear-gradient(135deg, #E8C9A0, #F2D9B6, #E0B88A, #E8C9A0)",
+              backgroundSize: "300% 300%",
+              animation: "gradientShift 8s ease infinite",
+            }}
           >
-            <p className="text-xs uppercase tracking-wide text-text-muted mb-2">01</p>
-            <h3 className="font-medium text-text-primary">{t("needBabysitter")}</h3>
-            <p className="mt-1 text-sm text-text-secondary">{t("findBookCaregivers")}</p>
+            <p className="text-[10px] font-medium uppercase tracking-widest text-text-primary/40 mb-3">{t("forParents")}</p>
+            <h3 className="font-serif text-2xl text-text-primary">{t("iAmParent")}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-text-primary/60">{t("parentDescription")}</p>
+            <span className="mt-5 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-text-primary/40 transition-colors group-hover:text-text-primary">
+              {t("getStarted")}
+              <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+              </svg>
+            </span>
           </button>
 
           <button
             onClick={() => { setRole("BABYSITTER"); setStep(2); }}
-            className="group w-full border border-border-default border-t-0 p-6 text-left transition-colors hover:border-text-primary"
+            className="group relative overflow-hidden p-7 text-left transition-transform hover:-translate-y-0.5"
+            style={{
+              background: "linear-gradient(135deg, #C4D8E2, #D6E6EE, #B8CFD9, #C4D8E2)",
+              backgroundSize: "300% 300%",
+              animation: "gradientShift 8s ease infinite 2s",
+            }}
           >
-            <p className="text-xs uppercase tracking-wide text-text-muted mb-2">02</p>
-            <h3 className="font-medium text-text-primary">{t("iAmBabysitter")}</h3>
-            <p className="mt-1 text-sm text-text-secondary">{t("createProfileGetBooked")}</p>
+            <p className="text-[10px] font-medium uppercase tracking-widest text-text-primary/40 mb-3">{t("forSitters")}</p>
+            <h3 className="font-serif text-2xl text-text-primary">{t("iAmBabysitter")}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-text-primary/60">{t("sitterDescription")}</p>
+            <span className="mt-5 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-text-primary/40 transition-colors group-hover:text-text-primary">
+              {t("getStarted")}
+              <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+              </svg>
+            </span>
           </button>
         </div>
 

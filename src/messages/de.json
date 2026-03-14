@@ -114,7 +114,13 @@
     "registrationFailed": "Registrierung fehlgeschlagen",
     "somethingWentWrong": "Etwas ist schiefgelaufen",
     "verificationSent": "Bestätigungs-E-Mail gesendet.",
-    "failedResend": "Senden fehlgeschlagen. Bitte erneut versuchen."
+    "failedResend": "Senden fehlgeschlagen. Bitte erneut versuchen.",
+    "forParents": "Für Eltern",
+    "forSitters": "Für Babysitter",
+    "getStarted": "Jetzt starten",
+    "iAmParent": "Ich bin Elternteil",
+    "parentDescription": "Profile durchstöbern, Bewertungen lesen, die richtige Person buchen.",
+    "sitterDescription": "Profil erstellen, Preise festlegen, Familien kennenlernen."
   },
   "sidebar": {
     "dashboard": "Übersicht",
@@ -336,7 +342,7 @@
     "discover": "Entdecken",
     "swipeBabysitters": "Swipe, um den perfekten Babysitter zu finden",
     "connectMoms": "Vernetze dich mit anderen Eltern in der Nähe",
-"babysitters": "Babysitter",
+    "babysitters": "Babysitter",
     "moms": "Eltern",
     "seenEveryone": "Du hast alle gesehen",
     "likedSitters": "Du hast {count, plural, one {1 Babysitter} other {# Babysitter}} geliked",
@@ -799,7 +805,7 @@
     "download": "Download",
     "tipsLabel": "Drucktipps",
     "tip1Title": "Bestes Papier",
-    "tip1Desc": "Dickeres Papier (ab 120g/m\u00b2) verwenden, damit Buntstifte und Filzstifte nicht durchscheinen.",
+    "tip1Desc": "Dickeres Papier (ab 120g/m²) verwenden, damit Buntstifte und Filzstifte nicht durchscheinen.",
     "tip2Title": "Druckeinstellungen",
     "tip2Desc": "Auf den Drucken-Button klicken, dann 'An Seite anpassen' in den Druckereinstellungen wählen.",
     "tip3Title": "Frei ausmalen",
