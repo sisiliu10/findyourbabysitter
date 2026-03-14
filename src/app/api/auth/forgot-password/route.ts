@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     const rateLimited = await checkRateLimit(emailLimiter, request);
     if (rateLimited) return rateLimited;
 
-    const { email } = await request.json();
+    const { email, locale } = await request.json();
 
     if (!email || typeof email !== "string") {
       return NextResponse.json({ success: true, message: SUCCESS_MESSAGE });
@@ -35,7 +35,8 @@ export async function POST(request: Request) {
       },
     });
 
-    sendPasswordResetEmail(user.email, user.firstName, resetToken).catch(console.error);
+    const safeLocale = typeof locale === "string" ? locale : undefined;
+    sendPasswordResetEmail(user.email, user.firstName, resetToken, safeLocale).catch(console.error);
 
     return NextResponse.json({ success: true, message: SUCCESS_MESSAGE });
   } catch (error) {

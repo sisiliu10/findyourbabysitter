@@ -30,6 +30,7 @@ export async function POST(request: Request) {
       where: {
         passwordResetToken: token,
         passwordResetExpiry: { gt: new Date() },
+        isDisabled: false,
       },
     });
 

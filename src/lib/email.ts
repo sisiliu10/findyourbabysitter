@@ -11,6 +11,10 @@ const resend = process.env.RESEND_API_KEY
 const FROM_EMAIL = "FindYourBabysitter <noreply@berlinbabysitter.com>";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
+if (!process.env.NEXT_PUBLIC_APP_URL) {
+  console.warn("[email] NEXT_PUBLIC_APP_URL is not set — email links will point to localhost:3000");
+}
+
 // -------------------------------------------------------------------
 // Generic send
 // -------------------------------------------------------------------
@@ -108,8 +112,10 @@ export async function sendPasswordResetEmail(
   email: string,
   firstName: string,
   token: string,
+  locale?: string,
 ): Promise<void> {
-  const resetLink = `${APP_URL}/reset-password?token=${token}`;
+  const localePath = locale && locale !== "en" ? `/${locale}` : "";
+  const resetLink = `${APP_URL}${localePath}/reset-password?token=${token}`;
 
   return sendEmail({
     to: email,

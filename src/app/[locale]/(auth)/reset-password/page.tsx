@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRouter, Link } from "@/i18n/navigation";
 import { Suspense } from "react";
@@ -15,6 +15,13 @@ function ResetPasswordForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const redirectTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (redirectTimer.current) clearTimeout(redirectTimer.current);
+    };
+  }, []);
 
   if (!token) {
     return (
@@ -70,7 +77,7 @@ function ResetPasswordForm() {
       }
 
       setSuccess(true);
-      setTimeout(() => router.push("/login"), 3000);
+      redirectTimer.current = setTimeout(() => router.push("/login"), 3000);
     } catch {
       setError(t("somethingWentWrong"));
     } finally {
