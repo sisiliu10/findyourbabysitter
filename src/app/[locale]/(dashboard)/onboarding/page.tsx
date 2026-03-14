@@ -319,7 +319,7 @@ export default function OnboardingPage() {
                 <button
                   key={g}
                   type="button"
-                  onClick={() => setGender(gender === g ? "" : g)}
+                  onClick={() => setGender(g)}
                   className={`px-3.5 py-2 text-sm transition ${
                     gender === g
                       ? "bg-text-primary text-surface-primary"
