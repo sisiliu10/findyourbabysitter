@@ -21,7 +21,7 @@ export async function canStartConversation(
   userId: string
 ): Promise<{ allowed: boolean; used: number; limit: number }> {
   if (await isPremium(userId)) {
-    return { allowed: true, used: 0, limit: Infinity };
+    return { allowed: true, used: 0, limit: 9999 };
   }
 
   const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -49,7 +49,7 @@ export async function canLikeToday(
   userId: string
 ): Promise<{ allowed: boolean; used: number; limit: number }> {
   if (await isPremium(userId)) {
-    return { allowed: true, used: 0, limit: Infinity };
+    return { allowed: true, used: 0, limit: 9999 };
   }
 
   const todayStart = new Date();
@@ -73,7 +73,7 @@ export async function canCreateRequest(
   userId: string
 ): Promise<{ allowed: boolean; used: number; limit: number }> {
   if (await isPremium(userId)) {
-    return { allowed: true, used: 0, limit: Infinity };
+    return { allowed: true, used: 0, limit: 9999 };
   }
 
   const used = await prisma.childcareRequest.count({
