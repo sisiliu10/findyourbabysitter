@@ -255,24 +255,16 @@ export async function notifyBookingCancelled(
 export async function notifyNewMessage(
   recipientEmail: string,
   senderName: string,
-  messagePreview: string,
+  _messagePreview: string,
   bookingId: string,
 ): Promise<void> {
-  const preview =
-    messagePreview.length > 150
-      ? messagePreview.slice(0, 150) + "..."
-      : messagePreview;
-
   return sendEmail({
     to: recipientEmail,
     subject: `New message from ${senderName}`,
     html: `
       <h2>You have a new message</h2>
-      <p><strong>${senderName}</strong> sent you a message:</p>
-      <blockquote style="border-left: 3px solid #ccc; padding-left: 12px; color: #555;">
-        ${preview}
-      </blockquote>
-      <p><a href="${APP_URL}/messages/${bookingId}">Reply to this message</a></p>
+      <p><strong>${senderName}</strong> sent you a message.</p>
+      <p><a href="${APP_URL}/messages/${bookingId}" style="display:inline-block;padding:12px 24px;background:#111;color:#fff;text-decoration:none;font-size:14px;letter-spacing:0.05em;">View message</a></p>
     `,
   });
 }
