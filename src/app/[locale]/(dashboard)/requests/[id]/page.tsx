@@ -5,6 +5,7 @@ import { notFound, redirect } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Badge, type BadgeVariant } from "@/components/ui/Badge";
 import { MatchedSitters } from "./MatchedSitters";
+import { RequestActions } from "./RequestActions";
 import { getTranslations } from "next-intl/server";
 
 const statusVariants: Record<string, BadgeVariant> = {
@@ -77,9 +78,12 @@ export default async function RequestDetailPage({
             {request.title}
           </h1>
         </div>
-        <Badge variant={statusVariants[request.status] || "neutral"}>
-          {tc(`status.${request.status}` as any)}
-        </Badge>
+        <div className="flex flex-wrap items-center gap-3">
+          <Badge variant={statusVariants[request.status] || "neutral"}>
+            {tc(`status.${request.status}` as any)}
+          </Badge>
+          <RequestActions requestId={id} status={request.status} />
+        </div>
       </div>
 
       <div className="space-y-6">

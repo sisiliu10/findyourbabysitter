@@ -152,6 +152,89 @@ export async function expressInterest(requestId: string): Promise<ActionResult> 
   }
 }
 
+export async function deleteRequest(requestId: string): Promise<ActionResult> {
+  try {
+    const session = await requireAuth();
+
+    const request = await prisma.childcareRequest.findUnique({
+      where: { id: requestId },
+    });
+
+    if (!request) {
+      return { success: false, error: "Request not found" };
+    }
+
+    if (request.parentId !== session.userId) {
+      return { success: false, error: "Not authorized to delete this request" };
+    }
+
+    await prisma.childcareRequest.delete({ where: { id: requestId } });
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to delete request",
+    };
+  }
+
+  redirect("/requests");
+}
+
+export async function updateRequest(requestId: string, formData: FormData): Promise<ActionResult> {
+  try {
+    const session = await requireAuth();
+
+    const request = await prisma.childcareRequest.findUnique({
+      where: { id: requestId },
+    });
+
+    if (!request) {
+      return { success: false, error: "Request not found" };
+    }
+
+    if (request.parentId !== session.userId) {
+      return { success: false, error: "Not authorized to edit this request" };
+    }
+
+    if (request.status !== "OPEN") {
+      return { success: false, error: "Only open requests can be edited" };
+    }
+
+    const startTime = formData.get("startTime") as string;
+    const endTime = formData.get("endTime") as string;
+    const city = formData.get("city") as string;
+    const zipCode = formData.get("zipCode") as string;
+    const description = formData.get("description") as string;
+    const specialNotes = formData.get("specialNotes") as string;
+    const maxHourlyRateRaw = formData.get("maxHourlyRate") as string;
+    const maxHourlyRate = maxHourlyRateRaw ? parseFloat(maxHourlyRateRaw) : null;
+
+    const [sh, sm] = startTime.split(":").map(Number);
+    const [eh, em] = endTime.split(":").map(Number);
+    const durationHours = Math.round(((eh * 60 + em) - (sh * 60 + sm)) / 60 * 10) / 10;
+
+    await prisma.childcareRequest.update({
+      where: { id: requestId },
+      data: {
+        startTime,
+        endTime,
+        durationHours: durationHours > 0 ? durationHours : request.durationHours,
+        city,
+        zipCode,
+        description,
+        specialNotes,
+        maxHourlyRate,
+      },
+    });
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Failed to update request",
+    };
+  }
+
+  redirect(`/requests/${requestId}`);
+}
+
 export async function closeRequest(requestId: string): Promise<ActionResult> {
   try {
     const session = await requireAuth();

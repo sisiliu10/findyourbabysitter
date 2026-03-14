@@ -581,7 +581,16 @@
     "cat_date_night": "Abendbetreuung",
     "cat_other": "Sonstiges",
     "recurring": "Regelmäßig",
-    "occasional": "Einmalig"
+    "occasional": "Einmalig",
+    "editRequest": "Bearbeiten",
+    "deleteRequest": "Löschen",
+    "deleteConfirm": "Anfrage löschen? Dies kann nicht rückgängig gemacht werden.",
+    "confirmDelete": "Ja, löschen",
+    "cancelDelete": "Abbrechen",
+    "deleting": "Wird gelöscht...",
+    "saveChanges": "Änderungen speichern",
+    "editTitle": "Anfrage bearbeiten",
+    "editSubtitle": "Aktualisiere die Details deiner Betreuungsanfrage."
   },
   "newRequest": {
     "title": "Betreuungsanfrage erstellen",

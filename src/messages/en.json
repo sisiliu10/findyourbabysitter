@@ -581,7 +581,16 @@
     "cat_date_night": "Date night",
     "cat_other": "Other",
     "recurring": "Recurring",
-    "occasional": "One-time"
+    "occasional": "One-time",
+    "editRequest": "Edit",
+    "deleteRequest": "Delete",
+    "deleteConfirm": "Delete this request? This cannot be undone.",
+    "confirmDelete": "Yes, delete",
+    "cancelDelete": "Cancel",
+    "deleting": "Deleting...",
+    "saveChanges": "Save Changes",
+    "editTitle": "Edit Request",
+    "editSubtitle": "Update the details of your childcare request."
   },
   "newRequest": {
     "title": "Create a Childcare Request",
