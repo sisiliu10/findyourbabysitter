@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "@/i18n/navigation";
+import { useRouter, Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES, SITTER_TYPES, GENDER_OPTIONS } from "@/lib/constants";
+import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES, SITTER_TYPES, GENDER_OPTIONS, LANGUAGE_OPTIONS } from "@/lib/constants";
 import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
-import { TagInput } from "@/components/ui/TagInput";
 import { getDistrictFromZip } from "@/lib/berlin-districts";
+import { cn } from "@/lib/utils";
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -17,6 +17,8 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [userId, setUserId] = useState<string | null>(null);
+  const [profileLive, setProfileLive] = useState(false);
 
   // Sitter fields
   const [bio, setBio] = useState("");
@@ -28,6 +30,9 @@ export default function OnboardingPage() {
   const [sitterType, setSitterType] = useState("");
   const [gender, setGender] = useState("");
   const [availAttempted, setAvailAttempted] = useState(false);
+  const [hasFirstAid, setHasFirstAid] = useState(false);
+  const [hasCPR, setHasCPR] = useState(false);
+  const [hasTransportation, setHasTransportation] = useState(false);
 
   // Profile picture
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
@@ -61,6 +66,7 @@ export default function OnboardingPage() {
           return;
         }
         setRole(u?.data?.role || "PARENT");
+        if (u?.data?.id) setUserId(u.data.id);
         if (u?.data?.avatarUrl) setAvatarPreview(u.data.avatarUrl);
       })
       .catch(() => setRole("PARENT"));
@@ -139,6 +145,9 @@ export default function OnboardingPage() {
         availabilityJson: JSON.stringify(availability),
         sitterType,
         gender,
+        hasFirstAid,
+        hasCPR,
+        hasTransportation,
       });
     }
 
@@ -155,8 +164,12 @@ export default function OnboardingPage() {
         return;
       }
 
-      router.push("/dashboard");
-      router.refresh();
+      if (role === "BABYSITTER") {
+        setProfileLive(true);
+      } else {
+        router.push("/dashboard");
+        router.refresh();
+      }
     } catch {
       setError(tc("somethingWentWrong"));
     } finally {
@@ -175,6 +188,38 @@ export default function OnboardingPage() {
   function FieldError({ show, message }: { show: boolean; message: string }) {
     if (!show) return null;
     return <p className="mt-1 text-xs text-danger">{message}</p>;
+  }
+
+  if (profileLive) {
+    return (
+      <div className="mx-auto max-w-lg">
+        <div className="border border-success/30 bg-success-muted p-8 text-center">
+          <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center bg-success/10">
+            <svg className="h-7 w-7 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h1 className="font-serif text-3xl text-text-primary">{t("profileLiveTitle")}</h1>
+          <p className="mt-3 text-sm leading-relaxed text-text-secondary">{t("profileLiveSubtitle")}</p>
+          <div className="mt-8 flex flex-col gap-3">
+            {userId && (
+              <Link
+                href={`/sitter/${userId}`}
+                className="w-full border border-text-primary bg-text-primary px-4 py-3 text-xs font-medium uppercase tracking-widest text-surface-primary transition hover:bg-accent hover:border-accent text-center block"
+              >
+                {t("previewProfile")}
+              </Link>
+            )}
+            <button
+              onClick={() => { router.push("/dashboard"); router.refresh(); }}
+              className="w-full border border-border-default px-4 py-3 text-xs font-medium uppercase tracking-widest text-text-primary transition hover:border-text-primary"
+            >
+              {t("goToDashboard")}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -295,11 +340,29 @@ export default function OnboardingPage() {
               {t("languagesLabel")} <span className="text-danger">*</span>
             </label>
             <p className="mb-1.5 text-xs text-text-tertiary">{t("languagesHint")}</p>
-            <TagInput
-              value={languages}
-              onChange={setLanguages}
-              placeholder={t("languagesPlaceholder")}
-            />
+            <div className="grid grid-cols-3 gap-1.5">
+              {LANGUAGE_OPTIONS.map((lang) => (
+                <button
+                  key={lang.value}
+                  type="button"
+                  onClick={() =>
+                    setLanguages((prev) =>
+                      prev.includes(lang.value)
+                        ? prev.filter((l) => l !== lang.value)
+                        : [...prev, lang.value]
+                    )
+                  }
+                  className={cn(
+                    "px-3 py-1.5 text-xs font-medium text-left transition-colors border",
+                    languages.includes(lang.value)
+                      ? "border-text-primary bg-text-primary text-surface-primary"
+                      : "border-border-default bg-surface-tertiary text-text-secondary hover:border-text-primary hover:text-text-primary"
+                  )}
+                >
+                  {lang.flag} {lang.value}
+                </button>
+              ))}
+            </div>
           </div>
 
           <h2 className="pt-1 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourLocation")}</h2>
@@ -550,6 +613,39 @@ export default function OnboardingPage() {
                   }`}
                 >
                   {t(`sitterTypes.${type}`)}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
+              {t("certificationsLabel")}
+            </label>
+            <p className="mb-3 text-xs text-text-tertiary">{t("certificationsHint")}</p>
+            <div className="flex flex-col gap-2.5">
+              {[
+                { key: "hasFirstAid", label: t("firstAid"), checked: hasFirstAid, set: setHasFirstAid },
+                { key: "hasCPR", label: t("cpr"), checked: hasCPR, set: setHasCPR },
+                { key: "hasTransportation", label: t("transportLabel"), checked: hasTransportation, set: setHasTransportation },
+              ].map((cert) => (
+                <button
+                  key={cert.key}
+                  type="button"
+                  onClick={() => cert.set(!cert.checked)}
+                  className={`flex items-center gap-3 border px-4 py-3 text-left text-sm transition ${
+                    cert.checked
+                      ? "border-success bg-success-muted text-success"
+                      : "border-border-default bg-surface-tertiary text-text-secondary hover:border-text-muted"
+                  }`}
+                >
+                  <span className={`flex h-5 w-5 shrink-0 items-center justify-center border transition ${cert.checked ? "border-success bg-success text-white" : "border-border-default bg-transparent"}`}>
+                    {cert.checked && (
+                      <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                      </svg>
+                    )}
+                  </span>
+                  {cert.label}
                 </button>
               ))}
             </div>

@@ -70,6 +70,30 @@ export default async function DashboardPage() {
     CANCELLED: "border-l-danger",
   };
 
+  // Compute sitter profile completeness
+  let completenessItems: { key: string; label: string; done: boolean }[] = [];
+  if (user.role === "BABYSITTER" && user.babysitterProfile) {
+    const p = user.babysitterProfile;
+    let availability: Record<string, string[]> = {};
+    try { availability = JSON.parse(p.availabilityJson); } catch { /* empty */ }
+    const hasAvailability = Object.values(availability).some(slots => slots.length > 0);
+
+    completenessItems = [
+      { key: "photo", label: t("missingPhoto"), done: !!user.avatarUrl },
+      { key: "bio", label: t("missingBio"), done: p.bio.length >= 50 },
+      { key: "experience", label: t("missingExperience"), done: p.yearsExperience > 0 },
+      { key: "firstAid", label: t("missingFirstAid"), done: p.hasFirstAid },
+      { key: "cpr", label: t("missingCPR"), done: p.hasCPR },
+      { key: "transport", label: t("missingTransport"), done: p.hasTransportation },
+      { key: "availability", label: t("missingAvailability"), done: hasAvailability },
+    ];
+  }
+
+  const completenessCount = completenessItems.filter(i => i.done).length;
+  const completenessTotal = completenessItems.length;
+  const completenessPercent = completenessTotal > 0 ? Math.round((completenessCount / completenessTotal) * 100) : 100;
+  const missingItems = completenessItems.filter(i => !i.done);
+
   return (
     <div>
       {/* Header */}
@@ -83,6 +107,57 @@ export default async function DashboardPage() {
             : t("subtitleSitter")}
         </p>
       </div>
+
+      {/* Profile completeness banner for sitters */}
+      {user.role === "BABYSITTER" && completenessPercent < 100 && (
+        <div className="mb-10">
+          <div className="border border-border-default bg-surface-secondary p-5">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
+                  {t("profileCompleteness")}
+                </p>
+                <p className="mt-0.5 text-xs text-text-tertiary">{t("profileCompletenessHint")}</p>
+              </div>
+              <span className={`text-2xl font-medium tabular-nums ${completenessPercent >= 70 ? "text-success" : completenessPercent >= 40 ? "text-warning" : "text-danger"}`}>
+                {completenessPercent}%
+              </span>
+            </div>
+            {/* Progress bar */}
+            <div className="h-1.5 w-full bg-surface-tertiary overflow-hidden">
+              <div
+                className={`h-full transition-all duration-500 ${completenessPercent >= 70 ? "bg-success" : completenessPercent >= 40 ? "bg-warning" : "bg-danger"}`}
+                style={{ width: `${completenessPercent}%` }}
+              />
+            </div>
+            {/* Missing items */}
+            {missingItems.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {missingItems.slice(0, 4).map(item => (
+                  <Link
+                    key={item.key}
+                    href="/profile/edit"
+                    className="flex items-center gap-1.5 bg-surface-tertiary px-3 py-1.5 text-xs text-text-secondary transition hover:bg-border-default hover:text-text-primary"
+                  >
+                    <svg className="h-3 w-3 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    {item.label}
+                  </Link>
+                ))}
+                {missingItems.length > 4 && (
+                  <Link
+                    href="/profile/edit"
+                    className="flex items-center gap-1.5 border border-border-default px-3 py-1.5 text-xs font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary"
+                  >
+                    {t("editProfileLink")}
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Discover — parent cards */}
       {user.role === "PARENT" && (
@@ -201,31 +276,54 @@ export default async function DashboardPage() {
           {t("upcomingBookings")}
         </p>
         {allBookings.length === 0 ? (
-          <div className="border border-border-default bg-surface-secondary p-12 text-center">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center bg-surface-tertiary">
-              <svg
-                className="h-6 w-6 text-text-muted"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
-                />
-              </svg>
-            </div>
-            <p className="text-sm text-text-secondary">{t("noUpcomingBookings")}</p>
-            {user.role === "PARENT" && (
+          <div className="space-y-4">
+            {user.role === "BABYSITTER" && (
               <Link
-                href="/search"
-                className="mt-3 inline-block text-sm font-medium text-accent hover:underline"
+                href="/requests/browse"
+                className="group flex flex-col gap-3 border border-accent/20 bg-accent-muted p-6 transition hover:border-accent/40"
               >
-                {t("findSitters")}
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-accent/10 transition group-hover:scale-105">
+                    <svg className="h-6 w-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-serif text-lg text-text-primary">{t("getStartedTitle")}</p>
+                    <p className="mt-0.5 text-xs text-text-secondary">{t("getStartedSubtitle")}</p>
+                  </div>
+                  <svg className="ml-auto h-5 w-5 shrink-0 text-text-muted transition group-hover:translate-x-0.5 group-hover:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </div>
               </Link>
             )}
+            <div className="border border-border-default bg-surface-secondary p-12 text-center">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center bg-surface-tertiary">
+                <svg
+                  className="h-6 w-6 text-text-muted"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+                  />
+                </svg>
+              </div>
+              <p className="text-sm text-text-secondary">{t("noUpcomingBookings")}</p>
+              {user.role === "PARENT" && (
+                <Link
+                  href="/search"
+                  className="mt-3 inline-block text-sm font-medium text-accent hover:underline"
+                >
+                  {t("findSitters")}
+                </Link>
+              )}
+            </div>
           </div>
         ) : (
           <div className="space-y-3">
