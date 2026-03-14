@@ -425,6 +425,12 @@ export default function SearchPage() {
             >
               {t("parents")}
             </button>
+            <Link
+              href="/kita-search"
+              className="border-l border-border-default px-4 py-2 text-xs font-medium uppercase tracking-wide text-success transition-colors hover:bg-success-muted"
+            >
+              {t("kitas")}
+            </Link>
           </div>
         </div>
       )}

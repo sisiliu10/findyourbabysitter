@@ -346,7 +346,8 @@
     "kidsAndAges": "{count, plural, one {1 Kind} other {# Kinder}}, Alter {ages}",
     "lookingFor": "Sucht",
     "filterByLanguage": "Sprache filtern",
-    "allLanguages": "Alle"
+    "allLanguages": "Alle",
+    "kitas": "Kitas"
   },
   "onboarding": {
     "completeProfile": "Profil vervollständigen",
