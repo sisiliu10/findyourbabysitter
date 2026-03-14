@@ -297,6 +297,10 @@
       "erzieher_azubi": "Childcare trainee",
       "other": "Other"
     },
+    "district": "District",
+    "allDistricts": "All districts",
+    "showAllLanguages": "Show all {count} languages",
+    "showFewer": "Show fewer",
     "gender": "Gender",
     "allGenders": "All",
     "genders": {

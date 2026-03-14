@@ -6,6 +6,9 @@ import { Link } from "@/i18n/navigation";
 import { formatCurrency, getInitials, cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/Spinner";
 import { SITTER_TYPES, LANGUAGE_OPTIONS, GENDER_OPTIONS } from "@/lib/constants";
+import { BERLIN_DISTRICTS } from "@/lib/berlin-districts";
+
+const POPULAR_LANGUAGE_COUNT = 8;
 
 interface SitterResult {
   id: string;
@@ -74,6 +77,8 @@ export default function BrowseSittersPage() {
   const [maxRate, setMaxRate] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [genderFilter, setGenderFilter] = useState("");
+  const [districtFilter, setDistrictFilter] = useState("");
+  const [showAllLanguages, setShowAllLanguages] = useState(false);
 
   const fetchSitters = useCallback(async () => {
     setLoading(true);
@@ -83,6 +88,7 @@ export default function BrowseSittersPage() {
       if (sitterTypeFilter) params.set("sitterType", sitterTypeFilter);
       if (genderFilter) params.set("gender", genderFilter);
       if (maxRate) params.set("maxRate", maxRate);
+      if (districtFilter) params.set("district", districtFilter);
 
       const res = await fetch(`/api/sitters?${params}`);
       const json = await res.json();
@@ -96,7 +102,7 @@ export default function BrowseSittersPage() {
     } finally {
       setLoading(false);
     }
-  }, [languageFilter, sitterTypeFilter, genderFilter, maxRate]);
+  }, [languageFilter, sitterTypeFilter, genderFilter, maxRate, districtFilter]);
 
   useEffect(() => {
     fetchSitters();
@@ -145,11 +151,18 @@ export default function BrowseSittersPage() {
           />
         </div>
 
-        {/* Language filter — prominent */}
+        {/* Language filter — collapsible */}
         <div>
-          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            {t("language")}
-          </p>
+          <div className="mb-2 flex items-center justify-between">
+            <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("language")}
+            </p>
+            {languageFilter && (
+              <span className="text-[11px] text-accent font-medium">
+                {languageFilter}
+              </span>
+            )}
+          </div>
           <div className="flex flex-wrap gap-1.5">
             <button
               onClick={() => setLanguageFilter("")}
@@ -162,7 +175,7 @@ export default function BrowseSittersPage() {
             >
               {t("all")}
             </button>
-            {LANGUAGE_OPTIONS.map((lang) => (
+            {(showAllLanguages ? LANGUAGE_OPTIONS : LANGUAGE_OPTIONS.slice(0, POPULAR_LANGUAGE_COUNT)).map((lang) => (
               <button
                 key={lang.value}
                 onClick={() => setLanguageFilter(languageFilter === lang.value ? "" : lang.value)}
@@ -177,92 +190,118 @@ export default function BrowseSittersPage() {
               </button>
             ))}
           </div>
-        </div>
-
-        {/* Sitter type filter */}
-        <div>
-          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            {t("sitterType")}
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            <button
-              onClick={() => setSitterTypeFilter("")}
-              className={cn(
-                "px-3 py-1.5 text-xs font-medium transition-colors",
-                !sitterTypeFilter
-                  ? "bg-text-primary text-surface-primary"
-                  : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
-              )}
-            >
-              {t("allTypes")}
-            </button>
-            {SITTER_TYPES.map((type) => (
-              <button
-                key={type}
-                onClick={() => setSitterTypeFilter(sitterTypeFilter === type ? "" : type)}
-                className={cn(
-                  "px-3 py-1.5 text-xs font-medium transition-colors",
-                  sitterTypeFilter === type
-                    ? "bg-text-primary text-surface-primary"
-                    : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
-                )}
-              >
-                {t(`sitterTypes.${type}`)}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Gender filter */}
-        <div>
-          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
-            {t("gender")}
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            <button
-              onClick={() => setGenderFilter("")}
-              className={cn(
-                "px-3 py-1.5 text-xs font-medium transition-colors",
-                !genderFilter
-                  ? "bg-text-primary text-surface-primary"
-                  : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
-              )}
-            >
-              {t("allGenders")}
-            </button>
-            {GENDER_OPTIONS.map((g) => (
-              <button
-                key={g}
-                onClick={() => setGenderFilter(genderFilter === g ? "" : g)}
-                className={cn(
-                  "px-3 py-1.5 text-xs font-medium transition-colors",
-                  genderFilter === g
-                    ? "bg-text-primary text-surface-primary"
-                    : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
-                )}
-              >
-                {t(`genders.${g}`)}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Max rate */}
-        <div className="flex items-center gap-3">
-          <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
-            {t("maxRate")}
-          </label>
-          <select
-            value={maxRate}
-            onChange={(e) => setMaxRate(e.target.value)}
-            className="border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
+          <button
+            onClick={() => setShowAllLanguages((v) => !v)}
+            className="mt-2 text-[11px] text-text-tertiary underline underline-offset-2 hover:text-text-secondary"
           >
-            <option value="">{t("anyRate")}</option>
-            <option value="15">{t("upTo")} {formatCurrency(15)}/hr</option>
-            <option value="20">{t("upTo")} {formatCurrency(20)}/hr</option>
-            <option value="25">{t("upTo")} {formatCurrency(25)}/hr</option>
-            <option value="30">{t("upTo")} {formatCurrency(30)}/hr</option>
-          </select>
+            {showAllLanguages
+              ? t("showFewer")
+              : t("showAllLanguages", { count: LANGUAGE_OPTIONS.length })}
+          </button>
+        </div>
+
+        {/* District + Max rate — inline row */}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div className="flex items-center gap-2">
+            <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
+              {t("district")}
+            </label>
+            <select
+              value={districtFilter}
+              onChange={(e) => setDistrictFilter(e.target.value)}
+              className="border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
+            >
+              <option value="">{t("allDistricts")}</option>
+              {BERLIN_DISTRICTS.map((d) => (
+                <option key={d} value={d}>{d}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
+              {t("maxRate")}
+            </label>
+            <select
+              value={maxRate}
+              onChange={(e) => setMaxRate(e.target.value)}
+              className="border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
+            >
+              <option value="">{t("anyRate")}</option>
+              <option value="15">{t("upTo")} {formatCurrency(15)}/hr</option>
+              <option value="20">{t("upTo")} {formatCurrency(20)}/hr</option>
+              <option value="25">{t("upTo")} {formatCurrency(25)}/hr</option>
+              <option value="30">{t("upTo")} {formatCurrency(30)}/hr</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Type + Gender — inline row */}
+        <div className="flex flex-wrap gap-x-6 gap-y-3">
+          <div>
+            <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("sitterType")}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              <button
+                onClick={() => setSitterTypeFilter("")}
+                className={cn(
+                  "px-3 py-1.5 text-xs font-medium transition-colors",
+                  !sitterTypeFilter
+                    ? "bg-text-primary text-surface-primary"
+                    : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
+                )}
+              >
+                {t("allTypes")}
+              </button>
+              {SITTER_TYPES.map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setSitterTypeFilter(sitterTypeFilter === type ? "" : type)}
+                  className={cn(
+                    "px-3 py-1.5 text-xs font-medium transition-colors",
+                    sitterTypeFilter === type
+                      ? "bg-text-primary text-surface-primary"
+                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
+                  )}
+                >
+                  {t(`sitterTypes.${type}`)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("gender")}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              <button
+                onClick={() => setGenderFilter("")}
+                className={cn(
+                  "px-3 py-1.5 text-xs font-medium transition-colors",
+                  !genderFilter
+                    ? "bg-text-primary text-surface-primary"
+                    : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
+                )}
+              >
+                {t("allGenders")}
+              </button>
+              {GENDER_OPTIONS.map((g) => (
+                <button
+                  key={g}
+                  onClick={() => setGenderFilter(genderFilter === g ? "" : g)}
+                  className={cn(
+                    "px-3 py-1.5 text-xs font-medium transition-colors",
+                    genderFilter === g
+                      ? "bg-text-primary text-surface-primary"
+                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
+                  )}
+                >
+                  {t(`genders.${g}`)}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -281,9 +320,9 @@ export default function BrowseSittersPage() {
       ) : filtered.length === 0 ? (
         <div className="flex flex-1 flex-col items-center justify-center py-20">
           <p className="text-sm text-text-tertiary">{t("noResults")}</p>
-          {(languageFilter || sitterTypeFilter || genderFilter || maxRate || searchQuery) && (
+          {(languageFilter || sitterTypeFilter || genderFilter || maxRate || searchQuery || districtFilter) && (
             <button
-              onClick={() => { setLanguageFilter(""); setSitterTypeFilter(""); setGenderFilter(""); setMaxRate(""); setSearchQuery(""); }}
+              onClick={() => { setLanguageFilter(""); setSitterTypeFilter(""); setGenderFilter(""); setMaxRate(""); setSearchQuery(""); setDistrictFilter(""); }}
               className="mt-3 text-sm text-accent hover:underline"
             >
               {t("clearFilters")}

@@ -297,6 +297,10 @@
       "erzieher_azubi": "Ausbildung zur Erzieher/in",
       "other": "Anderes"
     },
+    "district": "Bezirk",
+    "allDistricts": "Alle Bezirke",
+    "showAllLanguages": "Alle {count} Sprachen anzeigen",
+    "showFewer": "Weniger anzeigen",
     "gender": "Geschlecht",
     "allGenders": "Alle",
     "genders": {

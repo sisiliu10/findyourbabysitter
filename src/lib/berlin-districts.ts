@@ -72,6 +72,13 @@ const DISTRICT_MAP: Record<string, string> = {
 };
 
 /**
+ * Sorted unique list of all Berlin districts, for use in filter UIs.
+ */
+export const BERLIN_DISTRICTS: string[] = [
+  ...new Set(Object.values(DISTRICT_MAP)),
+].sort();
+
+/**
  * Derives a Berlin district name from a German zip code (PLZ).
  * Returns the district name, or empty string if not a Berlin zip.
  */

@@ -24,8 +24,8 @@ export async function GET(request: Request) {
     const hasFirstAid = searchParams.get("hasFirstAid");
     const language = searchParams.get("language");
     const sitterType = searchParams.get("sitterType");
-    const page = parseInt(searchParams.get("page") || "1", 10);
-    const limit = Math.min(parseInt(searchParams.get("limit") || "20", 10), 100);
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
+    const limit = Math.max(1, Math.min(parseInt(searchParams.get("limit") || "20", 10), 100));
     const skip = (page - 1) * limit;
 
     const where: Prisma.BabysitterProfileWhereInput = {
@@ -50,6 +50,14 @@ export async function GET(request: Request) {
 
     const gender = searchParams.get("gender");
     if (gender) where.gender = gender;
+
+    const district = searchParams.get("district");
+    if (district) {
+      where.user = {
+        ...(where.user as Prisma.UserWhereInput),
+        district: { contains: district },
+      };
+    }
 
     const [sitters, total] = await Promise.all([
       prisma.babysitterProfile.findMany({
@@ -109,8 +117,9 @@ export async function GET(request: Request) {
       },
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      { success: false, error: error instanceof Error ? error.message : "Failed to search sitters" },
+      { success: false, error: "Failed to search sitters" },
       { status: 500 }
     );
   }
