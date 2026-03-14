@@ -156,11 +156,6 @@ export const LANDING_PAGE_DE: Record<string, LocalizedContent> = {
         answer:
           "Viele schon. Sie finden Babysitter mit Hintergrund in frühkindlicher Bildung, Au-pair-Erfahrung und professionellen Nanny-Zertifikaten.",
       },
-      {
-        question: "Kann ein Babysitter mein Kind von der Kita abholen?",
-        answer:
-          "Ja, viele Babysitter bieten Abholdienste von lokalen Kindergärten und Schulen an. Klären Sie dies bei der Buchung.",
-      },
     ],
   },
   moabit: {

@@ -45,7 +45,6 @@ export function KitaSearchClient({
   const [query, setQuery] = useState("");
   const [district, setDistrict] = useState("");
   const [minRating, setMinRating] = useState("");
-  const [hasSpots, setHasSpots] = useState(false);
   const [openingHours, setOpeningHours] = useState("");
   const [page, setPage] = useState(1);
 
@@ -61,7 +60,6 @@ export function KitaSearchClient({
       q?: string;
       district?: string;
       minRating?: string;
-      hasSpots?: boolean;
       openingHours?: string;
       page?: number;
     }) => {
@@ -71,7 +69,6 @@ export function KitaSearchClient({
         if (params.q) searchParams.set("q", params.q);
         if (params.district) searchParams.set("district", params.district);
         if (params.minRating) searchParams.set("minRating", params.minRating);
-        if (params.hasSpots) searchParams.set("hasSpots", "true");
         if (params.openingHours) searchParams.set("openingHours", params.openingHours);
         searchParams.set("page", String(params.page || 1));
 
@@ -98,55 +95,46 @@ export function KitaSearchClient({
       setPage(1);
       if (debounceRef.current) clearTimeout(debounceRef.current);
       debounceRef.current = setTimeout(() => {
-        fetchKitas({ q, district, minRating, hasSpots, openingHours, page: 1 });
+        fetchKitas({ q, district, minRating, openingHours, page: 1 });
       }, 400);
     },
-    [district, minRating, hasSpots, openingHours, fetchKitas]
+    [district, minRating, openingHours, fetchKitas]
   );
 
   const handleDistrictChange = useCallback(
     (d: string) => {
       setDistrict(d);
       setPage(1);
-      fetchKitas({ q: query, district: d, minRating, hasSpots, openingHours, page: 1 });
+      fetchKitas({ q: query, district: d, minRating, openingHours, page: 1 });
     },
-    [query, minRating, hasSpots, openingHours, fetchKitas]
+    [query, minRating, openingHours, fetchKitas]
   );
 
   const handleMinRatingChange = useCallback(
     (r: string) => {
       setMinRating(r);
       setPage(1);
-      fetchKitas({ q: query, district, minRating: r, hasSpots, openingHours, page: 1 });
+      fetchKitas({ q: query, district, minRating: r, openingHours, page: 1 });
     },
-    [query, district, hasSpots, openingHours, fetchKitas]
-  );
-
-  const handleHasSpotsChange = useCallback(
-    (v: boolean) => {
-      setHasSpots(v);
-      setPage(1);
-      fetchKitas({ q: query, district, minRating, hasSpots: v, openingHours, page: 1 });
-    },
-    [query, district, minRating, openingHours, fetchKitas]
+    [query, district, openingHours, fetchKitas]
   );
 
   const handleOpeningHoursChange = useCallback(
     (v: string) => {
       setOpeningHours(v);
       setPage(1);
-      fetchKitas({ q: query, district, minRating, hasSpots, openingHours: v, page: 1 });
+      fetchKitas({ q: query, district, minRating, openingHours: v, page: 1 });
     },
-    [query, district, minRating, hasSpots, fetchKitas]
+    [query, district, minRating, fetchKitas]
   );
 
   const handlePageChange = useCallback(
     (p: number) => {
       setPage(p);
-      fetchKitas({ q: query, district, minRating, hasSpots, openingHours, page: p });
+      fetchKitas({ q: query, district, minRating, openingHours, page: p });
       listRef.current?.scrollTo({ top: 0, behavior: "smooth" });
     },
-    [query, district, minRating, hasSpots, openingHours, fetchKitas]
+    [query, district, minRating, openingHours, fetchKitas]
   );
 
   const handleMarkerClick = useCallback((kita: Kita) => {
@@ -154,8 +142,6 @@ export function KitaSearchClient({
     const card = document.getElementById(`kita-${kita.id}`);
     card?.scrollIntoView({ behavior: "smooth", block: "center" });
   }, []);
-
-  const noResultsWithSpotsFilter = !loading && kitas.length === 0 && hasSpots;
 
   return (
     <div className="flex flex-col h-[calc(100vh-57px)]">
@@ -166,14 +152,12 @@ export function KitaSearchClient({
             query={query}
             district={district}
             minRating={minRating}
-            hasSpots={hasSpots}
             openingHours={openingHours}
             lastSyncDate={lastSyncDate}
             districts={districts}
             onQueryChange={handleQueryChange}
             onDistrictChange={handleDistrictChange}
             onMinRatingChange={handleMinRatingChange}
-            onHasSpotsChange={handleHasSpotsChange}
             onOpeningHoursChange={handleOpeningHoursChange}
           />
         </div>
@@ -247,11 +231,8 @@ export function KitaSearchClient({
                   />
                 </svg>
                 <p className="text-sm text-text-secondary">
-                  {noResultsWithSpotsFilter ? t("noSpotsMessage") : t("noResults")}
+                  {t("noResults")}
                 </p>
-                {noResultsWithSpotsFilter && (
-                  <p className="mt-2 text-xs text-text-tertiary">{t("noSpotsHint")}</p>
-                )}
               </div>
             ) : (
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

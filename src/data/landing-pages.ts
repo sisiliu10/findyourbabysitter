@@ -116,7 +116,6 @@ export const DISTRICTS: LandingPage[] = [
       { question: "Can I find a babysitter for regular weekly bookings in Mitte?", answer: "Yes. Many sitters in Mitte are open to recurring arrangements. Discuss your schedule when you connect and set up a regular booking." },
       { question: "Are there babysitters near Hackescher Markt?", answer: "Several of our sitters live in or commute easily to the Hackescher Markt area. Use the location filter to find caregivers nearby." },
       { question: "Do babysitters in Mitte have professional experience?", answer: "Many do. You'll find sitters with backgrounds in early childhood education, au pair experience, and professional nanny certifications." },
-      { question: "Can a babysitter pick up my child from Kita?", answer: "Yes, many sitters offer pickup services from local kindergartens and schools. Clarify this when making your booking." },
     ],
   },
   {

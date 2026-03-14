@@ -6,14 +6,12 @@ interface KitaFiltersProps {
   query: string;
   district: string;
   minRating: string;
-  hasSpots: boolean;
   openingHours: string;
   lastSyncDate: string | null;
   districts: { name: string; count: number }[];
   onQueryChange: (q: string) => void;
   onDistrictChange: (d: string) => void;
   onMinRatingChange: (r: string) => void;
-  onHasSpotsChange: (v: boolean) => void;
   onOpeningHoursChange: (v: string) => void;
 }
 
@@ -21,14 +19,12 @@ export function KitaFilters({
   query,
   district,
   minRating,
-  hasSpots,
   openingHours,
   lastSyncDate,
   districts,
   onQueryChange,
   onDistrictChange,
   onMinRatingChange,
-  onHasSpotsChange,
   onOpeningHoursChange,
 }: KitaFiltersProps) {
   const t = useTranslations("kitaSearch");
@@ -95,23 +91,14 @@ export function KitaFilters({
         </select>
       </div>
 
-      {/* Available spots toggle */}
-      <div className="flex flex-col gap-0.5">
-        <label className="flex cursor-pointer items-center gap-2 border border-border-default bg-surface-secondary px-3 py-2 text-sm text-text-secondary transition-colors hover:border-border-hover">
-          <input
-            type="checkbox"
-            checked={hasSpots}
-            onChange={(e) => onHasSpotsChange(e.target.checked)}
-            className="h-3.5 w-3.5"
-          />
-          {t("spotsAvailable")}
-        </label>
-        {syncDateLabel && (
-          <span className="text-[10px] text-text-muted px-1">
+      {/* Data freshness label */}
+      {syncDateLabel && (
+        <div className="flex items-end pb-2">
+          <span className="text-[10px] text-text-muted">
             {t("dataAsOf")} {syncDateLabel}
           </span>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
