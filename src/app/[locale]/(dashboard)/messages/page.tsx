@@ -28,90 +28,90 @@ export default async function MessagesListPage() {
   const t = await getTranslations("messagesList");
   const locale = await getLocale();
 
-  // Fetch booking-based conversations
-  const bookings = await prisma.booking.findMany({
-    where: {
-      OR: [
-        { parentId: session.userId },
-        { sitterId: session.userId },
-      ],
-      status: {
-        notIn: ["DECLINED"],
+  // Fetch booking and match conversations in parallel
+  const [bookings, matches] = await Promise.all([
+    prisma.booking.findMany({
+      where: {
+        OR: [
+          { parentId: session.userId },
+          { sitterId: session.userId },
+        ],
+        status: { notIn: ["DECLINED"] },
       },
-    },
-    include: {
-      parent: {
-        select: { id: true, firstName: true, lastName: true, avatarUrl: true },
-      },
-      sitter: {
-        select: { id: true, firstName: true, lastName: true, avatarUrl: true },
-      },
-      messages: {
-        orderBy: { createdAt: "desc" },
-        take: 1,
-        select: { content: true, createdAt: true, senderId: true, isRead: true },
-      },
-      request: {
-        select: { title: true },
-      },
-    },
-    orderBy: { updatedAt: "desc" },
-  });
-
-  // Fetch match-based conversations
-  const matches = await prisma.match.findMany({
-    where: {
-      OR: [
-        { user1Id: session.userId },
-        { user2Id: session.userId },
-      ],
-    },
-    include: {
-      user1: {
-        select: { id: true, firstName: true, lastName: true, avatarUrl: true },
-      },
-      user2: {
-        select: { id: true, firstName: true, lastName: true, avatarUrl: true },
-      },
-      messages: {
-        orderBy: { createdAt: "desc" },
-        take: 1,
-        select: { content: true, createdAt: true, senderId: true, isRead: true },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-  });
-
-  // Count unread messages per booking
-  const bookingIds = bookings.map((b) => b.id);
-  const bookingUnreadRows = bookingIds.length > 0
-    ? await prisma.message.groupBy({
-        by: ["bookingId"],
-        where: {
-          bookingId: { in: bookingIds },
-          senderId: { not: session.userId },
-          isRead: false,
+      include: {
+        parent: {
+          select: { id: true, firstName: true, lastName: true, avatarUrl: true },
         },
-        _count: { id: true },
-      })
-    : [];
+        sitter: {
+          select: { id: true, firstName: true, lastName: true, avatarUrl: true },
+        },
+        messages: {
+          orderBy: { createdAt: "desc" },
+          take: 1,
+          select: { content: true, createdAt: true, senderId: true, isRead: true },
+        },
+        request: {
+          select: { title: true },
+        },
+      },
+      orderBy: { updatedAt: "desc" },
+    }),
+    prisma.match.findMany({
+      where: {
+        OR: [
+          { user1Id: session.userId },
+          { user2Id: session.userId },
+        ],
+      },
+      include: {
+        user1: {
+          select: { id: true, firstName: true, lastName: true, avatarUrl: true },
+        },
+        user2: {
+          select: { id: true, firstName: true, lastName: true, avatarUrl: true },
+        },
+        messages: {
+          orderBy: { createdAt: "desc" },
+          take: 1,
+          select: { content: true, createdAt: true, senderId: true, isRead: true },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    }),
+  ]);
+
+  // Count unread messages for both in parallel
+  const bookingIds = bookings.map((b) => b.id);
+  const matchIds = matches.map((m) => m.id);
+
+  const [bookingUnreadRows, matchUnreadRows] = await Promise.all([
+    bookingIds.length > 0
+      ? prisma.message.groupBy({
+          by: ["bookingId"],
+          where: {
+            bookingId: { in: bookingIds },
+            senderId: { not: session.userId },
+            isRead: false,
+          },
+          _count: { id: true },
+        })
+      : Promise.resolve([]),
+    matchIds.length > 0
+      ? prisma.message.groupBy({
+          by: ["matchId"],
+          where: {
+            matchId: { in: matchIds },
+            senderId: { not: session.userId },
+            isRead: false,
+          },
+          _count: { id: true },
+        })
+      : Promise.resolve([]),
+  ]);
+
   const bookingUnreadMap = new Map(
     bookingUnreadRows.map((r) => [r.bookingId, r._count.id])
   );
-
-  // Count unread messages per match
-  const matchIds = matches.map((m) => m.id);
-  const matchUnreadRows = matchIds.length > 0
-    ? await prisma.message.groupBy({
-        by: ["matchId"],
-        where: {
-          matchId: { in: matchIds },
-          senderId: { not: session.userId },
-          isRead: false,
-        },
-        _count: { id: true },
-      })
-    : [];
   const matchUnreadMap = new Map(
     matchUnreadRows.map((r) => [r.matchId, r._count.id])
   );
