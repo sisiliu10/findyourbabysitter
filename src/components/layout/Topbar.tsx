@@ -21,10 +21,14 @@ export function Topbar() {
     <header className="sticky top-0 z-40 border-b border-border-default bg-surface-primary">
       <div className="flex h-14 items-center justify-between px-4 sm:px-6">
         <Link href="/dashboard" className="flex items-center gap-2">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" className="text-text-primary">
-            <path d="M14 3L3 12h3v11h7v-7h2v7h7V12h3L14 3z" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-            <circle cx="14" cy="14" r="2.5" fill="currentColor" opacity="0.5" />
-          </svg>
+          <img
+            src="/bear-logo.jpg"
+            alt="Berlin Babysitter"
+            width={36}
+            height={36}
+            className="object-contain"
+            style={{ mixBlendMode: "multiply" }}
+          />
         </Link>
 
         <div className="flex items-center gap-6">
