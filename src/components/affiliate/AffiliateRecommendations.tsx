@@ -15,15 +15,13 @@ export function AffiliateRecommendations({
   const t = useTranslations("affiliateRecommendations");
   const isDE = locale === "de";
 
-  const products = AFFILIATE_PRODUCTS.filter((p) => p.context === context);
-
   return (
     <div className="border border-border-default bg-surface-secondary p-6">
       <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
         {context === "booking" ? t("bookingHeading") : t("profileHeading")}
       </p>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {products.map((product) => (
+        {AFFILIATE_PRODUCTS.map((product) => (
           <a
             key={product.id}
             href={product.url}

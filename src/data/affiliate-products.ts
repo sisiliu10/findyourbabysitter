@@ -4,9 +4,6 @@
 // Replace the `url` values with your real Awin / Amazon Associates affiliate
 // links once you've enrolled. Current URLs are Amazon.de search pages so the
 // site is functional before you have tracking links.
-//
-// "booking" context  → first 4 products shown on the booking detail page
-// "profile" context  → last 4 products shown on the sitter profile page
 // ---------------------------------------------------------------------------
 
 export interface AffiliateProduct {
@@ -18,11 +15,9 @@ export interface AffiliateProduct {
   icon: string;
   /** ← Replace with your affiliate link */
   url: string;
-  context: "booking" | "profile" | "both";
 }
 
 export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
-  // --- Booking context (shown after booking is confirmed) ---
   {
     id: "baby-monitor",
     nameEn: "Baby Monitor",
@@ -31,7 +26,6 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     descDe: "Behalte dein Kind im Blick, während die Babysitterin aufpasst.",
     icon: "📹",
     url: "https://amzn.to/4bkEtvx",
-    context: "booking",
   },
   {
     id: "baby-food-maker",
@@ -41,7 +35,6 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     descDe: "Frische Babymahlzeiten in Minuten dampfgaren und pürieren.",
     icon: "🍲",
     url: "https://amzn.to/4s9OB1o",
-    context: "booking",
   },
   {
     id: "baby-bouncer",
@@ -51,7 +44,6 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     descDe: "Hält das Baby ruhig und glücklich – ein Lebensretter für jede Betreuungsperson.",
     icon: "🪑",
     url: "https://amzn.to/4b6RKJq",
-    context: "booking",
   },
   {
     id: "baby-play-gym",
@@ -61,10 +53,7 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     descDe: "Hält Babys stundenlang beschäftigt – perfekt für die Betreuungszeit.",
     icon: "🎯",
     url: "https://amzn.to/4sbTl6Q",
-    context: "booking",
   },
-
-  // --- Profile context (shown on sitter profile page) ---
   {
     id: "baby-carrier",
     nameEn: "Baby Carrier",
@@ -73,7 +62,6 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     descDe: "Freie Hände für die Babysitterin und Komfort für dein Baby.",
     icon: "🤱",
     url: "https://amzn.to/4sEU7sH",
-    context: "profile",
   },
   {
     id: "travel-stroller",
@@ -83,7 +71,6 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     descDe: "Kompakt und leicht faltbar – ideal für Ausflüge mit der Babysitterin.",
     icon: "🛻",
     url: "https://amzn.to/4dmRo2F",
-    context: "profile",
   },
   {
     id: "lego-duplo",
@@ -93,7 +80,6 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     descDe: "Klassischer Bauspaß – Babysitterinnen und Kleinkinder lieben es.",
     icon: "🧱",
     url: "https://amzn.to/3P7S0zq",
-    context: "profile",
   },
   {
     id: "white-noise-machine",
@@ -103,6 +89,5 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     descDe: "Hilft Babys länger zu schlafen – erleichtert jeder Babysitterin die Arbeit.",
     icon: "🔊",
     url: "https://amzn.to/4btDcCx",
-    context: "profile",
   },
 ];
