@@ -115,7 +115,7 @@ export function KitaCard({ kita, isHighlighted, onHover, onClick }: KitaCardProp
               <svg className="h-3.5 w-3.5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              {kita.openingHours}
+              {kita.openingHours.replace(/(\d{2}:\d{2}):\d{2}/g, "$1")}
             </span>
           )}
           {kita.capacity && (
