@@ -16,6 +16,9 @@ async function resolveConversation(conversationId: string, userId: string) {
     if (booking.parentId !== userId && booking.sitterId !== userId) {
       return { type: "unauthorized" as const };
     }
+    if (booking.status === "DECLINED" || booking.status === "CANCELLED") {
+      return { type: "closed" as const };
+    }
     const otherUserId =
       booking.parentId === userId ? booking.sitterId : booking.parentId;
     return {
@@ -177,6 +180,12 @@ export async function POST(
         { status: 403 }
       );
     }
+    if (conv.type === "closed") {
+      return NextResponse.json(
+        { success: false, error: "This booking is no longer active" },
+        { status: 403 }
+      );
+    }
 
     // Check if this is a new conversation for this parent (free tier limit)
     if (session.role === "PARENT") {
@@ -228,7 +237,7 @@ export async function POST(
     });
     if (recipient) {
       const senderName = `${message.sender.firstName} ${message.sender.lastName}`;
-      notifyNewMessage(recipient.email, senderName, parsed.data.content, conversationId).catch(console.error);
+      notifyNewMessage(recipient.email, senderName, "", conversationId).catch(console.error);
     }
 
     return NextResponse.json(

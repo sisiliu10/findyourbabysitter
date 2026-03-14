@@ -37,11 +37,13 @@ export async function GET() {
       },
     });
 
-    // Count new matches with no messages yet (waiting to be contacted)
+    // Count new matches (created in last 7 days) with no messages yet
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const newMatchCount = matchIds.length > 0
       ? await prisma.match.count({
           where: {
             id: { in: matchIds },
+            createdAt: { gte: sevenDaysAgo },
             messages: { none: {} },
           },
         })

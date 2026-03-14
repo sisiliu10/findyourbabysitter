@@ -83,7 +83,7 @@ export const reviewSchema = z.object({
 });
 
 export const messageSchema = z.object({
-  content: z.string().min(1, "Message cannot be empty").max(5000),
+  content: z.string().trim().min(1, "Message cannot be empty").max(5000),
 });
 
 export const profileUpdateSchema = z.object({
