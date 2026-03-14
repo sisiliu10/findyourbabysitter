@@ -20,14 +20,14 @@ export function Topbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-border-default bg-surface-primary">
       <div className="flex h-14 items-center justify-between px-4 sm:px-6">
-        <Link href="/dashboard" className="flex items-center gap-2">
+        <Link href="/dashboard" className="flex items-center" style={{ width: 52, height: 52, overflow: "hidden" }}>
           <img
             src="/bear-logo.jpg"
             alt="Berlin Babysitter"
-            width={64}
-            height={64}
+            width={52}
+            height={52}
             className="object-contain"
-            style={{ mixBlendMode: "multiply", transform: "scale(1.8)", transformOrigin: "center" }}
+            style={{ mixBlendMode: "multiply", transform: "scale(2.2)", transformOrigin: "center" }}
           />
         </Link>
 
