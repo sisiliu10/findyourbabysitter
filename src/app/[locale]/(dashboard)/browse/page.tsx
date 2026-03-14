@@ -163,11 +163,11 @@ export default function BrowseSittersPage() {
               </span>
             )}
           </div>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="grid grid-cols-3 gap-1.5">
             <button
               onClick={() => setLanguageFilter("")}
               className={cn(
-                "px-3 py-1.5 text-xs font-medium transition-colors",
+                "px-3 py-1.5 text-xs font-medium text-center transition-colors",
                 !languageFilter
                   ? "bg-text-primary text-surface-primary"
                   : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
@@ -180,7 +180,7 @@ export default function BrowseSittersPage() {
                 key={lang.value}
                 onClick={() => setLanguageFilter(languageFilter === lang.value ? "" : lang.value)}
                 className={cn(
-                  "px-3 py-1.5 text-xs font-medium transition-colors",
+                  "px-3 py-1.5 text-xs font-medium text-center transition-colors",
                   languageFilter === lang.value
                     ? "bg-text-primary text-surface-primary"
                     : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
@@ -241,11 +241,11 @@ export default function BrowseSittersPage() {
             <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">
               {t("sitterType")}
             </p>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="grid grid-cols-3 gap-1.5">
               <button
                 onClick={() => setSitterTypeFilter("")}
                 className={cn(
-                  "px-3 py-1.5 text-xs font-medium transition-colors",
+                  "px-3 py-1.5 text-xs font-medium text-center transition-colors",
                   !sitterTypeFilter
                     ? "bg-text-primary text-surface-primary"
                     : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
@@ -258,7 +258,7 @@ export default function BrowseSittersPage() {
                   key={type}
                   onClick={() => setSitterTypeFilter(sitterTypeFilter === type ? "" : type)}
                   className={cn(
-                    "px-3 py-1.5 text-xs font-medium transition-colors",
+                    "px-3 py-1.5 text-xs font-medium text-center transition-colors",
                     sitterTypeFilter === type
                       ? "bg-text-primary text-surface-primary"
                       : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
