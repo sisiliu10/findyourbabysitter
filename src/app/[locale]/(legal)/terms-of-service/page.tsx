@@ -21,7 +21,7 @@ export default function TermsOfServicePage() {
         <section>
           <h2 className="text-lg font-medium text-text-primary mb-3">Your Account</h2>
           <p>
-            You must be at least 18 years old, provide accurate information, and verify your email. You are responsible for your account credentials and all activity under your account.
+            You must provide accurate information and verify your email. You are responsible for your account credentials and all activity under your account.
           </p>
         </section>
 
