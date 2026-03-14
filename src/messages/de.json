@@ -303,7 +303,7 @@
     "searchPlaceholder": "Nach Name, Bezirk suchen...",
     "language": "Sprache",
     "all": "Alle",
-    "maxRate": "Max. Stundensatz",
+    "maxRate": "Stundenlohn",
     "anyRate": "Egal",
     "upTo": "Bis",
     "resultCount": "{count, plural, one {1 Babysitter} other {# Babysitter}} gefunden",

@@ -303,7 +303,7 @@
     "searchPlaceholder": "Search by name, neighborhood...",
     "language": "Language",
     "all": "All",
-    "maxRate": "Max rate",
+    "maxRate": "Hourly salary",
     "anyRate": "Any",
     "upTo": "Up to",
     "resultCount": "{count, plural, one {1 sitter} other {# sitters}} found",

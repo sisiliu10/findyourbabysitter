@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { profileUpdateSchema } from "@/lib/validators";
+import { normalizeLanguages } from "@/lib/language-normalizer";
 
 export async function GET() {
   const session = await getSession();
@@ -44,7 +45,7 @@ export async function PUT(request: NextRequest) {
   if (body.timesOfDay !== undefined) userUpdates.timesOfDay = body.timesOfDay;
   if (body.careFrequency !== undefined) userUpdates.careFrequency = body.careFrequency;
   if (body.gender !== undefined) userUpdates.gender = body.gender;
-  if (body.languages !== undefined) userUpdates.languages = body.languages;
+  if (body.languages !== undefined) userUpdates.languages = normalizeLanguages(body.languages);
 
   // All users must have a profile picture before onboarding
   const currentUser = await prisma.user.findUnique({
@@ -78,7 +79,9 @@ export async function PUT(request: NextRequest) {
 
     for (const field of profileFields) {
       if (body[field] !== undefined) {
-        profileData[field] = body[field];
+        profileData[field] = field === "languages"
+          ? normalizeLanguages(body[field])
+          : body[field];
       }
     }
 

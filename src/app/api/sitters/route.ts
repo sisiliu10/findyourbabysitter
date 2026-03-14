@@ -45,7 +45,7 @@ export async function GET(request: Request) {
 
     if (hasCPR === "true") where.hasCPR = true;
     if (hasFirstAid === "true") where.hasFirstAid = true;
-    if (language) where.languages = { contains: language };
+    if (language) where.languages = { contains: language, mode: "insensitive" };
     if (sitterType) where.sitterType = sitterType;
 
     const gender = searchParams.get("gender");

@@ -3,12 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES } from "@/lib/constants";
+import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES, LANGUAGE_OPTIONS } from "@/lib/constants";
+import { cn, getInitials } from "@/lib/utils";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 import { Spinner } from "@/components/ui/Spinner";
-import { getInitials } from "@/lib/utils";
 import { getDistrictFromZip } from "@/lib/berlin-districts";
 
 interface UserProfile {
@@ -75,7 +75,7 @@ export default function ProfileEditPage() {
   const [zipCode, setZipCode] = useState("");
   const [radiusMiles, setRadiusMiles] = useState("10");
   const [yearsExperience, setYearsExperience] = useState("0");
-  const [languages, setLanguages] = useState("English");
+  const [languages, setLanguages] = useState<string[]>(["English"]);
   const [ageRangeMin, setAgeRangeMin] = useState("0");
   const [ageRangeMax, setAgeRangeMax] = useState("17");
   const [hasFirstAid, setHasFirstAid] = useState(false);
@@ -121,7 +121,7 @@ export default function ProfileEditPage() {
           setZipCode(p.zipCode);
           setRadiusMiles(String(p.radiusMiles));
           setYearsExperience(String(p.yearsExperience));
-          setLanguages(p.languages);
+          setLanguages(p.languages ? p.languages.split(",").map((l) => l.trim()).filter(Boolean) : ["English"]);
           setAgeRangeMin(String(p.ageRangeMin));
           setAgeRangeMax(String(p.ageRangeMax));
           setHasFirstAid(p.hasFirstAid);
@@ -213,7 +213,7 @@ export default function ProfileEditPage() {
         zipCode,
         radiusMiles: parseInt(radiusMiles, 10),
         yearsExperience: parseInt(yearsExperience, 10),
-        languages,
+        languages: languages.join(", "),
         ageRangeMin: parseInt(ageRangeMin, 10),
         ageRangeMax: parseInt(ageRangeMax, 10),
         hasFirstAid,
@@ -501,12 +501,34 @@ export default function ProfileEditPage() {
                     onChange={(e) => setYearsExperience(e.target.value)}
                   />
                 </div>
-                <Input
-                  label={t("languagesLabel")}
-                  value={languages}
-                  onChange={(e) => setLanguages(e.target.value)}
-                  placeholder="English, Spanish"
-                />
+                <div>
+                  <p className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
+                    {t("languagesLabel")}
+                  </p>
+                  <div className="grid grid-cols-3 gap-1.5">
+                    {LANGUAGE_OPTIONS.map((lang) => (
+                      <button
+                        key={lang.value}
+                        type="button"
+                        onClick={() =>
+                          setLanguages((prev) =>
+                            prev.includes(lang.value)
+                              ? prev.filter((l) => l !== lang.value)
+                              : [...prev, lang.value]
+                          )
+                        }
+                        className={cn(
+                          "px-3 py-1.5 text-xs font-medium text-left transition-colors border",
+                          languages.includes(lang.value)
+                            ? "border-text-primary bg-text-primary text-surface-primary"
+                            : "border-border-default bg-surface-tertiary text-text-secondary hover:border-text-primary hover:text-text-primary"
+                        )}
+                      >
+                        {lang.flag} {lang.value}
+                      </button>
+                    ))}
+                  </div>
+                </div>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Input
                     label={t("youngestAge")}

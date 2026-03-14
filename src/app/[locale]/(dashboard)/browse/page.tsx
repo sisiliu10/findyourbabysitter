@@ -200,7 +200,7 @@ export default function BrowseSittersPage() {
           </button>
         </div>
 
-        {/* District + Max rate — inline row */}
+        {/* District + Hourly salary — inline row */}
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
           <div className="flex items-center gap-2">
             <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
@@ -209,7 +209,7 @@ export default function BrowseSittersPage() {
             <select
               value={districtFilter}
               onChange={(e) => setDistrictFilter(e.target.value)}
-              className="border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
+              className="w-44 border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
             >
               <option value="">{t("allDistricts")}</option>
               {BERLIN_DISTRICTS.map((d) => (
@@ -224,7 +224,7 @@ export default function BrowseSittersPage() {
             <select
               value={maxRate}
               onChange={(e) => setMaxRate(e.target.value)}
-              className="border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
+              className="w-44 border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
             >
               <option value="">{t("anyRate")}</option>
               <option value="15">{t("upTo")} {formatCurrency(15)}/hr</option>
@@ -245,7 +245,7 @@ export default function BrowseSittersPage() {
               <button
                 onClick={() => setSitterTypeFilter("")}
                 className={cn(
-                  "px-3 py-1.5 text-xs font-medium text-center transition-colors",
+                  "flex min-h-[44px] items-center justify-center px-3 py-1.5 text-xs font-medium text-center transition-colors",
                   !sitterTypeFilter
                     ? "bg-text-primary text-surface-primary"
                     : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
@@ -258,7 +258,7 @@ export default function BrowseSittersPage() {
                   key={type}
                   onClick={() => setSitterTypeFilter(sitterTypeFilter === type ? "" : type)}
                   className={cn(
-                    "px-3 py-1.5 text-xs font-medium text-center transition-colors",
+                    "flex min-h-[44px] items-center justify-center px-3 py-1.5 text-xs font-medium text-center transition-colors",
                     sitterTypeFilter === type
                       ? "bg-text-primary text-surface-primary"
                       : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
