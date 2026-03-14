@@ -301,6 +301,28 @@
     "allDistricts": "All districts",
     "showAllLanguages": "Show all {count} languages",
     "showFewer": "Show fewer",
+    "languages": {
+      "English": "English",
+      "German": "German",
+      "Spanish": "Spanish",
+      "French": "French",
+      "Turkish": "Turkish",
+      "Russian": "Russian",
+      "Arabic": "Arabic",
+      "Polish": "Polish",
+      "Italian": "Italian",
+      "Portuguese": "Portuguese",
+      "Ukrainian": "Ukrainian",
+      "Romanian": "Romanian",
+      "Chinese": "Chinese",
+      "Korean": "Korean",
+      "Japanese": "Japanese",
+      "Hindi": "Hindi",
+      "Persian": "Persian",
+      "Vietnamese": "Vietnamese",
+      "Greek": "Greek",
+      "Bulgarian": "Bulgarian"
+    },
     "gender": "Gender",
     "allGenders": "All",
     "genders": {
@@ -347,7 +369,8 @@
     "lookingFor": "Looking for",
     "filterByLanguage": "Filter by language",
     "allLanguages": "All",
-    "kitas": "Kitas"
+    "kitas": "Kitas",
+    "dailyLimitReached": "You've reached your daily limit of {limit} likes. Upgrade to like more."
   },
   "onboarding": {
     "completeProfile": "Complete your profile",

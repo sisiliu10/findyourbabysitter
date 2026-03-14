@@ -186,7 +186,7 @@ export default function BrowseSittersPage() {
                     : "bg-surface-tertiary text-text-secondary hover:bg-border-default hover:text-text-primary"
                 )}
               >
-                {lang.flag} {lang.value}
+                {lang.flag} {t(`languages.${lang.value}` as Parameters<typeof t>[0])}
               </button>
             ))}
           </div>
