@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useUnreadCount } from "@/hooks/useUnreadCount";
 import { cn } from "@/lib/utils";
@@ -24,10 +25,16 @@ const sitterLinks: { href: string; key: string; icon: string }[] = [
 
 export function MobileNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const { user } = useCurrentUser();
   const unreadCount = useUnreadCount();
   const t = useTranslations("mobilenav");
   const links = user?.role === "BABYSITTER" ? sitterLinks : parentLinks;
+
+  // Prefetch all tab routes once after mount so navigation feels instant
+  useEffect(() => {
+    links.forEach((link) => router.prefetch(link.href));
+  }, [links, router]);
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-border-default bg-surface-primary lg:hidden">
