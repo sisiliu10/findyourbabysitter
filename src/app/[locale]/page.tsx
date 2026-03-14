@@ -34,8 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? "Babysitter Berlin | Vertrauenswürdige Babysitter & Kita-Plätze finden"
       : "Babysitter Berlin | Find Trusted Babysitters & Kita Places",
     description: isDE
-      ? "Finde vertrauenswürdige Babysitter in Berlin. Stöbere durch Sitter, die von Eltern vor Ort empfohlen werden, entdecke Kita-Plätze und vernetze dich mit anderen Familien in ganz Berlin."
-      : "Find trusted babysitters in Berlin. Browse sitters recommended by local parents, discover Kita places and connect with other families across Berlin.",
+      ? "Babysitter in Berlin gesucht? Finde vertrauenswürdige Babysitter und Kindermädchen in Prenzlauer Berg, Mitte, Charlottenburg und mehr – empfohlen von Berliner Eltern."
+      : "Looking for a babysitter in Berlin? Find trusted babysitters in Prenzlauer Berg, Mitte, Charlottenburg and more – recommended by local Berlin parents.",
   };
 }
 
@@ -53,6 +53,21 @@ export default async function HomePage({ params }: Props) {
     { question: t("faq4Q"), answer: t("faq4A") },
     { question: t("faq5Q"), answer: t("faq5A") },
   ];
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "BerlinBabysitter",
+    url: base,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${base}/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
 
   const organizationJsonLd = {
     "@context": "https://schema.org",
@@ -116,6 +131,7 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <div className="flex min-h-screen flex-col bg-surface-primary">
+      <JsonLd data={websiteJsonLd} />
       <JsonLd data={organizationJsonLd} />
       <JsonLd data={howToJsonLd} />
       <JsonLd data={faqJsonLd} />

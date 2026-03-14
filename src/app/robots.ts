@@ -4,7 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: ["/", "/babysitter/"],
+      allow: ["/", "/babysitter/", "/guides/", "/coloring-pages/", "/register", "/login"],
       disallow: ["/dashboard/", "/admin/", "/api/", "/onboarding/", "/profile/"],
     },
     sitemap: "https://berlinbabysitter.com/sitemap.xml",

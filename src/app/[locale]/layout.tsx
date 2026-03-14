@@ -45,8 +45,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     openGraph: {
       siteName: "BerlinBabysitter",
+      url,
       locale: isDE ? "de_DE" : "en_US",
       type: "website",
+      title: isDE
+        ? "Babysitter Berlin | BerlinBabysitter"
+        : "Babysitter Berlin | BerlinBabysitter",
+      description: isDE
+        ? "Kostenlose Plattform für Babysitter und Familien in Berlin. Profile entdecken, Bewertungen sehen und direkt Kontakt aufnehmen."
+        : "Free platform for babysitters and families in Berlin. Browse profiles, read reviews and get in touch directly.",
       images: [
         {
           url: `${base}/hero-bg.png`,
@@ -57,6 +64,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             : "BerlinBabysitter – Trusted childcare in Berlin",
         },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: isDE
+        ? "Babysitter Berlin finden | BerlinBabysitter"
+        : "Find a Babysitter in Berlin | BerlinBabysitter",
+      description: isDE
+        ? "Kostenlose Plattform für Babysitter und Familien in Berlin. Profile entdecken, Bewertungen sehen und direkt Kontakt aufnehmen."
+        : "Free platform for babysitters and families in Berlin. Browse profiles, read reviews and get in touch directly.",
+      images: [`${base}/hero-bg.png`],
     },
   };
 }
