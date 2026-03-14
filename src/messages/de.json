@@ -885,6 +885,8 @@
     "descriptionMinHintDone": "{current} Zeichen ✓",
     "cityLabel": "Stadt",
     "zipCodeLabel": "Postleitzahl",
+    "cityErrorBerlin": "Bitte gib einen Berliner Standort ein (z. B. Berlin, Berlin Mitte)",
+    "zipErrorBerlin": "Bitte gib eine gültige Berliner Postleitzahl ein (z. B. 10117, 12345)",
     "budgetLabel": "Dein Budget (optional)",
     "budgetHint": "Max. Stundensatz in €",
     "step6Title": "Anfrage überprüfen",

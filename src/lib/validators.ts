@@ -54,8 +54,8 @@ export const createRequestSchema = z
     durationHours: z.number().positive(),
     numberOfChildren: z.number().int().min(1).max(10),
     childrenJson: z.string(), // JSON array of { ageRange: string }
-    city: z.string().min(1),
-    zipCode: z.string().min(4),
+    city: z.string().min(1).refine((v) => v.toLowerCase().includes("berlin"), "Must be a Berlin location"),
+    zipCode: z.string().regex(/^(10|12|13|14)\d{3}$/, "Must be a valid Berlin zip code"),
     description: z.string().max(2000).optional(),
     maxHourlyRate: z.number().positive().optional(),
   })

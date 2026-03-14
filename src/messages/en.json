@@ -885,6 +885,8 @@
     "descriptionMinHintDone": "{current} characters ✓",
     "cityLabel": "City",
     "zipCodeLabel": "Zip code",
+    "cityErrorBerlin": "Please enter a Berlin location (e.g. Berlin, Berlin Mitte)",
+    "zipErrorBerlin": "Please enter a valid Berlin zip code (e.g. 10117, 12345)",
     "budgetLabel": "Your budget (optional)",
     "budgetHint": "Max hourly rate in €",
     "step6Title": "Review your request",

@@ -12,16 +12,31 @@ interface Props {
   onBack: () => void;
 }
 
+const BERLIN_ZIP_RE = /^(10|12|13|14)\d{3}$/;
+
+function isBerlinZip(zip: string) {
+  return BERLIN_ZIP_RE.test(zip.trim());
+}
+
+function isBerlinCity(city: string) {
+  return city.trim().toLowerCase().includes("berlin");
+}
+
 export function Step5Details({ state, onChange, onNext, onBack }: Props) {
   const t = useTranslations("requestWizard");
 
   const MIN_DESCRIPTION = 20;
 
+  const zipTouched = state.zipCode.trim().length > 0;
+  const cityTouched = state.city.trim().length > 0;
+  const zipValid = isBerlinZip(state.zipCode);
+  const cityValid = isBerlinCity(state.city);
+
   function canContinue() {
     return (
       state.description.trim().length >= MIN_DESCRIPTION &&
-      state.city.trim().length > 0 &&
-      state.zipCode.trim().length >= 4
+      cityValid &&
+      zipValid
     );
   }
 
@@ -49,20 +64,41 @@ export function Step5Details({ state, onChange, onNext, onBack }: Props) {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Input
-          label={t("cityLabel")}
-          value={state.city}
-          onChange={(e) => onChange({ city: e.target.value })}
-          placeholder="Berlin"
-          required
-        />
-        <Input
-          label={t("zipCodeLabel")}
-          value={state.zipCode}
-          onChange={(e) => onChange({ zipCode: e.target.value })}
-          placeholder="10117"
-          required
-        />
+        <div className="space-y-1">
+          <Input
+            label={t("cityLabel")}
+            value={state.city}
+            onChange={(e) => onChange({ city: e.target.value })}
+            placeholder="Berlin"
+            required
+          />
+          {cityTouched && !cityValid && (
+            <p className="flex items-center gap-1 text-xs text-danger">
+              <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+              {t("cityErrorBerlin")}
+            </p>
+          )}
+        </div>
+        <div className="space-y-1">
+          <Input
+            label={t("zipCodeLabel")}
+            value={state.zipCode}
+            onChange={(e) => onChange({ zipCode: e.target.value })}
+            placeholder="10117"
+            required
+            maxLength={5}
+          />
+          {zipTouched && !zipValid && (
+            <p className="flex items-center gap-1 text-xs text-danger">
+              <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+              {t("zipErrorBerlin")}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="space-y-1">
