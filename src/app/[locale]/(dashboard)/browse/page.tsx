@@ -200,39 +200,35 @@ export default function BrowseSittersPage() {
           </button>
         </div>
 
-        {/* District + Hourly salary — inline row */}
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-          <div className="flex items-center gap-2">
-            <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
-              {t("district")}
-            </label>
-            <select
-              value={districtFilter}
-              onChange={(e) => setDistrictFilter(e.target.value)}
-              className="w-44 border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
-            >
-              <option value="">{t("allDistricts")}</option>
-              {BERLIN_DISTRICTS.map((d) => (
-                <option key={d} value={d}>{d}</option>
-              ))}
-            </select>
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
-              {t("maxRate")}
-            </label>
-            <select
-              value={maxRate}
-              onChange={(e) => setMaxRate(e.target.value)}
-              className="w-44 border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
-            >
-              <option value="">{t("anyRate")}</option>
-              <option value="15">{t("upTo")} {formatCurrency(15)}/hr</option>
-              <option value="20">{t("upTo")} {formatCurrency(20)}/hr</option>
-              <option value="25">{t("upTo")} {formatCurrency(25)}/hr</option>
-              <option value="30">{t("upTo")} {formatCurrency(30)}/hr</option>
-            </select>
-          </div>
+        {/* District + Hourly salary — grid so labels and selects stay aligned */}
+        <div className="grid grid-cols-[max-content_1fr] items-center gap-x-3 gap-y-3 sm:w-fit sm:grid-cols-[max-content_minmax(160px,_200px)_max-content_minmax(160px,_200px)]">
+          <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
+            {t("district")}
+          </label>
+          <select
+            value={districtFilter}
+            onChange={(e) => setDistrictFilter(e.target.value)}
+            className="w-full border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
+          >
+            <option value="">{t("allDistricts")}</option>
+            {BERLIN_DISTRICTS.map((d) => (
+              <option key={d} value={d}>{d}</option>
+            ))}
+          </select>
+          <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
+            {t("maxRate")}
+          </label>
+          <select
+            value={maxRate}
+            onChange={(e) => setMaxRate(e.target.value)}
+            className="w-full border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
+          >
+            <option value="">{t("anyRate")}</option>
+            <option value="15">{t("upTo")} {formatCurrency(15)}/hr</option>
+            <option value="20">{t("upTo")} {formatCurrency(20)}/hr</option>
+            <option value="25">{t("upTo")} {formatCurrency(25)}/hr</option>
+            <option value="30">{t("upTo")} {formatCurrency(30)}/hr</option>
+          </select>
         </div>
 
         {/* Type + Gender — inline row */}
