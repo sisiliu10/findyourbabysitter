@@ -58,7 +58,18 @@
       "Bash(grep -n \"prisma\\\\.\" /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/profile/page.tsx)",
       "Bash(wc -l /Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\\\\\(dashboard\\\\\\)/profile/page.tsx)",
       "Bash(head -100 /Users/sisi.liu/findyourbabysitter/src/app/[locale]/kita-search/page.tsx)",
-      "Bash(head -100 /Users/sisi.liu/findyourbabysitter/src/app/[locale]/guides/page.tsx)"
+      "Bash(head -100 /Users/sisi.liu/findyourbabysitter/src/app/[locale]/guides/page.tsx)",
+      "Bash(git diff:*)",
+      "Bash(find /Users/sisi.liu/findyourbabysitter/src/app/[locale]/kita-search -type f -name \"*.tsx\")",
+      "Bash(head -5 \"/Users/sisi.liu/findyourbabysitter/src/app/[locale]/\\(dashboard\\)/browse/page.tsx\")",
+      "Bash(ls /Users/sisi.liu/findyourbabysitter/*.config*)",
+      "Bash(python3 -c \"from PIL import Image; print\\(''PIL available''\\)\")",
+      "Bash(sed -i '' 's/import { Link, usePathname, useRouter } from \"\"@\\\\/i18n\\\\/navigation\"\";/import { Link, usePathname } from \"\"@\\\\/i18n\\\\/navigation\"\";/' /Users/sisi.liu/findyourbabysitter/src/components/layout/MobileNav.tsx)",
+      "Bash(sed -i '' '/const router = useRouter\\(\\);/d' /Users/sisi.liu/findyourbabysitter/src/components/layout/MobileNav.tsx)",
+      "Bash(sed -i '' '/onTouchStart={\\(\\) => router.prefetch\\(link.href\\)}/d' /Users/sisi.liu/findyourbabysitter/src/components/layout/MobileNav.tsx)",
+      "Bash(find /Users/sisi.liu/findyourbabysitter -name middleware* -type f)",
+      "Bash(ls -la /Users/sisi.liu/findyourbabysitter/*.ts)",
+      "Bash(find /Users/sisi.liu/findyourbabysitter/src -name *middleware* -o -name *auth*)"
     ],
     "additionalDirectories": [
       "/Users/sisi.liu/findyourbabysitter/public/coloring-pages",

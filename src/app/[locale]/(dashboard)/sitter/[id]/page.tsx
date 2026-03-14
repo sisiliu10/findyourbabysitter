@@ -14,8 +14,9 @@ export default async function SitterProfilePage({
 }: {
   params: Promise<{ id: string; locale: string }>;
 }) {
-  await requireAuth();
+  const session = await requireAuth();
   const { id, locale } = await params;
+  const isParent = session.role === "PARENT";
   const t = await getTranslations("sitterProfile");
 
   const profile = await prisma.babysitterProfile.findUnique({
@@ -266,8 +267,10 @@ export default async function SitterProfilePage({
           </Link>
         </div>
 
-        {/* Affiliate recommendations */}
-        <AffiliateRecommendations locale={locale} context="profile" />
+        {/* Affiliate recommendations — parents only */}
+        {isParent && (
+          <AffiliateRecommendations locale={locale} context="profile" />
+        )}
 
         {/* Reviews */}
         <div className="border border-border-default bg-surface-secondary p-6">
