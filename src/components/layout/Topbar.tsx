@@ -24,8 +24,8 @@ export function Topbar() {
           <img
             src="/bear-logo.jpg"
             alt="Berlin Babysitter"
-            width={36}
-            height={36}
+            width={48}
+            height={48}
             className="object-contain"
             style={{ mixBlendMode: "multiply" }}
           />
