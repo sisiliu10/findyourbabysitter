@@ -5,6 +5,10 @@ import { prisma } from "./prisma";
 
 const COOKIE_NAME = "fyb_session";
 
+// Throttle lastSeenAt writes: at most once per 5 min per user per function instance
+const lastSeenAtCache = new Map<string, number>();
+const LAST_SEEN_TTL = 5 * 60 * 1000;
+
 export async function setSessionCookie(token: string) {
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, token, {
@@ -32,13 +36,14 @@ export async function requireAuth(): Promise<JwtPayload> {
   const session = await getSession();
   if (!session) redirect("/login");
 
-  // Fire-and-forget: update lastSeenAt
-  prisma.user
-    .update({
-      where: { id: session.userId },
-      data: { lastSeenAt: new Date() },
-    })
-    .catch(() => {});
+  // Fire-and-forget: update lastSeenAt (throttled to once per 5 min)
+  const now = Date.now();
+  if (now - (lastSeenAtCache.get(session.userId) ?? 0) > LAST_SEEN_TTL) {
+    lastSeenAtCache.set(session.userId, now);
+    prisma.user
+      .update({ where: { id: session.userId }, data: { lastSeenAt: new Date() } })
+      .catch(() => {});
+  }
 
   return session;
 }

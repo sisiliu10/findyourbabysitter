@@ -31,6 +31,7 @@ export default async function DashboardPage() {
         request: { select: { title: true } },
       },
       orderBy: { dateBooked: "desc" },
+      take: 20,
     }),
     prisma.booking.count({
       where: {

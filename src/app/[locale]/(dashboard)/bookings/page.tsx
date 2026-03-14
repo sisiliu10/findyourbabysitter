@@ -59,6 +59,7 @@ export default async function BookingsListPage() {
       },
     },
     orderBy: { dateBooked: "desc" },
+    take: 100,
   });
 
   return (
