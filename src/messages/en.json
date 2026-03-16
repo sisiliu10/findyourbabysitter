@@ -504,7 +504,12 @@
     "confirmBooking": "Confirm Booking",
     "markComplete": "Mark as Complete",
     "leaveReview": "Leave a Review",
-    "failedToUpdate": "Failed to update booking"
+    "failedToUpdate": "Failed to update booking",
+    "confirmDecline": "Are you sure you want to decline this booking?",
+    "confirmCancel": "Are you sure you want to cancel this booking?",
+    "reasonPlaceholder": "Optional: let them know why…",
+    "goBack": "Go back",
+    "confirmYes": "Yes, confirm"
   },
   "profileView": {
     "yourProfile": "Your Profile",
@@ -1005,6 +1010,8 @@
     "cat_other": "Other",
     "expressInterest": "Express Interest",
     "interestSent": "Interest sent",
+    "viewBooking": "View booking",
+    "noRateError": "Set your hourly rate in your profile before expressing interest.",
     "postedBy": "Posted by {name}",
     "childCount": "{count, plural, one {1 child} other {# children}}",
     "failedToExpress": "Failed to send interest",

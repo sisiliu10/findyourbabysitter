@@ -25,8 +25,10 @@ export function BookingActions({
   const tc = useTranslations("common");
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [pendingAction, setPendingAction] = useState<{ status: string } | null>(null);
+  const [reason, setReason] = useState("");
 
-  async function updateStatus(newStatus: string) {
+  async function updateStatus(newStatus: string, actionReason?: string) {
     setLoading(newStatus);
     setError("");
 
@@ -34,13 +36,15 @@ export function BookingActions({
       const res = await fetch(`/api/bookings/${bookingId}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus }),
+        body: JSON.stringify({ status: newStatus, reason: actionReason || undefined }),
       });
 
       const json = await res.json();
       if (!res.ok || !json.success) {
         setError(json.error || t("failedToUpdate"));
       } else {
+        setPendingAction(null);
+        setReason("");
         router.refresh();
       }
     } catch {
@@ -50,12 +54,58 @@ export function BookingActions({
     }
   }
 
+  function requestAction(newStatus: string) {
+    setPendingAction({ status: newStatus });
+    setReason("");
+    setError("");
+  }
+
   const showActions =
     (isSitter && status === "PENDING") ||
     (isParent && (status === "PENDING" || status === "ACCEPTED" || status === "CONFIRMED")) ||
     (isParent && status === "COMPLETED" && !hasReview);
 
   if (!showActions) return null;
+
+  // Inline confirmation panel for destructive actions
+  if (pendingAction) {
+    const isDecline = pendingAction.status === "DECLINED";
+    return (
+      <div className="border border-border-default bg-surface-secondary p-6">
+        <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("actions")}</p>
+        <p className="mb-4 text-sm text-text-primary">
+          {isDecline ? t("confirmDecline") : t("confirmCancel")}
+        </p>
+        <textarea
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+          placeholder={t("reasonPlaceholder")}
+          rows={3}
+          className="mb-4 w-full resize-none border border-border-default bg-surface-tertiary px-3 py-2 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-accent"
+        />
+        {error && (
+          <div className="mb-4 border border-danger/30 bg-danger-muted p-3 text-sm text-danger">
+            {error}
+          </div>
+        )}
+        <div className="flex flex-wrap gap-3">
+          <Button
+            variant="danger"
+            onClick={() => updateStatus(pendingAction.status, reason.trim() || undefined)}
+            loading={loading === pendingAction.status}
+          >
+            {t("confirmYes")}
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => { setPendingAction(null); setReason(""); setError(""); }}
+          >
+            {t("goBack")}
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="border border-border-default bg-surface-secondary p-6">
@@ -79,8 +129,7 @@ export function BookingActions({
             </Button>
             <Button
               variant="danger"
-              onClick={() => updateStatus("DECLINED")}
-              loading={loading === "DECLINED"}
+              onClick={() => requestAction("DECLINED")}
             >
               {t("decline")}
             </Button>
@@ -91,8 +140,7 @@ export function BookingActions({
         {isParent && (status === "PENDING" || status === "ACCEPTED") && (
           <Button
             variant="danger"
-            onClick={() => updateStatus("CANCELLED")}
-            loading={loading === "CANCELLED"}
+            onClick={() => requestAction("CANCELLED")}
           >
             {t("cancelBooking")}
           </Button>
@@ -119,8 +167,7 @@ export function BookingActions({
             </Button>
             <Button
               variant="danger"
-              onClick={() => updateStatus("CANCELLED")}
-              loading={loading === "CANCELLED"}
+              onClick={() => requestAction("CANCELLED")}
             >
               {t("cancelBooking")}
             </Button>

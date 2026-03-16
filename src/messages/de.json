@@ -504,7 +504,12 @@
     "confirmBooking": "Buchung bestätigen",
     "markComplete": "Als erledigt markieren",
     "leaveReview": "Bewertung abgeben",
-    "failedToUpdate": "Buchung konnte nicht aktualisiert werden"
+    "failedToUpdate": "Buchung konnte nicht aktualisiert werden",
+    "confirmDecline": "Möchtest du diese Buchung wirklich ablehnen?",
+    "confirmCancel": "Möchtest du diese Buchung wirklich stornieren?",
+    "reasonPlaceholder": "Optional: Teile dem anderen mit, warum…",
+    "goBack": "Zurück",
+    "confirmYes": "Ja, bestätigen"
   },
   "profileView": {
     "yourProfile": "Dein Profil",
@@ -1005,6 +1010,8 @@
     "cat_other": "Sonstiges",
     "expressInterest": "Interesse zeigen",
     "interestSent": "Interesse gesendet",
+    "viewBooking": "Buchung ansehen",
+    "noRateError": "Lege deinen Stundensatz im Profil fest, bevor du Interesse zeigst.",
     "postedBy": "Von {name}",
     "childCount": "{count, plural, one {1 Kind} other {# Kinder}}",
     "failedToExpress": "Interesse konnte nicht gesendet werden",

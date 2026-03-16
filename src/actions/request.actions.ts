@@ -7,6 +7,7 @@ import { prisma } from "@/lib/prisma";
 import { createRequestSchema } from "@/lib/validators";
 import { canCreateRequest } from "@/lib/subscription";
 import type { ActionResult } from "@/types";
+import { notifyBookingAccepted, type BookingEmailData } from "@/lib/email";
 
 function generateTitle(
   careType: string,
@@ -128,6 +129,11 @@ export async function expressInterest(requestId: string): Promise<ActionResult> 
     });
 
     const agreedRate = profile?.hourlyRate ?? 0;
+
+    if (agreedRate === 0) {
+      return { success: false, error: "no_rate" };
+    }
+
     const totalEstimated = agreedRate * request.durationHours;
 
     const booking = await prisma.booking.create({
@@ -140,9 +146,29 @@ export async function expressInterest(requestId: string): Promise<ActionResult> 
         endTime: request.endTime,
         agreedRate,
         totalEstimated,
-        status: "PENDING",
+        status: "ACCEPTED",
       },
     });
+
+    // Notify parent that a sitter expressed interest (fire-and-forget)
+    const [parent, sitter] = await Promise.all([
+      prisma.user.findUnique({ where: { id: request.parentId }, select: { email: true, firstName: true, lastName: true } }),
+      prisma.user.findUnique({ where: { id: session.userId }, select: { email: true, firstName: true, lastName: true } }),
+    ]);
+    if (parent && sitter) {
+      const emailData: BookingEmailData = {
+        bookingId: booking.id,
+        dateBooked: booking.dateBooked,
+        startTime: booking.startTime,
+        endTime: booking.endTime,
+        agreedRate: booking.agreedRate,
+        parentName: `${parent.firstName} ${parent.lastName}`,
+        parentEmail: parent.email,
+        sitterName: `${sitter.firstName} ${sitter.lastName}`,
+        sitterEmail: sitter.email,
+      };
+      notifyBookingAccepted(emailData).catch(console.error);
+    }
 
     return { success: true, data: { bookingId: booking.id } };
   } catch (error) {

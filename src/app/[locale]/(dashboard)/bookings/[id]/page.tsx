@@ -337,8 +337,7 @@ export default async function BookingDetailPage({
         )}
 
         {/* Message link */}
-        {!isCancelledOrDeclined &&
-          booking.status !== "DECLINED" && (
+        {!isCancelledOrDeclined && (
             <div className="flex justify-center pb-6">
               <Link
                 href={`/messages/${booking.id}`}
