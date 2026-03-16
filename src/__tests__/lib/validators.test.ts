@@ -108,6 +108,7 @@ describe("sitterOnboardingSchema", () => {
     city: "Berlin",
     state: "Berlin",
     zipCode: "10115",
+    phone: "+49123456789",
   };
 
   it("accepts valid sitter with defaults", () => {
@@ -138,7 +139,7 @@ describe("sitterOnboardingSchema", () => {
 
 describe("createRequestSchema", () => {
   const validRequest = {
-    title: "Need a sitter for Saturday",
+    careType: "occasional" as const,
     dateNeeded: "2026-03-15",
     startTime: "09:00",
     endTime: "13:00",
@@ -146,7 +147,6 @@ describe("createRequestSchema", () => {
     numberOfChildren: 2,
     childrenJson: '[{"name":"Emma","age":3}]',
     city: "Berlin",
-    state: "Berlin",
     zipCode: "10115",
   };
 
@@ -155,8 +155,8 @@ describe("createRequestSchema", () => {
     expect(result.success).toBe(true);
   });
 
-  it("rejects title shorter than 3 chars", () => {
-    const result = createRequestSchema.safeParse({ ...validRequest, title: "Hi" });
+  it("rejects non-Berlin city", () => {
+    const result = createRequestSchema.safeParse({ ...validRequest, city: "Hamburg" });
     expect(result.success).toBe(false);
   });
 

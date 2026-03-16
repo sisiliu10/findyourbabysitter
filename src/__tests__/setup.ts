@@ -22,14 +22,25 @@ vi.mock("@/lib/prisma", () => ({
     },
     booking: {
       findUnique: vi.fn(),
+      findMany: vi.fn(),
       update: vi.fn(),
+    },
+    match: {
+      findUnique: vi.fn(),
+      findMany: vi.fn(),
+      count: vi.fn(),
     },
     message: {
       findUnique: vi.fn(),
       findMany: vi.fn(),
       create: vi.fn(),
       updateMany: vi.fn(),
+      count: vi.fn(),
     },
+    subscription: {
+      findUnique: vi.fn(),
+    },
+    $queryRaw: vi.fn(),
   },
 }));
 
@@ -46,6 +57,7 @@ vi.mock("@/lib/session", () => ({
 vi.mock("@/lib/ratelimit", () => ({
   authLimiter: null,
   emailLimiter: null,
+  apiLimiter: null,
   checkRateLimit: vi.fn().mockResolvedValue(null),
   getClientIp: vi.fn().mockReturnValue("127.0.0.1"),
 }));
@@ -61,4 +73,12 @@ vi.mock("@/lib/email", () => ({
   notifyBookingCancelled: vi.fn().mockResolvedValue(undefined),
   notifyNewMessage: vi.fn().mockResolvedValue(undefined),
   notifyReviewSubmitted: vi.fn().mockResolvedValue(undefined),
+}));
+
+// Mock subscription helpers — free tier by default
+vi.mock("@/lib/subscription", () => ({
+  isPremium: vi.fn().mockResolvedValue(false),
+  canStartConversation: vi.fn().mockResolvedValue({ allowed: true, used: 0, limit: 5 }),
+  canLikeToday: vi.fn().mockResolvedValue({ allowed: true, used: 0, limit: 5 }),
+  canCreateRequest: vi.fn().mockResolvedValue({ allowed: true, used: 0, limit: 3 }),
 }));
