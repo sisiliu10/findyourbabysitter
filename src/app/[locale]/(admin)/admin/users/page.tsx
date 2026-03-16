@@ -86,7 +86,10 @@ export default async function AdminUsersPage() {
                     )}
                   </td>
                   <td className="px-5 py-4 text-text-secondary">
-                    {formatDate(user.createdAt)}
+                    <span>{formatDate(user.createdAt)}</span>
+                    <span className="ml-1.5 text-text-tertiary text-xs">
+                      {new Date(user.createdAt).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })}
+                    </span>
                   </td>
                   <td className="px-5 py-4 text-right">
                     {user.role !== "ADMIN" && (
