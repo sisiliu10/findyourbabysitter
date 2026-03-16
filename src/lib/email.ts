@@ -317,6 +317,32 @@ export async function notifyReviewSubmitted(
 }
 
 // -------------------------------------------------------------------
+// Admin: New Signup Notification  (Any new user → Admin gets email)
+// -------------------------------------------------------------------
+
+export async function notifyAdminNewSignup(
+  firstName: string,
+  lastName: string,
+  email: string,
+  role: string,
+): Promise<void> {
+  const adminEmail = "sisiliu2003@icloud.com";
+  const usersLink = `${APP_URL}/admin/users`;
+
+  return sendEmail({
+    to: adminEmail,
+    subject: `New signup: ${firstName} ${lastName} (${role.toLowerCase()})`,
+    html: `
+      <h2>New user signed up</h2>
+      <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Role:</strong> ${role.charAt(0) + role.slice(1).toLowerCase()}</p>
+      <p><a href="${usersLink}" style="display:inline-block;padding:12px 24px;background:#111;color:#fff;text-decoration:none;font-size:14px;letter-spacing:0.05em;">View all users</a></p>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
 // 9. Payment Failed  (Stripe webhook → User gets email)
 // -------------------------------------------------------------------
 

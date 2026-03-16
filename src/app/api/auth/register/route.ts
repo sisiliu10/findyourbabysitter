@@ -3,7 +3,7 @@ import { randomUUID } from "crypto";
 import { hashPassword } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validators";
-import { sendVerificationEmail } from "@/lib/email";
+import { sendVerificationEmail, notifyAdminNewSignup } from "@/lib/email";
 import { emailLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 export async function POST(request: Request) {
@@ -54,6 +54,7 @@ export async function POST(request: Request) {
     }
 
     sendVerificationEmail(email, firstName, verificationToken).catch(console.error);
+    notifyAdminNewSignup(firstName, lastName, email, role).catch(console.error);
 
     return NextResponse.json(
       {
