@@ -99,7 +99,8 @@ export async function sendVerificationEmail(
       <p><a href="${verifyLink}" style="display:inline-block;padding:12px 24px;background:#111;color:#fff;text-decoration:none;font-size:14px;letter-spacing:0.05em;">Verify my email</a></p>
       <p style="margin-top:24px;font-size:13px;color:#666;">Or copy and paste this link into your browser:</p>
       <p style="font-size:13px;color:#666;word-break:break-all;">${verifyLink}</p>
-      <p style="margin-top:24px;font-size:12px;color:#999;">This link expires in 24 hours. If you didn't create an account, you can ignore this email.</p>
+      <p style="margin-top:16px;font-size:12px;color:#888;">Can't find this email? Check your spam or junk folder.</p>
+      <p style="margin-top:8px;font-size:12px;color:#999;">This link expires in 24 hours. If you didn't create an account, you can ignore this email.</p>
     `,
   });
 }

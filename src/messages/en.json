@@ -28,7 +28,10 @@
     "trustedBody": "Families in Prenzlauer Berg, Kreuzberg, Mitte, Friedrichshain, and Charlottenburg already use Berlin Babysitter to find childcare they can rely on. From English-speaking sitters in Mitte to experienced nannies in Schoeneberg, our platform connects you with caregivers your neighbors trust.",
     "forParents": "For parents",
     "iAmParent": "I am a parent",
-    "parentDescription": "Browse profiles, read reviews, book the right person.",
+    "parentDescription": "Browse verified Berlin sitters, read real parent reviews, and book for free.",
+    "statsSitters": "verified sitters in Berlin",
+    "statsFree": "Free to browse",
+    "statsReviews": "Real reviews from parents",
     "forSitters": "For sitters",
     "iAmSitter": "I am a sitter",
     "sitterDescription": "Create your profile, set your rates, connect with families.",
@@ -119,7 +122,7 @@
     "forSitters": "For sitters",
     "getStarted": "Get started",
     "iAmParent": "I am a parent",
-    "parentDescription": "Browse profiles, read reviews, book the right person.",
+    "parentDescription": "Browse verified Berlin sitters, read real parent reviews, and book for free.",
     "sitterDescription": "Create your profile, set your rates, connect with families."
   },
   "sidebar": {

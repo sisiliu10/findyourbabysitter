@@ -9,6 +9,9 @@ import { TrustBar } from "@/components/landing/TrustBar";
 import { JsonLd } from "@/components/landing/JsonLd";
 import { FAQ } from "@/components/landing/FAQ";
 import ScrollRevealText from "@/components/landing/ScrollRevealText";
+import { prisma } from "@/lib/prisma";
+
+export const revalidate = 3600; // Revalidate every hour
 
 const LANGUAGE_FLAGS: Record<string, string> = {
   english: "🇬🇧",
@@ -46,6 +49,10 @@ export default async function HomePage({ params }: Props) {
   const isDE = locale === "de";
   const base = "https://berlinbabysitter.com";
   const url = isDE ? `${base}/de` : base;
+
+  const activeSitters = await prisma.babysitterProfile.count({
+    where: { isActive: true, user: { isDisabled: false } },
+  });
 
   const faqItems = [
     { question: t("faq1Q"), answer: t("faq1A") },
@@ -179,6 +186,17 @@ export default async function HomePage({ params }: Props) {
               >
                 {t("getStarted")}
               </Link>
+            </div>
+
+            <div className="mt-8 pb-10 flex items-center justify-center gap-3 sm:gap-6 text-xs text-text-secondary/70">
+              <span>
+                <span className="font-semibold text-text-primary">{activeSitters}+</span>{" "}
+                {t("statsSitters")}
+              </span>
+              <span className="opacity-30">·</span>
+              <span>{t("statsFree")}</span>
+              <span className="opacity-30">·</span>
+              <span>{t("statsReviews")}</span>
             </div>
           </div>
         </section>

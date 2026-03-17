@@ -170,8 +170,9 @@ export default function OnboardingPage() {
         router.push("/dashboard");
         router.refresh();
       }
-    } catch {
-      setError(tc("somethingWentWrong"));
+    } catch (err) {
+      console.error(err);
+      setError("Network error — please check your connection and try again.");
     } finally {
       setLoading(false);
     }
