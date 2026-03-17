@@ -188,16 +188,6 @@ export default async function HomePage({ params }: Props) {
               </Link>
             </div>
 
-            <div className="mt-8 pb-10 flex items-center justify-center gap-3 sm:gap-6 text-xs text-text-secondary/70">
-              <span>
-                <span className="font-semibold text-text-primary">{activeSitters}+</span>{" "}
-                {t("statsSitters")}
-              </span>
-              <span className="opacity-30">·</span>
-              <span>{t("statsFree")}</span>
-              <span className="opacity-30">·</span>
-              <span>{t("statsReviews")}</span>
-            </div>
           </div>
         </section>
 
