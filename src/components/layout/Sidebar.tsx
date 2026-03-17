@@ -31,6 +31,35 @@ export function Sidebar() {
 
   const baseLinks = user?.role === "BABYSITTER" ? sitterLinks : parentLinks;
 
+  if (user?.role === "ADMIN") {
+    return (
+      <aside className="hidden w-56 shrink-0 border-r border-border-default lg:block">
+        <nav className="flex flex-col py-4">
+          {[
+            { href: "/admin", label: "Dashboard" },
+            { href: "/admin/users", label: "Users" },
+          ].map((link) => {
+            const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "flex items-center gap-3 px-6 py-2.5 text-sm transition-colors",
+                  isActive
+                    ? "text-text-primary border-r-2 border-accent bg-accent-muted"
+                    : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </aside>
+    );
+  }
+
   // For parents: swap upgrade/subscription link based on premium status
   const links = baseLinks.map((link) => {
     if (link.key === "upgrade" && user?.isPremium) {
