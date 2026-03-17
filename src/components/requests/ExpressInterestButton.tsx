@@ -25,7 +25,7 @@ export function ExpressInterestButton({ requestId, alreadySent = false }: Props)
       const result = await expressInterest(requestId);
       if (result.success) {
         setSent(true);
-        setBookingId(result.data?.bookingId ?? null);
+        setBookingId((result.data as { bookingId?: string } | undefined)?.bookingId ?? null);
       } else if (result.error === "already_expressed") {
         setSent(true);
       } else if (result.error === "no_rate") {
