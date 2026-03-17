@@ -16,8 +16,8 @@ export default function ImpressumPage() {
         <section>
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-muted mb-2">Kontakt</h2>
           <p>
-            <a href="mailto:sisiliu2003@icloud.com" className="underline hover:text-text-primary transition-colors">
-              sisiliu2003@icloud.com
+            <a href="mailto:info@berlinbabysitter.com" className="underline hover:text-text-primary transition-colors">
+              info@berlinbabysitter.com
             </a>
           </p>
         </section>
