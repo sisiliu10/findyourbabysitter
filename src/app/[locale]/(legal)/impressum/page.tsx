@@ -8,7 +8,6 @@ export default function ImpressumPage() {
         <section>
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-muted mb-2">Betreiber</h2>
           <p>
-            Sisi Liu<br />
             Homuthstr. 7<br />
             12161 Berlin<br />
             Deutschland
