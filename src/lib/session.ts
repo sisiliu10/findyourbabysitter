@@ -55,3 +55,13 @@ export async function requireRole(allowedRoles: string[]): Promise<JwtPayload> {
   }
   return session;
 }
+
+// Only the platform owner (ADMIN + matching OWNER_EMAIL) can access super-admin pages.
+export async function requireOwner(): Promise<JwtPayload> {
+  const session = await requireRole(["ADMIN"]);
+  const ownerEmail = process.env.OWNER_EMAIL;
+  if (!ownerEmail || session.email !== ownerEmail) {
+    redirect("/dashboard");
+  }
+  return session;
+}

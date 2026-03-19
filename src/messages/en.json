@@ -775,7 +775,8 @@
   "admin": {
     "admin": "Admin",
     "dashboard": "Dashboard",
-    "users": "Users"
+    "users": "Users",
+    "messages": "Messages"
   },
   "childcareNeeds": {
     "title": "Childcare Needs",

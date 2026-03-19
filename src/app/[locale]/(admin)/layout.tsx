@@ -1,4 +1,9 @@
+import type { Metadata } from "next";
 import { Topbar } from "@/components/layout/Topbar";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 
@@ -24,6 +29,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
               className="border-r-2 border-transparent px-3 py-2 text-sm font-medium text-text-tertiary transition-colors hover:border-r-2 hover:border-accent hover:bg-accent-muted hover:text-text-primary"
             >
               {t("users")}
+            </Link>
+            <Link
+              href="/admin/messages"
+              className="border-r-2 border-transparent px-3 py-2 text-sm font-medium text-text-tertiary transition-colors hover:border-r-2 hover:border-accent hover:bg-accent-muted hover:text-text-primary"
+            >
+              {t("messages")}
             </Link>
           </nav>
         </aside>

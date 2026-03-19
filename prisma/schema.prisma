@@ -35,6 +35,7 @@ model User {
   childcareTypes           String    @default("[]")
   timesOfDay               String    @default("[]")
   careFrequency            String    @default("")
+  registrationSource       String?   // "web" | "mobile"
   createdAt                DateTime  @default(now())
   updatedAt                DateTime  @updatedAt
 

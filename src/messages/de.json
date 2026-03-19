@@ -775,7 +775,8 @@
   "admin": {
     "admin": "Admin",
     "dashboard": "Übersicht",
-    "users": "Benutzer"
+    "users": "Benutzer",
+    "messages": "Nachrichten"
   },
   "childcareNeeds": {
     "title": "Betreuungsbedarf",

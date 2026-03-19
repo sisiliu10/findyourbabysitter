@@ -1,4 +1,9 @@
+import type { Metadata } from "next";
 import { Topbar } from "@/components/layout/Topbar";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 import { Sidebar } from "@/components/layout/Sidebar";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { NavigationTimings } from "@/components/NavigationTimings";

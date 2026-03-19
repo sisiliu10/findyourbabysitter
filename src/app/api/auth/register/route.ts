@@ -31,6 +31,10 @@ export async function POST(request: Request) {
       );
     }
 
+    const ua = request.headers.get("user-agent") ?? "";
+    const isMobile = /Mobile|Android|iPhone|iPad|iPod/i.test(ua);
+    const registrationSource = isMobile ? "mobile" : "web";
+
     const passwordHash = await hashPassword(password);
     const verificationToken = randomUUID();
     const verificationExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
@@ -42,6 +46,7 @@ export async function POST(request: Request) {
         firstName,
         lastName,
         role,
+        registrationSource,
         emailVerificationToken: verificationToken,
         emailVerificationExpiry: verificationExpiry,
       },

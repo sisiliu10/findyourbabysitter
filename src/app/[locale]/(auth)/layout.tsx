@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import { LanguageToggle } from "@/components/LanguageToggle";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (

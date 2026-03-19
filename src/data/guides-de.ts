@@ -241,4 +241,133 @@ export const GUIDES_DE: Record<string, LocalizedGuide> = {
       },
     ],
   },
+  "babysitter-rates-berlin": {
+    title: "Babysitter-Kosten in Berlin: Was du 2025 erwarten kannst",
+    metaTitle: "Babysitter-Kosten Berlin 2025 | Was kostet ein Babysitter?",
+    metaDescription:
+      "Was kostet ein Babysitter in Berlin? Eine Übersicht nach Bezirk, Erfahrung und Stunden — damit du weißt, was fair ist, bevor du buchst.",
+    intro:
+      "Eine der ersten Fragen, die Eltern stellen, wenn sie in Berlin einen Babysitter suchen, ist: Was soll ich eigentlich bezahlen? Die Honorare variieren je nach Erfahrung, Bezirk, Uhrzeit und Anzahl der Kinder. Hier ist eine klare Übersicht, damit du gut kalkulieren und fair bezahlen kannst.",
+    sections: [
+      {
+        heading: "Der typische Bereich: 12–25 € pro Stunde",
+        content:
+          "Die meisten Babysitter in Berlin verlangen zwischen 12 und 25 € pro Stunde. Die Spanne ist groß, weil Erfahrung, Qualifikation und Nachfrage den Preis nach oben oder unten drücken.",
+        items: [
+          "12–15 €/Std. — Studenten oder Einsteiger ohne formale Ausbildung. Gut für ältere Kinder, die eher Aufsicht als aktive Betreuung brauchen.",
+          "15–18 €/Std. — Sitter mit Erfahrung, Referenzen und sicherem Umgang mit verschiedenen Altersstufen. Der häufigste Bereich für reguläre Buchungen.",
+          "18–22 €/Std. — Erfahrene Sitter mit Ausbildung (Erzieher, Kita-Erfahrung o.ä.), Erste-Hilfe-Kurs oder zweisprachigen Fähigkeiten.",
+          "22–25 €/Std.+ — Hochqualifizierte oder gefragte Sitter, Übernachtungen, mehrere kleine Kinder oder Betreuung mit besonderem Förderbedarf.",
+        ],
+      },
+      {
+        heading: "Honorare nach Bezirk",
+        content:
+          "Berlins Bezirke unterscheiden sich in den Lebenshaltungskosten, und die Babysitter-Honorare spiegeln das wider.",
+        items: [
+          "Prenzlauer Berg & Charlottenburg — erwarte eher das obere Ende der Spanne. Die Nachfrage nach erfahrenen Sittern ist hoch.",
+          "Mitte & Friedrichshain — mittlere Honorare sind üblich. Viele Sitter betreuen mehrere zentrale Bezirke.",
+          "Kreuzberg & Schöneberg — ähnlich wie Mitte; die vielfältige Auswahl bedeutet mehr Optionen zu unterschiedlichen Preisen.",
+          "Neukölln & Wedding — die günstigsten Bezirke. Zuverlässige Sitter sind oft schon ab 12–16 €/Std. verfügbar.",
+        ],
+      },
+      {
+        heading: "Was den Preis nach oben treibt",
+        content:
+          "Wenn eines der folgenden Kriterien zutrifft, solltest du mit einem Aufschlag auf den Grundpreis rechnen.",
+        items: [
+          "Mehr als zwei Kinder — jedes weitere Kind erhöht das Honorar typischerweise um 2–5 €/Std.",
+          "Sehr kleine Kinder (unter 12 Monaten) — Säuglingspflege erfordert mehr Aufmerksamkeit und wird meist höher vergütet.",
+          "Spätabends oder am Wochenende — viele Sitter verlangen 2–3 € mehr nach 22 Uhr oder sonntags.",
+          "Kurzfristige Buchungen (am selben oder nächsten Tag) — Sitter, die flexibel verfügbar sind, verlangen oft mehr dafür.",
+          "Sprachanforderungen — ein Sitter, der Spanisch, Französisch oder eine andere spezifische Sprache spricht, liegt oft am oberen Ende der Spanne.",
+          "Erste-Hilfe-Kurs oder Erzieherausbildung — Qualifikationen rechtfertigen einen Aufschlag.",
+        ],
+      },
+      {
+        heading: "Bar oder Überweisung?",
+        content:
+          "Beides ist in Berlin üblich. Manche Familien bevorzugen Überweisung für die Nachvollziehbarkeit; viele Sitter bevorzugen weiterhin Bargeld, besonders bei Einzelbuchungen. Für regelmäßige Arrangements ist eine monatliche Überweisung praktisch.",
+        items: [
+          "Vereinbart die Zahlungsart vor der ersten Buchung — das vermeidet unangenehme Gespräche an der Tür.",
+          "Bei regelmäßigen Buchungen bietet sich eine Zahlung zu Monatsbeginn oder nach einer festen Stundenzahl an.",
+          "Wenn du über eine Plattform buchst, prüfe, ob die Plattform die Zahlung abwickelt oder ob sie direkt zwischen dir und dem Sitter erfolgt.",
+        ],
+      },
+      {
+        heading: "Was du für das Honorar erwarten kannst",
+        content:
+          "Unabhängig vom Honorar gelten bestimmte Grunderwartungen für jede Buchung.",
+        items: [
+          "Bei 12–15 €/Std.: Zuverlässigkeit, grundlegende Beschäftigung mit den Kindern, Befolgen deiner Anweisungen und Meldung bei Problemen.",
+          "Bei 16–20 €/Std.: Proaktive Kommunikation, sicherer Umgang mit Routinen (Schlafengehen, Mahlzeiten), Ruhe bei kleineren Zwischenfällen.",
+          "Bei 20 €+/Std.: All das, plus relevante Qualifikationen, Referenzen und die Erfahrung, Säuglinge oder mehrere Kinder selbstständig zu betreuen.",
+          "Bei jedem Honorar: Der Sitter sollte nicht übermäßig auf dem Handy sein, deine Hausregeln einhalten und deine Wohnung respektieren.",
+        ],
+      },
+    ],
+  },
+  "how-to-find-babysitter-berlin": {
+    title: "Einen Babysitter in Berlin finden",
+    metaTitle: "Babysitter in Berlin finden | Praktischer Ratgeber für Eltern",
+    metaDescription:
+      "Wie du in Berlin einen zuverlässigen Babysitter findest: wo du suchen solltest, worauf du achten musst und wie du eine Betreuung aufbaust, die langfristig funktioniert.",
+    intro:
+      "Einen guten Babysitter in Berlin zu finden braucht mehr als eine Google-Suche. Die Stadt hat eine große und vielfältige Auswahl an Betreuungspersonen — aber zu wissen, wo man sucht und worauf man achtet, ist der Unterschied zwischen einer Einmallösung und einer verlässlichen Betreuung, die wirklich zu deiner Familie passt.",
+    sections: [
+      {
+        heading: "Starte in deinem Bezirk",
+        content:
+          "Die besten Babysitter kennen oft schon deinen Kiez. Sie können die Kinder zum Spielplatz um die Ecke bringen, sie von der Kita abholen und im Notfall schnell bei dir sein.",
+        items: [
+          "Nutze Plattformen, bei denen du nach Bezirk filtern kannst — das ist schneller als stadtweite Suchen und zeigt oft Sitter, die deine Umgebung kennen.",
+          "Frag andere Eltern am Kita-Eingang, auf dem Spielplatz oder in lokalen WhatsApp- oder Signal-Gruppen. Persönliche Empfehlungen sind nach wie vor die verlässlichste Quelle.",
+          "Schau auf Schwarze Bretter in deinem Lieblingscafe, in der Bibliothek oder am Spielplatz — viele Sitter hängen dort Zettel aus, besonders in kinderreichen Bezirken wie Prenzlauer Berg und Charlottenburg.",
+        ],
+      },
+      {
+        heading: "Worauf du bei einem Profil achten solltest",
+        content:
+          "Ein gutes Sitter-Profil verrät dir mehr als nur Name und Verfügbarkeit. Darauf solltest du besonders achten.",
+        items: [
+          "Aktuelle Bewertungen von anderen Berliner Familien — achte auf konkrete Hinweise zu Altersgruppen ähnlich wie deinen Kindern und auf wiederkehrende Eigenschaften (geduldig, zuverlässig, kommunikativ).",
+          "Erfahrung mit Kindern im Alter deiner Kinder — die Betreuung eines Neugeborenen ist sehr anders als die eines 7-Jährigen. Stell sicher, dass die Erfahrung passt.",
+          "Sprachkompetenz — wenn du möchtest, dass dein Kind Französisch, Spanisch oder eine andere Sprache hört, filtere gezielt danach.",
+          "Erste-Hilfe-Kurs — kein Pflichtkriterium, aber ein starkes Zeichen für Professionalität, besonders bei kleinen Kindern.",
+        ],
+      },
+      {
+        heading: "Wie du die erste Nachricht formulierst",
+        content:
+          "Die Art, wie du dich an einen Sitter wendest, setzt den Ton für die Beziehung. Halte es kurz, aber gib genug Informationen für eine sinnvolle Antwort.",
+        items: [
+          "Nenn das Alter deiner Kinder, was du suchst (regelmäßige Wochenabende, gelegentliche Wochenendnächte oder einen bestimmten Termin) und deinen Bezirk.",
+          "Wichtige Anforderungen gleich am Anfang nennen — Sprache, Haustiere, Allergien der Kinder oder besondere Betreuungsbedürfnisse. Das spart beiden Seiten Zeit.",
+          "Wenn du offen für ein Kennenlerntreffen vor der Buchung bist, sag es. Die meisten Sitter schätzen das.",
+          "Antworte prompt. Gute Sitter bekommen viele Anfragen und sind oft schnell ausgebucht.",
+        ],
+      },
+      {
+        heading: "Das Kennenlerntreffen vor der ersten Buchung",
+        content:
+          "Überspringe das persönliche Kennenlerntreffen nicht. 30 Minuten Kaffee oder ein Hausbesuch vor der ersten Buchung ist der wertvollste Schritt beim Finden des richtigen Matches.",
+        items: [
+          "Am besten bei dir zu Hause — das ist die Umgebung, in der der Sitter arbeiten wird, und deine Kinder können sich natürlich eingewöhnen.",
+          "Kinder dabei haben. Wie ein Sitter in den ersten zehn Minuten mit ihnen umgeht, sagt dir sehr viel.",
+          "Ein paar praktische Fragen stellen: Verfügbarkeit, Anfahrt, Erfahrung mit ähnlichem Alter, Umgang mit dem Schlafengehen oder Trotzphasen.",
+          "Hör auf dein Bauchgefühl. Wenn die Chemie nicht stimmt, ist es völlig in Ordnung zu sagen, dass du noch andere Personen triffst.",
+        ],
+      },
+      {
+        heading: "Ein zuverlässiges Backup-Netzwerk aufbauen",
+        content:
+          "Ein toller Sitter ist gut. Zwei oder drei, auf die du zurückgreifen kannst, sind viel besser — besonders in Berlin, wo kurzfristige Betreuungslücken häufig sind.",
+        items: [
+          "Wenn du einen Sitter gefunden hast, der gut funktioniert, frag, ob er Kollegen empfehlen kann. Viele Berliner Sitter kennen sich aus Ausbildungsprogrammen oder gemeinsamen Netzwerken.",
+          "Halte eine Kurzliste von zwei bis drei Sittern mit unterschiedlichen Preisen und Verfügbarkeiten bereit. So bist du bei kurzfristigen Bedürfnissen und geplanten Reisen abgesichert.",
+          "Regelmäßige Arrangements — selbst nur ein Abend pro Woche — bauen mehr Vertrauen und Zuverlässigkeit auf als Einzelbuchungen. Überlege, ob ein fester Slot möglich ist.",
+        ],
+      },
+    ],
+  },
 };
