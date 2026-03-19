@@ -318,6 +318,66 @@ export async function notifyReviewSubmitted(
 }
 
 // -------------------------------------------------------------------
+// Profile Completion Reminder  (3h after signup, if not onboarded)
+// -------------------------------------------------------------------
+
+export async function notifyProfileReminder(
+  recipientEmail: string,
+  firstName: string,
+  role: string,
+): Promise<void> {
+  const onboardingLink = `${APP_URL}/onboarding`;
+  const isParent = role === "PARENT";
+
+  const subject = `${firstName}, your profile is waiting — it only takes 2 minutes`;
+
+  const bodyText = isParent
+    ? `You're one step away from finding a babysitter you'll love. Complete your profile and start browsing sitters in your neighborhood today.`
+    : `Berlin families are looking for someone like you. Finish setting up your profile so parents can find and book you.`;
+
+  const ctaText = isParent ? "Find my babysitter" : "Complete my profile";
+
+  return sendEmail({
+    to: recipientEmail,
+    subject,
+    html: `
+      <div style="font-family: Georgia, serif; max-width: 520px; margin: 0 auto; padding: 32px 24px; color: #1a1a1a;">
+        <p style="font-size: 15px; line-height: 1.6; margin: 0 0 16px;">Hi ${firstName},</p>
+
+        <p style="font-size: 15px; line-height: 1.6; margin: 0 0 16px;">
+          You signed up for Berlin Babysitter a little while ago — welcome! We just wanted to give you a gentle nudge.
+        </p>
+
+        <p style="font-size: 15px; line-height: 1.6; margin: 0 0 28px;">
+          ${bodyText}
+        </p>
+
+        <p style="margin: 0 0 32px;">
+          <a href="${onboardingLink}" style="display: inline-block; background: #1a1a1a; color: #ffffff; text-decoration: none; padding: 13px 28px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; font-family: Arial, sans-serif;">
+            ${ctaText}
+          </a>
+        </p>
+
+        <p style="font-size: 14px; line-height: 1.6; color: #555; margin: 0 0 8px;">
+          It takes about 2 minutes. We'll see you on the other side.
+        </p>
+
+        <p style="font-size: 14px; line-height: 1.6; color: #555; margin: 0 0 32px;">
+          — The Berlin Babysitter team
+        </p>
+
+        <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 24px 0;" />
+
+        <p style="font-size: 12px; color: #999; line-height: 1.5; margin: 0;">
+          You're receiving this because you created an account at berlinbabysitter.com.
+          If you didn't sign up, you can safely ignore this email.
+        </p>
+      </div>
+    `,
+  });
+}
+
+// -------------------------------------------------------------------
 // Admin: New Signup Notification  (Any new user → Admin gets email)
 // -------------------------------------------------------------------
 
