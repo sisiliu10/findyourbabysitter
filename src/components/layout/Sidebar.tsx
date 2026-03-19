@@ -38,6 +38,7 @@ export function Sidebar() {
           {[
             { href: "/admin", label: "Dashboard" },
             { href: "/admin/users", label: "Users" },
+            { href: "/admin/messages", label: "Messages" },
           ].map((link) => {
             const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
             return (
