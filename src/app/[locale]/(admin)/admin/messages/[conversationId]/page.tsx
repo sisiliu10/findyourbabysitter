@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { requireOwner } from "@/lib/session";
+import { requireRole } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { Link } from "@/i18n/navigation";
 
@@ -8,7 +8,7 @@ export default async function AdminConversationPage({
 }: {
   params: Promise<{ conversationId: string }>;
 }) {
-  await requireOwner();
+  await requireRole(["ADMIN"]);
 
   const { conversationId } = await params;
 

@@ -1,10 +1,10 @@
-import { requireOwner } from "@/lib/session";
+import { requireRole } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { Link } from "@/i18n/navigation";
 import { formatDate } from "@/lib/utils";
 
 export default async function AdminMessagesPage() {
-  await requireOwner();
+  await requireRole(["ADMIN"]);
 
   // Load all matches with messages
   const [matches, bookings] = await Promise.all([
