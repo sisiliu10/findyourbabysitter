@@ -91,7 +91,7 @@ export default async function BookingsListPage() {
           <p className="text-sm text-text-secondary">{t("noBookings")}</p>
           {session.role === "PARENT" && (
             <Link
-              href="/search"
+              href="/browse"
               className="mt-3 inline-block text-sm font-medium text-accent hover:underline"
             >
               {t("findBabysitter")}

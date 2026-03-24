@@ -167,7 +167,7 @@ export default async function DashboardPage() {
           </p>
           <div className="grid grid-cols-2 gap-4">
             <Link
-              href="/search?mode=sitters"
+              href="/browse"
               className="group relative flex aspect-square flex-col items-center justify-center gap-3 border border-accent/20 bg-accent-muted p-6 transition hover:border-accent/40"
             >
               <div className="flex h-14 w-14 items-center justify-center bg-accent/10 transition group-hover:scale-105">
@@ -317,7 +317,7 @@ export default async function DashboardPage() {
               <p className="text-sm text-text-secondary">{t("noUpcomingBookings")}</p>
               {user.role === "PARENT" && (
                 <Link
-                  href="/search"
+                  href="/browse"
                   className="mt-3 inline-block text-sm font-medium text-accent hover:underline"
                 >
                   {t("findSitters")}
