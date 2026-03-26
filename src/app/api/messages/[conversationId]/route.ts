@@ -230,14 +230,23 @@ export async function POST(
       },
     });
 
-    // Send email notification to the other party (fire-and-forget)
-    const recipient = await prisma.user.findUnique({
-      where: { id: conv.otherUserId },
-      select: { email: true },
-    });
-    if (recipient) {
-      const senderName = `${message.sender.firstName} ${message.sender.lastName}`;
-      notifyNewMessage(recipient.email, senderName, "", conversationId).catch(console.error);
+    // Send email notification only if no message was sent in this conversation
+    // in the last 15 minutes (avoid spamming during active chats)
+    const where15 = {
+      ...(conv.bookingId ? { bookingId: conv.bookingId } : { matchId: conv.matchId }),
+      createdAt: { gte: new Date(Date.now() - 15 * 60 * 1000) },
+      id: { not: message.id },
+    };
+    const recentCount = await prisma.message.count({ where: where15 });
+    if (recentCount === 0) {
+      const recipient = await prisma.user.findUnique({
+        where: { id: conv.otherUserId },
+        select: { email: true },
+      });
+      if (recipient) {
+        const senderName = `${message.sender.firstName} ${message.sender.lastName}`;
+        notifyNewMessage(recipient.email, senderName, "", conversationId).catch(console.error);
+      }
     }
 
     return NextResponse.json(
