@@ -12,7 +12,7 @@ export async function GET(request: Request) {
       );
     }
 
-    if (session.role !== "BABYSITTER") {
+    if (session.role === "ADMIN") {
       return NextResponse.json(
         { success: false, error: "Forbidden" },
         { status: 403 }
