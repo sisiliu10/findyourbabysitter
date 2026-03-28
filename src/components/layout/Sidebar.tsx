@@ -31,7 +31,7 @@ export function Sidebar() {
 
   const baseLinks = user?.role === "BABYSITTER" ? sitterLinks : parentLinks;
 
-  if (user?.role === "ADMIN") {
+  if (user?.role === "ADMIN" && user?.email === "admin@fyb.com") {
     return (
       <aside className="hidden w-56 shrink-0 border-r border-border-default lg:block">
         <nav className="flex flex-col py-4">
