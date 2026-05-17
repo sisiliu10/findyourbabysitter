@@ -3,7 +3,7 @@ import { LANDING_PAGES } from "@/data/landing-pages";
 import { GUIDES } from "@/data/guides";
 import { routing } from "@/i18n/routing";
 
-const BASE = "https://berlinbabysitter.com";
+const BASE = "https://tottilotti.com";
 
 const staticPaths = ["/", "/login", "/register", "/guides", "/coloring-pages"];
 

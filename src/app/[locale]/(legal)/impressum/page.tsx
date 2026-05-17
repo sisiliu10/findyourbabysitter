@@ -16,15 +16,15 @@ export default function ImpressumPage() {
         <section>
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-muted mb-2">Kontakt</h2>
           <p>
-            <a href="mailto:info@berlinbabysitter.com" className="underline hover:text-text-primary transition-colors">
-              info@berlinbabysitter.com
+            <a href="mailto:info@tottilotti.com" className="underline hover:text-text-primary transition-colors">
+              info@tottilotti.com
             </a>
           </p>
         </section>
         <section>
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-muted mb-2">Hinweis</h2>
           <p>
-            Berlin Babysitter ist eine Plattform, die Eltern und Babysitter miteinander vernetzt. Wir sind keine Vermittlungsagentur und beschäftigen keine Babysitter.
+            tottilotti ist eine Plattform, die Eltern und Babysitter miteinander vernetzt. Wir sind keine Vermittlungsagentur und beschäftigen keine Babysitter.
           </p>
         </section>
       </div>

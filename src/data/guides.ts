@@ -345,7 +345,7 @@ export const GUIDES: Guide[] = [
   {
     slug: "first-meetup-babysitter",
     title: "Your First Meetup with a Babysitter",
-    metaTitle: "First Meetup with a Babysitter | Parent's Guide | Berlin Babysitter",
+    metaTitle: "First Meetup with a Babysitter | Parent's Guide | tottilotti",
     metaDescription:
       "How to arrange a first meetup with a new babysitter in Berlin. What to ask, what to show, and how to know if the fit is right — a practical guide for parents.",
     category: "parenting",
@@ -357,7 +357,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Start with a coffee, not a booking",
         content:
-          "Resist the urge to jump straight into scheduling. Reach out to the sitter via the platform, introduce yourself, and suggest a 30-minute coffee or home visit before committing to anything. This low-stakes meeting lets everyone relax and get a feel for each other without the pressure of a job already on the line. Most sitters on Berlin Babysitter are happy to do this — it is in their interest too.",
+          "Resist the urge to jump straight into scheduling. Reach out to the sitter via the platform, introduce yourself, and suggest a 30-minute coffee or home visit before committing to anything. This low-stakes meeting lets everyone relax and get a feel for each other without the pressure of a job already on the line. Most sitters on tottilotti are happy to do this — it is in their interest too.",
         items: [
           "Keep it short — 20 to 30 minutes is enough. You are not interviewing them, you are meeting them.",
           "Meet at your home if possible. It is the environment they will be working in, and your kids can warm up naturally.",

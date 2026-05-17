@@ -23,7 +23,7 @@ export function Topbar() {
         <Link href="/dashboard" className="flex items-center" style={{ width: 52, height: 52, overflow: "hidden" }}>
           <img
             src="/bear-logo.jpg"
-            alt="Berlin Babysitter"
+            alt="tottilotti"
             width={52}
             height={52}
             className="object-contain"

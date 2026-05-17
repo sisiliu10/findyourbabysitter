@@ -19,7 +19,7 @@ export async function POST() {
       return NextResponse.json({ error: "No subscription found" }, { status: 404 });
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://berlinbabysitter.com";
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tottilotti.com";
 
     const portalSession = await getStripe().billingPortal.sessions.create({
       customer: user.stripeCustomerId,

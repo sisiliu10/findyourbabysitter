@@ -19,7 +19,7 @@ export function Header() {
             href="/"
             className="shrink-0 text-xs font-medium uppercase tracking-[0.2em] text-text-primary"
           >
-            Berlin Babysitter
+            tottilotti
           </Link>
 
           {/* Center: nav links */}
@@ -74,7 +74,7 @@ export function Header() {
             href="/"
             className="shrink-0 text-xs font-medium uppercase tracking-[0.2em] text-text-primary"
           >
-            Berlin Babysitter
+            tottilotti
           </Link>
           <button
             onClick={() => setMenuOpen(!menuOpen)}

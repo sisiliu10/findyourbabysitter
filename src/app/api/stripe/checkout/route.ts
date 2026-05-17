@@ -37,7 +37,7 @@ export async function POST(request: Request) {
         ? process.env.STRIPE_PRICE_YEARLY!
         : process.env.STRIPE_PRICE_MONTHLY!;
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://berlinbabysitter.com";
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tottilotti.com";
 
     // Reuse existing Stripe customer or create new one
     let customerId = user.stripeCustomerId;

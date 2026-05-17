@@ -9,7 +9,7 @@ export default async function LegalLayout({ children }: { children: React.ReactN
       <header className="border-b border-border-default">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
           <Link href="/" className="text-xs font-medium uppercase tracking-[0.2em] text-text-primary">
-            Berlin Babysitter
+            tottilotti
           </Link>
           <div className="flex items-center gap-6">
             <LanguageToggle />
@@ -26,7 +26,7 @@ export default async function LegalLayout({ children }: { children: React.ReactN
       <footer className="border-t border-border-default">
         <div className="mx-auto max-w-7xl px-6 py-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <span className="text-xs uppercase tracking-wide text-text-muted">Berlin Babysitter</span>
+            <span className="text-xs uppercase tracking-wide text-text-muted">tottilotti</span>
             <nav className="flex items-center gap-6">
               <Link href="/impressum" className="text-xs text-text-muted transition-colors hover:text-text-primary">{t("impressum")}</Link>
             </nav>

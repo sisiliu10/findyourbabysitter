@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const guide = getGuide(slug, locale);
   if (!guide) return {};
 
-  const url = `https://berlinbabysitter.com/guides/${slug}`;
+  const url = `https://tottilotti.com/guides/${slug}`;
 
   return {
     title: guide.metaTitle,
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: guide.metaTitle,
       description: guide.metaDescription,
       url,
-      siteName: "Berlin Babysitter",
+      siteName: "tottilotti",
       locale: locale === "de" ? "de_DE" : "en_US",
       type: "article",
     },
@@ -63,18 +63,18 @@ export default async function GuideDetailPage({ params }: PageProps) {
     "@type": "BlogPosting",
     headline: guide.title,
     description: guide.metaDescription,
-    url: `https://berlinbabysitter.com/guides/${slug}`,
+    url: `https://tottilotti.com/guides/${slug}`,
     dateModified: guide.updatedAt,
     datePublished: guide.updatedAt,
     author: {
       "@type": "Organization",
-      name: "Berlin Babysitter",
-      url: "https://berlinbabysitter.com",
+      name: "tottilotti",
+      url: "https://tottilotti.com",
     },
     publisher: {
       "@type": "Organization",
-      name: "Berlin Babysitter",
-      url: "https://berlinbabysitter.com",
+      name: "tottilotti",
+      url: "https://tottilotti.com",
     },
     about: {
       "@type": "Place",
@@ -86,9 +86,9 @@ export default async function GuideDetailPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: t("home"), item: "https://berlinbabysitter.com" },
-      { "@type": "ListItem", position: 2, name: t("label"), item: "https://berlinbabysitter.com/guides" },
-      { "@type": "ListItem", position: 3, name: guide.title, item: `https://berlinbabysitter.com/guides/${slug}` },
+      { "@type": "ListItem", position: 1, name: t("home"), item: "https://tottilotti.com" },
+      { "@type": "ListItem", position: 2, name: t("label"), item: "https://tottilotti.com/guides" },
+      { "@type": "ListItem", position: 3, name: guide.title, item: `https://tottilotti.com/guides/${slug}` },
     ],
   };
 

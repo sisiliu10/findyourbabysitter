@@ -12,7 +12,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const base = "https://berlinbabysitter.com";
+  const base = "https://tottilotti.com";
   const url = locale === "en" ? base : `${base}/${locale}`;
   const isDE = locale === "de";
 

@@ -186,7 +186,7 @@ export const DISTRICTS: LandingPage[] = [
     faqs: [
       { question: "How much does a babysitter in Prenzlauer Berg cost?", answer: "Babysitters in Prenzlauer Berg typically charge between 12 and 25 EUR per hour, depending on experience, number of children, and time of day. Evening and weekend rates may be slightly higher." },
       { question: "Can I find English-speaking babysitters in Prenzlauer Berg?", answer: "Yes. Prenzlauer Berg has a large international community, and many of our registered babysitters speak fluent English alongside German and other languages." },
-      { question: "Are babysitters on Berlin Babysitter background-checked?", answer: "All babysitters on our platform create verified profiles with their real identity. We encourage parents to review references and ratings before booking." },
+      { question: "Are babysitters on tottilotti background-checked?", answer: "All babysitters on our platform create verified profiles with their real identity. We encourage parents to review references and ratings before booking." },
       { question: "How quickly can I book a babysitter in Prenzlauer Berg?", answer: "Many sitters in the area are available for same-day or next-day bookings. Post your request and you can start receiving responses within hours." },
     ],
   },

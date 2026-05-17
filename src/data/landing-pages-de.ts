@@ -261,7 +261,7 @@ export const LANDING_PAGE_DE: Record<string, LocalizedContent> = {
           "Ja. Prenzlauer Berg hat eine große internationale Gemeinschaft, und viele unserer registrierten Babysitter sprechen fließend Englisch neben Deutsch und anderen Sprachen.",
       },
       {
-        question: "Werden Babysitter auf Berlin Babysitter überprüft?",
+        question: "Werden Babysitter auf tottilotti überprüft?",
         answer:
           "Alle Babysitter auf unserer Plattform erstellen verifizierte Profile mit ihrer echten Identität. Wir empfehlen Eltern, Referenzen und Bewertungen vor der Buchung zu prüfen.",
       },

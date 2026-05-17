@@ -47,7 +47,7 @@ export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
   const isDE = locale === "de";
-  const base = "https://berlinbabysitter.com";
+  const base = "https://tottilotti.com";
   const url = isDE ? `${base}/de` : base;
 
   const activeSitters = await prisma.babysitterProfile.count({
@@ -80,7 +80,7 @@ export default async function HomePage({ params }: Props) {
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Berlin Babysitter",
+    name: "tottilotti",
     url: base,
     logo: `${base}/hero-bg.png`,
     description: isDE
@@ -198,7 +198,7 @@ export default async function HomePage({ params }: Props) {
         <ScrollRevealText
           title={t("seoIntroTitle")}
           body={t("seoIntro")}
-          label="Berlin Babysitter"
+          label="tottilotti"
           highlights={isDE
             ? ["vertrauen", "Nachbarschaft", "Kita-Plätze", "Bewertungen", "Spielverabredungen", "spontan", "schnell"]
             : ["trust", "neighborhood", "Kita", "reviews", "playdates", "last-minute", "quickly"]}
@@ -336,7 +336,7 @@ export default async function HomePage({ params }: Props) {
       <footer className="border-t border-border-default">
         <div className="mx-auto max-w-7xl px-6 py-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <span className="text-xs uppercase tracking-wide text-text-muted">Berlin Babysitter</span>
+            <span className="text-xs uppercase tracking-wide text-text-muted">tottilotti</span>
             <nav className="flex items-center gap-6">
               <Link href="/impressum" className="text-xs text-text-muted transition-colors hover:text-text-primary">{t("impressum")}</Link>
             </nav>

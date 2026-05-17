@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const page = getLandingPage(slug, locale);
   if (!page) return {};
 
-  const url = `https://berlinbabysitter.com/babysitter/${slug}`;
+  const url = `https://tottilotti.com/babysitter/${slug}`;
 
   return {
     title: page.metaTitle,
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: page.metaTitle,
       description: page.metaDescription,
       url,
-      siteName: "Berlin Babysitter",
+      siteName: "tottilotti",
       locale: locale === "de" ? "de_DE" : "en_US",
       type: "website",
     },
@@ -51,9 +51,9 @@ export default async function LandingPage({ params }: PageProps) {
     ? {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        name: `Berlin Babysitter - ${page.name}`,
+        name: `tottilotti - ${page.name}`,
         description: page.metaDescription,
-        url: `https://berlinbabysitter.com/babysitter/${slug}`,
+        url: `https://tottilotti.com/babysitter/${slug}`,
         areaServed: {
           "@type": "Place",
           name: `${page.name}, Berlin, Germany`,
@@ -69,7 +69,7 @@ export default async function LandingPage({ params }: PageProps) {
         "@type": "Service",
         name: `${page.name}-Speaking Babysitters in Berlin`,
         description: page.metaDescription,
-        url: `https://berlinbabysitter.com/babysitter/${slug}`,
+        url: `https://tottilotti.com/babysitter/${slug}`,
         areaServed: { "@type": "City", name: "Berlin, Germany" },
         serviceType: "Babysitting",
         availableLanguage: {
@@ -93,8 +93,8 @@ export default async function LandingPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: t("home"), item: "https://berlinbabysitter.com" },
-      { "@type": "ListItem", position: 2, name: page.h1, item: `https://berlinbabysitter.com/babysitter/${slug}` },
+      { "@type": "ListItem", position: 1, name: t("home"), item: "https://tottilotti.com" },
+      { "@type": "ListItem", position: 2, name: page.h1, item: `https://tottilotti.com/babysitter/${slug}` },
     ],
   };
 

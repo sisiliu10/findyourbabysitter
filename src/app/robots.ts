@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: ["/", "/babysitter/", "/guides/", "/coloring-pages/", "/register", "/login"],
       disallow: ["/dashboard/", "/admin/", "/api/", "/onboarding/", "/profile/"],
     },
-    sitemap: "https://berlinbabysitter.com/sitemap.xml",
+    sitemap: "https://tottilotti.com/sitemap.xml",
   };
 }

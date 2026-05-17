@@ -13,7 +13,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-4">
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-text-primary mb-4">
-              Berlin Babysitter
+              tottilotti
             </p>
             <p className="text-xs leading-relaxed text-text-tertiary">
               {t("tagline")}
@@ -73,7 +73,7 @@ export function Footer() {
         </div>
         <div className="mt-10 flex items-center justify-between border-t border-border-default pt-6">
           <span className="text-xs uppercase tracking-wide text-text-muted">
-            Berlin Babysitter
+            tottilotti
           </span>
           <span className="text-xs text-text-muted">
             {new Date().getFullYear()}

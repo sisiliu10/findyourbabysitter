@@ -8,7 +8,7 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-const FROM_EMAIL = "FindYourBabysitter <noreply@berlinbabysitter.com>";
+const FROM_EMAIL = "tottilotti <noreply@tottilotti.com>";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
 if (!process.env.NEXT_PUBLIC_APP_URL) {
@@ -94,7 +94,7 @@ export async function sendVerificationEmail(
     to: email,
     subject: "Verify your email address",
     html: `
-      <h2>Welcome to FindYourBabysitter!</h2>
+      <h2>Welcome to tottilotti!</h2>
       <p>Hi ${firstName}, thanks for signing up. Please verify your email address to get started.</p>
       <p><a href="${verifyLink}" style="display:inline-block;padding:12px 24px;background:#111;color:#fff;text-decoration:none;font-size:14px;letter-spacing:0.05em;">Verify my email</a></p>
       <p style="margin-top:24px;font-size:13px;color:#666;">Or copy and paste this link into your browser:</p>
@@ -284,7 +284,7 @@ export async function notifyNewMatch(
     subject: `It's a match! ${matchedUserName} liked you back`,
     html: `
       <h2>It's a match!</h2>
-      <p><strong>${matchedUserName}</strong> liked you back on FindYourBabysitter.</p>
+      <p><strong>${matchedUserName}</strong> liked you back on tottilotti.</p>
       <p>Say hello and start a conversation!</p>
       <p><a href="${APP_URL}/messages/${matchId}" style="display:inline-block;padding:12px 24px;background:#111;color:#fff;text-decoration:none;font-size:14px;letter-spacing:0.05em;">Say hello</a></p>
     `,
@@ -345,7 +345,7 @@ export async function notifyProfileReminder(
         <p style="font-size: 15px; line-height: 1.6; margin: 0 0 16px;">Hi ${firstName},</p>
 
         <p style="font-size: 15px; line-height: 1.6; margin: 0 0 16px;">
-          You signed up for Berlin Babysitter a little while ago — welcome! We just wanted to give you a gentle nudge.
+          You signed up for tottilotti a little while ago — welcome! We just wanted to give you a gentle nudge.
         </p>
 
         <p style="font-size: 15px; line-height: 1.6; margin: 0 0 28px;">
@@ -363,13 +363,13 @@ export async function notifyProfileReminder(
         </p>
 
         <p style="font-size: 14px; line-height: 1.6; color: #555; margin: 0 0 32px;">
-          — The Berlin Babysitter team
+          — The tottilotti team
         </p>
 
         <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 24px 0;" />
 
         <p style="font-size: 12px; color: #999; line-height: 1.5; margin: 0;">
-          You're receiving this because you created an account at berlinbabysitter.com.
+          You're receiving this because you created an account at tottilotti.com.
           If you didn't sign up, you can safely ignore this email.
         </p>
       </div>
@@ -465,7 +465,7 @@ export async function notifySubscriptionRenewed(
     subject: "Your Premium subscription has been renewed",
     html: `
       <h2>Subscription renewed</h2>
-      <p>Hi ${firstName}, your FindYourBabysitter Premium subscription has been successfully renewed.</p>
+      <p>Hi ${firstName}, your tottilotti Premium subscription has been successfully renewed.</p>
       ${nextBillingDate ? `<p><strong>Next billing date:</strong> ${formatDate(nextBillingDate)}</p>` : ""}
       <p><a href="${subscriptionLink}">View your subscription</a></p>
     `,
@@ -488,7 +488,7 @@ export async function notifySubscriptionCanceled(
     subject: "Your Premium subscription has been cancelled",
     html: `
       <h2>Subscription cancelled</h2>
-      <p>Hi ${firstName}, your FindYourBabysitter Premium subscription has been cancelled.</p>
+      <p>Hi ${firstName}, your tottilotti Premium subscription has been cancelled.</p>
       <p>You will retain access to Premium features until <strong>${formatDate(accessUntil)}</strong>.</p>
       <p>After that, your account will revert to the free plan.</p>
       <p><a href="${pricingLink}">Resubscribe anytime</a></p>

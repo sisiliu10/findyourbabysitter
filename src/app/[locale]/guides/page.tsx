@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: isDE
       ? "Entdecke kinderfreundliche Cafes, Spielplätze und Aktivitäten in Berlin. Lokale Tipps von Berliner Eltern."
       : "Discover kid-friendly cafes, playgrounds, and activities in Berlin. Local tips from Berlin parents.",
-    alternates: { canonical: "https://berlinbabysitter.com/guides" },
+    alternates: { canonical: "https://tottilotti.com/guides" },
     openGraph: {
       title: isDE
         ? "Berlin mit Kindern | Guides für Familien"
@@ -31,8 +31,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: isDE
         ? "Entdecke kinderfreundliche Cafes, Spielplätze und Aktivitäten in Berlin."
         : "Discover kid-friendly cafes, playgrounds, and activities in Berlin.",
-      url: "https://berlinbabysitter.com/guides",
-      siteName: "Berlin Babysitter",
+      url: "https://tottilotti.com/guides",
+      siteName: "tottilotti",
       locale: isDE ? "de_DE" : "en_US",
       type: "website",
     },

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const guide = getPlaygroundGuide(slug, locale);
   if (!guide) return {};
 
-  const url = `https://berlinbabysitter.com/babysitter/${slug}/playgrounds`;
+  const url = `https://tottilotti.com/babysitter/${slug}/playgrounds`;
 
   return {
     title: guide.metaTitle,
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: guide.metaTitle,
       description: guide.metaDescription,
       url,
-      siteName: "Berlin Babysitter",
+      siteName: "tottilotti",
       locale: locale === "de" ? "de_DE" : "en_US",
       type: "article",
     },
@@ -55,11 +55,11 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
     "@type": "Article",
     headline: guide.h1,
     description: guide.metaDescription,
-    url: `https://berlinbabysitter.com/babysitter/${slug}/playgrounds`,
+    url: `https://tottilotti.com/babysitter/${slug}/playgrounds`,
     publisher: {
       "@type": "Organization",
-      name: "Berlin Babysitter",
-      url: "https://berlinbabysitter.com",
+      name: "tottilotti",
+      url: "https://tottilotti.com",
     },
   };
 
@@ -67,9 +67,9 @@ export default async function PlaygroundGuidePage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: t("home"), item: "https://berlinbabysitter.com" },
-      { "@type": "ListItem", position: 2, name: t("babysittersIn", { district: guide.districtName }), item: `https://berlinbabysitter.com/babysitter/${slug}` },
-      { "@type": "ListItem", position: 3, name: t("playgrounds"), item: `https://berlinbabysitter.com/babysitter/${slug}/playgrounds` },
+      { "@type": "ListItem", position: 1, name: t("home"), item: "https://tottilotti.com" },
+      { "@type": "ListItem", position: 2, name: t("babysittersIn", { district: guide.districtName }), item: `https://tottilotti.com/babysitter/${slug}` },
+      { "@type": "ListItem", position: 3, name: t("playgrounds"), item: `https://tottilotti.com/babysitter/${slug}/playgrounds` },
     ],
   };
 

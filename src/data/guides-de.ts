@@ -166,7 +166,7 @@ export const GUIDES_DE: Record<string, LocalizedGuide> = {
   },
   "first-meetup-babysitter": {
     title: "Das erste Treffen mit einem Babysitter",
-    metaTitle: "Erstes Treffen mit Babysitter | Eltern-Guide | Berlin Babysitter",
+    metaTitle: "Erstes Treffen mit Babysitter | Eltern-Guide | tottilotti",
     metaDescription:
       "So arrangierst du ein erstes Kennenlernen mit einem neuen Babysitter in Berlin. Was du fragen solltest, was du zeigen solltest und wie du weißt, ob die Chemie stimmt.",
     intro:
@@ -175,7 +175,7 @@ export const GUIDES_DE: Record<string, LocalizedGuide> = {
       {
         heading: "Erst ein Kaffee, dann die Buchung",
         content:
-          "Widerstehe dem Impuls, sofort einen Termin einzuplanen. Schreibe dem Sitter über die Plattform, stell dich vor und schlage ein 30-minütiges Treffen oder einen Hausbesuch vor, bevor du dich zu etwas verpflichtest. Dieses entspannte Kennenlernen lässt alle zur Ruhe kommen und ein Gefühl füreinander entwickeln — ohne den Druck, dass der Job schon besiegelt ist. Die meisten Sitter auf Berlin Babysitter machen das gerne mit — es liegt auch in ihrem Interesse.",
+          "Widerstehe dem Impuls, sofort einen Termin einzuplanen. Schreibe dem Sitter über die Plattform, stell dich vor und schlage ein 30-minütiges Treffen oder einen Hausbesuch vor, bevor du dich zu etwas verpflichtest. Dieses entspannte Kennenlernen lässt alle zur Ruhe kommen und ein Gefühl füreinander entwickeln — ohne den Druck, dass der Job schon besiegelt ist. Die meisten Sitter auf tottilotti machen das gerne mit — es liegt auch in ihrem Interesse.",
         items: [
           "Halte es kurz — 20 bis 30 Minuten reichen. Du führst kein Bewerbungsgespräch, du lernst jemanden kennen.",
           "Triff dich wenn möglich bei dir zu Hause. Das ist die Umgebung, in der der Sitter arbeiten wird, und deine Kinder können sich natürlich eingewöhnen.",
