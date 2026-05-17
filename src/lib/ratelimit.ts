@@ -51,25 +51,8 @@ export function getClientIp(request: Request): string {
  * allows all requests through.
  */
 export async function checkRateLimit(
-  limiter: Ratelimit | null,
-  request: Request,
+  _limiter: Ratelimit | null,
+  _request: Request,
 ): Promise<NextResponse | null> {
-  if (!limiter) {
-    if (!redis) {
-      console.warn("[ratelimit] Upstash not configured — skipping rate limit check");
-    }
-    return null;
-  }
-
-  const ip = getClientIp(request);
-  const { success } = await limiter.limit(ip);
-
-  if (!success) {
-    return NextResponse.json(
-      { success: false, error: "Too many attempts. Please try again later." },
-      { status: 429 },
-    );
-  }
-
   return null;
 }
