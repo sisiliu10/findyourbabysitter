@@ -1,4 +1,4 @@
-import { requireRole } from "@/lib/session";
+import { requireOwner } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 import { Badge, type BadgeVariant } from "@/components/ui/Badge";
@@ -43,7 +43,7 @@ export default async function AdminUsersPage({
 }: {
   searchParams: Promise<{ role?: string }>;
 }) {
-  await requireRole(["ADMIN"]);
+  await requireOwner();
 
   const { role: roleFilter } = await searchParams;
   const validRoles = ["PARENT", "BABYSITTER", "ADMIN"];

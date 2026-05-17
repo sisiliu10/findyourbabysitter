@@ -35,7 +35,7 @@ export function Topbar() {
           <LanguageToggle />
           {user && (
             <>
-              {user.role === "ADMIN" && (
+              {user.role === "ADMIN" && user.email === "admin@fyb.com" && (
                 <Link
                   href="/admin"
                   className="hidden text-xs uppercase tracking-wide text-accent transition-colors hover:text-accent/70 sm:block"

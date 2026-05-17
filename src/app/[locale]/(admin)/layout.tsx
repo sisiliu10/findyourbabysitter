@@ -6,10 +6,10 @@ export const metadata: Metadata = {
 };
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
-import { requireRole } from "@/lib/session";
+import { requireOwner } from "@/lib/session";
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  await requireRole(["ADMIN"]);
+  await requireOwner();
   const t = await getTranslations("admin");
   return (
     <div className="flex min-h-screen flex-col bg-surface-primary">

@@ -1,4 +1,4 @@
-import { requireRole } from "@/lib/session";
+import { requireOwner } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { SignupChart } from "./SignupChart";
 
@@ -12,7 +12,7 @@ function getWeekLabel(date: Date): string {
 }
 
 export default async function AdminDashboardPage() {
-  await requireRole(["ADMIN"]);
+  await requireOwner();
 
   const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000);
 
