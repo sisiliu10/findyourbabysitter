@@ -8,8 +8,6 @@ import { Spinner } from "@/components/ui/Spinner";
 import { SITTER_TYPES, LANGUAGE_OPTIONS, GENDER_OPTIONS } from "@/lib/constants";
 import { CityPicker } from "@/components/CityPicker";
 
-const CITY_KEY = "tottilotti_selected_city";
-
 const POPULAR_LANGUAGE_COUNT = 8;
 
 interface SitterResult {
@@ -75,19 +73,7 @@ export default function BrowseSittersPage() {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [cityPickerDone, setCityPickerDone] = useState(false);
 
-  // Load saved city from localStorage
-  useEffect(() => {
-    const saved = typeof window !== "undefined" ? localStorage.getItem(CITY_KEY) : null;
-    if (saved) {
-      setSelectedCity(saved);
-      setCityPickerDone(true);
-    } else {
-      setCityPickerDone(false);
-    }
-  }, []);
-
   const handleCitySelect = (city: string) => {
-    localStorage.setItem(CITY_KEY, city);
     setSelectedCity(city);
     setCityPickerDone(true);
   };
@@ -163,7 +149,6 @@ export default function BrowseSittersPage() {
               <p className="text-sm text-text-secondary">{selectedCity}</p>
               <button
                 onClick={() => {
-                  localStorage.removeItem(CITY_KEY);
                   setSelectedCity(null);
                   setCityPickerDone(false);
                   setSitters([]);
