@@ -6,7 +6,9 @@ import { Link } from "@/i18n/navigation";
 import { formatCurrency, getInitials, cn } from "@/lib/utils";
 import { Spinner } from "@/components/ui/Spinner";
 import { SITTER_TYPES, LANGUAGE_OPTIONS, GENDER_OPTIONS } from "@/lib/constants";
-import { BERLIN_DISTRICTS } from "@/lib/berlin-districts";
+import { CityPicker } from "@/components/CityPicker";
+
+const CITY_KEY = "tottilotti_selected_city";
 
 const POPULAR_LANGUAGE_COUNT = 8;
 
@@ -70,6 +72,25 @@ export default function BrowseSittersPage() {
 
   const [sitters, setSitters] = useState<SitterResult[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCity, setSelectedCity] = useState<string | null>(null);
+  const [cityPickerDone, setCityPickerDone] = useState(false);
+
+  // Load saved city from localStorage
+  useEffect(() => {
+    const saved = typeof window !== "undefined" ? localStorage.getItem(CITY_KEY) : null;
+    if (saved) {
+      setSelectedCity(saved);
+      setCityPickerDone(true);
+    } else {
+      setCityPickerDone(false);
+    }
+  }, []);
+
+  const handleCitySelect = (city: string) => {
+    localStorage.setItem(CITY_KEY, city);
+    setSelectedCity(city);
+    setCityPickerDone(true);
+  };
 
   // Filters
   const [languageFilter, setLanguageFilter] = useState("");
@@ -77,18 +98,18 @@ export default function BrowseSittersPage() {
   const [maxRate, setMaxRate] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [genderFilter, setGenderFilter] = useState("");
-  const [districtFilter, setDistrictFilter] = useState("");
   const [showAllLanguages, setShowAllLanguages] = useState(false);
 
   const fetchSitters = useCallback(async () => {
+    if (!cityPickerDone) return;
     setLoading(true);
     try {
       const params = new URLSearchParams({ limit: "100" });
+      if (selectedCity) params.set("city", selectedCity);
       if (languageFilter) params.set("language", languageFilter);
       if (sitterTypeFilter) params.set("sitterType", sitterTypeFilter);
       if (genderFilter) params.set("gender", genderFilter);
       if (maxRate) params.set("maxRate", maxRate);
-      if (districtFilter) params.set("district", districtFilter);
 
       const res = await fetch(`/api/sitters?${params}`);
       const json = await res.json();
@@ -102,7 +123,7 @@ export default function BrowseSittersPage() {
     } finally {
       setLoading(false);
     }
-  }, [languageFilter, sitterTypeFilter, genderFilter, maxRate, districtFilter]);
+  }, [languageFilter, sitterTypeFilter, genderFilter, maxRate, selectedCity, cityPickerDone]);
 
   useEffect(() => {
     fetchSitters();
@@ -120,6 +141,17 @@ export default function BrowseSittersPage() {
     );
   });
 
+  // Show city picker if no city selected yet
+  if (!cityPickerDone) {
+    return (
+      <CityPicker
+        onSelect={handleCitySelect}
+        title={locale === "de" ? "In welcher Stadt bist du?" : "Which city are you in?"}
+        subtitle={locale === "de" ? "Wir zeigen dir Babysitter in deiner Nähe." : "We'll show you babysitters near you."}
+      />
+    );
+  }
+
   return (
     <div className="flex h-full flex-col">
       {/* Header */}
@@ -127,7 +159,20 @@ export default function BrowseSittersPage() {
         <div className="flex items-start justify-between">
           <div>
             <h1 className="font-serif text-3xl text-text-primary">{t("title")}</h1>
-            <p className="mt-1 text-sm text-text-secondary">{t("subtitle")}</p>
+            <div className="mt-1 flex items-center gap-2">
+              <p className="text-sm text-text-secondary">{selectedCity}</p>
+              <button
+                onClick={() => {
+                  localStorage.removeItem(CITY_KEY);
+                  setSelectedCity(null);
+                  setCityPickerDone(false);
+                  setSitters([]);
+                }}
+                className="text-xs text-text-muted underline underline-offset-2 hover:text-text-secondary"
+              >
+                {locale === "de" ? "ändern" : "change"}
+              </button>
+            </div>
           </div>
           <Link
             href="/search"
@@ -200,28 +245,15 @@ export default function BrowseSittersPage() {
           </button>
         </div>
 
-        {/* District + Hourly salary — grid so labels and selects stay aligned */}
-        <div className="grid grid-cols-[max-content_1fr] items-center gap-x-3 gap-y-3 sm:w-fit sm:grid-cols-[max-content_minmax(160px,_200px)_max-content_minmax(160px,_200px)]">
-          <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
-            {t("district")}
-          </label>
-          <select
-            value={districtFilter}
-            onChange={(e) => setDistrictFilter(e.target.value)}
-            className="w-full border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
-          >
-            <option value="">{t("allDistricts")}</option>
-            {BERLIN_DISTRICTS.map((d) => (
-              <option key={d} value={d}>{d}</option>
-            ))}
-          </select>
+        {/* Hourly salary */}
+        <div className="flex items-center gap-3 sm:w-fit">
           <label className="text-xs font-medium uppercase tracking-wide text-text-secondary whitespace-nowrap">
             {t("maxRate")}
           </label>
           <select
             value={maxRate}
             onChange={(e) => setMaxRate(e.target.value)}
-            className="w-full border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
+            className="border border-border-default bg-transparent px-3 py-2 text-sm text-text-primary focus:border-text-primary focus:outline-none"
           >
             <option value="">{t("anyRate")}</option>
             <option value="15">{t("upTo")} {formatCurrency(15)}/hr</option>
@@ -316,9 +348,9 @@ export default function BrowseSittersPage() {
       ) : filtered.length === 0 ? (
         <div className="flex flex-1 flex-col items-center justify-center py-20">
           <p className="text-sm text-text-tertiary">{t("noResults")}</p>
-          {(languageFilter || sitterTypeFilter || genderFilter || maxRate || searchQuery || districtFilter) && (
+          {(languageFilter || sitterTypeFilter || genderFilter || maxRate || searchQuery) && (
             <button
-              onClick={() => { setLanguageFilter(""); setSitterTypeFilter(""); setGenderFilter(""); setMaxRate(""); setSearchQuery(""); setDistrictFilter(""); }}
+              onClick={() => { setLanguageFilter(""); setSitterTypeFilter(""); setGenderFilter(""); setMaxRate(""); setSearchQuery(""); }}
               className="mt-3 text-sm text-accent hover:underline"
             >
               {t("clearFilters")}
