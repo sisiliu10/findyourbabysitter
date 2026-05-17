@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { DISTRICTS, LANGUAGES } from "@/data/landing-pages";
+import { LANGUAGES } from "@/data/landing-pages";
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -10,7 +10,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border-default">
       <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-text-primary mb-4">
               tottilotti
@@ -18,22 +18,6 @@ export function Footer() {
             <p className="text-xs leading-relaxed text-text-tertiary">
               {t("tagline")}
             </p>
-          </div>
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wide text-text-secondary mb-3">
-              {t("neighborhoods")}
-            </p>
-            <div className="flex flex-col gap-1.5">
-              {DISTRICTS.map((d) => (
-                <Link
-                  key={d.slug}
-                  href={`/babysitter/${d.slug}`}
-                  className="text-xs text-text-tertiary transition-colors hover:text-text-primary"
-                >
-                  {d.name}
-                </Link>
-              ))}
-            </div>
           </div>
           <div>
             <p className="text-xs font-medium uppercase tracking-wide text-text-secondary mb-3">

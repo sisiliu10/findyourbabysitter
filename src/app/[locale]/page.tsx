@@ -278,25 +278,6 @@ export default async function HomePage({ params }: Props) {
           </div>
         </section>
 
-        {/* Browse by neighborhood */}
-        <section id="neighborhoods" className="border-t border-border-default">
-          <div className="mx-auto max-w-7xl px-6 py-20 sm:py-28">
-            <h2 className="text-xs uppercase tracking-wide text-text-muted mb-8">{t("browseByNeighborhood")}</h2>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-              {DISTRICTS.map((d) => (
-                <Link
-                  key={d.slug}
-                  href={`/babysitter/${d.slug}`}
-                  className="group border border-border-default p-5 transition-colors hover:border-text-primary"
-                >
-                  <p className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">{d.name}</p>
-                  <p className="mt-1 text-xs text-text-tertiary">{t("babysitters")}</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Browse by language */}
         <section className="border-t border-border-default">
           <div className="mx-auto max-w-7xl px-6 py-12 sm:py-28">

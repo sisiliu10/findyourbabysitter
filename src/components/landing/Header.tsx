@@ -31,12 +31,6 @@ export function Header() {
               {t("howItWorks")}
             </Link>
             <Link
-              href="/#neighborhoods"
-              className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
-            >
-              {t("neighborhoods")}
-            </Link>
-            <Link
               href="/guides"
               className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
             >
@@ -110,13 +104,6 @@ export function Header() {
               className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
             >
               {t("howItWorks")}
-            </Link>
-            <Link
-              href="/#neighborhoods"
-              onClick={() => setMenuOpen(false)}
-              className="text-xs uppercase tracking-wide text-text-tertiary transition-colors hover:text-text-primary"
-            >
-              {t("neighborhoods")}
             </Link>
             <Link
               href="/guides"
