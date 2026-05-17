@@ -3,16 +3,18 @@
 import { useTranslations } from "next-intl";
 
 const TRUST_ITEMS = [
-  "Prenzlauer Berg",
-  "Kreuzberg",
-  "Mitte",
-  "Friedrichshain",
-  "Charlottenburg",
-  "Schöneberg",
-  "Neukölln",
-  "Wedding",
-  "Moabit",
-  "Steglitz",
+  "Berlin",
+  "München",
+  "Hamburg",
+  "Frankfurt",
+  "Köln",
+  "Stuttgart",
+  "Düsseldorf",
+  "Leipzig",
+  "Dortmund",
+  "Bremen",
+  "Hannover",
+  "Nürnberg",
 ];
 
 export function TrustBar() {

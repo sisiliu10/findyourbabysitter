@@ -35,11 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const isDE = locale === "de";
   return {
     title: isDE
-      ? "Babysitter Berlin | Vertrauenswürdige Babysitter & Kita-Plätze finden"
-      : "Babysitter Berlin | Find Trusted Babysitters & Kita Places",
+      ? "tottilotti | Vertrauenswürdige Babysitter & Kita-Plätze in Deutschland"
+      : "tottilotti | Find Trusted Babysitters & Kita Places in Germany",
     description: isDE
-      ? "Babysitter in Berlin gesucht? Finde vertrauenswürdige Babysitter und Kindermädchen in Prenzlauer Berg, Mitte, Charlottenburg und mehr – empfohlen von Berliner Eltern."
-      : "Looking for a babysitter in Berlin? Find trusted babysitters in Prenzlauer Berg, Mitte, Charlottenburg and more – recommended by local Berlin parents.",
+      ? "Babysitter in Deutschland gesucht? Finde vertrauenswürdige Babysitter in Berlin, München, Hamburg, Frankfurt und mehr – empfohlen von echten Eltern."
+      : "Looking for a babysitter in Germany? Find trusted babysitters in Berlin, Munich, Hamburg, Frankfurt and more – recommended by real parents.",
   };
 }
 
@@ -65,7 +65,7 @@ export default async function HomePage({ params }: Props) {
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "BerlinBabysitter",
+    name: "tottilotti",
     url: base,
     potentialAction: {
       "@type": "SearchAction",
@@ -84,11 +84,11 @@ export default async function HomePage({ params }: Props) {
     url: base,
     logo: `${base}/hero-bg.png`,
     description: isDE
-      ? "Finde vertrauenswürdige Babysitter in Berlin, empfohlen von anderen Berliner Familien."
-      : "Find trusted babysitters in Berlin, recommended by local families.",
+      ? "Finde vertrauenswürdige Babysitter in Deutschland, empfohlen von echten Familien."
+      : "Find trusted babysitters across Germany, recommended by real families.",
     areaServed: {
-      "@type": "City",
-      name: "Berlin, Germany",
+      "@type": "Country",
+      name: "Germany",
     },
     sameAs: [],
   };
@@ -97,11 +97,11 @@ export default async function HomePage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "HowTo",
     name: isDE
-      ? "Wie finde ich einen Babysitter in Berlin?"
-      : "How to find a babysitter in Berlin",
+      ? "Wie finde ich einen Babysitter in Deutschland?"
+      : "How to find a babysitter in Germany",
     description: isDE
-      ? "Finde vertrauenswürdige Babysitter in Berlin in drei einfachen Schritten."
-      : "Find trusted babysitters in Berlin in three simple steps.",
+      ? "Finde vertrauenswürdige Babysitter in Deutschland in drei einfachen Schritten."
+      : "Find trusted babysitters in Germany in three simple steps.",
     step: [
       {
         "@type": "HowToStep",
