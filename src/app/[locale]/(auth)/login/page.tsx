@@ -43,7 +43,11 @@ export default function LoginPage() {
         return;
       }
 
-      router.push(data.data.onboarded ? "/dashboard" : "/onboarding");
+      if (data.data.role === "ADMIN") {
+        router.push("/admin");
+      } else {
+        router.push(data.data.onboarded ? "/dashboard" : "/onboarding");
+      }
       router.refresh();
     } catch {
       setError(t("somethingWentWrong"));

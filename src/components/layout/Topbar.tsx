@@ -35,6 +35,14 @@ export function Topbar() {
           <LanguageToggle />
           {user && (
             <>
+              {user.role === "ADMIN" && (
+                <Link
+                  href="/admin"
+                  className="hidden text-xs uppercase tracking-wide text-accent transition-colors hover:text-accent/70 sm:block"
+                >
+                  Admin
+                </Link>
+              )}
               <span className="hidden text-xs uppercase tracking-wide text-text-tertiary sm:block">
                 {user.firstName} {user.lastName}
               </span>
