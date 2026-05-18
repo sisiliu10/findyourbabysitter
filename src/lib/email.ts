@@ -97,64 +97,84 @@ export async function sendVerificationEmail(
 <!DOCTYPE html>
 <html lang="de">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f5f5f0;font-family:Georgia,serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f0;padding:40px 16px;">
+<body style="margin:0;padding:0;background:#FAF6F1;font-family:Georgia,'Times New Roman',serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FAF6F1;padding:48px 16px;">
     <tr><td align="center">
-      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#fafaf7;border:1px solid #e0ddd5;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;">
 
-        <!-- Header -->
+        <!-- Logo / Brand -->
         <tr>
-          <td style="padding:36px 40px 28px;border-bottom:1px solid #e0ddd5;">
-            <p style="margin:0;font-family:Georgia,serif;font-size:22px;font-weight:normal;color:#1a1a1a;letter-spacing:0.02em;">tottilotti</p>
+          <td style="padding:0 0 24px;">
+            <p style="margin:0;font-family:Georgia,serif;font-size:15px;font-weight:normal;color:#2C2420;letter-spacing:0.12em;text-transform:lowercase;">tottilotti</p>
           </td>
         </tr>
 
-        <!-- Body DE -->
+        <!-- Main card -->
         <tr>
-          <td style="padding:36px 40px 0;">
-            <p style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;color:#888;">Hallo ${firstName},</p>
-            <p style="margin:0 0 20px;font-size:17px;line-height:1.6;color:#1a1a1a;">schön, dass du dabei bist.<br>Bitte bestätige deine E-Mail-Adresse, um dein Konto zu aktivieren.</p>
-            <table cellpadding="0" cellspacing="0" style="margin:0 0 28px;">
+          <td style="background:#FFFFFF;border:1px solid #E5DDD4;">
+
+            <!-- Accent top bar -->
+            <div style="height:3px;background:#D4845C;"></div>
+
+            <!-- DE section -->
+            <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
-                <td style="background:#1a1a1a;">
-                  <a href="${verifyLink}" style="display:inline-block;padding:14px 32px;font-family:Georgia,serif;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#fafaf7;text-decoration:none;">E-Mail bestätigen</a>
+                <td style="padding:40px 40px 32px;">
+                  <p style="margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#9B8E87;">Deutsch</p>
+                  <p style="margin:0 0 6px;font-family:Georgia,serif;font-size:24px;font-weight:normal;color:#2C2420;line-height:1.3;">Hallo ${firstName}.</p>
+                  <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#6B5E57;">Schön, dass du bei tottilotti dabei bist.<br>Klick auf den Button um deine E-Mail-Adresse zu bestätigen und loszulegen.</p>
+
+                  <table cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="background:#2C2420;">
+                        <a href="${verifyLink}" style="display:inline-block;padding:14px 36px;font-family:Georgia,serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#FAF6F1;text-decoration:none;">E-Mail bestätigen</a>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <p style="margin:24px 0 4px;font-size:11px;color:#B5A9A3;">Link funktioniert nicht? Kopiere ihn in deinen Browser:</p>
+                  <p style="margin:0 0 4px;font-size:10px;color:#C9BFB4;word-break:break-all;">${verifyLink}</p>
+                  <p style="margin:16px 0 0;font-size:11px;color:#C9BFB4;">Gültig für 24 Stunden · Falls du kein Konto erstellt hast, ignoriere diese Mail.</p>
                 </td>
               </tr>
             </table>
-            <p style="margin:0 0 6px;font-size:12px;color:#999;">Oder kopiere diesen Link in deinen Browser:</p>
-            <p style="margin:0 0 28px;font-size:11px;color:#aaa;word-break:break-all;">${verifyLink}</p>
-            <p style="margin:0 0 4px;font-size:12px;color:#bbb;">Der Link ist 24 Stunden gültig.</p>
-            <p style="margin:0 0 36px;font-size:12px;color:#bbb;">Falls du kein Konto erstellt hast, kannst du diese E-Mail ignorieren.</p>
-          </td>
-        </tr>
 
-        <!-- Divider -->
-        <tr>
-          <td style="padding:0 40px;">
-            <hr style="border:none;border-top:1px solid #e0ddd5;margin:0 0 32px;">
-          </td>
-        </tr>
-
-        <!-- Body EN -->
-        <tr>
-          <td style="padding:0 40px 36px;">
-            <p style="margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;color:#888;">Hi ${firstName},</p>
-            <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#555;">glad you're here. Please verify your email address to activate your account.</p>
-            <table cellpadding="0" cellspacing="0" style="margin:0 0 20px;">
+            <!-- Divider -->
+            <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
-                <td style="background:#fafaf7;border:1px solid #1a1a1a;">
-                  <a href="${verifyLink}" style="display:inline-block;padding:12px 28px;font-family:Georgia,serif;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#1a1a1a;text-decoration:none;">Verify email</a>
+                <td style="padding:0 40px;">
+                  <div style="height:1px;background:#F3EDE6;"></div>
                 </td>
               </tr>
             </table>
-            <p style="margin:0;font-size:11px;color:#bbb;">Link expires in 24 hours. If you didn't sign up, ignore this email.</p>
+
+            <!-- EN section -->
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="padding:28px 40px 40px;">
+                  <p style="margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:#9B8E87;">English</p>
+                  <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#9B8E87;">Hi ${firstName}, glad you're here. Please verify your email to activate your account.</p>
+
+                  <table cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="border:1px solid #E5DDD4;">
+                        <a href="${verifyLink}" style="display:inline-block;padding:11px 28px;font-family:Georgia,serif;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#6B5E57;text-decoration:none;">Verify email</a>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <p style="margin:16px 0 0;font-size:11px;color:#C9BFB4;">Valid for 24 hours · If you didn't sign up, you can safely ignore this email.</p>
+                </td>
+              </tr>
+            </table>
+
           </td>
         </tr>
 
         <!-- Footer -->
         <tr>
-          <td style="padding:20px 40px;border-top:1px solid #e0ddd5;background:#f0ede6;">
-            <p style="margin:0;font-size:11px;color:#aaa;">tottilotti · Deutschland</p>
+          <td style="padding:24px 0 0;">
+            <p style="margin:0;font-size:11px;color:#B5A9A3;letter-spacing:0.05em;">tottilotti · Deutschland · <a href="${APP_URL}" style="color:#B5A9A3;text-decoration:none;">tottilotti.com</a></p>
           </td>
         </tr>
 
