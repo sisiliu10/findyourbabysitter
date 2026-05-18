@@ -43,7 +43,11 @@ export default async function AdminDashboardPage() {
 
   const [pendingBookings, unverifiedCount, sitterCityRaw, parentCityRaw] = await Promise.all([
     prisma.booking.count({ where: { status: "PENDING" } }),
-    prisma.user.count({ where: { emailVerified: false, role: { not: "ADMIN" } } }),
+    prisma.user.findMany({
+      where: { emailVerified: false, role: { not: "ADMIN" } },
+      select: { id: true, email: true, firstName: true, lastName: true, role: true, createdAt: true },
+      orderBy: { createdAt: "desc" },
+    }),
     prisma.babysitterProfile.groupBy({
       by: ["city"],
       where: { city: { not: "" }, isActive: true },
@@ -60,6 +64,7 @@ export default async function AdminDashboardPage() {
     }),
   ]);
 
+  const unverifiedCount = unverifiedUsers.length;
   const sitterCities = sitterCityRaw.map((r) => ({ city: r.city, count: r._count.city }));
   const parentCities = parentCityRaw.map((r) => ({ city: r.city, count: r._count.city }));
 
@@ -155,7 +160,7 @@ export default async function AdminDashboardPage() {
 
       <CityStats sitterCities={sitterCities} parentCities={parentCities} />
 
-      <ResendVerificationsButton initialCount={unverifiedCount} />
+      <ResendVerificationsButton initialCount={unverifiedCount} users={unverifiedUsers} />
     </div>
   );
 }

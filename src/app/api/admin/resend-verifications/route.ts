@@ -16,17 +16,39 @@ export async function GET() {
   return NextResponse.json({ count: unverified.length, users: unverified });
 }
 
-export async function POST() {
+export async function POST(request: Request) {
   await requireOwner();
 
+  const newExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+  // If userId provided, resend only for that user
+  let body: { userId?: string } = {};
+  try { body = await request.json(); } catch { /* no body */ }
+
+  if (body.userId) {
+    const user = await prisma.user.findUnique({
+      where: { id: body.userId },
+      select: { id: true, email: true, firstName: true, emailVerified: true },
+    });
+    if (!user || user.emailVerified) {
+      return NextResponse.json({ success: false, error: "User not found or already verified" }, { status: 400 });
+    }
+    const token = randomUUID();
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { emailVerificationToken: token, emailVerificationExpiry: newExpiry },
+    });
+    await sendVerificationEmail(user.email, user.firstName, token);
+    return NextResponse.json({ success: true, sent: 1 });
+  }
+
+  // Otherwise resend to all unverified
   const unverified = await prisma.user.findMany({
     where: { emailVerified: false, role: { not: "ADMIN" } },
     select: { id: true, email: true, firstName: true },
   });
 
-  const newExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
   let sent = 0;
-
   for (const user of unverified) {
     const token = randomUUID();
     await prisma.user.update({
