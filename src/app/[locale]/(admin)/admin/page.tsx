@@ -2,6 +2,7 @@ import { requireOwner } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { SignupChart } from "./SignupChart";
 import { ResendVerificationsButton } from "./ResendVerificationsButton";
+import { CityStats } from "./CityStats";
 
 function getWeekLabel(date: Date): string {
   // Returns "MMM DD" label for the Monday of the week containing `date`
@@ -40,10 +41,27 @@ export default async function AdminDashboardPage() {
       }),
     ]);
 
-  const [pendingBookings, unverifiedCount] = await Promise.all([
+  const [pendingBookings, unverifiedCount, sitterCityRaw, parentCityRaw] = await Promise.all([
     prisma.booking.count({ where: { status: "PENDING" } }),
     prisma.user.count({ where: { emailVerified: false, role: { not: "ADMIN" } } }),
+    prisma.babysitterProfile.groupBy({
+      by: ["city"],
+      where: { city: { not: "" }, isActive: true },
+      _count: { city: true },
+      orderBy: { _count: { city: "desc" } },
+      take: 10,
+    }),
+    prisma.childcareRequest.groupBy({
+      by: ["city"],
+      where: { city: { not: "" } },
+      _count: { city: true },
+      orderBy: { _count: { city: "desc" } },
+      take: 10,
+    }),
   ]);
+
+  const sitterCities = sitterCityRaw.map((r) => ({ city: r.city, count: r._count.city }));
+  const parentCities = parentCityRaw.map((r) => ({ city: r.city, count: r._count.city }));
 
   // Group signups by ISO week (last 13 weeks)
   const weekMap = new Map<string, { parents: number; sitters: number }>();
@@ -134,6 +152,8 @@ export default async function AdminDashboardPage() {
         <p className="mb-6 text-xs text-text-secondary">Parents vs sitters — last 13 weeks</p>
         <SignupChart data={chartData} />
       </div>
+
+      <CityStats sitterCities={sitterCities} parentCities={parentCities} />
 
       <ResendVerificationsButton initialCount={unverifiedCount} />
     </div>
