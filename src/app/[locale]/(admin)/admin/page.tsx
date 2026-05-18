@@ -1,6 +1,7 @@
 import { requireOwner } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { SignupChart } from "./SignupChart";
+import { ResendVerificationsButton } from "./ResendVerificationsButton";
 
 function getWeekLabel(date: Date): string {
   // Returns "MMM DD" label for the Monday of the week containing `date`
@@ -39,9 +40,10 @@ export default async function AdminDashboardPage() {
       }),
     ]);
 
-  const pendingBookings = await prisma.booking.count({
-    where: { status: "PENDING" },
-  });
+  const [pendingBookings, unverifiedCount] = await Promise.all([
+    prisma.booking.count({ where: { status: "PENDING" } }),
+    prisma.user.count({ where: { emailVerified: false, role: { not: "ADMIN" } } }),
+  ]);
 
   // Group signups by ISO week (last 13 weeks)
   const weekMap = new Map<string, { parents: number; sitters: number }>();
@@ -132,6 +134,8 @@ export default async function AdminDashboardPage() {
         <p className="mb-6 text-xs text-text-secondary">Parents vs sitters — last 13 weeks</p>
         <SignupChart data={chartData} />
       </div>
+
+      <ResendVerificationsButton initialCount={unverifiedCount} />
     </div>
   );
 }
