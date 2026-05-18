@@ -34,7 +34,7 @@ export async function GET(request: Request) {
 
     if (city) {
       where.childcareRequests = {
-        some: { city: { contains: city } },
+        some: { city: { contains: city, mode: "insensitive" } },
       };
     }
 

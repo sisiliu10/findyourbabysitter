@@ -11,7 +11,7 @@ export async function GET() {
   const rows = await prisma.childcareRequest.groupBy({
     by: ["city"],
     where: {
-      city: { not: "" },
+      city: { not: "", mode: "insensitive" } as any,
       status: "OPEN",
       parent: { isDisabled: false, onboarded: true },
     },
