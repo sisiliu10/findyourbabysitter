@@ -39,7 +39,8 @@ function VerifyEmailContent() {
         if (res.ok) {
           setStatus("success");
           setMessage(data.message);
-          setTimeout(() => router.push("/login"), 3000);
+          const dest = data.role === "ADMIN" ? "/admin" : data.onboarded ? "/dashboard" : "/onboarding";
+          setTimeout(() => { router.push(dest); router.refresh(); }, 2000);
         } else {
           setStatus("error");
           setMessage(data.error);
@@ -96,13 +97,13 @@ function VerifyEmailContent() {
 
         <h1 className="font-serif text-4xl text-text-primary">{t("emailVerified")}</h1>
         <p className="mt-3 text-sm text-text-secondary">{message}</p>
-        <p className="mt-2 text-sm text-text-tertiary">{t("redirecting")}</p>
+        <p className="mt-2 text-sm text-text-tertiary">Du wirst automatisch weitergeleitet…</p>
 
         <Link
-          href="/login"
+          href="/onboarding"
           className="mt-8 inline-block w-full border border-text-primary bg-text-primary px-4 py-3 text-center text-xs font-medium uppercase tracking-widest text-surface-primary transition-colors hover:bg-accent hover:border-accent"
         >
-          {t("logInNow")}
+          Jetzt loslegen →
         </Link>
       </div>
     );

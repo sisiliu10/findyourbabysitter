@@ -7,6 +7,7 @@ import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQ
 import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
 import { getDistrictFromZip } from "@/lib/berlin-districts";
 import { cn } from "@/lib/utils";
+import { CityPicker } from "@/components/CityPicker";
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -90,11 +91,16 @@ export default function OnboardingPage() {
       !!(avatarFile || avatarPreview) &&
       !!gender &&
       languages.length > 0 &&
-      !!birthday &&
-      !!city &&
-      !!zipCode &&
-      (role !== "BABYSITTER" || !!phone);
+      !!birthday;
     if (valid) setStep(2);
+  }
+
+  // Step 3 validation: address+contact
+  const [step3Attempted, setStep3Attempted] = useState(false);
+  function handleStep3Continue() {
+    setStep3Attempted(true);
+    const valid = !!zipCode && (role !== "BABYSITTER" || !!phone);
+    if (valid) setStep(4);
   }
 
   async function handleSubmit() {
@@ -167,7 +173,7 @@ export default function OnboardingPage() {
       if (role === "BABYSITTER") {
         setProfileLive(true);
       } else {
-        router.push("/dashboard");
+        router.push("/browse");
         router.refresh();
       }
     } catch (err) {
@@ -178,7 +184,8 @@ export default function OnboardingPage() {
     }
   }
 
-  const totalSteps = role === "BABYSITTER" ? 3 : 2;
+  // Steps: 1=personal, 2=city, 3=address+contact, 4=role-specific, [5=sitter availability]
+  const totalSteps = role === "BABYSITTER" ? 5 : 4;
 
   const inputClass =
     "mt-1 block w-full border border-border-default bg-transparent px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted transition focus:border-text-primary focus:outline-none";
@@ -242,25 +249,20 @@ export default function OnboardingPage() {
         <div className="mb-4 border border-danger/30 bg-danger-muted p-3 text-sm text-danger">{error}</div>
       )}
 
-      {/* Step 1: About You + Location (both roles) */}
+      {/* Step 1: Personal — photo, birthday, gender, languages */}
       {step === 1 && (
         <div className="space-y-5 border border-border-default bg-surface-secondary p-6">
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("aboutYou")}</h2>
 
-          {/* Profile picture — required for all */}
+          {/* Profile picture */}
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
               {t("profilePicture")} <span className="text-danger">*</span>
             </label>
-            <div
-              className={`mt-2 flex flex-col items-center gap-3 border-2 border-dashed p-5 transition ${
-                step1Attempted && !avatarFile && !avatarPreview
-                  ? "border-danger bg-danger-muted"
-                  : avatarPreview
-                  ? "border-success"
-                  : "border-border-default hover:border-text-muted"
-              }`}
-            >
+            <div className={`mt-2 flex flex-col items-center gap-3 border-2 border-dashed p-5 transition ${
+              step1Attempted && !avatarFile && !avatarPreview ? "border-danger bg-danger-muted"
+              : avatarPreview ? "border-success" : "border-border-default hover:border-text-muted"
+            }`}>
               {avatarPreview ? (
                 <img src={avatarPreview} alt="Preview" className="h-20 w-20 object-cover" />
               ) : (
@@ -272,22 +274,12 @@ export default function OnboardingPage() {
               )}
               <label className="cursor-pointer border border-border-default px-4 py-2 text-sm text-text-secondary transition hover:border-text-primary hover:text-text-primary">
                 {avatarPreview ? t("changePhoto") : t("choosePhoto")}
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      setAvatarFile(file);
-                      setAvatarPreview(URL.createObjectURL(file));
-                    }
-                  }}
-                />
+                <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) { setAvatarFile(file); setAvatarPreview(URL.createObjectURL(file)); }
+                }} />
               </label>
-              {!avatarPreview && (
-                <p className="text-xs text-text-tertiary">{t("profilePictureHint")}</p>
-              )}
+              {!avatarPreview && <p className="text-xs text-text-tertiary">{t("profilePictureHint")}</p>}
             </div>
             <FieldError show={step1Attempted && !avatarFile && !avatarPreview} message={t("profilePictureRequired")} />
           </div>
@@ -296,20 +288,11 @@ export default function OnboardingPage() {
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
               {t("birthday")} <span className="text-danger">*</span>
             </label>
-            <input
-              type="date"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
+            <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)}
               className={step1Attempted && !birthday ? inputErrorClass : inputClass}
-              max={new Date().toISOString().split("T")[0]}
-            />
-            {!step1Attempted && (
-              <p className="mt-1.5 text-xs text-text-tertiary">{t("birthdayHint")}</p>
-            )}
+              max={new Date().toISOString().split("T")[0]} />
             <FieldError show={step1Attempted && !birthday} message={t("birthdayRequired")} />
           </div>
-
-          <h2 className="pt-1 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourIdentity")}</h2>
 
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
@@ -317,18 +300,12 @@ export default function OnboardingPage() {
             </label>
             <div className="flex flex-wrap gap-2">
               {GENDER_OPTIONS.map((g) => (
-                <button
-                  key={g}
-                  type="button"
-                  onClick={() => setGender(g)}
+                <button key={g} type="button" onClick={() => setGender(g)}
                   className={`px-3.5 py-2 text-sm transition ${
-                    gender === g
-                      ? "bg-text-primary text-surface-primary"
-                      : step1Attempted && !gender
-                      ? "border border-danger bg-surface-tertiary text-text-secondary hover:bg-border-default"
-                      : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
-                  }`}
-                >
+                    gender === g ? "bg-text-primary text-surface-primary"
+                    : step1Attempted && !gender ? "border border-danger bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                    : "bg-surface-tertiary text-text-secondary hover:bg-border-default"
+                  }`}>
                   {t(`genders.${g}`)}
                 </button>
               ))}
@@ -343,71 +320,65 @@ export default function OnboardingPage() {
             <p className="mb-1.5 text-xs text-text-tertiary">{t("languagesHint")}</p>
             <div className="grid grid-cols-3 gap-1.5">
               {LANGUAGE_OPTIONS.map((lang) => (
-                <button
-                  key={lang.value}
-                  type="button"
-                  onClick={() =>
-                    setLanguages((prev) =>
-                      prev.includes(lang.value)
-                        ? prev.filter((l) => l !== lang.value)
-                        : [...prev, lang.value]
-                    )
-                  }
-                  className={cn(
-                    "px-3 py-1.5 text-xs font-medium text-left transition-colors border",
+                <button key={lang.value} type="button"
+                  onClick={() => setLanguages((prev) => prev.includes(lang.value) ? prev.filter((l) => l !== lang.value) : [...prev, lang.value])}
+                  className={cn("px-3 py-1.5 text-xs font-medium text-left transition-colors border",
                     languages.includes(lang.value)
                       ? "border-text-primary bg-text-primary text-surface-primary"
                       : "border-border-default bg-surface-tertiary text-text-secondary hover:border-text-primary hover:text-text-primary"
-                  )}
-                >
+                  )}>
                   {lang.flag} {lang.value}
                 </button>
               ))}
             </div>
           </div>
 
-          <h2 className="pt-1 text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourLocation")}</h2>
+          <button onClick={handleStep1Continue} disabled={loading}
+            className="mt-2 w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50">
+            {tc("continue")}
+          </button>
+        </div>
+      )}
 
-          <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
-              {t("city")} <span className="text-danger">*</span>
-            </label>
-            <input
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              className={step1Attempted && !city ? inputErrorClass : inputClass}
-              placeholder="Berlin"
-            />
-            <FieldError show={step1Attempted && !city} message={t("cityRequired")} />
+      {/* Step 2: City picker */}
+      {step === 2 && (
+        <div className="border border-border-default bg-surface-secondary">
+          <CityPicker
+            title="In welcher Stadt bist du?"
+            subtitle="Wähle deine Stadt damit wir dir passende Treffer zeigen."
+            onSelect={(selectedCity) => { setCity(selectedCity); setStep(3); }}
+          />
+          <div className="border-t border-border-default px-6 pb-4">
+            <button onClick={() => setStep(1)} className="text-xs uppercase tracking-wide text-text-tertiary hover:text-text-primary">
+              ← Zurück
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Step 3: Address, zip, phone, bio */}
+      {step === 3 && (
+        <div className="space-y-5 border border-border-default bg-surface-secondary p-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("yourLocation")}</h2>
+            <span className="text-xs text-text-tertiary">📍 {city}</span>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("address")}</label>
-              <AddressAutocomplete
-                value={streetAddress}
-                onChange={setStreetAddress}
-                onSelect={(result) => {
-                  setStreetAddress(result.address);
-                  setCity(result.city);
-                  setZipCode(result.zipCode);
-                  setLatitude(result.latitude);
-                  setLongitude(result.longitude);
-                }}
-                placeholder="Friedrichstraße 123"
-              />
+              <AddressAutocomplete value={streetAddress} onChange={setStreetAddress}
+                onSelect={(result) => { setStreetAddress(result.address); setCity(result.city); setZipCode(result.zipCode); setLatitude(result.latitude); setLongitude(result.longitude); }}
+                placeholder="Friedrichstraße 123" />
             </div>
             <div>
               <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
                 {t("zipCode")} <span className="text-danger">*</span>
               </label>
-              <input
-                value={zipCode}
-                onChange={(e) => setZipCode(e.target.value)}
-                className={step1Attempted && !zipCode ? inputErrorClass : inputClass}
-                placeholder="10117"
-              />
-              <FieldError show={step1Attempted && !zipCode} message={t("zipRequired")} />
+              <input value={zipCode} onChange={(e) => setZipCode(e.target.value)}
+                className={step3Attempted && !zipCode ? inputErrorClass : inputClass}
+                placeholder="10117" />
+              <FieldError show={step3Attempted && !zipCode} message={t("zipRequired")} />
             </div>
           </div>
 
@@ -416,17 +387,14 @@ export default function OnboardingPage() {
               {role === "BABYSITTER" ? t("phoneRequired") : t("phoneOptional")}
               {role === "BABYSITTER" && <span className="text-danger"> *</span>}
             </label>
-            <input
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className={step1Attempted && role === "BABYSITTER" && !phone ? inputErrorClass : inputClass}
-              placeholder="+49 30 123 4567"
-            />
-            {role === "BABYSITTER" && !phone && step1Attempted ? (
-              <FieldError show message={t("phoneRequired2")} />
-            ) : role === "BABYSITTER" ? (
-              <p className="mt-1.5 text-xs text-text-tertiary">{t("phoneVerificationHint")}</p>
-            ) : null}
+            <input value={phone} onChange={(e) => setPhone(e.target.value)}
+              className={step3Attempted && role === "BABYSITTER" && !phone ? inputErrorClass : inputClass}
+              placeholder="+49 30 123 4567" />
+            {role === "BABYSITTER" && !phone && step3Attempted
+              ? <FieldError show message={t("phoneRequired2")} />
+              : role === "BABYSITTER"
+              ? <p className="mt-1.5 text-xs text-text-tertiary">{t("phoneVerificationHint")}</p>
+              : null}
           </div>
 
           <div>
@@ -434,18 +402,20 @@ export default function OnboardingPage() {
             <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={3} className={inputClass} placeholder={t("bioPlaceholderParent")} />
           </div>
 
-          <button
-            onClick={handleStep1Continue}
-            disabled={loading}
-            className="mt-2 w-full bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
-          >
-            {tc("continue")}
-          </button>
+          <div className="flex gap-3">
+            <button onClick={() => setStep(2)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+              {tc("back")}
+            </button>
+            <button onClick={handleStep3Continue} disabled={loading}
+              className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50">
+              {tc("continue")}
+            </button>
+          </div>
         </div>
       )}
 
-      {/* Step 2: Parent - Childcare Needs */}
-      {step === 2 && role === "PARENT" && (() => {
+      {/* Step 4: Parent - Childcare Needs */}
+      {step === 4 && role === "PARENT" && (() => {
         const typesOk = childcareTypes.length > 0;
         const timesOk = timesOfDay.length > 0;
         const freqOk = !!careFrequency;
@@ -558,7 +528,7 @@ export default function OnboardingPage() {
             </div>
 
             <div className="flex gap-3">
-              <button onClick={() => setStep(1)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+              <button onClick={() => setStep(3)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
                 {tc("back")}
               </button>
               <button
@@ -576,8 +546,8 @@ export default function OnboardingPage() {
         );
       })()}
 
-      {/* Step 2: Sitter - Bio & experience */}
-      {step === 2 && role === "BABYSITTER" && (
+      {/* Step 4: Sitter - Bio & experience */}
+      {step === 4 && role === "BABYSITTER" && (
         <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("aboutYou")}</h2>
 
@@ -690,11 +660,11 @@ export default function OnboardingPage() {
                 </div>
 
                 <div className="mt-4 flex gap-3">
-                  <button onClick={() => setStep(1)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+                  <button onClick={() => setStep(3)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
                     {tc("back")}
                   </button>
                   <button
-                    onClick={() => { if (canContinue) setStep(3); }}
+                    onClick={() => { if (canContinue) setStep(5); }}
                     disabled={!canContinue}
                     className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
                   >
@@ -708,8 +678,8 @@ export default function OnboardingPage() {
       )}
 
 
-      {/* Step 3 (sitter): Availability */}
-      {step === 3 && role === "BABYSITTER" && (() => {
+      {/* Step 5 (sitter): Availability */}
+      {step === 5 && role === "BABYSITTER" && (() => {
         const totalSlots = Object.values(availability).reduce((sum, slots) => sum + slots.length, 0);
         const hasAvailability = totalSlots > 0;
 
@@ -821,7 +791,7 @@ export default function OnboardingPage() {
             )}
 
             <div className="mt-4 flex gap-3">
-              <button onClick={() => setStep(2)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
+              <button onClick={() => setStep(4)} className="flex-1 border border-border-default px-4 py-2.5 text-sm font-medium text-text-secondary transition hover:border-text-primary hover:text-text-primary">
                 {tc("back")}
               </button>
               <button

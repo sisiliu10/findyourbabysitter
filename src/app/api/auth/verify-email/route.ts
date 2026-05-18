@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { signJwt } from "@/lib/auth";
+import { setSessionCookie } from "@/lib/session";
 
 export async function POST(request: Request) {
   try {
@@ -46,9 +48,15 @@ export async function POST(request: Request) {
       },
     });
 
+    // Auto-login: create session so user doesn't have to log in manually
+    const token = signJwt({ userId: user.id, email: user.email, role: user.role });
+    await setSessionCookie(token);
+
     return NextResponse.json({
       success: true,
-      message: "Your email has been verified. You can now log in.",
+      onboarded: user.onboarded,
+      role: user.role,
+      message: "Your email has been verified.",
     });
   } catch (error) {
     console.error(error);
