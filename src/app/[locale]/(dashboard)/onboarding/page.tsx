@@ -96,11 +96,12 @@ export default function OnboardingPage() {
     if (valid) setStep(2);
   }
 
-  // Step 3 validation: address+contact
+  // Step 3 validation: zip + bio (bio required for sitters)
   const [step3Attempted, setStep3Attempted] = useState(false);
   function handleStep3Continue() {
     setStep3Attempted(true);
-    const valid = !!zipCode;
+    const bioOk = role !== "BABYSITTER" || bio.length >= 50;
+    const valid = !!zipCode && bioOk;
     if (valid) setStep(4);
   }
 
@@ -348,7 +349,7 @@ export default function OnboardingPage() {
         </div>
       )}
 
-      {/* Step 3: Address, zip, phone, bio */}
+      {/* Step 3: Zip + bio */}
       {step === 3 && (
         <div className="space-y-5 border border-border-default bg-surface-secondary p-6">
           <div className="flex items-center justify-between">
@@ -356,27 +357,48 @@ export default function OnboardingPage() {
             <span className="text-xs text-text-tertiary">📍 {city}</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("address")}</label>
-              <AddressAutocomplete value={streetAddress} onChange={setStreetAddress}
-                onSelect={(result) => { setStreetAddress(result.address); setCity(result.city); setZipCode(result.zipCode); setLatitude(result.latitude); setLongitude(result.longitude); }}
-                placeholder="Friedrichstraße 123" />
-            </div>
-            <div>
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
-                {t("zipCode")} <span className="text-danger">*</span>
-              </label>
-              <input value={zipCode} onChange={(e) => setZipCode(e.target.value)}
-                className={step3Attempted && !zipCode ? inputErrorClass : inputClass}
-                placeholder="10117" />
-              <FieldError show={step3Attempted && !zipCode} message={t("zipRequired")} />
-            </div>
+          <div>
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("zipCode")} <span className="text-danger">*</span>
+            </label>
+            <input value={zipCode} onChange={(e) => setZipCode(e.target.value)}
+              className={step3Attempted && !zipCode ? inputErrorClass : inputClass}
+              placeholder="10117" />
+            <FieldError show={step3Attempted && !zipCode} message={t("zipRequired")} />
           </div>
 
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("bioOptional")}</label>
-            <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={3} className={inputClass} placeholder={t("bioPlaceholderParent")} />
+            <div className="flex items-baseline justify-between mb-1">
+              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
+                Über mich
+                {role === "BABYSITTER" && <span className="text-danger"> *</span>}
+              </label>
+              {role === "BABYSITTER" && (
+                <span className={`text-xs tabular-nums ${bio.length >= 50 ? "text-success" : "text-text-tertiary"}`}>
+                  {bio.length >= 50 ? `${bio.length} ✓` : `${bio.length} / 50`}
+                </span>
+              )}
+            </div>
+            <textarea
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              rows={4}
+              className={step3Attempted && role === "BABYSITTER" && bio.length < 50 ? inputErrorClass : inputClass}
+              placeholder={
+                role === "BABYSITTER"
+                  ? "Erzähl Familien etwas über dich — deine Erfahrung, warum du Babysitter bist, was dich auszeichnet…"
+                  : "Erzähl Babysittern etwas über deine Familie…"
+              }
+            />
+            {role === "BABYSITTER" && bio.length > 0 && bio.length < 50 && (
+              <p className="mt-1 text-xs text-text-tertiary">
+                Noch {50 - bio.length} Zeichen bis zum Minimum
+              </p>
+            )}
+            <FieldError
+              show={step3Attempted && role === "BABYSITTER" && bio.length < 50}
+              message="Bitte beschreibe dich mit mindestens 50 Zeichen"
+            />
           </div>
 
           <div className="flex gap-3">
@@ -523,25 +545,11 @@ export default function OnboardingPage() {
         );
       })()}
 
-      {/* Step 4: Sitter - Bio & experience */}
+      {/* Step 4: Sitter - experience, rate, certifications */}
       {step === 4 && role === "BABYSITTER" && (
         <div className="space-y-4 border border-border-default bg-surface-secondary p-6">
           <h2 className="text-xs font-medium uppercase tracking-wide text-text-secondary">{t("aboutYou")}</h2>
 
-          <div>
-            <div className="flex items-baseline justify-between">
-              <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("bio")} <span className="text-danger">*</span></label>
-              <span className={`text-xs tabular-nums ${bio.length >= 10 ? "text-success" : "text-text-tertiary"}`}>
-                {bio.length >= 10 ? `${bio.length} ✓` : `${bio.length} / 10`}
-              </span>
-            </div>
-            <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={4} className={inputClass} placeholder={t("bioPlaceholder")} />
-            {bio.length > 0 && bio.length < 10 && (
-              <p className="mt-1 text-xs text-text-tertiary">
-                {t("bioMinHint", { remaining: 10 - bio.length })}
-              </p>
-            )}
-          </div>
           <div>
             <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">{t("hourlyRate")}</label>
             <input type="number" min="1" max="500" value={hourlyRate} onChange={(e) => setHourlyRate(e.target.value)} className={inputClass} />
@@ -602,7 +610,7 @@ export default function OnboardingPage() {
             const minVal = parseInt(ageRangeMin, 10);
             const maxVal = parseInt(ageRangeMax, 10);
             const ageInvalid = !isNaN(minVal) && !isNaN(maxVal) && minVal > maxVal;
-            const canContinue = bio.length >= 10 && !ageInvalid;
+            const canContinue = !ageInvalid;
             return (
               <>
                 <div>
