@@ -29,6 +29,7 @@ model User {
   passwordResetExpiry      DateTime?
   lastSeenAt               DateTime?
   zipCode                  String    @default("")
+  city                     String    @default("")
   district                 String    @default("")
   gender                   String    @default("")
   languages                String    @default("")

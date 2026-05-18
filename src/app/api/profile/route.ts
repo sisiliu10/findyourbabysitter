@@ -41,6 +41,7 @@ export async function PUT(request: NextRequest) {
   if (body.instagram !== undefined) userUpdates.instagram = body.instagram || null;
   if (body.bio !== undefined) userUpdates.bio = body.bio;
   if (body.zipCode !== undefined) userUpdates.zipCode = body.zipCode;
+  if (body.city !== undefined) userUpdates.city = normalizeCity(body.city);
   if (body.district !== undefined) userUpdates.district = body.district;
   if (body.childcareTypes !== undefined) userUpdates.childcareTypes = body.childcareTypes;
   if (body.timesOfDay !== undefined) userUpdates.timesOfDay = body.timesOfDay;

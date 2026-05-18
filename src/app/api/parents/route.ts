@@ -33,9 +33,11 @@ export async function GET(request: Request) {
     };
 
     if (city) {
-      where.childcareRequests = {
-        some: { city: { contains: city, mode: "insensitive" } },
-      };
+      // Match parents who live in that city (user.city) OR have a request there
+      where.OR = [
+        { city: { contains: city, mode: "insensitive" } },
+        { childcareRequests: { some: { city: { contains: city, mode: "insensitive" } } } },
+      ];
     }
 
     const [parents, total] = await Promise.all([
