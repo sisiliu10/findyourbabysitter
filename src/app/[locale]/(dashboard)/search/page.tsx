@@ -509,8 +509,8 @@ export default function SearchPage() {
         </p>
       )}
 
-      {/* Card stack area — hidden while sitter hasn't picked a city */}
-      {mode === "moms" && isSitter && !momsCity ? null : (
+      {/* Card stack + action buttons — hidden while sitter hasn't picked a city */}
+      {!(mode === "moms" && isSitter && !momsCity) && (<>
       <div className="relative mx-auto w-full max-w-md flex-1" style={{ minHeight: 540 }}>
         {(loading || isInitializing) ? (
           <div className="flex h-full items-center justify-center">
@@ -634,8 +634,7 @@ export default function SearchPage() {
           </button>
         </div>
       )}
-
-      )}
+      </>)}
 
       {/* Match modal */}
       <MatchModal

@@ -49,8 +49,8 @@ export async function POST(request: Request) {
     });
 
     // Auto-login: create session so user doesn't have to log in manually
-    const token = signJwt({ userId: user.id, email: user.email, role: user.role });
-    await setSessionCookie(token);
+    const sessionToken = signJwt({ userId: user.id, email: user.email, role: user.role });
+    await setSessionCookie(sessionToken);
 
     return NextResponse.json({
       success: true,

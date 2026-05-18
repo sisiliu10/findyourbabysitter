@@ -137,17 +137,17 @@ export default async function ParentProfilePage({
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {childcareTypes.map((type) => (
                   <span key={type} className="bg-accent-muted px-2.5 py-1 text-xs text-accent">
-                    {tn(`types.${type}`)}
+                    {(tn as any)(`types.${type}`)}
                   </span>
                 ))}
                 {timesOfDay.map((time) => (
                   <span key={time} className="bg-info-muted px-2.5 py-1 text-xs text-info">
-                    {tn(`times.${time}`)}
+                    {(tn as any)(`times.${time}`)}
                   </span>
                 ))}
                 {parent.careFrequency && (
                   <span className="bg-surface-tertiary px-2.5 py-1 text-xs text-text-secondary">
-                    {tn(`frequencies.${parent.careFrequency}`)}
+                    {(tn as any)(`frequencies.${parent.careFrequency}`)}
                   </span>
                 )}
               </div>

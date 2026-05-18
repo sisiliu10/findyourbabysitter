@@ -41,7 +41,7 @@ export default async function AdminDashboardPage() {
       }),
     ]);
 
-  const [pendingBookings, unverifiedCount, sitterCityRaw, parentCityRaw] = await Promise.all([
+  const [pendingBookings, unverifiedUsers, sitterCityRaw, parentCityRaw] = await Promise.all([
     prisma.booking.count({ where: { status: "PENDING" } }),
     prisma.user.findMany({
       where: { emailVerified: false, role: { not: "ADMIN" } },
