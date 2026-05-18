@@ -8,6 +8,7 @@ import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
 import { getDistrictFromZip } from "@/lib/berlin-districts";
 import { cn } from "@/lib/utils";
 import { CityPicker } from "@/components/CityPicker";
+import { LanguagePicker } from "@/components/ui/LanguagePicker";
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -314,23 +315,14 @@ export default function OnboardingPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-0.5">
+            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-1.5">
               {t("languagesLabel")} <span className="text-danger">*</span>
             </label>
-            <p className="mb-1.5 text-xs text-text-tertiary">{t("languagesHint")}</p>
-            <div className="grid grid-cols-3 gap-1.5">
-              {LANGUAGE_OPTIONS.map((lang) => (
-                <button key={lang.value} type="button"
-                  onClick={() => setLanguages((prev) => prev.includes(lang.value) ? prev.filter((l) => l !== lang.value) : [...prev, lang.value])}
-                  className={cn("px-3 py-1.5 text-xs font-medium text-left transition-colors border",
-                    languages.includes(lang.value)
-                      ? "border-text-primary bg-text-primary text-surface-primary"
-                      : "border-border-default bg-surface-tertiary text-text-secondary hover:border-text-primary hover:text-text-primary"
-                  )}>
-                  {lang.flag} {lang.value}
-                </button>
-              ))}
-            </div>
+            <LanguagePicker
+              selected={languages}
+              onChange={setLanguages}
+              error={step1Attempted && languages.length === 0}
+            />
           </div>
 
           <button onClick={handleStep1Continue} disabled={loading}

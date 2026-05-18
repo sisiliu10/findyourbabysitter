@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES, LANGUAGE_OPTIONS } from "@/lib/constants";
+import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES } from "@/lib/constants";
+import { LanguagePicker } from "@/components/ui/LanguagePicker";
 import { cn, getInitials } from "@/lib/utils";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
@@ -502,32 +503,13 @@ export default function ProfileEditPage() {
                   />
                 </div>
                 <div>
-                  <p className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-2">
+                  <p className="block text-xs font-medium uppercase tracking-wide text-text-secondary mb-1.5">
                     {t("languagesLabel")}
                   </p>
-                  <div className="grid grid-cols-3 gap-1.5">
-                    {LANGUAGE_OPTIONS.map((lang) => (
-                      <button
-                        key={lang.value}
-                        type="button"
-                        onClick={() =>
-                          setLanguages((prev) =>
-                            prev.includes(lang.value)
-                              ? prev.filter((l) => l !== lang.value)
-                              : [...prev, lang.value]
-                          )
-                        }
-                        className={cn(
-                          "px-3 py-1.5 text-xs font-medium text-left transition-colors border",
-                          languages.includes(lang.value)
-                            ? "border-text-primary bg-text-primary text-surface-primary"
-                            : "border-border-default bg-surface-tertiary text-text-secondary hover:border-text-primary hover:text-text-primary"
-                        )}
-                      >
-                        {lang.flag} {lang.value}
-                      </button>
-                    ))}
-                  </div>
+                  <LanguagePicker
+                    selected={languages}
+                    onChange={setLanguages}
+                  />
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <Input
