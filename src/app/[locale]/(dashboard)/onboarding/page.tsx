@@ -44,7 +44,7 @@ export default function OnboardingPage() {
   const [city, setCity] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [zipCode, setZipCode] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone] = useState("");
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
 
@@ -99,7 +99,7 @@ export default function OnboardingPage() {
   const [step3Attempted, setStep3Attempted] = useState(false);
   function handleStep3Continue() {
     setStep3Attempted(true);
-    const valid = !!zipCode && (role !== "BABYSITTER" || !!phone);
+    const valid = !!zipCode;
     if (valid) setStep(4);
   }
 
@@ -380,21 +380,6 @@ export default function OnboardingPage() {
                 placeholder="10117" />
               <FieldError show={step3Attempted && !zipCode} message={t("zipRequired")} />
             </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
-              {role === "BABYSITTER" ? t("phoneRequired") : t("phoneOptional")}
-              {role === "BABYSITTER" && <span className="text-danger"> *</span>}
-            </label>
-            <input value={phone} onChange={(e) => setPhone(e.target.value)}
-              className={step3Attempted && role === "BABYSITTER" && !phone ? inputErrorClass : inputClass}
-              placeholder="+49 30 123 4567" />
-            {role === "BABYSITTER" && !phone && step3Attempted
-              ? <FieldError show message={t("phoneRequired2")} />
-              : role === "BABYSITTER"
-              ? <p className="mt-1.5 text-xs text-text-tertiary">{t("phoneVerificationHint")}</p>
-              : null}
           </div>
 
           <div>
