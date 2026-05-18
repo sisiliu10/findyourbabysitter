@@ -11,6 +11,7 @@ import { MatchModal } from "@/components/search/MatchModal";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { useToast } from "@/components/ui/Toast";
 import { LANGUAGE_OPTIONS } from "@/lib/constants";
+import { GERMAN_CITIES } from "@/components/CityPicker";
 
 type SwipeMode = "babysitters" | "moms";
 
@@ -223,7 +224,7 @@ function parentToCard(p: ParentResult, t: (key: string, values?: Record<string, 
       : t("lookingToConnect")),
     tags,
     detail,
-    linkHref: `/messages`,
+    linkHref: `/parent/${p.id}`,
     meta: t("memberSince", { date: new Date(p.createdAt).toLocaleDateString(dateLocale, { month: "short", year: "numeric" }) }),
     children: allChildren,
     needsSummary: viewerRole === "sitter" ? needsSummary : undefined,
@@ -262,6 +263,8 @@ export default function SearchPage() {
   const [showMatchModal, setShowMatchModal] = useState(false);
   const likedIdsRef = useRef<Set<string>>(new Set());
   const [languageFilter, setLanguageFilter] = useState("");
+  const [momsCity, setMomsCity] = useState<string | null>(null);
+  const [cityCounts, setCityCounts] = useState<Record<string, number>>({});
 
   // Set mode from URL param or default based on user role
   useEffect(() => {
@@ -301,7 +304,9 @@ export default function SearchPage() {
         }
       } else {
         const viewerRole = isSitter ? "sitter" : "parent";
-        const res = await fetch("/api/parents?limit=50");
+        const parentParams = new URLSearchParams({ limit: "50" });
+        if (momsCity) parentParams.set("city", momsCity);
+        const res = await fetch(`/api/parents?${parentParams}`);
         const json = await res.json();
         if (json.success && json.data) {
           const all = (json.data.parents || []).map((p: ParentResult) => parentToCard(p, t as any, locale, tn as any, viewerRole as "sitter" | "parent"));
@@ -315,12 +320,29 @@ export default function SearchPage() {
     } finally {
       setLoading(false);
     }
-  }, [t, tn, locale, isSitter, languageFilter]);
+  }, [t, tn, locale, isSitter, languageFilter, momsCity]);
 
-  // Only fetch when mode is resolved or language filter changes
+  // Fetch city counts when sitter switches to moms mode
   useEffect(() => {
+    if (mode === "moms" && isSitter) {
+      fetch("/api/parents/cities")
+        .then((r) => r.json())
+        .then((json) => {
+          if (json.success) {
+            const map: Record<string, number> = {};
+            for (const row of json.data) map[row.city] = row.count;
+            setCityCounts(map);
+          }
+        })
+        .catch(() => {});
+    }
+  }, [mode, isSitter]);
+
+  // Only fetch when mode is resolved, language filter, or city changes
+  useEffect(() => {
+    if (mode === "moms" && isSitter && !momsCity) return; // wait for city selection
     if (mode) fetchCards(mode);
-  }, [mode, fetchCards]);
+  }, [mode, fetchCards, momsCity]);
 
   const handleSwipeRight = useCallback(() => {
     const card = cards[currentIndex];
@@ -426,6 +448,11 @@ export default function SearchPage() {
         </div>
       )}
 
+      {/* City picker — sitter browsing parents, no city selected yet */}
+      {mode === "moms" && isSitter && !momsCity && (
+        <MomsCityPicker cityCounts={cityCounts} onSelect={setMomsCity} />
+      )}
+
       {/* Language filter — prominent, only for babysitter browsing */}
       {mode === "babysitters" && (
         <div className="mb-4">
@@ -462,6 +489,19 @@ export default function SearchPage() {
         </div>
       )}
 
+      {/* City badge + change button for sitter moms mode */}
+      {mode === "moms" && isSitter && momsCity && (
+        <div className="mb-3 flex items-center gap-2">
+          <span className="text-xs text-text-secondary">📍 {momsCity}</span>
+          <button
+            onClick={() => { setMomsCity(null); setCards([]); setCurrentIndex(0); }}
+            className="text-xs text-text-tertiary underline underline-offset-2 hover:text-text-primary"
+          >
+            ändern
+          </button>
+        </div>
+      )}
+
       {/* Counter */}
       {!loading && cards.length > 0 && !isFinished && (
         <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-tertiary">
@@ -469,7 +509,8 @@ export default function SearchPage() {
         </p>
       )}
 
-      {/* Card stack area */}
+      {/* Card stack area — hidden while sitter hasn't picked a city */}
+      {mode === "moms" && isSitter && !momsCity ? null : (
       <div className="relative mx-auto w-full max-w-md flex-1" style={{ minHeight: 540 }}>
         {(loading || isInitializing) ? (
           <div className="flex h-full items-center justify-center">
@@ -594,6 +635,8 @@ export default function SearchPage() {
         </div>
       )}
 
+      )}
+
       {/* Match modal */}
       <MatchModal
         open={showMatchModal}
@@ -601,6 +644,58 @@ export default function SearchPage() {
         matchedUser={matchInfo?.matchedUser ?? null}
         matchId={matchInfo?.id ?? null}
       />
+    </div>
+  );
+}
+
+function MomsCityPicker({
+  cityCounts,
+  onSelect,
+}: {
+  cityCounts: Record<string, number>;
+  onSelect: (city: string) => void;
+}) {
+  const [query, setQuery] = useState("");
+
+  const filtered = query.trim()
+    ? GERMAN_CITIES.filter((c) => c.toLowerCase().includes(query.toLowerCase()))
+    : GERMAN_CITIES;
+
+  return (
+    <div className="flex flex-col">
+      <div className="mb-6 text-center">
+        <h2 className="font-serif text-2xl text-text-primary">In welcher Stadt suchst du?</h2>
+        <p className="mt-2 text-sm text-text-secondary">Wähle eine Stadt um Eltern in deiner Nähe zu sehen.</p>
+      </div>
+
+      <input
+        type="text"
+        autoFocus
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Stadt suchen…"
+        className="mb-4 w-full border border-border-default bg-transparent px-4 py-3 text-base text-text-primary placeholder:text-text-muted focus:border-text-primary focus:outline-none"
+      />
+
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+        {filtered.map((city) => {
+          const count = cityCounts[city] ?? 0;
+          return (
+            <button
+              key={city}
+              onClick={() => onSelect(city)}
+              className="group flex flex-col border border-border-default bg-surface-secondary px-4 py-3.5 text-left transition-all hover:border-text-primary hover:bg-surface-tertiary"
+            >
+              <span className="text-sm font-medium text-text-primary group-hover:text-accent transition-colors">
+                {city}
+              </span>
+              <span className="mt-0.5 text-xs text-text-muted">
+                {count > 0 ? `${count} ${count === 1 ? "Familie" : "Familien"}` : "Neu"}
+              </span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
