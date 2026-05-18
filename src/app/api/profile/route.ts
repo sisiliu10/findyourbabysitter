@@ -3,6 +3,7 @@ import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { profileUpdateSchema } from "@/lib/validators";
 import { normalizeLanguages } from "@/lib/language-normalizer";
+import { normalizeCity } from "@/lib/normalizeCity";
 
 export async function GET() {
   const session = await getSession();
@@ -81,6 +82,8 @@ export async function PUT(request: NextRequest) {
       if (body[field] !== undefined) {
         profileData[field] = field === "languages"
           ? normalizeLanguages(body[field])
+          : field === "city"
+          ? normalizeCity(body[field])
           : body[field];
       }
     }

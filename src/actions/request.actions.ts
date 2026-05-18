@@ -8,6 +8,7 @@ import { createRequestSchema } from "@/lib/validators";
 import { canCreateRequest } from "@/lib/subscription";
 import type { ActionResult } from "@/types";
 import { notifyBookingAccepted, type BookingEmailData } from "@/lib/email";
+import { normalizeCity } from "@/lib/normalizeCity";
 
 function generateTitle(
   careType: string,
@@ -44,7 +45,7 @@ export async function createRequest(formData: FormData): Promise<ActionResult> {
       durationHours: parseFloat(formData.get("durationHours") as string),
       numberOfChildren: parseInt(formData.get("numberOfChildren") as string, 10),
       childrenJson: formData.get("childrenJson") as string,
-      city: formData.get("city") as string,
+      city: normalizeCity(formData.get("city") as string),
       zipCode: formData.get("zipCode") as string,
       description: (formData.get("description") as string) || undefined,
       maxHourlyRate: formData.get("maxHourlyRate")
@@ -81,8 +82,8 @@ export async function createRequest(formData: FormData): Promise<ActionResult> {
         durationHours: data.durationHours,
         numberOfChildren: data.numberOfChildren,
         childrenJson: data.childrenJson,
-        city: data.city,
-        state: "Berlin",
+        city: normalizeCity(data.city),
+        state: "Deutschland",
         zipCode: data.zipCode,
         maxHourlyRate: data.maxHourlyRate ?? null,
         specialNotes: "",
