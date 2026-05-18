@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { getInitials, formatCurrency } from "@/lib/utils";
 import { getTranslations } from "next-intl/server";
+import { ContactButton } from "@/components/ContactButton";
 
 function formatLastSeen(lastSeenAt: Date | null): { text: string; active: boolean } {
   if (!lastSeenAt) return { text: "Offline", active: false };
@@ -157,12 +158,12 @@ export default async function ParentProfilePage({
 
         {/* Message CTA */}
         <div className="border-t border-border-default p-4">
-          <Link
-            href="/messages"
-            className="block w-full bg-text-primary px-4 py-3 text-center text-xs font-medium uppercase tracking-widest text-surface-primary transition hover:bg-accent"
-          >
-            Nachricht senden
-          </Link>
+          <ContactButton
+            toUserId={parent.id}
+            toFirstName={parent.firstName}
+            label="Interesse bekunden"
+            defaultMessage={`Hallo ${parent.firstName}, ich bin Babysitter und auf dein Profil aufmerksam geworden. Ich würde mich gerne vorstellen — hast du noch Bedarf an Betreuung?`}
+          />
         </div>
       </div>
 

@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/Badge";
 import { StarRating } from "@/components/ui/StarRating";
 import { AffiliateRecommendations } from "@/components/affiliate/AffiliateRecommendations";
 import { getTranslations } from "next-intl/server";
+import { ContactButton } from "@/components/ContactButton";
 
 export default async function SitterProfilePage({
   params,
@@ -135,12 +136,22 @@ export default async function SitterProfilePage({
               </span>
             </p>
           </div>
-          <Link
-            href={`/requests/new?sitterId=${id}`}
-            className="mt-4 inline-flex items-center justify-center bg-text-primary px-5 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent sm:mt-0"
-          >
-            {t("requestBooking")}
-          </Link>
+          <div className="mt-4 flex flex-col gap-2 sm:mt-0 sm:items-end">
+            {isParent && (
+              <ContactButton
+                toUserId={user.id}
+                toFirstName={user.firstName}
+                label="Nachricht senden"
+                className="inline-flex items-center justify-center bg-text-primary px-5 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent w-full sm:w-auto"
+              />
+            )}
+            <Link
+              href={`/requests/new?sitterId=${id}`}
+              className="inline-flex items-center justify-center border border-border-default px-5 py-2.5 text-sm font-medium text-text-primary transition hover:border-text-primary w-full sm:w-auto text-center"
+            >
+              {t("requestBooking")}
+            </Link>
+          </div>
         </div>
       </div>
 
