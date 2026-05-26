@@ -12,18 +12,6 @@ export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => ({}));
   const published: boolean = body.published ?? true;
 
-  const user = await prisma.user.findUnique({
-    where: { id: session.userId },
-    select: { onboarded: true },
-  });
-
-  if (!user?.onboarded) {
-    return NextResponse.json(
-      { success: false, error: "Complete your profile first" },
-      { status: 400 }
-    );
-  }
-
   await prisma.user.update({
     where: { id: session.userId },
     data: { isPublished: published },
