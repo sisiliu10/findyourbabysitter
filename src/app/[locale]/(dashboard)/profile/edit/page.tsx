@@ -166,6 +166,12 @@ export default function ProfileEditPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    if (file.size > 8 * 1024 * 1024) {
+      setError("Bild zu groß — bitte unter 8 MB wählen.");
+      e.target.value = "";
+      return;
+    }
+
     setUploadingAvatar(true);
     setError("");
 

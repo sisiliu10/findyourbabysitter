@@ -51,6 +51,7 @@ export default function OnboardingPage() {
 
   // Step 1 validation
   const [step1Attempted, setStep1Attempted] = useState(false);
+  const [avatarError, setAvatarError] = useState("");
 
   // Parent childcare needs
   const [childcareTypes, setChildcareTypes] = useState<string[]>([]);
@@ -90,6 +91,7 @@ export default function OnboardingPage() {
     setStep1Attempted(true);
     const valid =
       !!(avatarFile || avatarPreview) &&
+      !avatarError &&
       !!gender &&
       languages.length > 0 &&
       !!birthday;
@@ -298,10 +300,19 @@ export default function OnboardingPage() {
                 {avatarPreview ? t("changePhoto") : t("choosePhoto")}
                 <input type="file" accept="image/*" className="hidden" onChange={(e) => {
                   const file = e.target.files?.[0];
-                  if (file) { setAvatarFile(file); setAvatarPreview(URL.createObjectURL(file)); }
+                  if (!file) return;
+                  if (file.size > 8 * 1024 * 1024) {
+                    setAvatarError("Bild zu groß — bitte unter 8 MB wählen.");
+                    e.target.value = "";
+                    return;
+                  }
+                  setAvatarError("");
+                  setAvatarFile(file);
+                  setAvatarPreview(URL.createObjectURL(file));
                 }} />
               </label>
-              {!avatarPreview && <p className="text-xs text-text-tertiary">{t("profilePictureHint")}</p>}
+              {!avatarPreview && !avatarError && <p className="text-xs text-text-tertiary">{t("profilePictureHint")}</p>}
+              {avatarError && <p className="text-xs text-danger">{avatarError}</p>}
             </div>
             <FieldError show={step1Attempted && !avatarFile && !avatarPreview} message={t("profilePictureRequired")} />
           </div>
