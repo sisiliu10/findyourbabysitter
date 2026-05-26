@@ -49,12 +49,14 @@ export async function PUT(request: NextRequest) {
   if (body.gender !== undefined) userUpdates.gender = body.gender;
   if (body.languages !== undefined) userUpdates.languages = normalizeLanguages(body.languages);
 
-  // All users must have a profile picture before onboarding
+  // Check current user state
   const currentUser = await prisma.user.findUnique({
     where: { id: session.userId },
-    select: { avatarUrl: true },
+    select: { avatarUrl: true, onboarded: true },
   });
-  if (!currentUser?.avatarUrl) {
+
+  // Require avatar only during initial onboarding (not for profile edits)
+  if (!currentUser?.onboarded && !currentUser?.avatarUrl) {
     return NextResponse.json(
       { error: "Profile picture is required" },
       { status: 400 }

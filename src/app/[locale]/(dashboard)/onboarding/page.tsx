@@ -105,13 +105,16 @@ export default function OnboardingPage() {
     if (zip.length === 5 && /^\d{5}$/.test(zip)) {
       setDistrictLoading(true);
       try {
-        const res = await fetch(`https://api.zippopotam.us/de/${zip}`);
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 4000);
+        const res = await fetch(`https://api.zippopotam.us/de/${zip}`, { signal: controller.signal });
+        clearTimeout(timer);
         if (res.ok) {
           const data = await res.json();
           const place = data.places?.[0]?.["place name"];
           if (place) setStreetAddress(place); // reuse streetAddress as district label
         }
-      } catch { /* ignore */ } finally {
+      } catch { /* ignore — district is optional, don't block the user */ } finally {
         setDistrictLoading(false);
       }
     }
@@ -405,10 +408,10 @@ export default function OnboardingPage() {
             </button>
             <button
               onClick={handleStep3Continue}
-              disabled={loading || districtLoading}
+              disabled={loading}
               className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
             >
-              {tc("continue")}
+              {districtLoading ? "…" : tc("continue")}
             </button>
           </div>
         </div>
@@ -556,7 +559,7 @@ export default function OnboardingPage() {
               <label className="block text-xs font-medium uppercase tracking-wide text-text-secondary">
                 Über mich <span className="text-danger">*</span>
               </label>
-              <span className={`text-xs tabular-nums ${bio.length >= 50 ? "text-success" : "text-text-tertiary"}`}>
+              <span className={`text-xs tabular-nums ${bio.length >= 50 ? "text-success" : "text-danger"}`}>
                 {bio.length >= 50 ? `${bio.length} ✓` : `${bio.length} / 50`}
               </span>
             </div>
@@ -564,14 +567,14 @@ export default function OnboardingPage() {
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               rows={4}
-              className={inputClass}
+              className={bio.length > 0 && bio.length < 50 ? inputErrorClass : inputClass}
               placeholder="Erzähl Familien etwas über dich — deine Erfahrung, warum du Babysitter bist, was dich auszeichnet…"
             />
-            {bio.length > 0 && bio.length < 50 && (
-              <p className="mt-1 text-xs text-text-tertiary">
-                Noch {50 - bio.length} Zeichen bis zum Minimum
-              </p>
-            )}
+            <p className={`mt-1 text-xs ${bio.length >= 50 ? "text-success" : "text-text-tertiary"}`}>
+              {bio.length >= 50
+                ? "✓ Super! Dein Profil macht einen tollen Eindruck."
+                : `Mindestens 50 Zeichen erforderlich — noch ${50 - bio.length} Zeichen`}
+            </p>
           </div>
 
           <div>
@@ -673,9 +676,15 @@ export default function OnboardingPage() {
                     {tc("back")}
                   </button>
                   <button
-                    onClick={() => { if (canContinue) setStep(5); }}
-                    disabled={!canContinue}
-                    className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent disabled:opacity-50"
+                    onClick={() => {
+                      if (canContinue) {
+                        setStep(5);
+                      } else {
+                        // Scroll bio textarea into view so the error is visible
+                        document.querySelector("textarea")?.focus();
+                      }
+                    }}
+                    className="flex-1 bg-text-primary px-4 py-2.5 text-sm font-medium text-surface-primary transition hover:bg-accent opacity-100"
                   >
                     {tc("continue")}
                   </button>

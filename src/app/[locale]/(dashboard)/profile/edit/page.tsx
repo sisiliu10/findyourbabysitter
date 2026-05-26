@@ -27,7 +27,9 @@ interface UserProfile {
   timesOfDay: string;
   careFrequency: string;
   zipCode: string;
+  city: string;
   district: string;
+  languages: string;
   babysitterProfile: {
     bio: string;
     hourlyRate: number;
@@ -86,6 +88,10 @@ export default function ProfileEditPage() {
     {}
   );
 
+  // Parent-specific fields
+  const [parentCity, setParentCity] = useState("");
+  const [parentLanguages, setParentLanguages] = useState<string[]>([]);
+
   // Parent childcare needs
   const [childcareTypes, setChildcareTypes] = useState<string[]>([]);
   const [timesOfDay, setTimesOfDay] = useState<string[]>([]);
@@ -110,8 +116,13 @@ export default function ProfileEditPage() {
         try { setTimesOfDay(JSON.parse(user.timesOfDay || "[]")); } catch { /* empty */ }
         setCareFrequency(user.careFrequency || "");
 
-        // Load user-level zip for parents
+        // Load user-level fields for parents
         if (user.zipCode) setZipCode(user.zipCode);
+        if (user.city) setParentCity(user.city);
+        if (user.languages) {
+          const langs = user.languages.split(",").map((l: string) => l.trim()).filter(Boolean);
+          if (langs.length > 0) setParentLanguages(langs);
+        }
 
         if (user.babysitterProfile) {
           const p = user.babysitterProfile;
@@ -200,6 +211,8 @@ export default function ProfileEditPage() {
     };
 
     if (role === "PARENT") {
+      body.city = parentCity;
+      body.languages = parentLanguages.join(", ");
       body.childcareTypes = JSON.stringify(childcareTypes);
       body.timesOfDay = JSON.stringify(timesOfDay);
       body.careFrequency = careFrequency;
@@ -383,17 +396,38 @@ export default function ProfileEditPage() {
             <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
               {t("location")}
             </p>
-            <Input
-              label={t("zipCode")}
-              value={zipCode}
-              onChange={(e) => setZipCode(e.target.value)}
-              placeholder="10117"
+            <div className="space-y-4">
+              <Input
+                label={t("city")}
+                value={parentCity}
+                onChange={(e) => setParentCity(e.target.value)}
+                placeholder="Berlin"
+              />
+              <Input
+                label={t("zipCode")}
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
+                placeholder="10117"
+              />
+              {zipCode && getDistrictFromZip(zipCode) && (
+                <p className="text-sm text-text-secondary">
+                  {getDistrictFromZip(zipCode)}
+                </p>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Languages (Parents) */}
+        {!isSitter && (
+          <section className="border border-border-default bg-surface-secondary p-6">
+            <p className="mb-4 text-xs font-medium uppercase tracking-wide text-text-secondary">
+              {t("languagesLabel")}
+            </p>
+            <LanguagePicker
+              selected={parentLanguages}
+              onChange={setParentLanguages}
             />
-            {zipCode && getDistrictFromZip(zipCode) && (
-              <p className="mt-2 text-sm text-text-secondary">
-                {getDistrictFromZip(zipCode)}, Berlin
-              </p>
-            )}
           </section>
         )}
 
