@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { getTranslations } from "next-intl/server";
 import { isPremium } from "@/lib/subscription";
+import { ProfilePublishToggle } from "@/components/ProfilePublishToggle";
 
 const CARE_TYPE_EMOJI: Record<string, string> = {
   after_school: "🎒",
@@ -97,6 +98,8 @@ export default async function ProfilePage() {
     }),
     isPremium(session.userId),
   ]);
+
+  // isPublished comes from the user record (included above)
 
   if (!user) return null;
 
@@ -252,6 +255,12 @@ export default async function ProfilePage() {
           </div>
         )}
       </div>
+
+      {/* ─── Publish toggle ─── */}
+      <ProfilePublishToggle
+        initialIsPublished={user.isPublished}
+        isSitter={isSitter}
+      />
 
       {/* ─── Premium Upgrade Card (free parents only) ─── */}
       {!isSitter && !userIsPremium && (
