@@ -283,11 +283,25 @@ function ParentCard({ parent }: { parent: ParentResult }) {
   );
 }
 
+type BrowseMode = "sitters" | "parents";
+
 // ── Main page ──────────────────────────────────────────────────────────────────
 export default function BrowsePage() {
   const locale = useLocale();
   const { user: currentUser, loading: userLoading } = useCurrentUser();
-  const isSitter = currentUser?.role === "BABYSITTER";
+
+  // mode: null = not yet set (waiting for user role), then "sitters" or "parents"
+  const [mode, setMode] = useState<BrowseMode | null>(null);
+
+  // Set default mode based on role once loaded
+  useEffect(() => {
+    if (!userLoading && currentUser && mode === null) {
+      // Sitters default to browsing parents; parents default to browsing sitters
+      setMode(currentUser.role === "BABYSITTER" ? "parents" : "sitters");
+    }
+  }, [userLoading, currentUser, mode]);
+
+  const showingParents = mode === "parents";
 
   const [items, setItems] = useState<(SitterResult | ParentResult)[]>([]);
   const [loading, setLoading] = useState(true);
@@ -307,16 +321,29 @@ export default function BrowsePage() {
   const [sortBy, setSortBy] = useState<SortKey>("newest");
   const [filtersOpen, setFiltersOpen] = useState(false);
 
-  const activeFilterCount = isSitter
+  const activeFilterCount = showingParents
     ? [typeFilter, timeFilter].filter(Boolean).length
     : [languageFilter, sitterTypeFilter, maxRate, genderFilter].filter(Boolean).length;
 
+  const clearAllFilters = () => {
+    setLanguageFilter(""); setSitterTypeFilter(""); setGenderFilter(""); setMaxRate("");
+    setTypeFilter(""); setTimeFilter(""); setSearchQuery("");
+  };
+
+  // When mode switches, clear results + filters
+  function switchMode(newMode: BrowseMode) {
+    setMode(newMode);
+    setItems([]);
+    clearAllFilters();
+    setSortBy("newest");
+    setFiltersOpen(false);
+  }
+
   const fetchItems = useCallback(async () => {
-    if (!cityPickerDone || userLoading || !currentUser) return;
+    if (!cityPickerDone || userLoading || !currentUser || !mode) return;
     setLoading(true);
     try {
-      if (!isSitter) {
-        // Parent browsing sitters
+      if (mode === "sitters") {
         const params = new URLSearchParams({ limit: "100" });
         if (selectedCity) params.set("city", selectedCity);
         if (languageFilter) params.set("language", languageFilter);
@@ -327,7 +354,6 @@ export default function BrowsePage() {
         const json = await res.json();
         setItems(json.success ? json.data.sitters || [] : []);
       } else {
-        // Sitter browsing parents
         const params = new URLSearchParams({ limit: "100" });
         if (selectedCity) params.set("city", selectedCity);
         if (typeFilter) params.set("childcareType", typeFilter);
@@ -341,21 +367,16 @@ export default function BrowsePage() {
     } finally {
       setLoading(false);
     }
-  }, [cityPickerDone, userLoading, currentUser, isSitter, selectedCity,
+  }, [cityPickerDone, userLoading, currentUser, mode, selectedCity,
       languageFilter, sitterTypeFilter, genderFilter, maxRate, typeFilter, timeFilter]);
 
   useEffect(() => { fetchItems(); }, [fetchItems]);
-
-  const clearAllFilters = () => {
-    setLanguageFilter(""); setSitterTypeFilter(""); setGenderFilter(""); setMaxRate("");
-    setTypeFilter(""); setTimeFilter(""); setSearchQuery("");
-  };
 
   // Sort + search (client-side)
   const filtered = [...items].filter((item) => {
     if (!searchQuery) return true;
     const q = searchQuery.toLowerCase();
-    if (isSitter) {
+    if (showingParents) {
       const p = item as ParentResult;
       return p.firstName.toLowerCase().includes(q) || p.lastName.toLowerCase().includes(q) || (p.bio || "").toLowerCase().includes(q);
     } else {
@@ -364,11 +385,11 @@ export default function BrowsePage() {
     }
   }).sort((a, b) => {
     if (sortBy === "active") {
-      const ta = isSitter ? (a as ParentResult).lastSeenAt : (a as SitterResult).user.lastSeenAt;
-      const tb = isSitter ? (b as ParentResult).lastSeenAt : (b as SitterResult).user.lastSeenAt;
+      const ta = showingParents ? (a as ParentResult).lastSeenAt : (a as SitterResult).user.lastSeenAt;
+      const tb = showingParents ? (b as ParentResult).lastSeenAt : (b as SitterResult).user.lastSeenAt;
       return (tb ? new Date(tb).getTime() : 0) - (ta ? new Date(ta).getTime() : 0);
     }
-    if (!isSitter) {
+    if (!showingParents) {
       const sa = a as SitterResult; const sb = b as SitterResult;
       if (sortBy === "price_asc") return sa.hourlyRate - sb.hourlyRate;
       if (sortBy === "price_desc") return sb.hourlyRate - sa.hourlyRate;
@@ -377,15 +398,9 @@ export default function BrowsePage() {
     return 0;
   });
 
-  // City picker label
-  const cityTitle = isSitter
-    ? (locale === "de" ? "In welcher Stadt suchst du?" : "Which city are you searching in?")
-    : (locale === "de" ? "In welcher Stadt bist du?" : "Which city are you in?");
-  const citySubtitle = isSitter
-    ? "Wähle eine Stadt um Familien in deiner Nähe zu sehen."
-    : "Wir zeigen dir Babysitter in deiner Nähe.";
+  const COUNT_LABEL = showingParents ? "Familie" : "Sitter";
 
-  if (userLoading) {
+  if (userLoading || mode === null) {
     return (
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
@@ -397,17 +412,40 @@ export default function BrowsePage() {
     return (
       <CityPicker
         onSelect={(city) => { setSelectedCity(city); setCityPickerDone(true); }}
-        title={cityTitle}
-        subtitle={citySubtitle}
+        title={locale === "de" ? "In welcher Stadt bist du?" : "Which city are you in?"}
+        subtitle={showingParents ? "Wähle eine Stadt um Familien in deiner Nähe zu sehen." : "Wir zeigen dir Babysitter in deiner Nähe."}
       />
     );
   }
 
-  const PAGE_TITLE = isSitter ? "Familien in deiner Stadt" : "Babysitter in deiner Stadt";
-  const COUNT_LABEL = isSitter ? "Familie" : "Sitter";
-
   return (
     <div className="flex h-full flex-col">
+
+      {/* ── Mode toggle ── */}
+      <div className="mb-5 flex border border-border-default bg-surface-secondary">
+        <button
+          onClick={() => switchMode("sitters")}
+          className={cn(
+            "flex-1 py-2.5 text-xs font-medium uppercase tracking-wide transition-colors",
+            mode === "sitters"
+              ? "bg-text-primary text-surface-primary"
+              : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
+          )}
+        >
+          Babysitter
+        </button>
+        <button
+          onClick={() => switchMode("parents")}
+          className={cn(
+            "flex-1 py-2.5 text-xs font-medium uppercase tracking-wide transition-colors",
+            mode === "parents"
+              ? "bg-text-primary text-surface-primary"
+              : "text-text-tertiary hover:text-text-primary hover:bg-surface-tertiary"
+          )}
+        >
+          Familien
+        </button>
+      </div>
 
       {/* ── Top bar ── */}
       <div className="mb-4 flex items-center gap-2">
@@ -450,7 +488,7 @@ export default function BrowsePage() {
         >
           <option value="newest">Neueste</option>
           <option value="active">Zuletzt aktiv</option>
-          {!isSitter && <>
+          {!showingParents && <>
             <option value="price_asc">Preis ↑</option>
             <option value="price_desc">Preis ↓</option>
             <option value="experience">Erfahrung</option>
@@ -461,7 +499,7 @@ export default function BrowsePage() {
       {/* ── Filter panel ── */}
       {filtersOpen && (
         <div className="mb-4 space-y-4 border border-border-default bg-surface-secondary p-4">
-          {!isSitter ? (
+          {!showingParents ? (
             <>
               <div>
                 <p className="mb-2 text-xs font-medium uppercase tracking-wide text-text-secondary">Sprache</p>
@@ -603,7 +641,7 @@ export default function BrowsePage() {
       ) : filtered.length === 0 ? (
         <div className="flex flex-1 flex-col items-center justify-center py-20">
           <p className="text-sm text-text-tertiary">
-            {isSitter ? "Keine Familien gefunden." : "Keine Babysitter gefunden."}
+            {showingParents ? "Keine Familien gefunden." : "Keine Babysitter gefunden."}
           </p>
           {activeFilterCount > 0 && (
             <button onClick={clearAllFilters} className="mt-3 text-sm text-accent hover:underline">
@@ -613,7 +651,7 @@ export default function BrowsePage() {
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
-          {isSitter
+          {showingParents
             ? (filtered as ParentResult[]).map((parent) => <ParentCard key={parent.id} parent={parent} />)
             : (filtered as SitterResult[]).map((sitter) => <SitterCard key={sitter.id} sitter={sitter} />)
           }
