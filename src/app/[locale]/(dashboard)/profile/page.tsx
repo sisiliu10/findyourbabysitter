@@ -260,6 +260,7 @@ export default async function ProfilePage() {
       <ProfilePublishToggle
         initialIsPublished={user.isPublished}
         isSitter={isSitter}
+        onboarded={user.onboarded}
       />
 
       {/* ─── Premium Upgrade Card (free parents only) ─── */}
