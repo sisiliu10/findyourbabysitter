@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, Link } from "@/i18n/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { DAYS_OF_WEEK, TIME_SLOTS, CHILDCARE_TYPES, CARE_TIMES_OF_DAY, CARE_FREQUENCIES, SITTER_TYPES, GENDER_OPTIONS, LANGUAGE_OPTIONS } from "@/lib/constants";
 import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
@@ -20,7 +20,6 @@ export default function OnboardingPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [userId, setUserId] = useState<string | null>(null);
-  const [profileLive, setProfileLive] = useState(false);
 
   // Sitter fields
   const [bio, setBio] = useState("");
@@ -194,12 +193,8 @@ export default function OnboardingPage() {
         return;
       }
 
-      if (role === "BABYSITTER") {
-        setProfileLive(true);
-      } else {
-        router.push("/browse");
-        router.refresh();
-      }
+      // Both roles go to the publish page to explicitly go live
+      router.push("/publish");
     } catch (err) {
       console.error(err);
       setError("Network error — please check your connection and try again.");
@@ -220,38 +215,6 @@ export default function OnboardingPage() {
   function FieldError({ show, message }: { show: boolean; message: string }) {
     if (!show) return null;
     return <p className="mt-1 text-xs text-danger">{message}</p>;
-  }
-
-  if (profileLive) {
-    return (
-      <div className="mx-auto max-w-lg">
-        <div className="border border-success/30 bg-success-muted p-8 text-center">
-          <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center bg-success/10">
-            <svg className="h-7 w-7 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <h1 className="font-serif text-3xl text-text-primary">{t("profileLiveTitle")}</h1>
-          <p className="mt-3 text-sm leading-relaxed text-text-secondary">{t("profileLiveSubtitle")}</p>
-          <div className="mt-8 flex flex-col gap-3">
-            {userId && (
-              <Link
-                href={`/sitter/${userId}`}
-                className="w-full border border-text-primary bg-text-primary px-4 py-3 text-xs font-medium uppercase tracking-widest text-surface-primary transition hover:bg-accent hover:border-accent text-center block"
-              >
-                {t("previewProfile")}
-              </Link>
-            )}
-            <button
-              onClick={() => { router.push("/dashboard"); router.refresh(); }}
-              className="w-full border border-border-default px-4 py-3 text-xs font-medium uppercase tracking-widest text-text-primary transition hover:border-text-primary"
-            >
-              {t("goToDashboard")}
-            </button>
-          </div>
-        </div>
-      </div>
-    );
   }
 
   return (

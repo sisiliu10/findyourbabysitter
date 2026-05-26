@@ -29,6 +29,7 @@ export async function GET(request: Request) {
       role: "PARENT",
       isDisabled: false,
       onboarded: true,
+      isPublished: true,
       id: { not: session.userId },
     };
 

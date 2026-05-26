@@ -10,6 +10,9 @@ interface CurrentUser {
   role: string;
   avatarUrl: string | null;
   onboarded: boolean;
+  isPublished: boolean;
+  city: string;
+  district: string;
   isPremium: boolean;
 }
 

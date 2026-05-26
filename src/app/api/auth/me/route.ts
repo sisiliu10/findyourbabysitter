@@ -35,6 +35,7 @@ export async function GET() {
         languages: true,
         isDisabled: true,
         onboarded: true,
+        isPublished: true,
         createdAt: true,
         babysitterProfile: true,
       },
