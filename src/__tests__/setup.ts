@@ -65,6 +65,7 @@ vi.mock("@/lib/ratelimit", () => ({
 // Mock email — all fire-and-forget
 vi.mock("@/lib/email", () => ({
   sendVerificationEmail: vi.fn().mockResolvedValue(undefined),
+  notifyAdminNewSignup: vi.fn().mockResolvedValue(undefined),
   notifyBookingCreated: vi.fn().mockResolvedValue(undefined),
   notifyBookingAccepted: vi.fn().mockResolvedValue(undefined),
   notifyBookingDeclined: vi.fn().mockResolvedValue(undefined),

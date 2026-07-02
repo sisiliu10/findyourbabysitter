@@ -47,12 +47,23 @@ export function getClientIp(request: Request): string {
  * Check rate limit for a request. Returns a 429 response if the limit is
  * exceeded, or null if the request should proceed.
  *
- * When Upstash is not configured (local dev), logs a warning once and
- * allows all requests through.
+ * When Upstash is not configured (local dev), allows all requests through.
  */
 export async function checkRateLimit(
-  _limiter: Ratelimit | null,
-  _request: Request,
+  limiter: Ratelimit | null,
+  request: Request,
 ): Promise<NextResponse | null> {
+  if (!limiter) return null;
+
+  const ip = getClientIp(request);
+  const { success } = await limiter.limit(ip);
+
+  if (!success) {
+    return NextResponse.json(
+      { success: false, error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   return null;
 }
